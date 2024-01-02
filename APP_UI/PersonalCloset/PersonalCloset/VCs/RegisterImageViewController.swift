@@ -7,9 +7,8 @@
 
 import UIKit
 
-class RegisterImageViewController : UIViewController {
+class RegisterImageViewController : BaseViewController {
     override func viewDidLoad() {
-        view.backgroundColor = .systemBackground
-
+        super.viewDidLoad()
     }
 }

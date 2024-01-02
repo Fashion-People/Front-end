@@ -2,31 +2,14 @@
 //  Extension.swift
 //  PersonalCloset
 //
-//  Created by Bowon Han on 12/30/23.
+//  Created by Bowon Han on 1/2/24.
 //
 
 import UIKit
 
-// MARK: - UIColor extension
-extension UIColor {
-    convenience init(hexCode: String, alpha: CGFloat = 1.0) {
-        var hexFormatted: String = hexCode.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
-            
-        if hexFormatted.hasPrefix("#") {
-            hexFormatted = String(hexFormatted.dropFirst())
-        }
-            
-        assert(hexFormatted.count == 6, "Invalid hex code used.")
-            
-        var rgbValue: UInt64 = 0
-        Scanner(string: hexFormatted).scanHexInt64(&rgbValue)
-            
-        self.init(red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-                  green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-                  blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-                  alpha: alpha)
+// MARK: - UITableViewCell extension
+extension UITableViewCell {
+    static var identifier: String {
+        return String(describing: self)
     }
-    
-    static let skyBlue : UIColor = UIColor(hexCode: "C8C9ED")
-    static let darkBlue : UIColor = UIColor(hexCode: "4663AC")
 }

@@ -20,7 +20,7 @@ class TabBarController : UITabBarController {
     private func setupVC() {        
         let mainTabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "house"), tag: 0)
         let registerImageTabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "hanger"), tag: 0)
-        let settingTabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "person"), tag: 0)
+        let settingTabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "ellipsis"), tag: 0)
 
         mainVC.tabBarItem = mainTabBarItem
         registerVC.tabBarItem = registerImageTabBarItem
