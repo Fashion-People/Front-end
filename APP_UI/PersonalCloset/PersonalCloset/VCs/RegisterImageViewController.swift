@@ -8,9 +8,15 @@
 import UIKit
 import SnapKit
 
-class RegisterImageViewController : BaseViewController {
+class RegisterImageViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = .systemBackground
+        setLayout()
+        
+        let topView = TopView()
+        navigationItem.titleView = topView
     }
     
     private let imageInputStackView1 : UIStackView = {
@@ -62,8 +68,7 @@ class RegisterImageViewController : BaseViewController {
         return button
     }()
     
-    override func setLayout() {
-        super.setLayout()
+    func setLayout() {
         [imageInput1,imageInput2].forEach {
             imageInputStackView1.addArrangedSubview($0)
         }
@@ -79,7 +84,7 @@ class RegisterImageViewController : BaseViewController {
         }
         
         imageInputStackView1.snp.makeConstraints {
-            $0.top.equalTo(topView.snp.bottom).offset(30)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(40)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(30)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-30)
         }

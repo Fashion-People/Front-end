@@ -8,9 +8,12 @@
 import UIKit
 import SnapKit
 
-class ImageResultViewController : BaseViewController {
+class ImageResultViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = .systemBackground
+        setLayout()
     }
     
     private var resultImageView : UIImageView = {
@@ -30,16 +33,14 @@ class ImageResultViewController : BaseViewController {
         return label
     }()
     
-    override func setLayout() {
-        super.setLayout()
-        
+    func setLayout() {
         [resultImageView,
          resultLabel].forEach {
             view.addSubview($0)
         }
         
         resultImageView.snp.makeConstraints {
-            $0.top.equalTo(topView.snp.bottom).offset(80)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(80)
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(300)
             $0.width.equalTo(300)

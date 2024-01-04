@@ -25,7 +25,6 @@ class MainViewController : BaseViewController {
         
         button.addAction(UIAction { _ in
             self.tabCameraButton()
-            
             }, for: .touchUpInside
         )
 
@@ -45,7 +44,6 @@ class MainViewController : BaseViewController {
         registerNavigationVC.modalPresentationStyle = .fullScreen
         registerNavigationVC.modalTransitionStyle = .crossDissolve
         self.present(registerNavigationVC, animated: true, completion: nil)
-
     }
     
     override func setLayout() {
