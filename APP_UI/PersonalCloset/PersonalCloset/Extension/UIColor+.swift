@@ -29,4 +29,5 @@ extension UIColor {
     
     static let skyBlue : UIColor = UIColor(hexCode: "D2DEEB")
     static let darkBlue : UIColor = UIColor(hexCode: "4663AC")
+    static let bwGray : UIColor = UIColor(hexCode: "D9D9D9")
 }
