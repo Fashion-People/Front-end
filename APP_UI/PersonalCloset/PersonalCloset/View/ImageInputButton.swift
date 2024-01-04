@@ -13,6 +13,7 @@ class ImageInputButton : UIButton {
         let button = UIButton()
         button.backgroundColor = .lightGray
         button.tintColor = .black
+        button.layer.cornerRadius = 5
         
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 40, weight: .light)
         let image = UIImage(systemName: "plus", withConfiguration: imageConfig)

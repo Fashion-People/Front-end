@@ -13,14 +13,16 @@ class JoinViewController : UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
+        self.hideKeyboardWhenTappedAround()
         inputViewConfig()
         setLayout()
     }
     
     private var joinLabel : UILabel = {
         let label = UILabel()
-        label.text = "Join"
-        label.font =
+        label.text = "회원가입"
+        label.font = UIFont.systemFont(ofSize: 33, weight: .heavy)
+        label.textColor = .darkBlue
         
         return label
     }()
@@ -58,6 +60,35 @@ class JoinViewController : UIViewController {
         joinEmailInput.inputTextField.placeholder = "이메일을 입력해주세요"
     }
     
+    private lazy var joinButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("회원가입", for: .normal)
+        button.setTitleColor(.darkBlue, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
+        button.layer.cornerRadius = 5
+        button.backgroundColor = .skyBlue
+        button.addAction(UIAction { _ in
+            self.tabJoinButton()
+            }, for: .touchUpInside
+        )
+        
+        return button
+    }()
+    // MARK: - method
+    
+    private func tabJoinButton() {
+        let joinSuccessAlert = UIAlertController(title: "알림",
+                                                 message: "회원가입 성공.",
+                                                 preferredStyle: UIAlertController.Style.alert)
+        
+        let success = UIAlertAction(title: "확인",
+                                    style: .default) { action in
+            self.navigationController?.popViewController(animated: true)
+        }
+        joinSuccessAlert.addAction(success)
+        self.present(joinSuccessAlert, animated: true, completion: nil)
+    }
+    
     private func setLayout() {
         [joinIDInput,
          joinPasswordInput,
@@ -67,11 +98,27 @@ class JoinViewController : UIViewController {
             joinStackView.addArrangedSubview($0)
         }
         
-        view.addSubview(joinStackView)
+        [joinLabel,
+         joinStackView,
+         joinButton].forEach{
+            view.addSubview($0)
+        }
+        
+        joinLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(25)
+        }
         
         joinStackView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(130)
+            $0.top.equalTo(joinLabel.snp.bottom).offset(40)
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        joinButton.snp.makeConstraints {
+            $0.top.equalTo(joinStackView.snp.bottom).offset(80)
+            $0.centerX.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(40)
+            $0.width.equalTo(310)
         }
         
     }

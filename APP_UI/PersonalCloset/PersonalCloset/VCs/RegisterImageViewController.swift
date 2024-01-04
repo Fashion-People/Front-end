@@ -47,6 +47,15 @@ class RegisterImageViewController : BaseViewController {
         button.layer.cornerRadius = 10
         button.layer.borderColor = UIColor.skyBlue.cgColor
         button.layer.backgroundColor = UIColor.skyBlue.cgColor
+        button.addAction(
+            UIAction { _ in
+                let resultImageVC = ImageResultViewController()
+                resultImageVC.modalPresentationStyle = .fullScreen
+                resultImageVC.modalTransitionStyle = .crossDissolve
+                self.present(resultImageVC, animated: true, completion: nil)
+            },
+            for: .touchUpInside
+        )
         
         return button
     }()

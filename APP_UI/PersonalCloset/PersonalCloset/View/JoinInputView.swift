@@ -50,7 +50,7 @@ class JoinInputView : UIView {
         }
         
         inputTextField.snp.makeConstraints {
-            $0.width.equalTo(350)
+            $0.width.equalTo(340)
             $0.height.equalTo(50)
         }
         

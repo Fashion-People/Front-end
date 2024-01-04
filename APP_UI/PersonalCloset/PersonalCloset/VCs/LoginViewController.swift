@@ -13,8 +13,18 @@ final class LoginViewController : UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
+        self.hideKeyboardWhenTappedAround()
+        
+        UIconfig()
         stackLayout()
         setLayout()
+        
+        let backBarButtonItem = UIBarButtonItem(title: "로그인",
+                                                style: .plain,
+                                                target: self,
+                                                action: nil)
+        backBarButtonItem.tintColor = .darkBlue
+        self.navigationItem.backBarButtonItem = backBarButtonItem
     }
     
     private var loginLabel : UILabel = {
@@ -38,36 +48,36 @@ final class LoginViewController : UIViewController {
         return stackView
     }()
     
-    private var IDTextField : InputView = {
-        let input = InputView()
-        input.inputTextField.placeholder = "아이디를 입력해주세요."
-
-        return input
-    }()
+    private var IDTextField = InputView()
+    private var passwordTextField = InputView()
+    private let lineView = UIView()
     
-    private var passwordTextField : InputView = {
-        let input = InputView()
-        input.inputTextField.placeholder = "비밀번호를 입력해주세요."
+    private func UIconfig() {
+        IDTextField.inputTextField.placeholder = "아이디를 입력해주세요."
+        passwordTextField.inputTextField.placeholder = "비밀번호를 입력해주세요."
 
-        return input
-    }()
+        lineView.backgroundColor = .bwGray
+    }
+    
     
     private lazy var loginButton : UIButton = {
         let button = UIButton()
-        button.setTitle("Login", for: .normal)
+        button.setTitle("로그인", for: .normal)
         button.setTitleColor(.darkBlue, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         button.layer.cornerRadius = 5
         button.backgroundColor = .skyBlue
+        button.addAction(
+            UIAction { _ in
+                let tabBarVC = TabBarController()
+                tabBarVC.modalPresentationStyle = .fullScreen
+                tabBarVC.modalTransitionStyle = .crossDissolve
+                self.present(tabBarVC, animated: true, completion: nil)
+            },
+            for: .touchUpInside
+        )
         
         return button
-    }()
-    
-    private let lineView : UIView = {
-        let line = UIView()
-        line.backgroundColor = .bwGray
-        
-        return line
     }()
     
     private let findStackView : UIStackView = {
@@ -80,7 +90,7 @@ final class LoginViewController : UIViewController {
         return stackView
     }()
     
-    private let findID : UIButton = {
+    private let findIDButton : UIButton = {
         let button = UIButton()
         button.setTitle("아이디 찾기", for: .normal)
         button.setTitleColor(.lightGray, for: .normal)
@@ -89,7 +99,7 @@ final class LoginViewController : UIViewController {
         return button
     }()
     
-    private let findPassword : UIButton = {
+    private let findPasswordButton : UIButton = {
         let button = UIButton()
         button.setTitle("비밀번호 찾기", for: .normal)
         button.setTitleColor(.lightGray, for: .normal)
@@ -100,24 +110,29 @@ final class LoginViewController : UIViewController {
     
     private lazy var joinButton : UIButton = {
         let button = UIButton()
-        button.setTitle("Join", for: .normal)
+        button.setTitle("회원가입", for: .normal)
         button.setTitleColor(.darkBlue, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         button.layer.cornerRadius = 5
         button.backgroundColor = .skyBlue
+        button.addAction(
+            UIAction { _ in
+                self.navigationController?.pushViewController(JoinViewController(), animated: true)
+            },
+            for: .touchUpInside
+        )
         
         return button
     }()
 
-    
     private func stackLayout() {
         [IDTextField,
          passwordTextField].forEach {
             inputStackView.addArrangedSubview($0)
         }
         
-        [findID,
-         findPassword].forEach {
+        [findIDButton,
+         findPasswordButton].forEach {
             findStackView.addArrangedSubview($0)
         }
     }
@@ -133,7 +148,7 @@ final class LoginViewController : UIViewController {
         }
         
         loginLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(100)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(80)
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
         }
         
@@ -165,6 +180,7 @@ final class LoginViewController : UIViewController {
         joinButton.snp.makeConstraints {
             $0.top.equalTo(findStackView.snp.bottom).offset(50)
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(40)
             $0.width.equalTo(295)
         }
     }

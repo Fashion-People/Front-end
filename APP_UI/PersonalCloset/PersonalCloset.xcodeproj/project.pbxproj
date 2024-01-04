@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29589FCA2B457839003578A3 /* ImageResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29589FC92B457839003578A3 /* ImageResultViewController.swift */; };
 		2982023A2B43C2F100B7DEB3 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298202392B43C2F100B7DEB3 /* TopView.swift */; };
 		2982023C2B43C72600B7DEB3 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2982023B2B43C72600B7DEB3 /* BaseViewController.swift */; };
 		298202632B43F1AB00B7DEB3 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298202622B43F1AB00B7DEB3 /* SettingTableViewCell.swift */; };
@@ -14,6 +15,7 @@
 		298202672B44269300B7DEB3 /* ImageInputButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298202662B44269300B7DEB3 /* ImageInputButton.swift */; };
 		298202692B4452D800B7DEB3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298202682B4452D800B7DEB3 /* LoginViewController.swift */; };
 		2982026B2B4452DF00B7DEB3 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2982026A2B4452DF00B7DEB3 /* JoinViewController.swift */; };
+		299CCE5B2B4679EA0054505E /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299CCE5A2B4679EA0054505E /* UIViewController+.swift */; };
 		29A9C0962B3FE62900209641 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9C0952B3FE62900209641 /* AppDelegate.swift */; };
 		29A9C0982B3FE62900209641 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9C0972B3FE62900209641 /* SceneDelegate.swift */; };
 		29A9C09F2B3FE62A00209641 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29A9C09E2B3FE62A00209641 /* Assets.xcassets */; };
@@ -29,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29589FC92B457839003578A3 /* ImageResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResultViewController.swift; sourceTree = "<group>"; };
 		298202392B43C2F100B7DEB3 /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		2982023B2B43C72600B7DEB3 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		298202622B43F1AB00B7DEB3 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
@@ -36,6 +39,7 @@
 		298202662B44269300B7DEB3 /* ImageInputButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInputButton.swift; sourceTree = "<group>"; };
 		298202682B4452D800B7DEB3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2982026A2B4452DF00B7DEB3 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
+		299CCE5A2B4679EA0054505E /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		29A9C0922B3FE62900209641 /* PersonalCloset.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PersonalCloset.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29A9C0952B3FE62900209641 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29A9C0972B3FE62900209641 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +91,7 @@
 			children = (
 				29A9C0AE2B3FE7A700209641 /* UIColor+.swift */,
 				298202642B43F21000B7DEB3 /* Extension.swift */,
+				299CCE5A2B4679EA0054505E /* UIViewController+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -100,6 +105,7 @@
 				29A9C0B42B3FE96600209641 /* RegisterImageViewController.swift */,
 				298202682B4452D800B7DEB3 /* LoginViewController.swift */,
 				2982026A2B4452DF00B7DEB3 /* JoinViewController.swift */,
+				29589FC92B457839003578A3 /* ImageResultViewController.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -222,10 +228,12 @@
 				2982026B2B4452DF00B7DEB3 /* JoinViewController.swift in Sources */,
 				29A9C0962B3FE62900209641 /* AppDelegate.swift in Sources */,
 				2982023C2B43C72600B7DEB3 /* BaseViewController.swift in Sources */,
+				29589FCA2B457839003578A3 /* ImageResultViewController.swift in Sources */,
 				29DA5F632B45600600F45CC6 /* JoinInputView.swift in Sources */,
 				298202632B43F1AB00B7DEB3 /* SettingTableViewCell.swift in Sources */,
 				29A9C0B32B3FE93C00209641 /* SettingViewController.swift in Sources */,
 				2982023A2B43C2F100B7DEB3 /* TopView.swift in Sources */,
+				299CCE5B2B4679EA0054505E /* UIViewController+.swift in Sources */,
 				29DA5F612B4542A500F45CC6 /* InputView.swift in Sources */,
 				298202692B4452D800B7DEB3 /* LoginViewController.swift in Sources */,
 				29A9C0982B3FE62900209641 /* SceneDelegate.swift in Sources */,
