@@ -117,7 +117,8 @@ final class LoginViewController : UIViewController {
         button.backgroundColor = .skyBlue
         button.addAction(
             UIAction { _ in
-                self.navigationController?.pushViewController(JoinViewController(), animated: true)
+                self.navigationController?.pushViewController(JoinViewController(), 
+                                                              animated: true)
             },
             for: .touchUpInside
         )

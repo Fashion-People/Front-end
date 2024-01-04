@@ -49,10 +49,12 @@ class RegisterImageViewController : BaseViewController {
         button.layer.backgroundColor = UIColor.skyBlue.cgColor
         button.addAction(
             UIAction { _ in
-                let resultImageVC = ImageResultViewController()
-                resultImageVC.modalPresentationStyle = .fullScreen
-                resultImageVC.modalTransitionStyle = .crossDissolve
-                self.present(resultImageVC, animated: true, completion: nil)
+//                let resultImageVC = ImageResultViewController()
+//                resultImageVC.modalPresentationStyle = .fullScreen
+//                resultImageVC.modalTransitionStyle = .crossDissolve
+//                self.present(resultImageVC, animated: true, completion: nil)
+                self.navigationController?.pushViewController(ImageResultViewController(),
+                                                              animated: true)
             },
             for: .touchUpInside
         )

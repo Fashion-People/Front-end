@@ -9,7 +9,6 @@ import UIKit
 
 class TabBarController : UITabBarController {
     let mainVC = MainViewController()
-    let registerVC = RegisterImageViewController()
     let settingVC = SettingViewController()
     
     override func viewDidLoad() {
@@ -19,14 +18,14 @@ class TabBarController : UITabBarController {
     
     private func setupVC() {        
         let mainTabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "house"), tag: 0)
-        let registerImageTabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "hanger"), tag: 0)
+//        let registerImageTabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "hanger"), tag: 0)
         let settingTabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "ellipsis"), tag: 0)
 
         mainVC.tabBarItem = mainTabBarItem
-        registerVC.tabBarItem = registerImageTabBarItem
+//        registerVC.tabBarItem = registerImageTabBarItem
         settingVC.tabBarItem = settingTabBarItem
 
-        setViewControllers([mainVC,registerVC,settingVC], animated: true)
+        setViewControllers([mainVC,settingVC], animated: true)
     }
     
     private func layout() {

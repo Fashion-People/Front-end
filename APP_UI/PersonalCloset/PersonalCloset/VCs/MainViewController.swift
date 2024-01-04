@@ -22,6 +22,12 @@ class MainViewController : BaseViewController {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 40, weight: .light)
         let image = UIImage(systemName: "camera.fill", withConfiguration: imageConfig)
         button.setImage(image, for: .normal)
+        
+        button.addAction(UIAction { _ in
+            self.tabCameraButton()
+            
+            }, for: .touchUpInside
+        )
 
         return button
     }()
@@ -33,6 +39,14 @@ class MainViewController : BaseViewController {
         
         return view
     }()
+    
+    private func tabCameraButton() {
+        let registerNavigationVC = UINavigationController(rootViewController: RegisterImageViewController())
+        registerNavigationVC.modalPresentationStyle = .fullScreen
+        registerNavigationVC.modalTransitionStyle = .crossDissolve
+        self.present(registerNavigationVC, animated: true, completion: nil)
+
+    }
     
     override func setLayout() {
         super.setLayout()
