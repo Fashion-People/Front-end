@@ -90,10 +90,10 @@ final class JoinViewController : UIViewController {
         
         let success = UIAlertAction(title: "확인",
                                     style: .default) { action in
-            self.navigationController?.popViewController(animated: true)
+            self.delegate?.backToLogin()
         }
         joinSuccessAlert.addAction(success)
-        self.delegate?.backToLogin()
+        self.present(joinSuccessAlert, animated: true, completion: nil)
     }
     
     @objc private func tabJoinButtonbutton() {
@@ -103,10 +103,10 @@ final class JoinViewController : UIViewController {
         
         let success = UIAlertAction(title: "확인",
                                     style: .default) { action in
-            self.navigationController?.popViewController(animated: true)
+            self.delegate?.backToLogin()
         }
         joinSuccessAlert.addAction(success)
-        self.delegate?.backToLogin()
+        self.present(joinSuccessAlert, animated: true, completion: nil)
     }
 
     

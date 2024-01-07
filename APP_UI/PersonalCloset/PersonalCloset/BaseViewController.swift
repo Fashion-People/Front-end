@@ -46,7 +46,7 @@ class BaseViewController : UIViewController {
         view.addSubview(topView)
         
         topView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
             $0.leading.equalTo(view.safeAreaLayoutGuide)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-10)
             $0.height.equalTo(60)

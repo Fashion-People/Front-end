@@ -18,10 +18,11 @@ class AppCoordinator : Coordinator {
         
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        self.navigationController.isNavigationBarHidden = true
     }
     
     func start() {
-        self.showResultViewController()
+        self.showRegisterViewController()
     }
     
     private func showMainViewController() {
@@ -72,6 +73,7 @@ class AppCoordinator : Coordinator {
     }
 }
 
+// MARK: - MainCoordinatorDelegate extension
 extension AppCoordinator : MainCoordinatorDelegate {
     func didPresentRegister(_ coordinator: MainCoordinator) {
         self.childCoordinators = self.childCoordinators.filter { $0 !== coordinator }
@@ -79,18 +81,20 @@ extension AppCoordinator : MainCoordinatorDelegate {
     }
 }
 
+// MARK: - LoginCoordinatorDelegate extension
 extension AppCoordinator : LoginCoordinatorDelegate {
     func didJoined(_ coordinator: LoginCoordinator) {
         self.childCoordinators = self.childCoordinators.filter { $0 !== coordinator }
-        self.showLoginViewController()
+        self.showJoinViewController()
     }
     
     func didLoggedIn(_ coordinator: LoginCoordinator) {
         self.childCoordinators = self.childCoordinators.filter { $0 !== coordinator }
-        self.showMainViewController()
+        self.showTabBarViewController()
     }
 }
 
+// MARK: - JoinCoordinatorDelegate extension
 extension AppCoordinator : JoinCoordinatorDelegate {
     func didPresentLoginView(_ coordinator: JoinCoordinator) {
         self.childCoordinators = self.childCoordinators.filter { $0 !== coordinator }
@@ -98,6 +102,7 @@ extension AppCoordinator : JoinCoordinatorDelegate {
     }
 }
 
+// MARK: - ResultCoordinatorDelegate extension
 extension AppCoordinator : ResultCoordinatorDelegate {
     func didAgainCheckResult(_ coordinator: ResultCoordinator) {
         self.childCoordinators = self.childCoordinators.filter { $0 !== coordinator }
@@ -106,14 +111,15 @@ extension AppCoordinator : ResultCoordinatorDelegate {
     
     func didPresentMain(_ coordinator: ResultCoordinator) {
         self.childCoordinators = self.childCoordinators.filter { $0 !== coordinator }
-        self.showMainViewController()
+        self.showTabBarViewController()
     }
 }
 
+// MARK: - RegisterCoordinatorDelegate extension
 extension AppCoordinator : RegisterCoordinatorDelegate {
     func didPresentMain(_ coordinator: RegisterCoordinator) {
         self.childCoordinators = self.childCoordinators.filter { $0 !== coordinator }
-        self.showMainViewController()
+        self.showTabBarViewController()
     }
     
     func didPresentResult(_ coordinator: RegisterCoordinator) {

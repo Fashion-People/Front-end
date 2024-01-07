@@ -82,17 +82,18 @@ class TopView : UIView {
         }
         
         backButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(20)
             $0.leading.equalToSuperview().offset(15)
             $0.width.equalTo(20)
             $0.height.equalTo(45)
+            $0.centerY.equalTo(self)
         }
                 
         topStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(20)
             $0.leading.equalTo(backButton.snp.trailing).offset(10)
             $0.trailing.equalToSuperview().offset(-15)
             $0.height.equalTo(45)
+            $0.centerY.equalTo(self)
+
         }
     }
 }
