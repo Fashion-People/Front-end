@@ -8,15 +8,12 @@
 import UIKit
 import SnapKit
 
-class RegisterImageViewController : UIViewController {
+class RegisterImageViewController : BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .systemBackground
-        setLayout()
-        
-        let topView = TopView()
-        navigationItem.titleView = topView
+                
+//        let topView = TopView()
+//        navigationItem.titleView = topView
     }
     
     private let imageInputStackView1 : UIStackView = {
@@ -59,8 +56,8 @@ class RegisterImageViewController : UIViewController {
 //                resultImageVC.modalPresentationStyle = .fullScreen
 //                resultImageVC.modalTransitionStyle = .crossDissolve
 //                self.present(resultImageVC, animated: true, completion: nil)
-                self.navigationController?.pushViewController(ImageResultViewController(),
-                                                              animated: true)
+//                self.navigationController?.pushViewController(ImageResultViewController(),
+//                                                              animated: true)
             },
             for: .touchUpInside
         )
@@ -68,7 +65,9 @@ class RegisterImageViewController : UIViewController {
         return button
     }()
     
-    func setLayout() {
+    override func setLayout() {
+        super.setLayout()
+        
         [imageInput1,imageInput2].forEach {
             imageInputStackView1.addArrangedSubview($0)
         }
@@ -84,7 +83,7 @@ class RegisterImageViewController : UIViewController {
         }
         
         imageInputStackView1.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(40)
+            $0.top.equalTo(topView.snp.bottom).offset(40)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(30)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-30)
         }

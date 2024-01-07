@@ -20,7 +20,7 @@ class TopView : UIView {
         return stackView
     }()
     
-    private lazy var backButton : UIButton = {
+    lazy var backButton : UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
         button.tintColor = .darkBlue
@@ -63,14 +63,9 @@ class TopView : UIView {
     }
     
     private func setLayout() {
-        [backButton,
-         iconButton,
+        [iconButton,
          weatherImage].forEach {
             topStackView.addArrangedSubview($0)
-        }
-        
-        backButton.snp.makeConstraints {
-            $0.width.equalTo(40)
         }
         
         iconButton.snp.makeConstraints {
@@ -82,11 +77,20 @@ class TopView : UIView {
             $0.height.equalTo(40)
         }
         
-        addSubview(topStackView)
+        [backButton,topStackView].forEach {
+            addSubview($0)
+        }
+        
+        backButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(20)
+            $0.leading.equalToSuperview().offset(5)
+            $0.width.equalTo(20)
+            $0.height.equalTo(45)
+        }
                 
         topStackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(20)
-            $0.leading.equalToSuperview().offset(10)
+            $0.leading.equalTo(backButton.snp.trailing).offset(5)
             $0.trailing.equalToSuperview().offset(-15)
             $0.height.equalTo(45)
         }

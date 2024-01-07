@@ -15,7 +15,7 @@
 		298202672B44269300B7DEB3 /* ImageInputButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298202662B44269300B7DEB3 /* ImageInputButton.swift */; };
 		298202692B4452D800B7DEB3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298202682B4452D800B7DEB3 /* LoginViewController.swift */; };
 		2982026B2B4452DF00B7DEB3 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2982026A2B4452DF00B7DEB3 /* JoinViewController.swift */; };
-		299CCE5B2B4679EA0054505E /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299CCE5A2B4679EA0054505E /* UIViewController+.swift */; };
+		299CCE5B2B4679EA0054505E /* KeyboradHide+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299CCE5A2B4679EA0054505E /* KeyboradHide+.swift */; };
 		29A9C0962B3FE62900209641 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9C0952B3FE62900209641 /* AppDelegate.swift */; };
 		29A9C0982B3FE62900209641 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9C0972B3FE62900209641 /* SceneDelegate.swift */; };
 		29A9C09F2B3FE62A00209641 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29A9C09E2B3FE62A00209641 /* Assets.xcassets */; };
@@ -39,7 +39,7 @@
 		298202662B44269300B7DEB3 /* ImageInputButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInputButton.swift; sourceTree = "<group>"; };
 		298202682B4452D800B7DEB3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2982026A2B4452DF00B7DEB3 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
-		299CCE5A2B4679EA0054505E /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		299CCE5A2B4679EA0054505E /* KeyboradHide+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboradHide+.swift"; sourceTree = "<group>"; };
 		29A9C0922B3FE62900209641 /* PersonalCloset.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PersonalCloset.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29A9C0952B3FE62900209641 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29A9C0972B3FE62900209641 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 			children = (
 				29A9C0AE2B3FE7A700209641 /* UIColor+.swift */,
 				298202642B43F21000B7DEB3 /* Extension.swift */,
-				299CCE5A2B4679EA0054505E /* UIViewController+.swift */,
+				299CCE5A2B4679EA0054505E /* KeyboradHide+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -233,7 +233,7 @@
 				298202632B43F1AB00B7DEB3 /* SettingTableViewCell.swift in Sources */,
 				29A9C0B32B3FE93C00209641 /* SettingViewController.swift in Sources */,
 				2982023A2B43C2F100B7DEB3 /* TopView.swift in Sources */,
-				299CCE5B2B4679EA0054505E /* UIViewController+.swift in Sources */,
+				299CCE5B2B4679EA0054505E /* KeyboradHide+.swift in Sources */,
 				29DA5F612B4542A500F45CC6 /* InputView.swift in Sources */,
 				298202692B4452D800B7DEB3 /* LoginViewController.swift in Sources */,
 				29A9C0982B3FE62900209641 /* SceneDelegate.swift in Sources */,

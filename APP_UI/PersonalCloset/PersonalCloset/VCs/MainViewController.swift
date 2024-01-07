@@ -11,6 +11,7 @@ import SnapKit
 class MainViewController : BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        topView.backButton.isHidden = true
     }
     
     private lazy var cameraButton : UIButton = {
@@ -40,10 +41,10 @@ class MainViewController : BaseViewController {
     }()
     
     private func tabCameraButton() {
-        let registerNavigationVC = UINavigationController(rootViewController: RegisterImageViewController())
-        registerNavigationVC.modalPresentationStyle = .fullScreen
-        registerNavigationVC.modalTransitionStyle = .crossDissolve
-        self.present(registerNavigationVC, animated: true, completion: nil)
+        let registerVC = RegisterImageViewController()
+        registerVC.modalPresentationStyle = .fullScreen
+        registerVC.modalTransitionStyle = .crossDissolve
+        self.present(registerVC, animated: true, completion: nil)
     }
     
     override func setLayout() {

@@ -43,12 +43,12 @@ class BaseViewController : UIViewController {
     }()
     
     func setLayout() {
-        // Override point
         view.addSubview(topView)
         
         topView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.equalTo(view.safeAreaLayoutGuide)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-10)
             $0.height.equalTo(60)
         }
     }
