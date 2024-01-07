@@ -8,12 +8,20 @@
 import UIKit
 import SnapKit
 
-class ImageResultViewController : UIViewController {
+protocol ImageResultViewControllerDelegate {
+    func backToMain()
+    func againRegister()
+}
+
+class ImageResultViewController : BaseViewController {
+    var delegate : ImageResultViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
-        setLayout()
+        topView.backButton.addAction(UIAction{ _ in
+            self.tabBackToMain()
+        }, for: .touchUpInside)
     }
     
     private var resultImageView : UIImageView = {
@@ -33,14 +41,41 @@ class ImageResultViewController : UIViewController {
         return label
     }()
     
-    func setLayout() {
+    private lazy var backToRegisterButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("다시 검사하기", for: .normal)
+        button.setTitleColor(.darkBlue, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        button.layer.borderWidth = 2
+        button.layer.cornerRadius = 10
+        button.layer.borderColor = UIColor.skyBlue.cgColor
+        button.layer.backgroundColor = UIColor.skyBlue.cgColor
+        button.addAction(UIAction { _ in
+            self.tabAgainCheckButton()
+        }, for: .touchUpInside)
+        
+        return button
+    }()
+    
+    private func tabAgainCheckButton() {
+        self.delegate?.againRegister()
+    }
+
+    private func tabBackToMain() {
+        self.delegate?.backToMain()
+    }
+    
+    override func setLayout() {
+        super.setLayout()
+        
         [resultImageView,
-         resultLabel].forEach {
+         resultLabel,
+         backToRegisterButton].forEach {
             view.addSubview($0)
         }
         
         resultImageView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(80)
+            $0.top.equalTo(topView.snp.bottom).offset(40)
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(300)
             $0.width.equalTo(300)
@@ -50,6 +85,13 @@ class ImageResultViewController : UIViewController {
             $0.top.equalTo(resultImageView.snp.bottom).offset(40)
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
             $0.width.equalTo(300)
+        }
+        
+        backToRegisterButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-40)
+            $0.centerX.equalTo(view.safeAreaLayoutGuide)
+            $0.width.equalTo(230)
+            $0.height.equalTo(60)       
         }
     }
 }

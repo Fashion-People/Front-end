@@ -8,7 +8,13 @@
 import UIKit
 import SnapKit
 
-class JoinViewController : UIViewController {
+protocol JoinViewControllerDelegate {
+    func backToLogin()
+}
+
+final class JoinViewController : UIViewController {
+    var delegate : JoinViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -16,6 +22,7 @@ class JoinViewController : UIViewController {
         self.hideKeyboardWhenTappedAround()
         inputViewConfig()
         setLayout()
+        navigationItem.backBarButtonItem?.action = #selector(tabJoinButtonbutton)
     }
     
     private var joinLabel : UILabel = {
@@ -86,8 +93,22 @@ class JoinViewController : UIViewController {
             self.navigationController?.popViewController(animated: true)
         }
         joinSuccessAlert.addAction(success)
-        self.present(joinSuccessAlert, animated: true, completion: nil)
+        self.delegate?.backToLogin()
     }
+    
+    @objc private func tabJoinButtonbutton() {
+        let joinSuccessAlert = UIAlertController(title: "알림",
+                                                 message: "회원가입 성공.",
+                                                 preferredStyle: UIAlertController.Style.alert)
+        
+        let success = UIAlertAction(title: "확인",
+                                    style: .default) { action in
+            self.navigationController?.popViewController(animated: true)
+        }
+        joinSuccessAlert.addAction(success)
+        self.delegate?.backToLogin()
+    }
+
     
     private func setLayout() {
         [joinIDInput,

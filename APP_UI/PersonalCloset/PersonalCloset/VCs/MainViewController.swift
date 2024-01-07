@@ -8,7 +8,13 @@
 import UIKit
 import SnapKit
 
-class MainViewController : BaseViewController {
+protocol MainViewControllerDelegate {
+    func presentRegister()
+}
+
+final class MainViewController : BaseViewController {
+    var delegate : MainViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         topView.backButton.isHidden = true
@@ -41,10 +47,7 @@ class MainViewController : BaseViewController {
     }()
     
     private func tabCameraButton() {
-        let registerVC = RegisterImageViewController()
-        registerVC.modalPresentationStyle = .fullScreen
-        registerVC.modalTransitionStyle = .crossDissolve
-        self.present(registerVC, animated: true, completion: nil)
+        self.delegate?.presentRegister()
     }
     
     override func setLayout() {

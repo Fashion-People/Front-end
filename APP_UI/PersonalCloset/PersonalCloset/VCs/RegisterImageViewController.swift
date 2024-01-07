@@ -8,12 +8,20 @@
 import UIKit
 import SnapKit
 
+protocol RegisterImageViewControllerDelegate {
+    func backToMain()
+    func presentResult()
+}
+
 class RegisterImageViewController : BaseViewController {
+    var delegate : RegisterImageViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-//        let topView = TopView()
-//        navigationItem.titleView = topView
+        
+        topView.backButton.addAction(UIAction{ _ in
+            self.tabBackToMainButton()
+        }, for: .touchUpInside)
     }
     
     private let imageInputStackView1 : UIStackView = {
@@ -52,18 +60,21 @@ class RegisterImageViewController : BaseViewController {
         button.layer.backgroundColor = UIColor.skyBlue.cgColor
         button.addAction(
             UIAction { _ in
-//                let resultImageVC = ImageResultViewController()
-//                resultImageVC.modalPresentationStyle = .fullScreen
-//                resultImageVC.modalTransitionStyle = .crossDissolve
-//                self.present(resultImageVC, animated: true, completion: nil)
-//                self.navigationController?.pushViewController(ImageResultViewController(),
-//                                                              animated: true)
+                self.tabResultButton()
             },
             for: .touchUpInside
         )
         
         return button
     }()
+    
+    private func tabResultButton() {
+        self.delegate?.presentResult()
+    }
+    
+    private func tabBackToMainButton() {
+        self.delegate?.backToMain()
+    }
     
     override func setLayout() {
         super.setLayout()

@@ -8,7 +8,14 @@
 import UIKit
 import SnapKit
 
+protocol LoginViewControllerDelegate {
+    func login()
+    func join()
+}
+
 final class LoginViewController : UIViewController {
+    var delegate : LoginViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,13 +25,7 @@ final class LoginViewController : UIViewController {
         UIconfig()
         stackLayout()
         setLayout()
-        
-        let backBarButtonItem = UIBarButtonItem(title: "로그인",
-                                                style: .plain,
-                                                target: self,
-                                                action: nil)
-        backBarButtonItem.tintColor = .darkBlue
-        self.navigationItem.backBarButtonItem = backBarButtonItem
+        backBarButtonConfig()
     }
     
     private var loginLabel : UILabel = {
@@ -69,10 +70,7 @@ final class LoginViewController : UIViewController {
         button.backgroundColor = .skyBlue
         button.addAction(
             UIAction { _ in
-                let tabBarVC = TabBarController()
-                tabBarVC.modalPresentationStyle = .fullScreen
-                tabBarVC.modalTransitionStyle = .crossDissolve
-                self.present(tabBarVC, animated: true, completion: nil)
+                self.tabLoginButton()
             },
             for: .touchUpInside
         )
@@ -117,14 +115,30 @@ final class LoginViewController : UIViewController {
         button.backgroundColor = .skyBlue
         button.addAction(
             UIAction { _ in
-                self.navigationController?.pushViewController(JoinViewController(), 
-                                                              animated: true)
+                self.tabJoinButton()
             },
             for: .touchUpInside
         )
         
         return button
     }()
+    
+    private func backBarButtonConfig() {
+        let backBarButtonItem = UIBarButtonItem(title: "로그인",
+                                                style: .plain,
+                                                target: self,
+                                                action: nil)
+        backBarButtonItem.tintColor = .darkBlue
+        self.navigationItem.backBarButtonItem = backBarButtonItem
+    }
+    
+    private func tabJoinButton() {
+        self.delegate?.join()
+    }
+    
+    private func tabLoginButton() {
+        self.delegate?.login()
+    }
 
     private func stackLayout() {
         [IDTextField,
