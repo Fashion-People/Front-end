@@ -89,7 +89,7 @@ class TopView : UIView {
         }
                 
         topStackView.snp.makeConstraints {
-            $0.leading.equalTo(backButton.snp.trailing).offset(10)
+            $0.leading.equalTo(backButton.snp.trailing).offset(5)
             $0.trailing.equalToSuperview().offset(-15)
             $0.height.equalTo(45)
             $0.centerY.equalTo(self)

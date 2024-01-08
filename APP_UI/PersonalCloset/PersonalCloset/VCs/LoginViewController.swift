@@ -163,7 +163,7 @@ final class LoginViewController : UIViewController {
         }
         
         loginLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(80)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(90)
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
         }
         

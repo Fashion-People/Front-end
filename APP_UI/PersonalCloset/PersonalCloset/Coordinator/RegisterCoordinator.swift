@@ -21,6 +21,7 @@ class RegisterCoordinator : Coordinator {
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        self.navigationController.isNavigationBarHidden = true
     }
     
     func start() {
@@ -39,5 +40,4 @@ extension RegisterCoordinator : RegisterImageViewControllerDelegate {
     func presentResult(){
         self.delegate?.didPresentResult(self)
     }
-    
 }
