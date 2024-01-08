@@ -10,7 +10,7 @@ import SnapKit
 
 protocol ImageResultViewControllerDelegate {
     func backToMain()
-    func againRegister()
+    func backToRegister()
 }
 
 class ImageResultViewController : BaseViewController {
@@ -20,7 +20,7 @@ class ImageResultViewController : BaseViewController {
         super.viewDidLoad()
         
         topView.backButton.addAction(UIAction{ _ in
-            self.tabBackToMain()
+            self.tabBackToRegister()
         }, for: .touchUpInside)
     }
     
@@ -58,11 +58,11 @@ class ImageResultViewController : BaseViewController {
     }()
     
     private func tabAgainCheckButton() {
-        self.delegate?.againRegister()
+        self.delegate?.backToRegister()
     }
 
-    private func tabBackToMain() {
-        self.delegate?.backToMain()
+    private func tabBackToRegister() {
+        self.delegate?.backToRegister()
     }
     
     override func setLayout() {

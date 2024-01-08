@@ -17,7 +17,7 @@ class TabBarCoordinator : Coordinator {
     }
     
     func start() {
-        let viewController = TabBarController()
+        let viewController = CustomTabBarController()
         
         self.navigationController.viewControllers = [viewController]
     }

@@ -9,7 +9,7 @@ import UIKit
 
 protocol ResultCoordinatorDelegate {
     func didPresentMain(_ coordinator: ResultCoordinator)
-    func didAgainCheckResult(_ coordinator: ResultCoordinator)
+    func didPresentRegister(_ coordinator: ResultCoordinator)
 }
 
 class ResultCoordinator : Coordinator {
@@ -36,8 +36,8 @@ extension ResultCoordinator : ImageResultViewControllerDelegate {
         self.delegate?.didPresentMain(self)
     }
     
-    func againRegister() {
-        self.delegate?.didAgainCheckResult(self)
+    func backToRegister() {
+        self.delegate?.didPresentRegister(self)
     }
 }
 

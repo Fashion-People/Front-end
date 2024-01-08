@@ -104,7 +104,7 @@ extension AppCoordinator : JoinCoordinatorDelegate {
 
 // MARK: - ResultCoordinatorDelegate extension
 extension AppCoordinator : ResultCoordinatorDelegate {
-    func didAgainCheckResult(_ coordinator: ResultCoordinator) {
+    func didPresentRegister(_ coordinator: ResultCoordinator) {
         self.childCoordinators = self.childCoordinators.filter { $0 !== coordinator }
         self.showRegisterViewController()
     }

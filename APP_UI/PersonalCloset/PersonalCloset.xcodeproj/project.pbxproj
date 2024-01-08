@@ -22,12 +22,13 @@
 		298202672B44269300B7DEB3 /* ImageInputButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298202662B44269300B7DEB3 /* ImageInputButton.swift */; };
 		298202692B4452D800B7DEB3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298202682B4452D800B7DEB3 /* LoginViewController.swift */; };
 		2982026B2B4452DF00B7DEB3 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2982026A2B4452DF00B7DEB3 /* JoinViewController.swift */; };
+		29910A832B4BC78E00FF8460 /* ButtonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29910A822B4BC78E00FF8460 /* ButtonStackView.swift */; };
 		299CCE5B2B4679EA0054505E /* KeyboradHide+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299CCE5A2B4679EA0054505E /* KeyboradHide+.swift */; };
 		29A9C0962B3FE62900209641 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9C0952B3FE62900209641 /* AppDelegate.swift */; };
 		29A9C0982B3FE62900209641 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9C0972B3FE62900209641 /* SceneDelegate.swift */; };
 		29A9C09F2B3FE62A00209641 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29A9C09E2B3FE62A00209641 /* Assets.xcassets */; };
 		29A9C0A22B3FE62A00209641 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29A9C0A02B3FE62A00209641 /* LaunchScreen.storyboard */; };
-		29A9C0AA2B3FE6C800209641 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9C0A92B3FE6C800209641 /* TabBarController.swift */; };
+		29A9C0AA2B3FE6C800209641 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9C0A92B3FE6C800209641 /* CustomTabBarController.swift */; };
 		29A9C0AD2B3FE73C00209641 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 29A9C0AC2B3FE73C00209641 /* SnapKit */; };
 		29A9C0AF2B3FE7A700209641 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9C0AE2B3FE7A700209641 /* UIColor+.swift */; };
 		29A9C0B12B3FE92D00209641 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9C0B02B3FE92D00209641 /* MainViewController.swift */; };
@@ -53,6 +54,7 @@
 		298202662B44269300B7DEB3 /* ImageInputButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInputButton.swift; sourceTree = "<group>"; };
 		298202682B4452D800B7DEB3 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2982026A2B4452DF00B7DEB3 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
+		29910A822B4BC78E00FF8460 /* ButtonStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStackView.swift; sourceTree = "<group>"; };
 		299CCE5A2B4679EA0054505E /* KeyboradHide+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboradHide+.swift"; sourceTree = "<group>"; };
 		29A9C0922B3FE62900209641 /* PersonalCloset.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PersonalCloset.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29A9C0952B3FE62900209641 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -60,7 +62,7 @@
 		29A9C09E2B3FE62A00209641 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29A9C0A12B3FE62A00209641 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		29A9C0A32B3FE62A00209641 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		29A9C0A92B3FE6C800209641 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		29A9C0A92B3FE6C800209641 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		29A9C0AE2B3FE7A700209641 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		29A9C0B02B3FE92D00209641 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		29A9C0B22B3FE93C00209641 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				298202662B44269300B7DEB3 /* ImageInputButton.swift */,
 				29DA5F602B4542A500F45CC6 /* InputView.swift */,
 				29DA5F622B45600600F45CC6 /* JoinInputView.swift */,
+				29910A822B4BC78E00FF8460 /* ButtonStackView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -128,7 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				29A9C0B22B3FE93C00209641 /* SettingViewController.swift */,
-				29A9C0A92B3FE6C800209641 /* TabBarController.swift */,
+				29A9C0A92B3FE6C800209641 /* CustomTabBarController.swift */,
 				29A9C0B02B3FE92D00209641 /* MainViewController.swift */,
 				298202682B4452D800B7DEB3 /* LoginViewController.swift */,
 				2982026A2B4452DF00B7DEB3 /* JoinViewController.swift */,
@@ -253,12 +256,13 @@
 				290BAADF2B4AEA9900C800A1 /* LoginCoordinator.swift in Sources */,
 				290BAAE92B4AFE3F00C800A1 /* TabBarCoordinator.swift in Sources */,
 				29A9C0B52B3FE96600209641 /* RegisterImageViewController.swift in Sources */,
-				29A9C0AA2B3FE6C800209641 /* TabBarController.swift in Sources */,
+				29A9C0AA2B3FE6C800209641 /* CustomTabBarController.swift in Sources */,
 				290BAAE72B4AEB3F00C800A1 /* RegisterCoordinator.swift in Sources */,
 				290BAAE32B4AEB1000C800A1 /* MainCoordinator.swift in Sources */,
 				29A9C0B12B3FE92D00209641 /* MainViewController.swift in Sources */,
 				298202652B43F21000B7DEB3 /* Extension.swift in Sources */,
 				2982026B2B4452DF00B7DEB3 /* JoinViewController.swift in Sources */,
+				29910A832B4BC78E00FF8460 /* ButtonStackView.swift in Sources */,
 				29A9C0962B3FE62900209641 /* AppDelegate.swift in Sources */,
 				290BAAE12B4AEAF900C800A1 /* JoinCoordinator.swift in Sources */,
 				2982023C2B43C72600B7DEB3 /* BaseViewController.swift in Sources */,
