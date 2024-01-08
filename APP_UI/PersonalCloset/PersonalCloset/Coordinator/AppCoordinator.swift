@@ -22,7 +22,7 @@ class AppCoordinator : Coordinator {
     }
     
     func start() {
-        self.showRegisterViewController()
+        self.showLoginViewController()
     }
     
     private func showMainViewController() {
