@@ -94,7 +94,7 @@ class RegisterImageViewController : BaseViewController {
         }
         
         imageInputStackView1.snp.makeConstraints {
-            $0.top.equalTo(topView.snp.bottom).offset(40)
+            $0.top.equalTo(topView.snp.bottom).offset(20)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(30)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-30)
         }
