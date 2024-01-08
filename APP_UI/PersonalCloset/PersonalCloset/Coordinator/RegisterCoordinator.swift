@@ -39,5 +39,4 @@ extension RegisterCoordinator : RegisterImageViewControllerDelegate {
     func presentResult(){
         self.delegate?.didPresentResult(self)
     }
-    
 }
