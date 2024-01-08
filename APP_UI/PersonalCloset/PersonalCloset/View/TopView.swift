@@ -15,17 +15,27 @@ class TopView : UIView {
         stackView.axis = .horizontal
         stackView.distribution = .fill
         stackView.alignment = .center
-        stackView.spacing = 200
+        stackView.spacing = 10
         
         return stackView
+    }()
+    
+    lazy var backButton : UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
+        button.tintColor = .darkBlue
+        button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        
+        return button
     }()
     
     private lazy var iconButton : UIButton = {
         let button = UIButton()
         button.setTitle("Personal\nCloset", for: .normal)
         button.setTitleColor(.darkBlue, for: .normal)
+        button.contentHorizontalAlignment = .leading
         
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 23, weight: .bold)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 21, weight: .bold)
         button.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         button.titleLabel?.textAlignment = .center
         
@@ -53,8 +63,13 @@ class TopView : UIView {
     }
     
     private func setLayout() {
-        [iconButton,weatherImage].forEach {
+        [iconButton,
+         weatherImage].forEach {
             topStackView.addArrangedSubview($0)
+        }
+        
+        iconButton.snp.makeConstraints {
+            $0.width.equalTo(200)
         }
         
         weatherImage.snp.makeConstraints {
@@ -62,13 +77,23 @@ class TopView : UIView {
             $0.height.equalTo(40)
         }
         
-        addSubview(topStackView)
+        [backButton,topStackView].forEach {
+            addSubview($0)
+        }
+        
+        backButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(15)
+            $0.width.equalTo(20)
+            $0.height.equalTo(45)
+            $0.centerY.equalTo(self)
+        }
                 
         topStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(20)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
-            $0.height.equalTo(50)
+            $0.leading.equalTo(backButton.snp.trailing).offset(10)
+            $0.trailing.equalToSuperview().offset(-15)
+            $0.height.equalTo(45)
+            $0.centerY.equalTo(self)
+
         }
     }
 }

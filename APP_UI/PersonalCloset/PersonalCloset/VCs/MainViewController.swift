@@ -8,9 +8,16 @@
 import UIKit
 import SnapKit
 
-class MainViewController : BaseViewController {
+protocol MainViewControllerDelegate {
+    func presentRegister()
+}
+
+final class MainViewController : BaseViewController {
+    var delegate : MainViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        topView.backButton.isHidden = true
     }
     
     private lazy var cameraButton : UIButton = {
@@ -22,6 +29,11 @@ class MainViewController : BaseViewController {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 40, weight: .light)
         let image = UIImage(systemName: "camera.fill", withConfiguration: imageConfig)
         button.setImage(image, for: .normal)
+        
+        button.addAction(UIAction { _ in
+            self.tabCameraButton()
+            }, for: .touchUpInside
+        )
 
         return button
     }()
@@ -33,6 +45,10 @@ class MainViewController : BaseViewController {
         
         return view
     }()
+    
+    private func tabCameraButton() {
+        self.delegate?.presentRegister()
+    }
     
     override func setLayout() {
         super.setLayout()

@@ -14,14 +14,14 @@ class SettingViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemGray5
+        view.backgroundColor = .skyBlue
         setLayout()
         configure()
     }
     
     private lazy var settingTableView : UITableView = {
         let tableView = UITableView(frame: CGRect.zero, style: .insetGrouped)
-        tableView.backgroundColor = .systemGray5
+        tableView.backgroundColor = .skyBlue
         
         return tableView
     }()

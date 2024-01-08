@@ -8,9 +8,20 @@
 import UIKit
 import SnapKit
 
+protocol RegisterImageViewControllerDelegate {
+    func backToMain()
+    func presentResult()
+}
+
 class RegisterImageViewController : BaseViewController {
+    var delegate : RegisterImageViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        topView.backButton.addAction(UIAction{ _ in
+            self.tabBackToMainButton()
+        }, for: .touchUpInside)
     }
     
     private let imageInputStackView1 : UIStackView = {
@@ -49,10 +60,7 @@ class RegisterImageViewController : BaseViewController {
         button.layer.backgroundColor = UIColor.skyBlue.cgColor
         button.addAction(
             UIAction { _ in
-                let resultImageVC = ImageResultViewController()
-                resultImageVC.modalPresentationStyle = .fullScreen
-                resultImageVC.modalTransitionStyle = .crossDissolve
-                self.present(resultImageVC, animated: true, completion: nil)
+                self.tabResultButton()
             },
             for: .touchUpInside
         )
@@ -60,8 +68,17 @@ class RegisterImageViewController : BaseViewController {
         return button
     }()
     
+    private func tabResultButton() {
+        self.delegate?.presentResult()
+    }
+    
+    private func tabBackToMainButton() {
+        self.delegate?.backToMain()
+    }
+    
     override func setLayout() {
         super.setLayout()
+        
         [imageInput1,imageInput2].forEach {
             imageInputStackView1.addArrangedSubview($0)
         }
@@ -77,7 +94,7 @@ class RegisterImageViewController : BaseViewController {
         }
         
         imageInputStackView1.snp.makeConstraints {
-            $0.top.equalTo(topView.snp.bottom).offset(30)
+            $0.top.equalTo(topView.snp.bottom).offset(40)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(30)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-30)
         }
