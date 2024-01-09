@@ -14,6 +14,7 @@
 		290BAAE52B4AEB2200C800A1 /* ResultCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290BAAE42B4AEB2200C800A1 /* ResultCoordinator.swift */; };
 		290BAAE72B4AEB3F00C800A1 /* RegisterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290BAAE62B4AEB3F00C800A1 /* RegisterCoordinator.swift */; };
 		290BAAE92B4AFE3F00C800A1 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290BAAE82B4AFE3F00C800A1 /* TabBarCoordinator.swift */; };
+		292BE6B42B4D26BA00BF3EE9 /* JoinPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */; };
 		29589FCA2B457839003578A3 /* ImageResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29589FC92B457839003578A3 /* ImageResultViewController.swift */; };
 		2982023A2B43C2F100B7DEB3 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298202392B43C2F100B7DEB3 /* TopView.swift */; };
 		2982023C2B43C72600B7DEB3 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2982023B2B43C72600B7DEB3 /* BaseViewController.swift */; };
@@ -46,6 +47,7 @@
 		290BAAE42B4AEB2200C800A1 /* ResultCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCoordinator.swift; sourceTree = "<group>"; };
 		290BAAE62B4AEB3F00C800A1 /* RegisterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCoordinator.swift; sourceTree = "<group>"; };
 		290BAAE82B4AFE3F00C800A1 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
+		292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPickerView.swift; sourceTree = "<group>"; };
 		29589FC92B457839003578A3 /* ImageResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResultViewController.swift; sourceTree = "<group>"; };
 		298202392B43C2F100B7DEB3 /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		2982023B2B43C72600B7DEB3 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				29DA5F602B4542A500F45CC6 /* InputView.swift */,
 				29DA5F622B45600600F45CC6 /* JoinInputView.swift */,
 				29910A822B4BC78E00FF8460 /* ButtonStackView.swift */,
+				292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				29589FCA2B457839003578A3 /* ImageResultViewController.swift in Sources */,
 				29DA5F632B45600600F45CC6 /* JoinInputView.swift in Sources */,
 				298202632B43F1AB00B7DEB3 /* SettingTableViewCell.swift in Sources */,
+				292BE6B42B4D26BA00BF3EE9 /* JoinPickerView.swift in Sources */,
 				29A9C0B32B3FE93C00209641 /* SettingViewController.swift in Sources */,
 				2982023A2B43C2F100B7DEB3 /* TopView.swift in Sources */,
 				299CCE5B2B4679EA0054505E /* KeyboradHide+.swift in Sources */,

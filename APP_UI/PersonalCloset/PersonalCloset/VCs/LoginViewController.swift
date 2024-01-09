@@ -28,6 +28,7 @@ final class LoginViewController : UIViewController {
         backBarButtonConfig()
     }
     
+    // MARK: - UI config
     private var loginLabel : UILabel = {
         let label = UILabel()
         label.text = "Personal\ncloset"
@@ -59,8 +60,7 @@ final class LoginViewController : UIViewController {
 
         lineView.backgroundColor = .bwGray
     }
-    
-    
+
     private lazy var loginButton : UIButton = {
         let button = UIButton()
         button.setTitle("로그인", for: .normal)
@@ -132,6 +132,7 @@ final class LoginViewController : UIViewController {
         self.navigationItem.backBarButtonItem = backBarButtonItem
     }
     
+    // MARK: - method
     private func tabJoinButton() {
         self.delegate?.join()
     }
@@ -152,6 +153,7 @@ final class LoginViewController : UIViewController {
         }
     }
     
+    // MARK: - UI layout config
     private func setLayout() {
         [loginLabel,
          inputStackView,

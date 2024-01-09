@@ -20,6 +20,7 @@ final class MainViewController : BaseViewController {
         topView.backButton.isHidden = true
     }
     
+    // MARK: - UI config
     private lazy var cameraButton : UIButton = {
         let button = UIButton()
         button.imageView?.tintColor = .darkBlue
@@ -46,10 +47,12 @@ final class MainViewController : BaseViewController {
         return view
     }()
     
+    // MARK: - method
     private func tabCameraButton() {
         self.delegate?.presentRegister()
     }
     
+    // MARK: - UI layout config
     override func setLayout() {
         super.setLayout()
         
