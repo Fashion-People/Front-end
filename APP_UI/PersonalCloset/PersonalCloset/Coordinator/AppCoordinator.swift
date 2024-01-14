@@ -9,6 +9,8 @@ import UIKit
 
 protocol Coordinator : AnyObject {
     var childCoordinators : [Coordinator] { get set }
+    
+    // 해당 coordinator 실질적으로 실행하는 메서드
     func start()
 }
 

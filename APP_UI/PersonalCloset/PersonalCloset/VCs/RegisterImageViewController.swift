@@ -64,7 +64,6 @@ class RegisterImageViewController : BaseViewController {
             },
             for: .touchUpInside
         )
-        
         return button
     }()
     

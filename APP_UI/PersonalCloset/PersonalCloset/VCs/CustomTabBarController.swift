@@ -24,7 +24,7 @@ class CustomTabBarController : UITabBarController {
         tabFrame.origin.y = self.view.frame.size.height - 95
         self.tabBar.frame = tabFrame
     }
-    
+
     private var buttonStackView = ButtonStackView()
     
     private func tabBarConfig() {
