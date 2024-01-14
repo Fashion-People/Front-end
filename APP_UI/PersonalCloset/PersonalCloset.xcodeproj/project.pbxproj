@@ -7,15 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		290BAADD2B4AE54900C800A1 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290BAADC2B4AE54900C800A1 /* AppCoordinator.swift */; };
-		290BAADF2B4AEA9900C800A1 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290BAADE2B4AEA9900C800A1 /* LoginCoordinator.swift */; };
-		290BAAE12B4AEAF900C800A1 /* JoinCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290BAAE02B4AEAF900C800A1 /* JoinCoordinator.swift */; };
-		290BAAE32B4AEB1000C800A1 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290BAAE22B4AEB1000C800A1 /* MainCoordinator.swift */; };
-		290BAAE52B4AEB2200C800A1 /* ResultCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290BAAE42B4AEB2200C800A1 /* ResultCoordinator.swift */; };
-		290BAAE72B4AEB3F00C800A1 /* RegisterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290BAAE62B4AEB3F00C800A1 /* RegisterCoordinator.swift */; };
-		290BAAE92B4AFE3F00C800A1 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290BAAE82B4AFE3F00C800A1 /* TabBarCoordinator.swift */; };
 		292BE6B42B4D26BA00BF3EE9 /* JoinPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */; };
 		29589FCA2B457839003578A3 /* ImageResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29589FC92B457839003578A3 /* ImageResultViewController.swift */; };
+		295FF85D2B53DC32006DDD50 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295FF85C2B53DC32006DDD50 /* AppCoordinator.swift */; };
+		295FF85F2B53DD34006DDD50 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295FF85E2B53DD34006DDD50 /* AuthCoordinator.swift */; };
+		295FF8612B53DD67006DDD50 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295FF8602B53DD67006DDD50 /* TabBarCoordinator.swift */; };
+		295FF8632B53DD88006DDD50 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295FF8622B53DD88006DDD50 /* MainCoordinator.swift */; };
+		295FF8652B53DDA2006DDD50 /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295FF8642B53DDA2006DDD50 /* SettingCoordinator.swift */; };
 		2982023A2B43C2F100B7DEB3 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298202392B43C2F100B7DEB3 /* TopView.swift */; };
 		2982023C2B43C72600B7DEB3 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2982023B2B43C72600B7DEB3 /* BaseViewController.swift */; };
 		298202632B43F1AB00B7DEB3 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298202622B43F1AB00B7DEB3 /* SettingTableViewCell.swift */; };
@@ -40,15 +38,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		290BAADC2B4AE54900C800A1 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		290BAADE2B4AEA9900C800A1 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
-		290BAAE02B4AEAF900C800A1 /* JoinCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinCoordinator.swift; sourceTree = "<group>"; };
-		290BAAE22B4AEB1000C800A1 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
-		290BAAE42B4AEB2200C800A1 /* ResultCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCoordinator.swift; sourceTree = "<group>"; };
-		290BAAE62B4AEB3F00C800A1 /* RegisterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCoordinator.swift; sourceTree = "<group>"; };
-		290BAAE82B4AFE3F00C800A1 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPickerView.swift; sourceTree = "<group>"; };
 		29589FC92B457839003578A3 /* ImageResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResultViewController.swift; sourceTree = "<group>"; };
+		295FF85C2B53DC32006DDD50 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		295FF85E2B53DD34006DDD50 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		295FF8602B53DD67006DDD50 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
+		295FF8622B53DD88006DDD50 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		295FF8642B53DDA2006DDD50 /* SettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinator.swift; sourceTree = "<group>"; };
 		298202392B43C2F100B7DEB3 /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		2982023B2B43C72600B7DEB3 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		298202622B43F1AB00B7DEB3 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
@@ -88,13 +84,11 @@
 		290BAADB2B4AE15200C800A1 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				290BAADC2B4AE54900C800A1 /* AppCoordinator.swift */,
-				290BAAE22B4AEB1000C800A1 /* MainCoordinator.swift */,
-				290BAADE2B4AEA9900C800A1 /* LoginCoordinator.swift */,
-				290BAAE02B4AEAF900C800A1 /* JoinCoordinator.swift */,
-				290BAAE62B4AEB3F00C800A1 /* RegisterCoordinator.swift */,
-				290BAAE42B4AEB2200C800A1 /* ResultCoordinator.swift */,
-				290BAAE82B4AFE3F00C800A1 /* TabBarCoordinator.swift */,
+				295FF85C2B53DC32006DDD50 /* AppCoordinator.swift */,
+				295FF85E2B53DD34006DDD50 /* AuthCoordinator.swift */,
+				295FF8602B53DD67006DDD50 /* TabBarCoordinator.swift */,
+				295FF8622B53DD88006DDD50 /* MainCoordinator.swift */,
+				295FF8642B53DDA2006DDD50 /* SettingCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -255,19 +249,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				298202672B44269300B7DEB3 /* ImageInputButton.swift in Sources */,
+				295FF8632B53DD88006DDD50 /* MainCoordinator.swift in Sources */,
 				29A9C0AF2B3FE7A700209641 /* UIColor+.swift in Sources */,
-				290BAADF2B4AEA9900C800A1 /* LoginCoordinator.swift in Sources */,
-				290BAAE92B4AFE3F00C800A1 /* TabBarCoordinator.swift in Sources */,
 				29A9C0B52B3FE96600209641 /* RegisterImageViewController.swift in Sources */,
 				29A9C0AA2B3FE6C800209641 /* CustomTabBarController.swift in Sources */,
-				290BAAE72B4AEB3F00C800A1 /* RegisterCoordinator.swift in Sources */,
-				290BAAE32B4AEB1000C800A1 /* MainCoordinator.swift in Sources */,
+				295FF8612B53DD67006DDD50 /* TabBarCoordinator.swift in Sources */,
 				29A9C0B12B3FE92D00209641 /* MainViewController.swift in Sources */,
 				298202652B43F21000B7DEB3 /* Extension.swift in Sources */,
+				295FF85F2B53DD34006DDD50 /* AuthCoordinator.swift in Sources */,
+				295FF85D2B53DC32006DDD50 /* AppCoordinator.swift in Sources */,
 				2982026B2B4452DF00B7DEB3 /* JoinViewController.swift in Sources */,
 				29910A832B4BC78E00FF8460 /* ButtonStackView.swift in Sources */,
+				295FF8652B53DDA2006DDD50 /* SettingCoordinator.swift in Sources */,
 				29A9C0962B3FE62900209641 /* AppDelegate.swift in Sources */,
-				290BAAE12B4AEAF900C800A1 /* JoinCoordinator.swift in Sources */,
 				2982023C2B43C72600B7DEB3 /* BaseViewController.swift in Sources */,
 				29589FCA2B457839003578A3 /* ImageResultViewController.swift in Sources */,
 				29DA5F632B45600600F45CC6 /* JoinInputView.swift in Sources */,
@@ -276,10 +270,8 @@
 				29A9C0B32B3FE93C00209641 /* SettingViewController.swift in Sources */,
 				2982023A2B43C2F100B7DEB3 /* TopView.swift in Sources */,
 				299CCE5B2B4679EA0054505E /* KeyboardHide+.swift in Sources */,
-				290BAADD2B4AE54900C800A1 /* AppCoordinator.swift in Sources */,
 				29DA5F612B4542A500F45CC6 /* InputView.swift in Sources */,
 				298202692B4452D800B7DEB3 /* LoginViewController.swift in Sources */,
-				290BAAE52B4AEB2200C800A1 /* ResultCoordinator.swift in Sources */,
 				29A9C0982B3FE62900209641 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

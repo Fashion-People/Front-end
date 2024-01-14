@@ -8,13 +8,14 @@
 import UIKit
 import SnapKit
 
-protocol LoginViewControllerDelegate {
-    func login()
-    func join()
+protocol LoginNavigation : AnyObject {
+    func presentJoinVC()
+    func presentMainVC()
+    func goToLogin()
 }
 
-final class LoginViewController : UIViewController {
-    var delegate : LoginViewControllerDelegate?
+final class LoginViewController : UIViewController {    
+    weak var coordinator : LoginNavigation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,11 +135,11 @@ final class LoginViewController : UIViewController {
     
     // MARK: - method
     private func tabJoinButton() {
-        self.delegate?.join()
+        //join 버튼 눌렀을때
     }
     
     private func tabLoginButton() {
-        self.delegate?.login()
+        // login 버튼 눌렀을때 
     }
 
     private func stackLayout() {

@@ -8,13 +8,7 @@
 import UIKit
 import SnapKit
 
-protocol JoinViewControllerDelegate {
-    func backToLogin()
-}
-
 final class JoinViewController : UIViewController {
-    var delegate : JoinViewControllerDelegate?
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -126,14 +120,14 @@ final class JoinViewController : UIViewController {
         
         let success = UIAlertAction(title: "확인",
                                     style: .default) { action in
-            self.delegate?.backToLogin()
+            // 회원가입 확인 버튼 눌렀을때
         }
         joinSuccessAlert.addAction(success)
         self.present(joinSuccessAlert, animated: true, completion: nil)
     }
     
     @objc private func tabJoinButtonbutton() {
-        self.delegate?.backToLogin()
+        // join 버튼 눌렀을때 
     }
     
     private func navigationBarConfig() {

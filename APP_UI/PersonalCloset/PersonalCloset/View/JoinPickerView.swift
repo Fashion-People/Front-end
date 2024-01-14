@@ -79,25 +79,6 @@ extension JoinPickerView : UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return style[row]
     }
-    
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        switch component {
-//        case 0:
-//            first = style[row]
-//            print(first)
-//        case 1:
-//            second = style[row]
-//            print(second)
-//        case 2:
-//            third = style[row]
-//            print(third)
-//        case 3:
-//            fourth = style[row]
-//            print(fourth)
-//        default:
-//            print("없음")
-//        }
-//    }
 }
 
 extension JoinPickerView : UIPickerViewDataSource {
@@ -110,16 +91,7 @@ extension JoinPickerView : UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-//        var color: UIColor!
-
-//        if pickerView.selectedRow(inComponent: component) == row {
-//            color = UIColor.darkBlue
-//        } else {
-//            color = UIColor.black
-//        }
-        
         let attributes: [NSAttributedString.Key: Any] = [
-//            NSAttributedString.Key(rawValue: NSAttributedString.Key.foregroundColor.rawValue): color,
             NSAttributedString.Key(rawValue: NSAttributedString.Key.font.rawValue): UIFont.systemFont(ofSize: 10, weight: .bold)
         ]
         

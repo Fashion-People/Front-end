@@ -8,14 +8,7 @@
 import UIKit
 import SnapKit
 
-protocol ImageResultViewControllerDelegate {
-    func backToMain()
-    func backToRegister()
-}
-
 class ImageResultViewController : BaseViewController {
-    var delegate : ImageResultViewControllerDelegate?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,11 +51,11 @@ class ImageResultViewController : BaseViewController {
     }()
     
     private func tabAgainCheckButton() {
-        self.delegate?.backToRegister()
+        // 다시 확인 버튼
     }
 
     private func tabBackToRegister() {
-        self.delegate?.backToRegister()
+        // 다시 등록 버튼
     }
     
     override func setLayout() {

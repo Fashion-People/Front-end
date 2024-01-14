@@ -8,12 +8,12 @@
 import UIKit
 import SnapKit
 
-protocol MainViewControllerDelegate {
-    func presentRegister()
+protocol MainNavigation : AnyObject {
+    func presentRegisterImage()
 }
 
 final class MainViewController : BaseViewController {
-    var delegate : MainViewControllerDelegate?
+    weak var coordinator : MainNavigation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,6 @@ final class MainViewController : BaseViewController {
     
     // MARK: - method
     private func tabCameraButton() {
-        self.delegate?.presentRegister()
     }
     
     // MARK: - UI layout config
