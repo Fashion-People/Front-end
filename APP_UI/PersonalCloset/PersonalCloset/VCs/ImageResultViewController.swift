@@ -8,13 +8,13 @@
 import UIKit
 import SnapKit
 
-protocol ImageResultViewControllerDelegate {
-    func backToMain()
-    func backToRegister()
+protocol ImageResultNavigation : AnyObject {
+    func backToRegisterVC()
+    func backToMainVC()
 }
 
 class ImageResultViewController : BaseViewController {
-    var delegate : ImageResultViewControllerDelegate?
+    weak var coordinator : ImageResultNavigation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +22,19 @@ class ImageResultViewController : BaseViewController {
         topView.backButton.addAction(UIAction{ _ in
             self.tabBackToRegister()
         }, for: .touchUpInside)
+        
+        topView.iconButton.addAction(UIAction{ _ in
+            self.tabMainIcon()
+        }, for: .touchUpInside)
+    }
+    
+    init(coordinator: ImageResultNavigation) {
+        self.coordinator = coordinator
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private var resultImageView : UIImageView = {
@@ -58,11 +71,17 @@ class ImageResultViewController : BaseViewController {
     }()
     
     private func tabAgainCheckButton() {
-        self.delegate?.backToRegister()
+        // 다시 확인 버튼
+        coordinator?.backToRegisterVC()
     }
 
     private func tabBackToRegister() {
-        self.delegate?.backToRegister()
+        // 다시 등록 버튼
+        coordinator?.backToRegisterVC()
+    }
+    
+    private func tabMainIcon() {
+        coordinator?.backToMainVC()
     }
     
     override func setLayout() {

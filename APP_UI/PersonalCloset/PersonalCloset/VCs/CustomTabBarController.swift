@@ -8,9 +8,9 @@
 import UIKit
 
 class CustomTabBarController : UITabBarController {
-    let mainVC = MainViewController()
-    let settingVC = SettingViewController()
-    let registerVC = RegisterImageViewController()
+//    let mainVC = MainViewController()
+//    let settingVC = SettingViewController()
+//    let registerVC = RegisterImageViewController()
     
     override func viewDidLoad() {
         tabBarConfig()
@@ -24,7 +24,7 @@ class CustomTabBarController : UITabBarController {
         tabFrame.origin.y = self.view.frame.size.height - 95
         self.tabBar.frame = tabFrame
     }
-    
+
     private var buttonStackView = ButtonStackView()
     
     private func tabBarConfig() {
@@ -35,11 +35,9 @@ class CustomTabBarController : UITabBarController {
         
         buttonStackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(10)
-            $0.bottom.equalToSuperview().offset(-35)
+            $0.bottom.equalToSuperview().offset(-30)
             $0.leading.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-15)
         }
-        
-        setViewControllers([mainVC,registerVC,settingVC], animated: true)
     }
 }

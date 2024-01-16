@@ -2,38 +2,51 @@
 //  MainCoordinator.swift
 //  PersonalCloset
 //
-//  Created by Bowon Han on 1/7/24.
+//  Created by Bowon Han on 1/14/24.
 //
 
 import UIKit
 
-protocol MainCoordinatorDelegate {
-    func didPresentRegister(_ coordinator : MainCoordinator)
-}
+final class MainCoordinator : Coordinator {
+    var parentCoordinator: Coordinator?
+    var childCoordinator: [Coordinator] = []
+    
+    var navigationController: UINavigationController
 
-class MainCoordinator : Coordinator {
-    var childCoordinators: [Coordinator] = []
-    
-    var delegate : MainCoordinatorDelegate?
-    
-    private var navigationController : UINavigationController!
+    func start() {
+        presentMainVC()
+    }
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.navigationController.isNavigationBarHidden = true
+        navigationController.isNavigationBarHidden = true
+    }
+}
+
+extension MainCoordinator : MainNavigation, RegisterImageNavigation, ImageResultNavigation {
+    // navigation push 기능
+    func presentMainVC() {
+        let mainVC = MainViewController(coordinator: self)
+        navigationController.pushViewController(mainVC, animated: true)
     }
     
-    func start() {
-        let viewController = MainViewController()
-        viewController.delegate = self
-        
-        self.navigationController.viewControllers = [viewController]
+    func presentRegisterVC() {
+        let registerVC = RegisterImageViewController(coordinator: self)
+        navigationController.pushViewController(registerVC, animated: true)
     }
-}
-
-extension MainCoordinator : MainViewControllerDelegate {
-    func presentRegister() {
-        self.delegate?.didPresentRegister(self)
+    
+    func presentResultVC() {
+        let resultVC = ImageResultViewController(coordinator: self)
+        navigationController.pushViewController(resultVC, animated: true)
     }
-}
+    
+    // navigation pop 기능
+    func backToMainVC() {
+        navigationController.popToRootViewController(animated: true)
+    }
+    
+    func backToRegisterVC() {
+        navigationController.popViewController(animated: true)
+    }
 
+}

@@ -8,13 +8,23 @@
 import UIKit
 import SnapKit
 
-protocol LoginViewControllerDelegate {
-    func login()
-    func join()
+protocol LoginNavigation : AnyObject {
+    func presentJoinVC()
+    func presentMainVC()
+    func pushLoginVC()
 }
 
-final class LoginViewController : UIViewController {
-    var delegate : LoginViewControllerDelegate?
+final class LoginViewController : UIViewController {    
+    weak var coordinator : LoginNavigation?
+    
+    init(coordinator: LoginNavigation) {
+        self.coordinator = coordinator
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +38,7 @@ final class LoginViewController : UIViewController {
         backBarButtonConfig()
     }
     
+    // MARK: - UI config
     private var loginLabel : UILabel = {
         let label = UILabel()
         label.text = "Personal\ncloset"
@@ -59,8 +70,7 @@ final class LoginViewController : UIViewController {
 
         lineView.backgroundColor = .bwGray
     }
-    
-    
+
     private lazy var loginButton : UIButton = {
         let button = UIButton()
         button.setTitle("로그인", for: .normal)
@@ -132,12 +142,15 @@ final class LoginViewController : UIViewController {
         self.navigationItem.backBarButtonItem = backBarButtonItem
     }
     
+    // MARK: - method
     private func tabJoinButton() {
-        self.delegate?.join()
+        //join 버튼 눌렀을때
+        coordinator?.presentJoinVC()
     }
     
     private func tabLoginButton() {
-        self.delegate?.login()
+        // login 버튼 눌렀을때 
+        coordinator?.presentMainVC()
     }
 
     private func stackLayout() {
@@ -152,6 +165,7 @@ final class LoginViewController : UIViewController {
         }
     }
     
+    // MARK: - UI layout config
     private func setLayout() {
         [loginLabel,
          inputStackView,

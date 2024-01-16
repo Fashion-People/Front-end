@@ -2,130 +2,65 @@
 //  AppCoordinator.swift
 //  PersonalCloset
 //
-//  Created by Bowon Han on 1/7/24.
+//  Created by Bowon Han on 1/14/24.
 //
 
 import UIKit
 
 protocol Coordinator : AnyObject {
-    var childCoordinators : [Coordinator] { get set }
+    var parentCoordinator: Coordinator? { get set }
+    var childCoordinator: [Coordinator] { get set }
+    var navigationController : UINavigationController { get set }
     func start()
 }
 
-class AppCoordinator : Coordinator {
-    var childCoordinators: [Coordinator] = []
-    private var navigationController : UINavigationController!
-        
+extension Coordinator {
+    /// Removing a coordinator inside a children. This call is important to prevent memory leak.
+    /// - Parameter coordinator: Coordinator that finished.
+    func childDidFinish(_ coordinator : Coordinator){
+        // Call this if a coordinator is done.
+        for (index, child) in childCoordinator.enumerated() {
+            if child === coordinator {
+                childCoordinator.remove(at: index)
+                break
+            }
+        }
+    }
+}
+
+
+final class AppCoordinator : Coordinator {
+    var parentCoordinator: Coordinator?
+    var childCoordinator: [Coordinator] = []
+    
+    var navigationController: UINavigationController
+
+    func start() {
+        startAuthCoordinator()
+    }
+    
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.navigationController.isNavigationBarHidden = true
+        navigationController.isNavigationBarHidden = true
     }
     
-    func start() {
-        self.showLoginViewController()
+    func startAuthCoordinator() {
+        let authCoordinator = AuthCoordinator(navigationController: navigationController)
+        childCoordinator.removeAll()
+        authCoordinator.parentCoordinator = self
+        childCoordinator.append(authCoordinator)
+        authCoordinator.start()
     }
     
-    private func showMainViewController() {
-        let coordinator = MainCoordinator(navigationController: self.navigationController)
-        coordinator.delegate = self
-        coordinator.start()
+    
+    func startMainTabbarCoordinator() {
+        let tabBarCoordinator = TabBarCoordinator(navigationController: navigationController)
+        childCoordinator.removeAll()
+        tabBarCoordinator.parentCoordinator = self
+        tabBarCoordinator.start()
+    }
         
-        self.childCoordinators.append(coordinator)
-    }
-    
-    private func showLoginViewController() {
-        let coordinator = LoginCoordinator(navigationController: self.navigationController)
-        coordinator.delegate = self
-        coordinator.start()
-        
-        self.childCoordinators.append(coordinator)
-    }
-    
-    private func showJoinViewController() {
-        let coordinator = JoinCoordinator(navigationController: self.navigationController)
-        coordinator.delegate = self
-        coordinator.start()
-        
-        self.childCoordinators.append(coordinator)
-    }
-    
-    private func showResultViewController() {
-        let coordinator = ResultCoordinator(navigationController: self.navigationController)
-        coordinator.delegate = self
-        coordinator.start()
-        
-        self.childCoordinators.append(coordinator)
-    }
-    
-    private func showRegisterViewController() {
-        let coordinator = RegisterCoordinator(navigationController: self.navigationController)
-        coordinator.delegate = self
-        coordinator.start()
-        
-        self.childCoordinators.append(coordinator)
-    }
-    
-    private func showTabBarViewController() {
-        let coordinator = TabBarCoordinator(navigationController: self.navigationController)
-        coordinator.start()
-        
-        self.childCoordinators.append(coordinator)
+    deinit {
+        print("앱코디네이터해제")
     }
 }
-
-// MARK: - MainCoordinatorDelegate extension
-extension AppCoordinator : MainCoordinatorDelegate {
-    func didPresentRegister(_ coordinator: MainCoordinator) {
-        self.childCoordinators = self.childCoordinators.filter { $0 !== coordinator }
-        self.showRegisterViewController()
-    }
-}
-
-// MARK: - LoginCoordinatorDelegate extension
-extension AppCoordinator : LoginCoordinatorDelegate {
-    func didJoined(_ coordinator: LoginCoordinator) {
-        self.childCoordinators = self.childCoordinators.filter { $0 !== coordinator }
-        self.showJoinViewController()
-    }
-    
-    func didLoggedIn(_ coordinator: LoginCoordinator) {
-        self.childCoordinators = self.childCoordinators.filter { $0 !== coordinator }
-        self.showTabBarViewController()
-    }
-}
-
-// MARK: - JoinCoordinatorDelegate extension
-extension AppCoordinator : JoinCoordinatorDelegate {
-    func didPresentLoginView(_ coordinator: JoinCoordinator) {
-        self.childCoordinators = self.childCoordinators.filter { $0 !== coordinator }
-        self.showLoginViewController()
-    }
-}
-
-// MARK: - ResultCoordinatorDelegate extension
-extension AppCoordinator : ResultCoordinatorDelegate {
-    func didPresentRegister(_ coordinator: ResultCoordinator) {
-        self.childCoordinators = self.childCoordinators.filter { $0 !== coordinator }
-        self.showRegisterViewController()
-    }
-    
-    func didPresentMain(_ coordinator: ResultCoordinator) {
-        self.childCoordinators = self.childCoordinators.filter { $0 !== coordinator }
-        self.showTabBarViewController()
-    }
-}
-
-// MARK: - RegisterCoordinatorDelegate extension
-extension AppCoordinator : RegisterCoordinatorDelegate {
-    func didPresentMain(_ coordinator: RegisterCoordinator) {
-        self.childCoordinators = self.childCoordinators.filter { $0 !== coordinator }
-        self.showTabBarViewController()
-    }
-    
-    func didPresentResult(_ coordinator: RegisterCoordinator) {
-        self.childCoordinators = self.childCoordinators.filter { $0 !== coordinator }
-        self.showResultViewController()
-    }
-}
-
-

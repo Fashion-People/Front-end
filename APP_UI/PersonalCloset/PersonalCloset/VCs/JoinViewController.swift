@@ -8,17 +8,21 @@
 import UIKit
 import SnapKit
 
-protocol JoinViewControllerDelegate {
-    func backToLogin()
+protocol JoinNavigation : AnyObject {
+    func backToLoginVC()
 }
 
 final class JoinViewController : UIViewController {
-    var delegate : JoinViewControllerDelegate?
-    var style : [String] = ["모던", "캐주얼", "스포티","페미닌"]
-    var first = ""
-    var second = ""
-    var third = ""
-    var fourth = ""
+    weak var coordinator : JoinNavigation?
+    
+    init(coordinator: JoinNavigation) {
+        self.coordinator = coordinator
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +32,9 @@ final class JoinViewController : UIViewController {
         inputViewConfig()
         setLayout()
         navigationBarConfig()
-                
-        firstPickerView.delegate = self
-        firstPickerView.dataSource = self
     }
     
+    // MARK: - UI config
     private let contentView = UIView()
     private let scrollView : UIScrollView = {
         let scrollView = UIScrollView()
@@ -82,20 +84,31 @@ final class JoinViewController : UIViewController {
         joinEmailInput.inputLabel.text = "이메일"
         joinEmailInput.inputTextField.placeholder = "이메일을 입력해주세요"
     }
-    
-    private let pickerViewLabel : UILabel = {
-        let label = UILabel()
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        label.text = "취향"
         
-        return label
+    private var firstPickerView : JoinPickerView = {
+        let pickerView = JoinPickerView()
+        pickerView.inputLabel.text = "1순위"
+        
+        return pickerView
     }()
     
-    private var firstPickerView : UIPickerView = {
-        let pickerView = UIPickerView()
-        pickerView.layer.cornerRadius = 5
-        pickerView.layer.backgroundColor = UIColor.skyBlue.cgColor
+    private var secondPickerView : JoinPickerView = {
+        let pickerView = JoinPickerView()
+        pickerView.inputLabel.text = "2순위"
+        
+        return pickerView
+    }()
+    
+    private var thirdPickerView : JoinPickerView = {
+        let pickerView = JoinPickerView()
+        pickerView.inputLabel.text = "3순위"
+        
+        return pickerView
+    }()
+    
+    private var fourthPickerView : JoinPickerView = {
+        let pickerView = JoinPickerView()
+        pickerView.inputLabel.text = "4순위"
         
         return pickerView
     }()
@@ -122,14 +135,16 @@ final class JoinViewController : UIViewController {
         
         let success = UIAlertAction(title: "확인",
                                     style: .default) { action in
-            self.delegate?.backToLogin()
+            // 회원가입 확인 버튼 눌렀을때
+            self.coordinator?.backToLoginVC()
         }
         joinSuccessAlert.addAction(success)
         self.present(joinSuccessAlert, animated: true, completion: nil)
     }
     
     @objc private func tabJoinButtonbutton() {
-        self.delegate?.backToLogin()
+        // join 버튼 눌렀을때
+        coordinator?.backToLoginVC()
     }
     
     private func navigationBarConfig() {
@@ -143,6 +158,7 @@ final class JoinViewController : UIViewController {
         navigationItem.leftBarButtonItem?.tintColor = .darkBlue
     }
     
+    // MARK: - UI layout config
     private func setLayout() {
         [joinIDInput,
          joinPasswordInput,
@@ -161,8 +177,10 @@ final class JoinViewController : UIViewController {
         scrollView.addSubview(contentView)
         
         [joinStackView,
-         pickerViewLabel,
-         firstPickerView].forEach {
+         firstPickerView,
+         secondPickerView,
+         thirdPickerView,
+         fourthPickerView].forEach {
             contentView.addSubview($0)
         }
         
@@ -180,25 +198,39 @@ final class JoinViewController : UIViewController {
         contentView.snp.makeConstraints {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.width.equalTo(scrollView.frameLayoutGuide)
-            $0.height.equalTo(700)
+            $0.height.equalTo(1150)
         }
         
         joinStackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(5)
             $0.leading.equalToSuperview().offset(25)
             $0.trailing.equalToSuperview().offset(-25)
-            $0.bottom.equalTo(pickerViewLabel.snp.top).offset(-20)
-        }
-        
-        pickerViewLabel.snp.makeConstraints {
-            $0.top.equalTo(joinStackView.snp.bottom).offset(10)
-            $0.leading.equalToSuperview().offset(25)
-            $0.trailing.equalToSuperview().offset(-25)
             $0.bottom.equalTo(firstPickerView.snp.top).offset(-10)
         }
         
         firstPickerView.snp.makeConstraints {
-            $0.top.equalTo(pickerViewLabel.snp.bottom).offset(20)
+            $0.top.equalTo(joinStackView.snp.bottom).offset(10)
+            $0.height.equalTo(150)
+            $0.leading.equalToSuperview().offset(25)
+            $0.trailing.equalToSuperview().offset(-25)
+        }
+        
+        secondPickerView.snp.makeConstraints {
+            $0.top.equalTo(firstPickerView.snp.bottom).offset(10)
+            $0.height.equalTo(150)
+            $0.leading.equalToSuperview().offset(25)
+            $0.trailing.equalToSuperview().offset(-25)
+        }
+        
+        thirdPickerView.snp.makeConstraints {
+            $0.top.equalTo(secondPickerView.snp.bottom).offset(10)
+            $0.height.equalTo(150)
+            $0.leading.equalToSuperview().offset(25)
+            $0.trailing.equalToSuperview().offset(-25)
+        }
+        
+        fourthPickerView.snp.makeConstraints {
+            $0.top.equalTo(thirdPickerView.snp.bottom).offset(10)
             $0.height.equalTo(150)
             $0.leading.equalToSuperview().offset(25)
             $0.trailing.equalToSuperview().offset(-25)
@@ -214,38 +246,3 @@ final class JoinViewController : UIViewController {
     }
 }
 
-// MARK: - pickerView extension
-extension JoinViewController : UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return style[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        switch component {
-        case 0:
-            first = style[row]
-            print(first)
-        case 1:
-            second = style[row]
-            print(second)
-        case 2:
-            third = style[row]
-            print(third)
-        case 3:
-            fourth = style[row]
-            print(fourth)
-        default:
-            print("없음")
-        }
-    }
-}
-
-extension JoinViewController : UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 4
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 4
-    }
-}

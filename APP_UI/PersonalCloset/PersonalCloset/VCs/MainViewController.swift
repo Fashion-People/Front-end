@@ -8,18 +8,29 @@
 import UIKit
 import SnapKit
 
-protocol MainViewControllerDelegate {
-    func presentRegister()
+protocol MainNavigation : AnyObject {
+    func presentMainVC()
+    func presentRegisterVC()
 }
 
 final class MainViewController : BaseViewController {
-    var delegate : MainViewControllerDelegate?
+    weak var coordinator : MainNavigation?
+    
+    init(coordinator: MainNavigation) {
+        self.coordinator = coordinator
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         topView.backButton.isHidden = true
     }
     
+    // MARK: - UI config
     private lazy var cameraButton : UIButton = {
         let button = UIButton()
         button.imageView?.tintColor = .darkBlue
@@ -46,10 +57,13 @@ final class MainViewController : BaseViewController {
         return view
     }()
     
+    // MARK: - method
     private func tabCameraButton() {
-        self.delegate?.presentRegister()
+        // 카메라 버튼 눌렀을때
+        coordinator?.presentRegisterVC()
     }
     
+    // MARK: - UI layout config
     override func setLayout() {
         super.setLayout()
         

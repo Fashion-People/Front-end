@@ -8,19 +8,32 @@
 import UIKit
 import SnapKit
 
-protocol RegisterImageViewControllerDelegate {
-    func backToMain()
-    func presentResult()
+protocol RegisterImageNavigation : AnyObject {
+    func presentResultVC()
+    func backToMainVC()
 }
 
 class RegisterImageViewController : BaseViewController {
-    var delegate : RegisterImageViewControllerDelegate?
+    weak var coordinator : RegisterImageNavigation!
+    
+    init(coordinator: RegisterImageNavigation) {
+        self.coordinator = coordinator
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         topView.backButton.addAction(UIAction{ _ in
             self.tabBackToMainButton()
+        }, for: .touchUpInside)
+        
+        topView.iconButton.addAction(UIAction{ _ in
+            self.tabMainIcon()
         }, for: .touchUpInside)
     }
     
@@ -64,16 +77,21 @@ class RegisterImageViewController : BaseViewController {
             },
             for: .touchUpInside
         )
-        
         return button
     }()
     
     private func tabResultButton() {
-        self.delegate?.presentResult()
+        // 결과 버튼 눌렀을대
+        coordinator.presentResultVC()
     }
     
     private func tabBackToMainButton() {
-        self.delegate?.backToMain()
+        // topview의 back button 눌렀을때 
+        coordinator.backToMainVC()
+    }
+    
+    private func tabMainIcon() {
+        coordinator.backToMainVC()
     }
     
     override func setLayout() {
