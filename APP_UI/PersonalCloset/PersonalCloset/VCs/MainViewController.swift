@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 protocol MainNavigation : AnyObject {
-    func presentRegisterImage()
+    func presentMainVC()
 }
 
 final class MainViewController : BaseViewController {

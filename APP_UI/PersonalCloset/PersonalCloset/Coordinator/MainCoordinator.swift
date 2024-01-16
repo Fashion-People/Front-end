@@ -14,15 +14,19 @@ final class MainCoordinator : Coordinator {
     var navigationController: UINavigationController
 
     func start() {
-        
+        print("메인 코디네이터 시작")
+        presentMainVC()
     }
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        navigationController.isNavigationBarHidden = true
     }
 }
 
 extension MainCoordinator : MainNavigation {
-    func presentRegisterImage() {
+    func presentMainVC() {
+        let mainVC = MainViewController()
+        navigationController.pushViewController(mainVC, animated: true)
     }
 }

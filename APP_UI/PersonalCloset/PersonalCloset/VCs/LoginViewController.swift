@@ -16,6 +16,15 @@ protocol LoginNavigation : AnyObject {
 final class LoginViewController : UIViewController {    
     weak var coordinator : LoginNavigation?
     
+    init(coordinator: LoginNavigation) {
+        self.coordinator = coordinator
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -139,6 +148,7 @@ final class LoginViewController : UIViewController {
     
     private func tabLoginButton() {
         // login 버튼 눌렀을때 
+        coordinator?.presentMainVC()
     }
 
     private func stackLayout() {

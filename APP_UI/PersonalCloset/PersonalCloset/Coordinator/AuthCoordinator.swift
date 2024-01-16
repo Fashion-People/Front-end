@@ -14,19 +14,30 @@ final class AuthCoordinator : Coordinator {
     var navigationController: UINavigationController
 
     func start() {
-        
+        print("auth 시작")
+        presentLoginVC()
     }
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        navigationController.isNavigationBarHidden = true
     }
 }
 
 extension AuthCoordinator : LoginNavigation {
     func presentJoinVC() {
+        let joinVC = JoinViewController()
+        navigationController.pushViewController(joinVC, animated: true)
     }
     
     func presentMainVC() {
-        <#code#>
+        let appCoordinator = parentCoordinator as! AppCoordinator
+        appCoordinator.startMainTabbarCoordinator()
+        appCoordinator.childDidFinish(self)
+    }
+    
+    func presentLoginVC() {
+        let loginVC = LoginViewController(coordinator: self)
+        navigationController.pushViewController(loginVC, animated: true)
     }
 }

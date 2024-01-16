@@ -20,6 +20,7 @@ final class TabBarCoordinator : Coordinator {
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        navigationController.isNavigationBarHidden = true
     }
     
     func goToHomeTabbar() {
