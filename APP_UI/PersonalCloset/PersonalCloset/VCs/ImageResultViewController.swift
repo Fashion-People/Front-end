@@ -46,7 +46,7 @@ class ImageResultViewController : BaseViewController {
     
     private var resultLabel : UILabel = {
         let label = UILabel()
-        label.text = "날씨 적합도는 79% 입니다."
+        label.text = "적합도는 79% 입니다."
         label.font = UIFont.systemFont(ofSize: 23, weight: .bold)
         label.numberOfLines = 2
         label.textAlignment = .center
@@ -110,7 +110,7 @@ class ImageResultViewController : BaseViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-40)
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
             $0.width.equalTo(230)
-            $0.height.equalTo(60)       
+            $0.height.equalTo(50)       
         }
     }
 }

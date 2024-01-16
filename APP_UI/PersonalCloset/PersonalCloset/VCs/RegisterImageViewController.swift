@@ -127,7 +127,7 @@ class RegisterImageViewController : BaseViewController {
             $0.top.equalTo(imageInputStackView2.snp.bottom).offset(40)
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
             $0.width.equalTo(230)
-            $0.height.equalTo(60)
+            $0.height.equalTo(50)
         }
     }
 }
