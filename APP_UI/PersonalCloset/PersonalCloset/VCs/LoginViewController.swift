@@ -11,6 +11,7 @@ import SnapKit
 protocol LoginNavigation : AnyObject {
     func presentJoinVC()
     func presentMainVC()
+    func pushLoginVC()
 }
 
 final class LoginViewController : UIViewController {    
@@ -144,6 +145,7 @@ final class LoginViewController : UIViewController {
     // MARK: - method
     private func tabJoinButton() {
         //join 버튼 눌렀을때
+        coordinator?.presentJoinVC()
     }
     
     private func tabLoginButton() {

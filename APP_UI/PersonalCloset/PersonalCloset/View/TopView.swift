@@ -29,7 +29,7 @@ class TopView : UIView {
         return button
     }()
     
-    private lazy var iconButton : UIButton = {
+    lazy var iconButton : UIButton = {
         let button = UIButton()
         button.setTitle("Personal\nCloset", for: .normal)
         button.setTitleColor(.darkBlue, for: .normal)

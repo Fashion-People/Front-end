@@ -14,11 +14,18 @@ final class SettingCoordinator : Coordinator {
     var navigationController: UINavigationController
 
     func start() {
-        
+        presentSetting()
     }
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         navigationController.isNavigationBarHidden = true
+    }
+}
+
+extension SettingCoordinator : SettingNavigation {
+    func presentSetting() {
+        let settingVC = SettingViewController()
+        navigationController.pushViewController(settingVC, animated: true)
     }
 }

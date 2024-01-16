@@ -36,7 +36,6 @@ final class AppCoordinator : Coordinator {
     var navigationController: UINavigationController
 
     func start() {
-        print("앱코디네이터시작")
         startAuthCoordinator()
     }
     
@@ -55,10 +54,10 @@ final class AppCoordinator : Coordinator {
     
     
     func startMainTabbarCoordinator() {
-        let mainCoordinator = MainCoordinator(navigationController: navigationController)
+        let tabBarCoordinator = TabBarCoordinator(navigationController: navigationController)
         childCoordinator.removeAll()
-        mainCoordinator.parentCoordinator = self
-        mainCoordinator.start()
+        tabBarCoordinator.parentCoordinator = self
+        tabBarCoordinator.start()
     }
         
     deinit {

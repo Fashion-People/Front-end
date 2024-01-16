@@ -10,10 +10,20 @@ import SnapKit
 
 protocol MainNavigation : AnyObject {
     func presentMainVC()
+    func presentRegisterVC()
 }
 
 final class MainViewController : BaseViewController {
     weak var coordinator : MainNavigation?
+    
+    init(coordinator: MainNavigation) {
+        self.coordinator = coordinator
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +59,8 @@ final class MainViewController : BaseViewController {
     
     // MARK: - method
     private func tabCameraButton() {
+        // 카메라 버튼 눌렀을때
+        coordinator?.presentRegisterVC()
     }
     
     // MARK: - UI layout config

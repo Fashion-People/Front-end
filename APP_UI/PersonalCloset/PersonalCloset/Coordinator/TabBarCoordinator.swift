@@ -14,7 +14,6 @@ final class TabBarCoordinator : Coordinator {
     var navigationController: UINavigationController
 
     func start() {
-        print("홈탭코디네이터시작")
         goToHomeTabbar()
     }
     
@@ -36,7 +35,7 @@ final class TabBarCoordinator : Coordinator {
         let settingCoordinator = SettingCoordinator(navigationController: settingNavigationController)
         
         settingCoordinator.parentCoordinator = parentCoordinator
-        
+         
         
         tabbarController.viewControllers = [mainNavigationController, settingNavigationController]
         navigationController.pushViewController(tabbarController, animated: true)
