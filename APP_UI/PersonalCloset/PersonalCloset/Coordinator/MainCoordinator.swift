@@ -24,6 +24,5 @@ final class MainCoordinator : Coordinator {
 
 extension MainCoordinator : MainNavigation {
     func presentRegisterImage() {
-        <#code#>
     }
 }

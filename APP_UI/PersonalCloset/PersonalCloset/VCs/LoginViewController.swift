@@ -11,7 +11,6 @@ import SnapKit
 protocol LoginNavigation : AnyObject {
     func presentJoinVC()
     func presentMainVC()
-    func goToLogin()
 }
 
 final class LoginViewController : UIViewController {    

@@ -24,6 +24,7 @@ final class TabBarCoordinator : Coordinator {
     
     func goToHomeTabbar() {
         let tabbarController = CustomTabBarController()
+        
         let mainNavigationController = UINavigationController()
         let mainCoordinator = MainCoordinator(navigationController: mainNavigationController)
         

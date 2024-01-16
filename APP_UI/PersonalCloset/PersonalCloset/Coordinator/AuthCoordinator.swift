@@ -29,8 +29,4 @@ extension AuthCoordinator : LoginNavigation {
     func presentMainVC() {
         <#code#>
     }
-    
-    func goToLogin() {
-        <#code#>
-    }
 }
