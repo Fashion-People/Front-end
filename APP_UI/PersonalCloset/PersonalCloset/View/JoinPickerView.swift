@@ -19,7 +19,6 @@ class JoinPickerView : UIView {
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .leading
-//        stackView.spacing = 
         
         return stackView
     }()

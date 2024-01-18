@@ -22,21 +22,22 @@ class ButtonStackView : UIView {
     
     private let mainButton = UIButton()
     private let settingButton = UIButton()
-//    private let registerImageButton = UIButton()
+    private let listImageButton = UIButton()
     
     private func buttonConfig() {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 25,
                                                       weight: .medium,
                                                       scale: .small)
         let mainImage = UIImage(systemName: "house", withConfiguration: imageConfig)
-//        let registerImage = UIImage(systemName: "hanger", withConfiguration: imageConfig)
+        let listImage = UIImage(systemName: "hanger", withConfiguration: imageConfig)
         let settingImage = UIImage(systemName: "ellipsis", withConfiguration: imageConfig)
         
         mainButton.setImage(mainImage, for: .normal)
+        listImageButton.setImage(listImage, for: .normal)
         settingButton.setImage(settingImage, for: .normal)
-//        registerImageButton.setImage(registerImage, for: .normal)
         
         [mainButton,
+         listImageButton,
          settingButton].forEach {
             $0.layer.cornerRadius = 13
             $0.backgroundColor = .white
@@ -56,11 +57,14 @@ class ButtonStackView : UIView {
     
     private func setLayout(){
         [mainButton,
+         listImageButton,
          settingButton].forEach {
             stackView.addArrangedSubview($0)
         }
         
-        [mainButton,settingButton].forEach {
+        [mainButton,
+         listImageButton,
+         settingButton,].forEach {
             $0.snp.makeConstraints {
                 $0.height.equalTo(50)
             }

@@ -88,41 +88,13 @@ final class LoginViewController : UIViewController {
         return button
     }()
     
-    private let findStackView : UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.alignment = .center
-        stackView.spacing = 10
-        
-        return stackView
-    }()
-    
-    private let findIDButton : UIButton = {
-        let button = UIButton()
-        button.setTitle("아이디 찾기", for: .normal)
-        button.setTitleColor(.lightGray, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        
-        return button
-    }()
-    
-    private let findPasswordButton : UIButton = {
-        let button = UIButton()
-        button.setTitle("비밀번호 찾기", for: .normal)
-        button.setTitleColor(.lightGray, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        
-        return button
-    }()
-    
     private lazy var joinButton : UIButton = {
         let button = UIButton()
         button.setTitle("회원가입", for: .normal)
         button.setTitleColor(.darkBlue, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         button.layer.cornerRadius = 5
-        button.backgroundColor = .skyBlue
+        button.backgroundColor = .systemGray5
         button.addAction(
             UIAction { _ in
                 self.tabJoinButton()
@@ -158,11 +130,6 @@ final class LoginViewController : UIViewController {
          passwordTextField].forEach {
             inputStackView.addArrangedSubview($0)
         }
-        
-        [findIDButton,
-         findPasswordButton].forEach {
-            findStackView.addArrangedSubview($0)
-        }
     }
     
     // MARK: - UI layout config
@@ -171,7 +138,6 @@ final class LoginViewController : UIViewController {
          inputStackView,
          loginButton,
          lineView,
-         findStackView,
          joinButton].forEach {
             view.addSubview($0)
         }
@@ -200,14 +166,8 @@ final class LoginViewController : UIViewController {
             $0.width.equalTo(295)
         }
         
-        findStackView.snp.makeConstraints {
-            $0.top.equalTo(lineView.snp.bottom).offset(15)
-            $0.centerX.equalTo(view.safeAreaLayoutGuide)
-            $0.width.equalTo(280)
-        }
-        
         joinButton.snp.makeConstraints {
-            $0.top.equalTo(findStackView.snp.bottom).offset(50)
+            $0.top.equalTo(lineView.snp.bottom).offset(30)
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(40)
             $0.width.equalTo(295)

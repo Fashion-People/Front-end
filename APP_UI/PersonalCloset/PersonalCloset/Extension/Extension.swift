@@ -13,3 +13,10 @@ extension UITableViewCell {
         return String(describing: self)
     }
 }
+
+// MARK: - UICollectionViewCell extension
+extension UICollectionViewCell {
+    static var identifier: String {
+        return String(describing: self)
+    }
+}
