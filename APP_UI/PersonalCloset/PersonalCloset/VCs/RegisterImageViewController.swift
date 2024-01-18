@@ -29,7 +29,7 @@ class RegisterImageViewController : BaseViewController {
         super.viewDidLoad()
         
         topView.backButton.addAction(UIAction{ _ in
-            self.tabBackToMainButton()
+            self.tabBackButton()
         }, for: .touchUpInside)
         
         topView.iconButton.addAction(UIAction{ _ in
@@ -85,7 +85,7 @@ class RegisterImageViewController : BaseViewController {
         coordinator.presentResultVC()
     }
     
-    private func tabBackToMainButton() {
+    private func tabBackButton() {
         // topview의 back button 눌렀을때 
         coordinator.backToMainVC()
     }
@@ -127,7 +127,7 @@ class RegisterImageViewController : BaseViewController {
             $0.top.equalTo(imageInputStackView2.snp.bottom).offset(40)
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
             $0.width.equalTo(230)
-            $0.height.equalTo(60)
+            $0.height.equalTo(50)
         }
     }
 }

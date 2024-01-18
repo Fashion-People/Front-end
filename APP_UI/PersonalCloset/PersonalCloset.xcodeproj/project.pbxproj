@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		292BE6B42B4D26BA00BF3EE9 /* JoinPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */; };
 		29589FCA2B457839003578A3 /* ImageResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29589FC92B457839003578A3 /* ImageResultViewController.swift */; };
+		295FAD382B5796A3003BC20B /* ClothListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295FAD372B5796A3003BC20B /* ClothListViewController.swift */; };
+		295FAD3A2B57985B003BC20B /* ListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295FAD392B57985B003BC20B /* ListCoordinator.swift */; };
+		295FAD3C2B5798FA003BC20B /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295FAD3B2B5798FA003BC20B /* ListCollectionViewCell.swift */; };
 		295FF85D2B53DC32006DDD50 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295FF85C2B53DC32006DDD50 /* AppCoordinator.swift */; };
 		295FF85F2B53DD34006DDD50 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295FF85E2B53DD34006DDD50 /* AuthCoordinator.swift */; };
 		295FF8612B53DD67006DDD50 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295FF8602B53DD67006DDD50 /* TabBarCoordinator.swift */; };
@@ -40,6 +43,9 @@
 /* Begin PBXFileReference section */
 		292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPickerView.swift; sourceTree = "<group>"; };
 		29589FC92B457839003578A3 /* ImageResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResultViewController.swift; sourceTree = "<group>"; };
+		295FAD372B5796A3003BC20B /* ClothListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothListViewController.swift; sourceTree = "<group>"; };
+		295FAD392B57985B003BC20B /* ListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCoordinator.swift; sourceTree = "<group>"; };
+		295FAD3B2B5798FA003BC20B /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		295FF85C2B53DC32006DDD50 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		295FF85E2B53DD34006DDD50 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		295FF8602B53DD67006DDD50 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
@@ -89,6 +95,7 @@
 				295FF8602B53DD67006DDD50 /* TabBarCoordinator.swift */,
 				295FF8622B53DD88006DDD50 /* MainCoordinator.swift */,
 				295FF8642B53DDA2006DDD50 /* SettingCoordinator.swift */,
+				295FAD392B57985B003BC20B /* ListCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -110,6 +117,7 @@
 				29DA5F622B45600600F45CC6 /* JoinInputView.swift */,
 				29910A822B4BC78E00FF8460 /* ButtonStackView.swift */,
 				292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */,
+				295FAD3B2B5798FA003BC20B /* ListCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -134,6 +142,7 @@
 				2982026A2B4452DF00B7DEB3 /* JoinViewController.swift */,
 				29A9C0B42B3FE96600209641 /* RegisterImageViewController.swift */,
 				29589FC92B457839003578A3 /* ImageResultViewController.swift */,
+				295FAD372B5796A3003BC20B /* ClothListViewController.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -254,6 +263,7 @@
 				29A9C0B52B3FE96600209641 /* RegisterImageViewController.swift in Sources */,
 				29A9C0AA2B3FE6C800209641 /* CustomTabBarController.swift in Sources */,
 				295FF8612B53DD67006DDD50 /* TabBarCoordinator.swift in Sources */,
+				295FAD382B5796A3003BC20B /* ClothListViewController.swift in Sources */,
 				29A9C0B12B3FE92D00209641 /* MainViewController.swift in Sources */,
 				298202652B43F21000B7DEB3 /* Extension.swift in Sources */,
 				295FF85F2B53DD34006DDD50 /* AuthCoordinator.swift in Sources */,
@@ -267,7 +277,9 @@
 				29DA5F632B45600600F45CC6 /* JoinInputView.swift in Sources */,
 				298202632B43F1AB00B7DEB3 /* SettingTableViewCell.swift in Sources */,
 				292BE6B42B4D26BA00BF3EE9 /* JoinPickerView.swift in Sources */,
+				295FAD3A2B57985B003BC20B /* ListCoordinator.swift in Sources */,
 				29A9C0B32B3FE93C00209641 /* SettingViewController.swift in Sources */,
+				295FAD3C2B5798FA003BC20B /* ListCollectionViewCell.swift in Sources */,
 				2982023A2B43C2F100B7DEB3 /* TopView.swift in Sources */,
 				299CCE5B2B4679EA0054505E /* KeyboardHide+.swift in Sources */,
 				29DA5F612B4542A500F45CC6 /* InputView.swift in Sources */,
