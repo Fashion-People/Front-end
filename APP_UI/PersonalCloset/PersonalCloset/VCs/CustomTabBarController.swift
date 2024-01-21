@@ -8,10 +8,6 @@
 import UIKit
 
 class CustomTabBarController : UITabBarController {
-//    let mainVC = MainViewController()
-//    let settingVC = SettingViewController()
-//    let registerVC = RegisterImageViewController()
-    
     override func viewDidLoad() {
         tabBarConfig()
         view.backgroundColor = .systemBackground
