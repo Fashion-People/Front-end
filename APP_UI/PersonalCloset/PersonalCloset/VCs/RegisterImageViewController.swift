@@ -28,13 +28,8 @@ class RegisterImageViewController : BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        topView.backButton.addAction(UIAction{ _ in
-            self.tabBackButton()
-        }, for: .touchUpInside)
-        
-        topView.iconButton.addAction(UIAction{ _ in
-            self.tabMainIcon()
-        }, for: .touchUpInside)
+        tabTopViewButtons()
+//        buttonConfiguration()
     }
     
     private let imageInputStackView1 : UIStackView = {
@@ -79,6 +74,51 @@ class RegisterImageViewController : BaseViewController {
         )
         return button
     }()
+    
+//    private func buttonConfiguration() {
+//        imageInput1.tag = 1
+//        imageInput2.tag = 2
+//        imageInput3.tag = 3
+//        imageInput4.tag = 4
+//        
+//        imageInput1.addAction(UIAction { _ in
+//            self.tabImageButton(tag: 1)
+//        }, for: .touchUpInside)
+//        
+//        imageInput2.addAction(UIAction { _ in
+//            self.tabImageButton(tag: 2)
+//        }, for: .touchUpInside)
+//        
+//        imageInput3.addAction(UIAction { _ in
+//            self.tabImageButton(tag: 3)
+//        }, for: .touchUpInside)
+//        
+//        imageInput4.addAction(UIAction { _ in
+//            self.tabImageButton(tag: 4)
+//        }, for: .touchUpInside)
+//    }
+    
+//    private func tabImageButton(tag: Int) {
+//        let imagePicker = UIImagePickerController()
+//
+//        imagePicker.delegate = self
+//        imagePicker.sourceType = .photoLibrary
+//        imagePicker.allowsEditing = true
+//
+//        imagePicker.view.tag = tag
+//
+//        self.present(imagePicker, animated: true)
+//    }
+
+    private func tabTopViewButtons(){
+        topView.backButton.addAction(UIAction{ _ in
+            self.tabBackButton()
+        }, for: .touchUpInside)
+        
+        topView.iconButton.addAction(UIAction{ _ in
+            self.tabMainIcon()
+        }, for: .touchUpInside)
+    }
     
     private func tabResultButton() {
         // 결과 버튼 눌렀을대
@@ -131,3 +171,29 @@ class RegisterImageViewController : BaseViewController {
         }
     }
 }
+
+//extension RegisterImageViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+//    func imagePickerController(_ picker: UIImagePickerController,
+//                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//        picker.dismiss(animated: false) { () in
+//            let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+//            
+//            if let tag = picker.view?.tag {
+//                switch tag {
+//                case 1:
+//                    self.imageInput1.setImage(image, for: .normal)
+//                case 2:
+//                    self.imageInput2.setImage(image, for: .normal)
+//                case 3:
+//                    self.imageInput3.setImage(image, for: .normal)
+//                case 4:
+//                    self.imageInput4.setImage(image, for: .normal)
+//                default:
+//                    break
+//                }
+//            }
+//        }
+//    }
+//}
+
+
