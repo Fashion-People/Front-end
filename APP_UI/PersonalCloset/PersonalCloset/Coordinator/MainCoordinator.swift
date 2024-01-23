@@ -48,5 +48,4 @@ extension MainCoordinator : MainNavigation, RegisterImageNavigation, ImageResult
     func backToRegisterVC() {
         navigationController.popViewController(animated: true)
     }
-
 }

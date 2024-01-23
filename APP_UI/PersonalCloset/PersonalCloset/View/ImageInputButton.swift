@@ -8,8 +8,8 @@
 import UIKit
 import SnapKit
 
-class ImageInputButton : UIButton {
-    private lazy var inputImageButton : UIButton = {
+class ImageInputButton : UIView {
+    lazy var inputImageButton : UIButton = {
         let button = UIButton()
         button.backgroundColor = .lightGray
         button.tintColor = .black
