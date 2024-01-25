@@ -28,6 +28,7 @@ final class MainViewController : BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         topView.backButton.isHidden = true
+        topView.selectButton.isHidden = true
     }
     
     // MARK: - UI config
@@ -72,7 +73,7 @@ final class MainViewController : BaseViewController {
         }
         
         cameraButton.snp.makeConstraints {
-            $0.top.equalTo(topView.snp.bottom).offset(40)
+            $0.top.equalTo(topView.snp.bottom).offset(20)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(30)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-30)
             $0.height.equalTo(200)
@@ -82,7 +83,7 @@ final class MainViewController : BaseViewController {
             $0.top.equalTo(cameraButton.snp.bottom).offset(30)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(30)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-30)
-            $0.height.equalTo(300)
+            $0.height.equalTo(320)
         }
     }
 }

@@ -36,11 +36,7 @@ class BaseViewController : UIViewController {
     }
     
     // MARK: - Top View
-    lazy var topView : TopView = {
-        let view = TopView()
-        
-        return view
-    }()
+    lazy var topView = TopView()
     
     func setLayout() {
         view.addSubview(topView)
@@ -49,7 +45,7 @@ class BaseViewController : UIViewController {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
             $0.leading.equalTo(view.safeAreaLayoutGuide)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-10)
-            $0.height.equalTo(60)
+            $0.height.equalTo(80)
         }
     }
 }
