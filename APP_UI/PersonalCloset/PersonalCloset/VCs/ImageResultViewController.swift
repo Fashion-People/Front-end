@@ -19,13 +19,8 @@ class ImageResultViewController : BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        topView.backButton.addAction(UIAction{ _ in
-            self.tabBackToRegister()
-        }, for: .touchUpInside)
-        
-        topView.iconButton.addAction(UIAction{ _ in
-            self.tabMainIcon()
-        }, for: .touchUpInside)
+        topViewConfig()
+        topView.selectButton.isHidden = true
     }
     
     init(coordinator: ImageResultNavigation) {
@@ -84,6 +79,16 @@ class ImageResultViewController : BaseViewController {
         coordinator?.backToMainVC()
     }
     
+    private func topViewConfig() {
+        topView.backButton.addAction(UIAction{ _ in
+            self.tabBackToRegister()
+        }, for: .touchUpInside)
+        
+        topView.iconButton.addAction(UIAction{ _ in
+            self.tabMainIcon()
+        }, for: .touchUpInside)
+    }
+    
     override func setLayout() {
         super.setLayout()
         
@@ -94,7 +99,7 @@ class ImageResultViewController : BaseViewController {
         }
         
         resultImageView.snp.makeConstraints {
-            $0.top.equalTo(topView.snp.bottom).offset(40)
+            $0.top.equalTo(topView.snp.bottom).offset(20)
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(300)
             $0.width.equalTo(300)

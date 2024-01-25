@@ -39,7 +39,7 @@ class ButtonStackView : UIView {
         [mainButton,
          listImageButton,
          settingButton].forEach {
-            $0.layer.cornerRadius = 13
+            $0.layer.cornerRadius = 10
             $0.backgroundColor = .white
             $0.imageView?.tintColor = .darkBlue
         }
@@ -66,7 +66,7 @@ class ButtonStackView : UIView {
          listImageButton,
          settingButton,].forEach {
             $0.snp.makeConstraints {
-                $0.height.equalTo(50)
+                $0.height.equalTo(40)
             }
         }
         

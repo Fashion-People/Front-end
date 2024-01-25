@@ -44,6 +44,20 @@ class TopView : UIView {
         return button
     }()
     
+    lazy var selectButton : UIButton = {
+        let button = UIButton()
+        
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 25,
+                                                      weight: .light,
+                                                      scale: .medium)
+
+        let buttonImage = UIImage(systemName: "ellipsis.circle", withConfiguration: imageConfig)
+        button.setImage(buttonImage, for: .normal)
+        button.tintColor = .black
+        
+        return button
+    }()
+    
     private var weatherImage : UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "sun.rain")
@@ -64,17 +78,16 @@ class TopView : UIView {
     
     private func setLayout() {
         [iconButton,
+         selectButton,
          weatherImage].forEach {
             topStackView.addArrangedSubview($0)
         }
-        
-        iconButton.snp.makeConstraints {
-            $0.width.equalTo(200)
-        }
-        
-        weatherImage.snp.makeConstraints {
-            $0.width.equalTo(40)
-            $0.height.equalTo(40)
+            
+        [weatherImage,selectButton].forEach {
+            $0.snp.makeConstraints {
+                $0.width.equalTo(40)
+                $0.height.equalTo(40)
+            }
         }
         
         [backButton,topStackView].forEach {
@@ -93,7 +106,6 @@ class TopView : UIView {
             $0.trailing.equalToSuperview().offset(-15)
             $0.height.equalTo(45)
             $0.centerY.equalTo(self)
-
         }
     }
 }
