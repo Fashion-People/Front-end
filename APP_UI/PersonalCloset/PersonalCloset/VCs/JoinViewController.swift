@@ -32,6 +32,7 @@ final class JoinViewController : UIViewController {
         inputViewConfig()
         setLayout()
         navigationBarConfig()
+        configPickerView()
     }
     
     // MARK: - UI config
@@ -55,7 +56,7 @@ final class JoinViewController : UIViewController {
     private let joinStackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
         stackView.alignment = .leading
         stackView.spacing = 24
         
@@ -85,33 +86,17 @@ final class JoinViewController : UIViewController {
         joinEmailInput.inputTextField.placeholder = "이메일을 입력해주세요"
     }
         
-    private var firstPickerView : JoinPickerView = {
-        let pickerView = JoinPickerView()
-        pickerView.inputLabel.text = "1순위"
-        
-        return pickerView
-    }()
+    private var firstPickerView = JoinPickerView()
+    private var secondPickerView = JoinPickerView()
+    private var thirdPickerView = JoinPickerView()
+    private var fourthPickerView = JoinPickerView()
     
-    private var secondPickerView : JoinPickerView = {
-        let pickerView = JoinPickerView()
-        pickerView.inputLabel.text = "2순위"
-        
-        return pickerView
-    }()
-    
-    private var thirdPickerView : JoinPickerView = {
-        let pickerView = JoinPickerView()
-        pickerView.inputLabel.text = "3순위"
-        
-        return pickerView
-    }()
-    
-    private var fourthPickerView : JoinPickerView = {
-        let pickerView = JoinPickerView()
-        pickerView.inputLabel.text = "4순위"
-        
-        return pickerView
-    }()
+    private func configPickerView() {
+        firstPickerView.inputLabel.text = "1순위"
+        secondPickerView.inputLabel.text = "2순위"
+        thirdPickerView.inputLabel.text = "3순위"
+        fourthPickerView.inputLabel.text = "4순위"
+    }
     
     private lazy var joinButton : UIButton = {
         let button = UIButton()
@@ -164,7 +149,11 @@ final class JoinViewController : UIViewController {
          joinPasswordInput,
          joinPasswordCheckInput,
          joinNameInput,
-         joinEmailInput].forEach{
+         joinEmailInput,
+         firstPickerView,
+         secondPickerView,
+         thirdPickerView,
+         fourthPickerView].forEach{
             joinStackView.addArrangedSubview($0)
         }
         
@@ -176,11 +165,7 @@ final class JoinViewController : UIViewController {
         
         scrollView.addSubview(contentView)
         
-        [joinStackView,
-         firstPickerView,
-         secondPickerView,
-         thirdPickerView,
-         fourthPickerView].forEach {
+        [joinStackView].forEach {
             contentView.addSubview($0)
         }
         
@@ -205,43 +190,13 @@ final class JoinViewController : UIViewController {
             $0.top.equalToSuperview().offset(5)
             $0.leading.equalToSuperview().offset(25)
             $0.trailing.equalToSuperview().offset(-25)
-            $0.bottom.equalTo(firstPickerView.snp.top).offset(-10)
         }
-        
-        firstPickerView.snp.makeConstraints {
-            $0.top.equalTo(joinStackView.snp.bottom).offset(10)
-            $0.height.equalTo(150)
-            $0.leading.equalToSuperview().offset(25)
-            $0.trailing.equalToSuperview().offset(-25)
-        }
-        
-        secondPickerView.snp.makeConstraints {
-            $0.top.equalTo(firstPickerView.snp.bottom).offset(10)
-            $0.height.equalTo(150)
-            $0.leading.equalToSuperview().offset(25)
-            $0.trailing.equalToSuperview().offset(-25)
-        }
-        
-        thirdPickerView.snp.makeConstraints {
-            $0.top.equalTo(secondPickerView.snp.bottom).offset(10)
-            $0.height.equalTo(150)
-            $0.leading.equalToSuperview().offset(25)
-            $0.trailing.equalToSuperview().offset(-25)
-        }
-        
-        fourthPickerView.snp.makeConstraints {
-            $0.top.equalTo(thirdPickerView.snp.bottom).offset(10)
-            $0.height.equalTo(150)
-            $0.leading.equalToSuperview().offset(25)
-            $0.trailing.equalToSuperview().offset(-25)
-        }
-        
+                
         joinButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(40)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-40)
+            $0.centerX.equalToSuperview()
             $0.height.equalTo(40)
-            $0.width.equalTo(310)
+            $0.width.equalTo(300)
         }
     }
 }

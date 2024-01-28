@@ -9,21 +9,22 @@ import UIKit
 import SnapKit
 
 class BaseViewController : UIViewController {
-    // MARK: - Property
+//    // MARK: - Property
     private(set) var didSetupConstraints = false
     
-    // MARK: - Initializing
+//    // MARK: - Initializing
     init() {
         super.init(nibName: nil, bundle: nil)
     }
-    
+//    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
-        self.view.backgroundColor = .systemBackground
+        super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         self.view.setNeedsUpdateConstraints()
     }
     
@@ -34,7 +35,7 @@ class BaseViewController : UIViewController {
         }
         super.updateViewConstraints()
     }
-    
+
     // MARK: - Top View
     lazy var topView = TopView()
     
