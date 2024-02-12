@@ -48,10 +48,10 @@ class TopView : UIView {
         let button = UIButton()
         
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 25,
-                                                      weight: .light,
+                                                      weight: .medium,
                                                       scale: .medium)
 
-        let buttonImage = UIImage(systemName: "ellipsis.circle", withConfiguration: imageConfig)
+        let buttonImage = UIImage(systemName: "checkmark", withConfiguration: imageConfig)
         button.setImage(buttonImage, for: .normal)
         button.tintColor = .black
         

@@ -44,4 +44,5 @@ extension AuthCoordinator : LoginNavigation, JoinNavigation {
     func backToLoginVC() {
         navigationController.popViewController(animated: true)
     }
+    
 }

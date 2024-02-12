@@ -26,10 +26,10 @@ final class ListCollectionViewCell : UICollectionViewCell {
         return label
     }()
         
-    private lazy var imageSettingButton : UIButton = {
+    lazy var imageSettingButton : UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
-        button.tintColor = .darkBlue
+        button.setImage(UIImage(systemName: "circle"), for: .normal)
+        button.tintColor = .black
         
         return button
     }()
@@ -50,11 +50,31 @@ final class ListCollectionViewCell : UICollectionViewCell {
             addSubview($0)
         }
         
-        clothImageView.snp.makeConstraints {
-            $0.leading.equalTo(self).offset(30)
+//        clothImageView.snp.makeConstraints {
+//            $0.leading.equalTo(self).offset(30)
+//            $0.centerY.equalTo(self)
+//            $0.height.equalTo(60)
+//            $0.width.equalTo(60)
+//        }
+//        
+//        imageTitleLabel.snp.makeConstraints {
+//            $0.top.equalTo(clothImageView.snp.top).offset(5)
+//            $0.leading.equalTo(clothImageView.snp.trailing).offset(20)
+//            $0.width.equalTo(200)
+//        }
+//        
+//        imageSettingButton.snp.makeConstraints {
+//            $0.centerY.equalTo(self)
+//            $0.trailing.equalTo(self).offset(-30)
+//            $0.height.equalTo(30)
+//            $0.width.equalTo(30)
+//        }
+        
+        imageSettingButton.snp.makeConstraints {
+            $0.leading.equalTo(self).offset(10)
             $0.centerY.equalTo(self)
-            $0.height.equalTo(60)
-            $0.width.equalTo(60)
+            $0.height.equalTo(30)
+            $0.width.equalTo(30)
         }
         
         imageTitleLabel.snp.makeConstraints {
@@ -63,11 +83,11 @@ final class ListCollectionViewCell : UICollectionViewCell {
             $0.width.equalTo(200)
         }
         
-        imageSettingButton.snp.makeConstraints {
+        clothImageView.snp.makeConstraints {
+            $0.leading.equalTo(imageSettingButton.snp.trailing).offset(15)
             $0.centerY.equalTo(self)
-            $0.trailing.equalTo(self).offset(-30)
-            $0.height.equalTo(30)
-            $0.width.equalTo(30)
+            $0.height.equalTo(60)
+            $0.width.equalTo(60)
         }
     }
 }

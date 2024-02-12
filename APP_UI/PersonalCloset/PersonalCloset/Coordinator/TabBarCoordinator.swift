@@ -46,13 +46,13 @@ final class TabBarCoordinator : Coordinator {
         tabbarController.viewControllers = [mainNavigationController, 
                                             listNavigationController,
                                             settingNavigationController]
+        
         navigationController.pushViewController(tabbarController, animated: true)
         navigationController.isNavigationBarHidden = true
         
         parentCoordinator?.childCoordinator.append(mainCoordinator)
         parentCoordinator?.childCoordinator.append(listCoordinator)
         parentCoordinator?.childCoordinator.append(settingCoordinator)
-        
         
         mainCoordinator.start()
         listCoordinator.start()

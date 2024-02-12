@@ -36,5 +36,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C54AEC16-BABA-48D4-9F76-FDC352C3BEA7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PersonalCloset/Coordinator/SettingCoordinator.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "init(navigationController:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C54AEC16-BABA-48D4-9F76-FDC352C3BEA7 - dce8305d63006447"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PersonalCloset.SettingCoordinator.__allocating_init(navigationController: __C.UINavigationController) -&gt; PersonalCloset.SettingCoordinator"
+                  moduleName = "PersonalCloset"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bowonhan/Documents/CapstoneDesign/Front-end/APP_UI/PersonalCloset/PersonalCloset/Coordinator/SettingCoordinator.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "C54AEC16-BABA-48D4-9F76-FDC352C3BEA7 - 24518a9ec3cf7f8f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PersonalCloset.SettingCoordinator.init(navigationController: __C.UINavigationController) -&gt; PersonalCloset.SettingCoordinator"
+                  moduleName = "PersonalCloset"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bowonhan/Documents/CapstoneDesign/Front-end/APP_UI/PersonalCloset/PersonalCloset/Coordinator/SettingCoordinator.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "11"
+                  endingLineNumber = "11"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

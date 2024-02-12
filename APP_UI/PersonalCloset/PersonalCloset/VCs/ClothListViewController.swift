@@ -44,6 +44,7 @@ final class ClothListViewController : BaseViewController {
     
     override func setLayout() {
         super.setLayout()
+        
         [clothListCollectionView].forEach {
             view.addSubview($0)
         }
@@ -82,6 +83,14 @@ extension ClothListViewController : UICollectionViewDataSource,UICollectionViewD
         ) as? ListCollectionViewCell else {
             return UICollectionViewCell()
         }
+        
+//        if topView.selectButton {
+//            cell.imageSettingButton.isHidden = true
+//        }
+//        else {
+//            cell.imageSettingButton.isHidden = false
+//        }
+        
         cell.imageTitleLabel.text = "예쁜옷"
  
         return cell

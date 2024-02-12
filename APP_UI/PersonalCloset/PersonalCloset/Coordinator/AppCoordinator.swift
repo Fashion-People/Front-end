@@ -52,7 +52,6 @@ final class AppCoordinator : Coordinator {
         authCoordinator.start()
     }
     
-    
     func startMainTabbarCoordinator() {
         let tabBarCoordinator = TabBarCoordinator(navigationController: navigationController)
         childCoordinator.removeAll()
