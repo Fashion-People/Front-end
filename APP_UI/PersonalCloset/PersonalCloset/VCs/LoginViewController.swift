@@ -60,14 +60,11 @@ final class LoginViewController : UIViewController {
         return stackView
     }()
     
-    private var IDTextField = InputView()
-    private var passwordTextField = InputView()
+    private var IDTextField = InputView("아이디를 입력해주세요.")
+    private var passwordTextField = InputView("비밀번호를 입력해주세요.")
     private let lineView = UIView()
     
     private func UIconfig() {
-        IDTextField.inputTextField.placeholder = "아이디를 입력해주세요."
-        passwordTextField.inputTextField.placeholder = "비밀번호를 입력해주세요."
-
         lineView.backgroundColor = .bwGray
     }
 
