@@ -7,7 +7,7 @@
 
 import UIKit
 
-class JoinPickerView : UIView {
+final class JoinPickerView : UIView {
     var style : [String] = ["모던", "캐주얼", "스포티","페미닌"]
     var first = ""
     var second = ""

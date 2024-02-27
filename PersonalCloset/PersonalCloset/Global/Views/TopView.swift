@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 
-class TopView : UIView {
+final class TopView : UIView {
     private let topStackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal

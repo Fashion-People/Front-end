@@ -13,7 +13,7 @@ protocol ImageResultNavigation : AnyObject {
     func backToMainVC()
 }
 
-class ImageResultViewController : BaseViewController {
+final class ImageResultViewController : BaseViewController {
     weak var coordinator : ImageResultNavigation?
     
     override func viewDidLoad() {

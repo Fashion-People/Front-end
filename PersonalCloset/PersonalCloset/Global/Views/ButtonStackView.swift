@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ButtonStackView : UIView {
+final class ButtonStackView : UIView {
     private let stackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal

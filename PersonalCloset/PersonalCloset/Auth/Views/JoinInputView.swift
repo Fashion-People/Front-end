@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class JoinInputView : UIView {
+final class JoinInputView : UIView {
     private let customPlaceholder: String
     private let customGuide: String
     
