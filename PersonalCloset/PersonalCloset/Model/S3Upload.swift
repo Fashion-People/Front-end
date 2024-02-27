@@ -8,7 +8,6 @@
 import Foundation
 import AWSCore
 import AWSS3
-import AWSCognito
 
 class S3Upload {
     func uploadImageFile(imgData: UIImage?){

@@ -8,7 +8,6 @@
 import UIKit
 import AWSCore
 import AWSS3
-import AWSCognito
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
