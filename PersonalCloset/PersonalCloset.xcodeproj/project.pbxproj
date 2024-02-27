@@ -198,6 +198,138 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		296353D22B8DE89500AB8A2B /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				296353E12B8DE9BD00AB8A2B /* Views */,
+				296353D92B8DE92E00AB8A2B /* VCs */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		296353D32B8DE89B00AB8A2B /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				296353E22B8DE9E000AB8A2B /* Views */,
+				296353D82B8DE92900AB8A2B /* VCs */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		296353D42B8DE8BA00AB8A2B /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				296353E02B8DE9A500AB8A2B /* Views */,
+				296353D72B8DE92600AB8A2B /* VCs */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		296353D52B8DE8C000AB8A2B /* ClothList */ = {
+			isa = PBXGroup;
+			children = (
+				296353DF2B8DE99700AB8A2B /* Views */,
+				296353D62B8DE91F00AB8A2B /* VCs */,
+			);
+			path = ClothList;
+			sourceTree = "<group>";
+		};
+		296353D62B8DE91F00AB8A2B /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				295FAD372B5796A3003BC20B /* ClothListViewController.swift */,
+			);
+			path = VCs;
+			sourceTree = "<group>";
+		};
+		296353D72B8DE92600AB8A2B /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				29A9C0B22B3FE93C00209641 /* SettingViewController.swift */,
+			);
+			path = VCs;
+			sourceTree = "<group>";
+		};
+		296353D82B8DE92900AB8A2B /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				29A9C0B02B3FE92D00209641 /* MainViewController.swift */,
+				29A9C0B42B3FE96600209641 /* RegisterImageViewController.swift */,
+				29589FC92B457839003578A3 /* ImageResultViewController.swift */,
+			);
+			path = VCs;
+			sourceTree = "<group>";
+		};
+		296353D92B8DE92E00AB8A2B /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				298202682B4452D800B7DEB3 /* LoginViewController.swift */,
+				2982026A2B4452DF00B7DEB3 /* JoinViewController.swift */,
+			);
+			path = VCs;
+			sourceTree = "<group>";
+		};
+		296353DC2B8DE95E00AB8A2B /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				296353DE2B8DE98200AB8A2B /* Views */,
+				296353DD2B8DE97900AB8A2B /* VCs */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		296353DD2B8DE97900AB8A2B /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				29A9C0A92B3FE6C800209641 /* CustomTabBarController.swift */,
+				2982023B2B43C72600B7DEB3 /* BaseViewController.swift */,
+			);
+			path = VCs;
+			sourceTree = "<group>";
+		};
+		296353DE2B8DE98200AB8A2B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				29910A822B4BC78E00FF8460 /* ButtonStackView.swift */,
+				298202392B43C2F100B7DEB3 /* TopView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		296353DF2B8DE99700AB8A2B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				295FAD3B2B5798FA003BC20B /* ListCollectionViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		296353E02B8DE9A500AB8A2B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				298202622B43F1AB00B7DEB3 /* SettingTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		296353E12B8DE9BD00AB8A2B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				29DA5F622B45600600F45CC6 /* JoinInputView.swift */,
+				292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */,
+				29DA5F602B4542A500F45CC6 /* InputView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		296353E22B8DE9E000AB8A2B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				298202662B44269300B7DEB3 /* ImageInputButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		298202352B43B2F300B7DEB3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,14 +342,6 @@
 		298202362B43B2FD00B7DEB3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				298202392B43C2F100B7DEB3 /* TopView.swift */,
-				298202622B43F1AB00B7DEB3 /* SettingTableViewCell.swift */,
-				298202662B44269300B7DEB3 /* ImageInputButton.swift */,
-				29DA5F602B4542A500F45CC6 /* InputView.swift */,
-				29DA5F622B45600600F45CC6 /* JoinInputView.swift */,
-				29910A822B4BC78E00FF8460 /* ButtonStackView.swift */,
-				292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */,
-				295FAD3B2B5798FA003BC20B /* ListCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -230,21 +354,6 @@
 				299CCE5A2B4679EA0054505E /* KeyboardHide+.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		298202382B43B32900B7DEB3 /* VCs */ = {
-			isa = PBXGroup;
-			children = (
-				29A9C0B22B3FE93C00209641 /* SettingViewController.swift */,
-				29A9C0A92B3FE6C800209641 /* CustomTabBarController.swift */,
-				29A9C0B02B3FE92D00209641 /* MainViewController.swift */,
-				298202682B4452D800B7DEB3 /* LoginViewController.swift */,
-				2982026A2B4452DF00B7DEB3 /* JoinViewController.swift */,
-				29A9C0B42B3FE96600209641 /* RegisterImageViewController.swift */,
-				29589FC92B457839003578A3 /* ImageResultViewController.swift */,
-				295FAD372B5796A3003BC20B /* ClothListViewController.swift */,
-			);
-			path = VCs;
 			sourceTree = "<group>";
 		};
 		29A9C0892B3FE62900209641 = {
@@ -266,13 +375,16 @@
 		29A9C0942B3FE62900209641 /* PersonalCloset */ = {
 			isa = PBXGroup;
 			children = (
+				296353DC2B8DE95E00AB8A2B /* Global */,
+				296353D52B8DE8C000AB8A2B /* ClothList */,
+				296353D42B8DE8BA00AB8A2B /* Setting */,
+				296353D32B8DE89B00AB8A2B /* Main */,
+				296353D22B8DE89500AB8A2B /* Auth */,
 				290BAADB2B4AE15200C800A1 /* Coordinator */,
-				298202382B43B32900B7DEB3 /* VCs */,
 				298202372B43B31500B7DEB3 /* Extension */,
 				298202362B43B2FD00B7DEB3 /* View */,
 				298202352B43B2F300B7DEB3 /* Model */,
 				29A9C0952B3FE62900209641 /* AppDelegate.swift */,
-				2982023B2B43C72600B7DEB3 /* BaseViewController.swift */,
 				29A9C0972B3FE62900209641 /* SceneDelegate.swift */,
 				29A9C0A32B3FE62A00209641 /* Info.plist */,
 				29A9C09E2B3FE62A00209641 /* Assets.xcassets */,
