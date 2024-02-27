@@ -70,7 +70,7 @@ final class JoinPickerView : UIView {
         }
         
         pickerView.snp.makeConstraints {
-            $0.width.equalTo(340)
+            $0.width.equalTo(380)
             $0.height.equalTo(70)
         }
         
