@@ -8,7 +8,23 @@
 import UIKit
 import SnapKit
 
-class JoinInputView : UIView {
+final class JoinInputView : UIView {
+    private let customPlaceholder: String
+    private let customGuide: String
+    
+    init(placeholder: String, guide: String) {
+        self.customPlaceholder = placeholder
+        self.customGuide = guide
+        super.init(frame: .zero)
+        
+        self.setLayout()
+        self.setupStyles()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private let inputStackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -19,7 +35,7 @@ class JoinInputView : UIView {
         return stackView
     }()
     
-    var inputLabel : UILabel = {
+    private var inputLabel : UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
@@ -27,21 +43,17 @@ class JoinInputView : UIView {
         return label
     }()
     
-    var inputTextField : UITextField = {
+    private var inputTextField : UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
-        textField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 20.0, height: 0.0))
+//        textField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 20.0, height: 0.0))
 
         return textField
     }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        
+    private func setupStyles() {
+        self.inputTextField.placeholder = customPlaceholder
+        self.inputLabel.text = customGuide
     }
     
     private func setLayout() {
@@ -50,7 +62,7 @@ class JoinInputView : UIView {
         }
         
         inputTextField.snp.makeConstraints {
-            $0.width.equalTo(340)
+            $0.width.equalTo(380)
             $0.height.equalTo(50)
         }
         

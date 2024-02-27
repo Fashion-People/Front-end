@@ -7,12 +7,14 @@
 
 import UIKit
 
-class JoinPickerView : UIView {
+final class JoinPickerView : UIView {
     var style : [String] = ["모던", "캐주얼", "스포티","페미닌"]
     var first = ""
     var second = ""
     var third = ""
     var fourth = ""
+    
+    private let pickerTitle: String
     
     private let inputStackView : UIStackView = {
         let stackView = UIStackView()
@@ -23,7 +25,7 @@ class JoinPickerView : UIView {
         return stackView
     }()
     
-    var inputLabel : UILabel = {
+    private var inputLabel : UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
@@ -31,7 +33,7 @@ class JoinPickerView : UIView {
         return label
     }()
     
-    var pickerView : UIPickerView = {
+    private var pickerView : UIPickerView = {
         let pickerView = UIPickerView()
         pickerView.layer.cornerRadius = 5
         pickerView.layer.backgroundColor = UIColor.skyBlue.cgColor
@@ -39,16 +41,23 @@ class JoinPickerView : UIView {
         return pickerView
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setLayout()
+    init(_ pickerTitle: String) {
+        self.pickerTitle = pickerTitle
+        super.init(frame: .zero)
+        self.setLayout()
+        self.setupStyles()
         pickerView.delegate = self
         pickerView.dataSource = self
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
+    
+    private func setupStyles() {
+        inputLabel.text = pickerTitle
+    }
+
     
     private func setLayout() {
         [inputLabel,
@@ -61,7 +70,7 @@ class JoinPickerView : UIView {
         }
         
         pickerView.snp.makeConstraints {
-            $0.width.equalTo(340)
+            $0.width.equalTo(380)
             $0.height.equalTo(70)
         }
         

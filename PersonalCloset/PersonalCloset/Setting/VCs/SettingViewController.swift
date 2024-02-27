@@ -11,7 +11,7 @@ protocol SettingNavigation : AnyObject {
     func presentSetting()
 }
 
-class SettingViewController : UIViewController {
+final class SettingViewController : UIViewController {
     var setting : [String] = ["회원 정보 수정","로그아웃","앱 버전","개인정보 처리방침"]
     var account : [String] = ["회원 탈퇴"]
     

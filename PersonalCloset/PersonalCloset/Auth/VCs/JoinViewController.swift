@@ -29,10 +29,8 @@ final class JoinViewController : UIViewController {
         
         view.backgroundColor = .systemBackground
         self.hideKeyboardWhenTappedAround()
-        inputViewConfig()
         setLayout()
         navigationBarConfig()
-        configPickerView()
     }
     
     // MARK: - UI config
@@ -63,40 +61,23 @@ final class JoinViewController : UIViewController {
         return stackView
     }()
     
-    private var joinIDInput = JoinInputView()
-    private var joinPasswordInput = JoinInputView()
-    private var joinPasswordCheckInput = JoinInputView()
-    private var joinNameInput = JoinInputView()
-    private var joinEmailInput = JoinInputView()
+    private var joinIDInput = JoinInputView(placeholder: "아이디를 입력해주세요",
+                                                guide: "아이디")
+    private var joinPasswordInput = JoinInputView(placeholder: "비밀번호를 입력해주세요",
+                                                  guide: "비밀번호")
+    private var joinPasswordCheckInput = JoinInputView(placeholder: "비밀번호를 한번더 입력해주세요",
+                                                       guide: "비밀번호 확인")
+    private var joinNameInput = JoinInputView(placeholder: "이름을 입력해주세요",
+                                              guide: "이름")
+    private var joinEmailInput = JoinInputView(placeholder: "이메일을 입력해주세요",
+                                               guide: "이메일")
+
+    private var firstPickerView = JoinPickerView("1순위")
+    private var secondPickerView = JoinPickerView("2순위")
+    private var thirdPickerView = JoinPickerView("3순위")
+    private var fourthPickerView = JoinPickerView("4순위")
     
-    private func inputViewConfig() {
-        joinIDInput.inputLabel.text = "아이디"
-        joinIDInput.inputTextField.placeholder = "아이디를 입력해주세요"
-        
-        joinPasswordInput.inputLabel.text = "비밀번호"
-        joinPasswordInput.inputTextField.placeholder = "비밀번호를 입력해주세요"
-        
-        joinPasswordCheckInput.inputLabel.text = "비밀번호 확인"
-        joinPasswordCheckInput.inputTextField.placeholder = "비밀번호를 한번더 입력해주세요"
-        
-        joinNameInput.inputLabel.text = "이름"
-        joinNameInput.inputTextField.placeholder = "이름을 입력해주세요"
-        
-        joinEmailInput.inputLabel.text = "이메일"
-        joinEmailInput.inputTextField.placeholder = "이메일을 입력해주세요"
-    }
-        
-    private var firstPickerView = JoinPickerView()
-    private var secondPickerView = JoinPickerView()
-    private var thirdPickerView = JoinPickerView()
-    private var fourthPickerView = JoinPickerView()
-    
-    private func configPickerView() {
-        firstPickerView.inputLabel.text = "1순위"
-        secondPickerView.inputLabel.text = "2순위"
-        thirdPickerView.inputLabel.text = "3순위"
-        fourthPickerView.inputLabel.text = "4순위"
-    }
+//    private lazy var joinButton = PersonalClosetButton("회원가입",titleColor: .darkBlue,backColor: .skyBlue)
     
     private lazy var joinButton : UIButton = {
         let button = UIButton()
@@ -108,7 +89,7 @@ final class JoinViewController : UIViewController {
         button.addAction(UIAction { _ in
             self.tabJoinButton()
             }, for: .touchUpInside)
-        
+
         return button
     }()
     
@@ -121,14 +102,17 @@ final class JoinViewController : UIViewController {
         let success = UIAlertAction(title: "확인",
                                     style: .default) { action in
             // 회원가입 확인 버튼 눌렀을때
+//            self.joinButton.tabButtonAction = { [weak self] in
+//                self?.coordinator?.backToLoginVC()
+//            }
             self.coordinator?.backToLoginVC()
         }
         joinSuccessAlert.addAction(success)
         self.present(joinSuccessAlert, animated: true, completion: nil)
     }
-    
-    @objc private func tabJoinButtonbutton() {
-        // join 버튼 눌렀을때
+
+    @objc private func tabBackbutton() {
+        // back 버튼 눌렀을때
         coordinator?.backToLoginVC()
     }
     
@@ -137,7 +121,7 @@ final class JoinViewController : UIViewController {
         let backButton = UIBarButtonItem(image: UIImage(systemName:"chevron.backward"),
                                          style: .plain,
                                          target: self,
-                                         action: #selector(tabJoinButtonbutton))
+                                         action: #selector(tabBackbutton))
         navigationItem.leftBarButtonItem = backButton
         navigationItem.leftBarButtonItem?.title = "로그인"
         navigationItem.leftBarButtonItem?.tintColor = .darkBlue
