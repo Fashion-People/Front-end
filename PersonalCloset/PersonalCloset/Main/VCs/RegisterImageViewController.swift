@@ -13,7 +13,7 @@ protocol RegisterImageNavigation : AnyObject {
     func backToMainVC()
 }
 
-final lass RegisterImageViewController : BaseViewController {
+final class RegisterImageViewController : BaseViewController {
     weak var coordinator : RegisterImageNavigation!
     
     init(coordinator: RegisterImageNavigation) {
