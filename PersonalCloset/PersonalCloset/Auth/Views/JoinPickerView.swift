@@ -25,7 +25,7 @@ final class JoinPickerView : UIView {
         return stackView
     }()
     
-    var inputLabel : UILabel = {
+    private var inputLabel : UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
@@ -33,7 +33,7 @@ final class JoinPickerView : UIView {
         return label
     }()
     
-    var pickerView : UIPickerView = {
+    private var pickerView : UIPickerView = {
         let pickerView = UIPickerView()
         pickerView.layer.cornerRadius = 5
         pickerView.layer.backgroundColor = UIColor.skyBlue.cgColor
