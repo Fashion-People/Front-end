@@ -342,13 +342,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		298202362B43B2FD00B7DEB3 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		298202372B43B31500B7DEB3 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -385,7 +378,6 @@
 				296353D22B8DE89500AB8A2B /* Auth */,
 				290BAADB2B4AE15200C800A1 /* Coordinator */,
 				298202372B43B31500B7DEB3 /* Extension */,
-				298202362B43B2FD00B7DEB3 /* View */,
 				298202352B43B2F300B7DEB3 /* Model */,
 				29A9C0952B3FE62900209641 /* AppDelegate.swift */,
 				29A9C0972B3FE62900209641 /* SceneDelegate.swift */,
