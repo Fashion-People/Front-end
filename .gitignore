@@ -42,6 +42,13 @@ Temporary Items
 # iCloud generated files
 *.icloud
 
+Packages
+.build/
+xcuserdata
+DerivedData/
+*.xcodeproj
+
+
 ### Xcode ###
 ## User settings
 xcuserdata/
