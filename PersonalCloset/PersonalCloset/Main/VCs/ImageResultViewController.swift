@@ -49,22 +49,9 @@ class ImageResultViewController : BaseViewController {
         return label
     }()
     
-    private lazy var backToRegisterButton : UIButton = {
-        let button = UIButton()
-        button.setTitle("다시 검사하기", for: .normal)
-        button.setTitleColor(.darkBlue, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        button.layer.borderWidth = 2
-        button.layer.cornerRadius = 10
-        button.layer.borderColor = UIColor.skyBlue.cgColor
-        button.layer.backgroundColor = UIColor.skyBlue.cgColor
-        button.addAction(UIAction { _ in
-            self.tabAgainCheckButton()
-        }, for: .touchUpInside)
-        
-        return button
-    }()
-    
+    private lazy var backToRegisterButton = PersonalClosetButton("다시 검사하기",
+                                                                titleColor: .darkBlue,
+                                                                backColor: .skyBlue)
     private func tabAgainCheckButton() {
         // 다시 확인 버튼
         coordinator?.backToRegisterVC()

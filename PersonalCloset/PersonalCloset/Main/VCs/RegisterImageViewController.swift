@@ -31,6 +31,7 @@ class RegisterImageViewController : BaseViewController {
         topView.selectButton.isHidden = true
         tabTopViewButtons()
         buttonConfiguration()
+        tabResultButton()
     }
     
     private let imageInputStackView1 : UIStackView = {
@@ -58,25 +59,9 @@ class RegisterImageViewController : BaseViewController {
     private var imageInput3 = ImageInputButton()
     private var imageInput4 = ImageInputButton()
     
-    private lazy var registerButton : UIButton = {
-        let button = UIButton()
-        button.setTitle("적합도를 알려주세요!", for: .normal)
-        button.setTitleColor(.darkBlue, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        button.layer.borderWidth = 2
-        button.layer.cornerRadius = 10
-        button.layer.borderColor = UIColor.skyBlue.cgColor
-        button.layer.backgroundColor = UIColor.skyBlue.cgColor
-        button.addAction(
-            UIAction { _ in
-                self.uploadImage()
-                self.tabResultButton()
-            },
-            for: .touchUpInside
-        )
-        return button
-    }()
-    
+    private lazy var registerButton = PersonalClosetButton("적합도를 알려주세요!",
+                                                           titleColor: .darkBlue,
+                                                           backColor: .skyBlue)
     private func buttonConfiguration() {
         imageInput1.tag = 1
         imageInput2.tag = 2
@@ -132,8 +117,8 @@ class RegisterImageViewController : BaseViewController {
         
         if (count == 4) {
             let imageNilAlert = UIAlertController(title: "알림",
-                                                     message: "하나 이상의 이미지를 등록해주세요",
-                                                     preferredStyle: UIAlertController.Style.alert)
+                                                 message: "하나 이상의 이미지를 등록해주세요",
+                                                 preferredStyle: UIAlertController.Style.alert)
             
             let success = UIAlertAction(title: "확인", style: .default)
             imageNilAlert.addAction(success)
@@ -165,7 +150,10 @@ class RegisterImageViewController : BaseViewController {
     
     private func tabResultButton() {
         // 결과 버튼 눌렀을 때
-        coordinator.presentResultVC()
+        registerButton.tabButtonAction = { [weak self] in
+            self?.uploadImage()
+            self?.coordinator.presentResultVC()
+        }
     }
     
     private func tabBackButton() {

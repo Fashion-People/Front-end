@@ -36,6 +36,7 @@ final class LoginViewController : UIViewController {
         stackLayout()
         setLayout()
         backBarButtonConfig()
+        tapButtonEvent()
     }
     
     // MARK: - UI config
@@ -68,39 +69,14 @@ final class LoginViewController : UIViewController {
         lineView.backgroundColor = .bwGray
     }
 
-    private lazy var loginButton : UIButton = {
-        let button = UIButton()
-        button.setTitle("로그인", for: .normal)
-        button.setTitleColor(.darkBlue, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
-        button.layer.cornerRadius = 5
-        button.backgroundColor = .skyBlue
-        button.addAction(
-            UIAction { _ in
-                self.tabLoginButton()
-            },
-            for: .touchUpInside
-        )
-        
-        return button
-    }()
+    private lazy var loginButton = PersonalClosetButton("로그인",
+                                                    titleColor:.darkBlue,
+                                                    backColor: .skyBlue)
     
-    private lazy var joinButton : UIButton = {
-        let button = UIButton()
-        button.setTitle("회원가입", for: .normal)
-        button.setTitleColor(.darkBlue, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
-        button.layer.cornerRadius = 5
-        button.backgroundColor = .systemGray5
-        button.addAction(
-            UIAction { _ in
-                self.tabJoinButton()
-            },
-            for: .touchUpInside
-        )
-        
-        return button
-    }()
+    private lazy var joinButton = PersonalClosetButton("회원가입",
+                                                    titleColor:.darkBlue,
+                                                    backColor: .systemGray5)
+    
     
     private func backBarButtonConfig() {
         let backBarButtonItem = UIBarButtonItem(title: "로그인",
@@ -112,14 +88,16 @@ final class LoginViewController : UIViewController {
     }
     
     // MARK: - method
-    private func tabJoinButton() {
+    private func tapButtonEvent() {
         //join 버튼 눌렀을때
-        coordinator?.presentJoinVC()
-    }
-    
-    private func tabLoginButton() {
-        // login 버튼 눌렀을때 
-        coordinator?.presentMainVC()
+        joinButton.tabButtonAction = { [weak self] in
+            self?.coordinator?.presentJoinVC()
+        }
+
+        // login 버튼 눌렀을때
+        loginButton.tabButtonAction = { [weak self] in
+            self?.coordinator?.presentMainVC()
+        }
     }
 
     private func stackLayout() {

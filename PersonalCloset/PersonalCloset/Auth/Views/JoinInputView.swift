@@ -9,6 +9,9 @@ import UIKit
 import SnapKit
 
 class JoinInputView : UIView {
+    private let customPlaceholder: String
+    private let customGuide: String
+    
     private let inputStackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -35,13 +38,22 @@ class JoinInputView : UIView {
         return textField
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setLayout()
+    init(placeholder: String, guide: String) {
+        self.customPlaceholder = placeholder
+        self.customGuide = guide
+        super.init(frame: .zero)
+        
+        self.setLayout()
+        self.setupStyles()
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupStyles() {
+        self.inputTextField.placeholder = customPlaceholder
+        self.inputLabel.text = customGuide
     }
     
     private func setLayout() {

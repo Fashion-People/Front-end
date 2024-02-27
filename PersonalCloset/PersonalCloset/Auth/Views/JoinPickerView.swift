@@ -14,6 +14,8 @@ class JoinPickerView : UIView {
     var third = ""
     var fourth = ""
     
+    private let pickerTitle: String
+    
     private let inputStackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -39,16 +41,23 @@ class JoinPickerView : UIView {
         return pickerView
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setLayout()
+    init(_ pickerTitle: String) {
+        self.pickerTitle = pickerTitle
+        super.init(frame: .zero)
+        self.setLayout()
+        self.setupStyles()
         pickerView.delegate = self
         pickerView.dataSource = self
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
+    
+    private func setupStyles() {
+        inputLabel.text = pickerTitle
+    }
+
     
     private func setLayout() {
         [inputLabel,
