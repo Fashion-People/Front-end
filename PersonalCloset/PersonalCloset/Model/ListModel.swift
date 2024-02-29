@@ -13,8 +13,8 @@ enum Section : CaseIterable {
 
 struct ListModel: Codable, Hashable {
     let id = UUID()
-    let clothDescription : String
-    let clothImageURL : String
+    var clothDescription : String
+    var clothImageURL : String
     
     init(clothDescription: String, clothImageURL: String) {
         self.clothDescription = clothDescription

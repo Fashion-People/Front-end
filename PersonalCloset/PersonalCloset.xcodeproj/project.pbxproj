@@ -89,6 +89,8 @@
 		29A9C0B52B3FE96600209641 /* RegisterImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9C0B42B3FE96600209641 /* RegisterImageViewController.swift */; };
 		29DA5F612B4542A500F45CC6 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DA5F602B4542A500F45CC6 /* InputView.swift */; };
 		29DA5F632B45600600F45CC6 /* JoinInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DA5F622B45600600F45CC6 /* JoinInputView.swift */; };
+		29DBBA602B90B86D00A36C27 /* ListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DBBA5F2B90B86D00A36C27 /* ListContentView.swift */; };
+		29DBBA622B90B88000A36C27 /* ListContentConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DBBA612B90B88000A36C27 /* ListContentConfiguration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,6 +130,8 @@
 		29A9C0B42B3FE96600209641 /* RegisterImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterImageViewController.swift; sourceTree = "<group>"; };
 		29DA5F602B4542A500F45CC6 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		29DA5F622B45600600F45CC6 /* JoinInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinInputView.swift; sourceTree = "<group>"; };
+		29DBBA5F2B90B86D00A36C27 /* ListContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListContentView.swift; sourceTree = "<group>"; };
+		29DBBA612B90B88000A36C27 /* ListContentConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListContentConfiguration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -305,6 +309,8 @@
 			isa = PBXGroup;
 			children = (
 				295FAD3B2B5798FA003BC20B /* ListCollectionViewCell.swift */,
+				29DBBA5F2B90B86D00A36C27 /* ListContentView.swift */,
+				29DBBA612B90B88000A36C27 /* ListContentConfiguration.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -518,6 +524,7 @@
 				298202672B44269300B7DEB3 /* ImageInputButton.swift in Sources */,
 				295FF8632B53DD88006DDD50 /* MainCoordinator.swift in Sources */,
 				29A9C0AF2B3FE7A700209641 /* UIColor+.swift in Sources */,
+				29DBBA602B90B86D00A36C27 /* ListContentView.swift in Sources */,
 				29A9C0B52B3FE96600209641 /* RegisterImageViewController.swift in Sources */,
 				29A9C0AA2B3FE6C800209641 /* CustomTabBarController.swift in Sources */,
 				295FF8612B53DD67006DDD50 /* TabBarCoordinator.swift in Sources */,
@@ -528,6 +535,7 @@
 				295FF85D2B53DC32006DDD50 /* AppCoordinator.swift in Sources */,
 				2982026B2B4452DF00B7DEB3 /* JoinViewController.swift in Sources */,
 				297F6CD82B5F9EE4009A1652 /* S3Upload.swift in Sources */,
+				29DBBA622B90B88000A36C27 /* ListContentConfiguration.swift in Sources */,
 				29910A832B4BC78E00FF8460 /* ButtonStackView.swift in Sources */,
 				295FF8652B53DDA2006DDD50 /* SettingCoordinator.swift in Sources */,
 				29A9C0962B3FE62900209641 /* AppDelegate.swift in Sources */,
