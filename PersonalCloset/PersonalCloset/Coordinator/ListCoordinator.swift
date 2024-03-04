@@ -23,13 +23,22 @@ final class ListCoordinator : Coordinator {
     }
 }
 
-extension ListCoordinator : ListNavigation {
+extension ListCoordinator : ListNavigation, RegisterImageNavigation {
+    func backToPreviousVC() {
+        navigationController.popToRootViewController(animated: true)
+    }
+    
+    func presentResultVC() {
+        
+    }
+    
     func presentListVC() {
         let listVC = ClothListViewController(coordinator: self)
         navigationController.pushViewController(listVC, animated: true)
     }
     
-    func backToMain() {
-        navigationController.popToRootViewController(animated: true)
+    func presentRegisterVC() {
+        let registerVC = RegisterImageViewController(coordinator: self)
+        navigationController.pushViewController(registerVC, animated: true)
     }
 }

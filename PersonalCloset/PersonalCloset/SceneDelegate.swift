@@ -20,19 +20,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let navigationController = UINavigationController()
             self.window?.rootViewController = navigationController
             
-//            let coordinator = AppCoordinator(navigationController: navigationController)
-            let coordinator = ListCoordinator(navigationController: navigationController)
+            let coordinator = AppCoordinator(navigationController: navigationController)
+//            let coordinator = ListCoordinator(navigationController: navigationController)
 
             coordinator.start()
             
             self.window?.makeKeyAndVisible()
         }
-        
-//        guard let windowScene = (scene as? UIWindowScene) else { return }
-//        let window = UIWindow(windowScene: windowScene)
-//        window.rootViewController = ClothListViewController()
-//        window.makeKeyAndVisible()
-//        self.window = window
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -10,7 +10,8 @@ import SnapKit
 
 protocol ListNavigation : AnyObject {
     func presentListVC()
-    func backToMain()
+    func backToPreviousVC()
+    func presentRegisterVC()
 }
 
 final class ClothListViewController : BaseViewController {
@@ -84,9 +85,15 @@ final class ClothListViewController : BaseViewController {
         }
         
         else {
-            clothListCollectionView.isEditing = false
-            topView.selectButton.tintColor = .black
-            selectToggle = true
+            if clothListCollectionView.indexPathsForSelectedItems?.count ?? 0 > 0 {
+                self.coordinator?.presentRegisterVC()
+            }
+            
+            else{
+                clothListCollectionView.isEditing = false
+                topView.selectButton.tintColor = .black
+                selectToggle = true
+            }
         }
     }
     
@@ -112,8 +119,4 @@ extension ClothListViewController : UICollectionViewDelegateFlowLayout {
         let width : CGFloat = collectionView.bounds.width
         return CGSize(width: width, height: width/4)
     }
-}
-
-extension ClothListViewController : UICollectionViewDelegate {
-
 }

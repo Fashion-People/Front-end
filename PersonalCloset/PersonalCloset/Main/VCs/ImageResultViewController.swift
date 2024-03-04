@@ -10,7 +10,7 @@ import SnapKit
 
 protocol ImageResultNavigation : AnyObject {
     func backToRegisterVC()
-    func backToMainVC()
+    func backToPreviousVC()
 }
 
 final class ImageResultViewController : BaseViewController {
@@ -63,7 +63,7 @@ final class ImageResultViewController : BaseViewController {
     }
     
     private func tabMainIcon() {
-        coordinator?.backToMainVC()
+        coordinator?.backToPreviousVC()
     }
     
     private func topViewConfig() {
