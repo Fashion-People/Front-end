@@ -41,7 +41,7 @@ extension MainCoordinator : MainNavigation, RegisterImageNavigation, ImageResult
     }
     
     // navigation pop 기능
-    func backToMainVC() {
+    func backToPreviousVC() {
         navigationController.popToRootViewController(animated: true)
     }
     
