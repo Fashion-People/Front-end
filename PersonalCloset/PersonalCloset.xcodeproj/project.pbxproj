@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		29059E262B9708170047CEF6 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 29059E252B9708170047CEF6 /* Moya */; };
+		2926A8752B9744B600C4BCA4 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2926A8742B9744B600C4BCA4 /* ListModel.swift */; };
 		292BE6B42B4D26BA00BF3EE9 /* JoinPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */; };
 		29589FCA2B457839003578A3 /* ImageResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29589FC92B457839003578A3 /* ImageResultViewController.swift */; };
 		295FAD382B5796A3003BC20B /* ClothListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295FAD372B5796A3003BC20B /* ClothListViewController.swift */; };
@@ -47,7 +48,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		290CCAFD2B8E2FFB00A8CADE /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
+		2926A8742B9744B600C4BCA4 /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
 		292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPickerView.swift; sourceTree = "<group>"; };
 		29589FC92B457839003578A3 /* ImageResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResultViewController.swift; sourceTree = "<group>"; };
 		295FAD372B5796A3003BC20B /* ClothListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothListViewController.swift; sourceTree = "<group>"; };
@@ -253,7 +254,7 @@
 			children = (
 				297F6CD72B5F9EE4009A1652 /* S3Upload.swift */,
 				297F6CD92B5F9F24009A1652 /* S3Configuration.swift */,
-				290CCAFD2B8E2FFB00A8CADE /* ListModel.swift */,
+				2926A8742B9744B600C4BCA4 /* ListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -407,9 +408,9 @@
 				298202632B43F1AB00B7DEB3 /* SettingTableViewCell.swift in Sources */,
 				292BE6B42B4D26BA00BF3EE9 /* JoinPickerView.swift in Sources */,
 				295FAD3A2B57985B003BC20B /* ListCoordinator.swift in Sources */,
-				290CCAFE2B8E2FFB00A8CADE /* ListModel.swift in Sources */,
 				29A9C0B32B3FE93C00209641 /* SettingViewController.swift in Sources */,
 				295FAD3C2B5798FA003BC20B /* ListCollectionViewCell.swift in Sources */,
+				2926A8752B9744B600C4BCA4 /* ListModel.swift in Sources */,
 				2982023A2B43C2F100B7DEB3 /* TopView.swift in Sources */,
 				299CCE5B2B4679EA0054505E /* KeyboardHide+.swift in Sources */,
 				29DA5F612B4542A500F45CC6 /* InputView.swift in Sources */,
