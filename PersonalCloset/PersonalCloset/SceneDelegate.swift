@@ -25,12 +25,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             self.window?.makeKeyAndVisible()
         }
-        
-//        guard let windowScene = (scene as? UIWindowScene) else { return }
-//        let window = UIWindow(windowScene: windowScene)
-//        window.rootViewController = ClothListViewController()
-//        window.makeKeyAndVisible()
-//        self.window = window
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -85,46 +85,46 @@ final class RegisterImageViewController : BaseViewController {
         }, for: .touchUpInside)
     }
     
-    private func uploadImage() {
-        let S3 = S3Upload()
-        var count = 0
-        
-        if (self.imageInput1.inputImageButton.imageView?.image != nil) {
-            S3.uploadImageFile(imgData:self.imageInput1.inputImageButton.currentImage)
-        } else {
-            print("이미지 없음")
-            count += 1
-        }
-        
-        if (self.imageInput2.inputImageButton.imageView?.image != nil) {
-            S3.uploadImageFile(imgData:self.imageInput2.inputImageButton.currentImage)
-        } else {
-            print("이미지2 없음")
-            count += 1
-        }
-        
-        if (self.imageInput3.inputImageButton.imageView?.image != nil) {
-            S3.uploadImageFile(imgData:self.imageInput3.inputImageButton.currentImage)
-        } else { print("이미지3 없음")
-            count += 1
-        }
-        
-        if (self.imageInput4.inputImageButton.imageView?.image != nil) {
-            S3.uploadImageFile(imgData:self.imageInput4.inputImageButton.currentImage)
-        } else { print("이미지4 없음")
-            count += 1
-        }
-        
-        if (count == 4) {
-            let imageNilAlert = UIAlertController(title: "알림",
-                                                 message: "하나 이상의 이미지를 등록해주세요",
-                                                 preferredStyle: UIAlertController.Style.alert)
-            
-            let success = UIAlertAction(title: "확인", style: .default)
-            imageNilAlert.addAction(success)
-            self.present(imageNilAlert, animated: true, completion: nil)
-        }
-    }
+//    private func uploadImage() {
+//        let S3 = S3Upload()
+//        var count = 0
+//        
+//        if (self.imageInput1.inputImageButton.imageView?.image != nil) {
+//            S3.uploadImageFile(imgData:self.imageInput1.inputImageButton.currentImage)
+//        } else {
+//            print("이미지 없음")
+//            count += 1
+//        }
+//        
+//        if (self.imageInput2.inputImageButton.imageView?.image != nil) {
+//            S3.uploadImageFile(imgData:self.imageInput2.inputImageButton.currentImage)
+//        } else {
+//            print("이미지2 없음")
+//            count += 1
+//        }
+//        
+//        if (self.imageInput3.inputImageButton.imageView?.image != nil) {
+//            S3.uploadImageFile(imgData:self.imageInput3.inputImageButton.currentImage)
+//        } else { print("이미지3 없음")
+//            count += 1
+//        }
+//        
+//        if (self.imageInput4.inputImageButton.imageView?.image != nil) {
+//            S3.uploadImageFile(imgData:self.imageInput4.inputImageButton.currentImage)
+//        } else { print("이미지4 없음")
+//            count += 1
+//        }
+//        
+//        if (count == 4) {
+//            let imageNilAlert = UIAlertController(title: "알림",
+//                                                 message: "하나 이상의 이미지를 등록해주세요",
+//                                                 preferredStyle: UIAlertController.Style.alert)
+//            
+//            let success = UIAlertAction(title: "확인", style: .default)
+//            imageNilAlert.addAction(success)
+//            self.present(imageNilAlert, animated: true, completion: nil)
+//        }
+//    }
     
     private func tabImageButton(tag: Int) {
         let imagePicker = UIImagePickerController()
@@ -151,7 +151,7 @@ final class RegisterImageViewController : BaseViewController {
     private func tabResultButton() {
         // 결과 버튼 눌렀을 때
         registerButton.tabButtonAction = { [weak self] in
-            self?.uploadImage()
+//            self?.uploadImage()
             self?.coordinator.presentResultVC()
         }
     }
