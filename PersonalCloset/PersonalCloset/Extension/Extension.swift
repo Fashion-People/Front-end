@@ -20,3 +20,9 @@ extension UICollectionViewCell {
         return String(describing: self)
     }
 }
+
+extension UICollectionViewListCell {
+    static var id: String {
+        return String(describing: self)
+    }
+}

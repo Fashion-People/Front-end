@@ -10,7 +10,7 @@ import SnapKit
 
 protocol RegisterImageNavigation : AnyObject {
     func presentResultVC()
-    func backToMainVC()
+    func backToPreviousVC()
 }
 
 final class RegisterImageViewController : BaseViewController {
@@ -158,11 +158,11 @@ final class RegisterImageViewController : BaseViewController {
     
     private func tabBackButton() {
         // topview의 back button 눌렀을때 
-        coordinator.backToMainVC()
+        coordinator.backToPreviousVC()
     }
     
     private func tabMainIcon() {
-        coordinator.backToMainVC()
+        coordinator.backToPreviousVC()
     }
     
     override func setLayout() {
