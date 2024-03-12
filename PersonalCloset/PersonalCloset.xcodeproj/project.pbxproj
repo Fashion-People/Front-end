@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		29059E262B9708170047CEF6 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 29059E252B9708170047CEF6 /* Moya */; };
-		2926A8752B9744B600C4BCA4 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2926A8742B9744B600C4BCA4 /* ListModel.swift */; };
+		2916A34C2BA06C4300758747 /* ClothesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916A34B2BA06C4300758747 /* ClothesAPI.swift */; };
+		2916A34E2BA06DB700758747 /* ClothRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916A34D2BA06DB700758747 /* ClothRequestDTO.swift */; };
+		2916A3502BA0859000758747 /* ClothListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916A34F2BA0859000758747 /* ClothListManager.swift */; };
+		2916A3522BA085EA00758747 /* ServerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916A3512BA085EA00758747 /* ServerStatus.swift */; };
+		2926A8752B9744B600C4BCA4 /* ClothListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2926A8742B9744B600C4BCA4 /* ClothListModel.swift */; };
 		292BE6B42B4D26BA00BF3EE9 /* JoinPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */; };
 		29589FCA2B457839003578A3 /* ImageResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29589FC92B457839003578A3 /* ImageResultViewController.swift */; };
 		295FAD382B5796A3003BC20B /* ClothListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295FAD372B5796A3003BC20B /* ClothListViewController.swift */; };
@@ -48,7 +51,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2926A8742B9744B600C4BCA4 /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
+		2916A34B2BA06C4300758747 /* ClothesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothesAPI.swift; sourceTree = "<group>"; };
+		2916A34D2BA06DB700758747 /* ClothRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothRequestDTO.swift; sourceTree = "<group>"; };
+		2916A34F2BA0859000758747 /* ClothListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothListManager.swift; sourceTree = "<group>"; };
+		2916A3512BA085EA00758747 /* ServerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerStatus.swift; sourceTree = "<group>"; };
+		2926A8742B9744B600C4BCA4 /* ClothListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothListModel.swift; sourceTree = "<group>"; };
 		292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPickerView.swift; sourceTree = "<group>"; };
 		29589FC92B457839003578A3 /* ImageResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResultViewController.swift; sourceTree = "<group>"; };
 		295FAD372B5796A3003BC20B /* ClothListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothListViewController.swift; sourceTree = "<group>"; };
@@ -93,7 +100,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29059E262B9708170047CEF6 /* Moya in Frameworks */,
 				29A9C0AD2B3FE73C00209641 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,7 +260,11 @@
 			children = (
 				297F6CD72B5F9EE4009A1652 /* S3Upload.swift */,
 				297F6CD92B5F9F24009A1652 /* S3Configuration.swift */,
-				2926A8742B9744B600C4BCA4 /* ListModel.swift */,
+				2926A8742B9744B600C4BCA4 /* ClothListModel.swift */,
+				2916A34F2BA0859000758747 /* ClothListManager.swift */,
+				2916A34B2BA06C4300758747 /* ClothesAPI.swift */,
+				2916A34D2BA06DB700758747 /* ClothRequestDTO.swift */,
+				2916A3512BA085EA00758747 /* ServerStatus.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -323,7 +333,6 @@
 			name = PersonalCloset;
 			packageProductDependencies = (
 				29A9C0AC2B3FE73C00209641 /* SnapKit */,
-				29059E252B9708170047CEF6 /* Moya */,
 			);
 			productName = PersonalCloset;
 			productReference = 29A9C0922B3FE62900209641 /* PersonalCloset.app */;
@@ -355,7 +364,6 @@
 			mainGroup = 29A9C0892B3FE62900209641;
 			packageReferences = (
 				29A9C0AB2B3FE73C00209641 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				29059E242B9708170047CEF6 /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = 29A9C0932B3FE62900209641 /* Products */;
 			projectDirPath = "";
@@ -388,6 +396,7 @@
 				29A9C0AF2B3FE7A700209641 /* UIColor+.swift in Sources */,
 				29DBBA602B90B86D00A36C27 /* ListContentView.swift in Sources */,
 				29A9C0B52B3FE96600209641 /* RegisterImageViewController.swift in Sources */,
+				2916A34C2BA06C4300758747 /* ClothesAPI.swift in Sources */,
 				29A9C0AA2B3FE6C800209641 /* CustomTabBarController.swift in Sources */,
 				295FF8612B53DD67006DDD50 /* TabBarCoordinator.swift in Sources */,
 				295FAD382B5796A3003BC20B /* ClothListViewController.swift in Sources */,
@@ -396,21 +405,24 @@
 				295FF85F2B53DD34006DDD50 /* AuthCoordinator.swift in Sources */,
 				295FF85D2B53DC32006DDD50 /* AppCoordinator.swift in Sources */,
 				2982026B2B4452DF00B7DEB3 /* JoinViewController.swift in Sources */,
+				2916A3502BA0859000758747 /* ClothListManager.swift in Sources */,
 				297F6CD82B5F9EE4009A1652 /* S3Upload.swift in Sources */,
 				29DBBA622B90B88000A36C27 /* ListContentConfiguration.swift in Sources */,
 				29910A832B4BC78E00FF8460 /* ButtonStackView.swift in Sources */,
 				295FF8652B53DDA2006DDD50 /* SettingCoordinator.swift in Sources */,
 				29A9C0962B3FE62900209641 /* AppDelegate.swift in Sources */,
+				2916A3522BA085EA00758747 /* ServerStatus.swift in Sources */,
 				2982023C2B43C72600B7DEB3 /* BaseViewController.swift in Sources */,
 				29589FCA2B457839003578A3 /* ImageResultViewController.swift in Sources */,
 				297F6CDA2B5F9F24009A1652 /* S3Configuration.swift in Sources */,
 				29DA5F632B45600600F45CC6 /* JoinInputView.swift in Sources */,
 				298202632B43F1AB00B7DEB3 /* SettingTableViewCell.swift in Sources */,
 				292BE6B42B4D26BA00BF3EE9 /* JoinPickerView.swift in Sources */,
+				2916A34E2BA06DB700758747 /* ClothRequestDTO.swift in Sources */,
 				295FAD3A2B57985B003BC20B /* ListCoordinator.swift in Sources */,
 				29A9C0B32B3FE93C00209641 /* SettingViewController.swift in Sources */,
 				295FAD3C2B5798FA003BC20B /* ListCollectionViewCell.swift in Sources */,
-				2926A8752B9744B600C4BCA4 /* ListModel.swift in Sources */,
+				2926A8752B9744B600C4BCA4 /* ClothListModel.swift in Sources */,
 				2982023A2B43C2F100B7DEB3 /* TopView.swift in Sources */,
 				299CCE5B2B4679EA0054505E /* KeyboardHide+.swift in Sources */,
 				29DA5F612B4542A500F45CC6 /* InputView.swift in Sources */,
@@ -631,14 +643,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		29059E242B9708170047CEF6 /* XCRemoteSwiftPackageReference "Moya" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Moya/Moya.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 15.0.3;
-			};
-		};
 		29A9C0AB2B3FE73C00209641 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -650,11 +654,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		29059E252B9708170047CEF6 /* Moya */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 29059E242B9708170047CEF6 /* XCRemoteSwiftPackageReference "Moya" */;
-			productName = Moya;
-		};
 		29A9C0AC2B3FE73C00209641 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 29A9C0AB2B3FE73C00209641 /* XCRemoteSwiftPackageReference "SnapKit" */;

@@ -9,11 +9,11 @@ import UIKit
 import SnapKit
 
 final class ListCollectionViewCell: UICollectionViewListCell {
-    var cloth: ListModel!
+    var cloth: ClothListModel!
     
     override func updateConfiguration(using state: UICellConfigurationState) {
         var config = ContentConfiguration().updated(for: state)
-        config.clothDescription = cloth.clothDescription
+        config.clothDescription = cloth.description
         
         contentConfiguration = config
     }

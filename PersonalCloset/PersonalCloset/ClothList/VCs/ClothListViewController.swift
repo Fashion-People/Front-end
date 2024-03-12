@@ -17,10 +17,10 @@ protocol ListNavigation : AnyObject {
 final class ClothListViewController : BaseViewController {
     weak var coordinator : ListNavigation?
     
+    private let clothListManager = ClothListManager.shared
     private var selectToggle = true
-    private let clothLists : [ListModel] = [ListModel(clothDescription: "예쁜옷", clothImageURL: "https://"),ListModel(clothDescription: "예쁜옷", clothImageURL: "https://"),ListModel(clothDescription: "예쁜옷", clothImageURL: "https://"),ListModel(clothDescription: "예쁜옷", clothImageURL: "https://"),ListModel(clothDescription: "예쁜옷", clothImageURL: "https://"),ListModel(clothDescription: "예쁜옷", clothImageURL: "https://"),ListModel(clothDescription: "예쁜옷", clothImageURL: "https://"),ListModel(clothDescription: "예쁜옷", clothImageURL: "https://")]
     
-    var dataSource: UICollectionViewDiffableDataSource<Section, ListModel>!
+    var dataSource: UICollectionViewDiffableDataSource<Section, ClothListModel>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +29,19 @@ final class ClothListViewController : BaseViewController {
         self.setupDataSource()
         self.performQuery()
         self.topView.selectButton.addTarget(self, action: #selector(tapTopCheckButton), for: .touchUpInside)
+        
+        Task {
+            do {
+                try await ClothesAPI.fetchAllClothes(memberId: "fashionPP").performRequest()
+                
+                DispatchQueue.main.async {
+                    self.performQuery()
+                }
+                
+            } catch {
+                print("error: \(error)")
+            }
+        }
     }
     
     init(coordinator: ListNavigation) {
@@ -53,16 +66,16 @@ final class ClothListViewController : BaseViewController {
     }()
     
     private func setupDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<ListCollectionViewCell, ListModel> {
+        let cellRegistration = UICollectionView.CellRegistration<ListCollectionViewCell, ClothListModel> {
             (cell, indexPath, list) in
-            var clothList : ListModel?
-            clothList = self.clothLists[indexPath.row]
+            var clothList : ClothListModel?
+            clothList = self.clothListManager.clothList[indexPath.row]
            
             cell.cloth = clothList
             cell.accessories = [.multiselect()]
         }
         
-        self.dataSource = UICollectionViewDiffableDataSource<Section, ListModel>(collectionView: self.clothListCollectionView) {
+        self.dataSource = UICollectionViewDiffableDataSource<Section, ClothListModel>(collectionView: self.clothListCollectionView) {
             (collectionView, indexPath, list) -> UICollectionViewListCell? in
             return self.clothListCollectionView.dequeueConfiguredReusableCell(using: cellRegistration, 
                                                                               for: indexPath,
@@ -71,9 +84,9 @@ final class ClothListViewController : BaseViewController {
     }
     
     func performQuery() {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, ListModel>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, ClothListModel>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(clothLists)
+        snapshot.appendItems(clothListManager.clothList)
         self.dataSource.apply(snapshot, animatingDifferences: true)
     }
     
