@@ -84,7 +84,7 @@ extension ClothesAPI {
         if (200..<300).contains(httpResponse.statusCode) {
             if case .fetchAllClothes = self {
                 let clothList = try JSONDecoder().decode([ClothListModel].self, from: data)
-                print(clothList)
+//                print(clothList)
                 
                 ClothListManager.shared.clothList = clothList
             }
