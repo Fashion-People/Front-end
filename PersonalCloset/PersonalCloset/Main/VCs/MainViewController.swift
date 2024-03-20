@@ -68,7 +68,8 @@ final class MainViewController : BaseViewController {
     override func setLayout() {
         super.setLayout()
         
-        [cameraButton, emptyView].forEach {
+        [cameraButton, 
+         emptyView].forEach {
             view.addSubview($0)
         }
         

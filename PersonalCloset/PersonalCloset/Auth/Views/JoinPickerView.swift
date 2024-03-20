@@ -84,7 +84,9 @@ final class JoinPickerView : UIView {
 
 // MARK: - pickerView extension
 extension JoinPickerView : UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, 
+                    titleForRow row: Int,
+                    forComponent component: Int) -> String? {
         return style[row]
     }
 }
@@ -98,7 +100,9 @@ extension JoinPickerView : UIPickerViewDataSource {
         return 4
     }
     
-    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+    func pickerView(_ pickerView: UIPickerView, 
+                    attributedTitleForRow row: Int,
+                    forComponent component: Int) -> NSAttributedString? {
         let attributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key(rawValue: NSAttributedString.Key.font.rawValue): UIFont.systemFont(ofSize: 10, weight: .bold)
         ]

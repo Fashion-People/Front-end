@@ -50,32 +50,20 @@ final class ImageResultViewController : BaseViewController {
     }()
     
     private lazy var backToRegisterButton = PersonalClosetButton("다시 검사하기",
-                                                                titleColor: .darkBlue,
-                                                                backColor: .skyBlue)
-    private func tabAgainCheckButton() {
-        // 다시 확인 버튼
-        coordinator?.backToRegisterVC()
-    }
-
-    private func tabBackToRegister() {
-        // 다시 등록 버튼
-        coordinator?.backToRegisterVC()
-    }
+                                                            titleColor: .darkBlue,
+                                                             backColor: .skyBlue,
+                                                             action: UIAction { _ in
+                                                                        self.coordinator?.backToRegisterVC()
+                                                                    })
     
-    private func tabMainIcon() {
-        coordinator?.backToPreviousVC()
-    }
-    
+    // MARK: - button click method
     private func topViewConfig() {
         topView.backButton.addAction(UIAction{ _ in
-            self.tabBackToRegister()
-        }, for: .touchUpInside)
-        
-        topView.iconButton.addAction(UIAction{ _ in
-            self.tabMainIcon()
+            self.coordinator?.backToRegisterVC()
         }, for: .touchUpInside)
     }
     
+    // MARK: - setup Layout
     override func setLayout() {
         super.setLayout()
         

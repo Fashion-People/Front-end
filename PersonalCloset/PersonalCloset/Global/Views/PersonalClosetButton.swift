@@ -11,25 +11,23 @@ final class PersonalClosetButton : UIButton {
     private let buttonSetTitle : String
     private let buttonTitleColor : UIColor
     private let buttonBackgroundColor : UIColor
-    var tabButtonAction : (() -> ())?
+    var tabButtonAction: UIAction
 
-    init(_ buttonTitle: String, titleColor: UIColor, backColor: UIColor) {
+    init(_ buttonTitle: String, titleColor: UIColor, backColor: UIColor, action: UIAction) {
         self.buttonSetTitle = buttonTitle
         self.buttonTitleColor = titleColor
         self.buttonBackgroundColor = backColor
+        self.tabButtonAction = action
         super.init(frame: .zero)
         self.setupStyles()
-        self.addTarget(self, action: #selector(tabButton), for: .touchUpInside)
+        self.addAction(tabButtonAction, for: .touchUpInside)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc func tabButton() {
-        tabButtonAction?()
-    }
-
+    // MARK: - setup Styles
     private func setupStyles() {
         self.setTitle(buttonSetTitle, for: .normal)
         self.setTitleColor(buttonTitleColor, for: .normal)

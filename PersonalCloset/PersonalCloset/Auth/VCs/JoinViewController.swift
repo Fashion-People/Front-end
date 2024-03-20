@@ -77,40 +77,20 @@ final class JoinViewController : UIViewController {
     private var thirdPickerView = JoinPickerView("3순위")
     private var fourthPickerView = JoinPickerView("4순위")
     
-//    private lazy var joinButton = PersonalClosetButton("회원가입",titleColor: .darkBlue,backColor: .skyBlue)
-    
-    private lazy var joinButton : UIButton = {
-        let button = UIButton()
-        button.setTitle("회원가입", for: .normal)
-        button.setTitleColor(.darkBlue, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
-        button.layer.cornerRadius = 5
-        button.layer.backgroundColor = UIColor.skyBlue.cgColor
-        button.addAction(UIAction { _ in
-            self.tabJoinButton()
-            }, for: .touchUpInside)
-
-        return button
-    }()
-    
-    // MARK: - method
-    private func tabJoinButton() {
-        let joinSuccessAlert = UIAlertController(title: "알림",
-                                                 message: "회원가입 성공.",
-                                                 preferredStyle: UIAlertController.Style.alert)
+    private lazy var joinButton = PersonalClosetButton("회원가입",titleColor: .darkBlue,backColor: .skyBlue,action: UIAction { _ in
+            let joinSuccessAlert = UIAlertController(title: "알림",
+                                                     message: "회원가입 성공.",
+                                                     preferredStyle: UIAlertController.Style.alert)
+            
+            let success = UIAlertAction(title: "확인",
+                                        style: .default) { action in
+                self.coordinator?.backToLoginVC()
+            }
+            joinSuccessAlert.addAction(success)
+            self.present(joinSuccessAlert, animated: true, completion: nil)
+    })
         
-        let success = UIAlertAction(title: "확인",
-                                    style: .default) { action in
-            // 회원가입 확인 버튼 눌렀을때
-//            self.joinButton.tabButtonAction = { [weak self] in
-//                self?.coordinator?.backToLoginVC()
-//            }
-            self.coordinator?.backToLoginVC()
-        }
-        joinSuccessAlert.addAction(success)
-        self.present(joinSuccessAlert, animated: true, completion: nil)
-    }
-
+    // MARK: - method
     @objc private func tabBackbutton() {
         // back 버튼 눌렀을때
         coordinator?.backToLoginVC()

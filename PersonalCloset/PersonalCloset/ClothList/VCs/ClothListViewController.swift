@@ -17,10 +17,12 @@ protocol ListNavigation : AnyObject {
 final class ClothListViewController : BaseViewController {
     weak var coordinator : ListNavigation?
     
-    private var selectToggle = true
-    private let clothLists : [ListModel] = [ListModel(clothDescription: "예쁜옷", clothImageURL: "https://"),ListModel(clothDescription: "예쁜옷", clothImageURL: "https://"),ListModel(clothDescription: "예쁜옷", clothImageURL: "https://"),ListModel(clothDescription: "예쁜옷", clothImageURL: "https://"),ListModel(clothDescription: "예쁜옷", clothImageURL: "https://"),ListModel(clothDescription: "예쁜옷", clothImageURL: "https://"),ListModel(clothDescription: "예쁜옷", clothImageURL: "https://"),ListModel(clothDescription: "예쁜옷", clothImageURL: "https://")]
+    private let clothListManager = ClothListManager.shared
     
-    var dataSource: UICollectionViewDiffableDataSource<Section, ListModel>!
+    // 상단 이미지 선택 button 클릭 유무 확인하기 위한 toggle
+    private var selectToggle = true
+    
+    var dataSource: UICollectionViewDiffableDataSource<Section, ClothListModel>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +30,20 @@ final class ClothListViewController : BaseViewController {
         self.topView.backButton.isHidden = true
         self.setupDataSource()
         self.performQuery()
-        self.topView.selectButton.addTarget(self, action: #selector(tapTopCheckButton), for: .touchUpInside)
+        self.tabTopViewButtons()
+        
+        Task {
+            do {
+                try await ClothesAPI.fetchAllClothes(memberId: "fashionPP").performRequest()
+                
+                DispatchQueue.main.async {
+                    self.performQuery()
+                }
+                
+            } catch {
+                print("error: \(error)")
+            }
+        }
     }
     
     init(coordinator: ListNavigation) {
@@ -40,6 +55,7 @@ final class ClothListViewController : BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - UICollectionView config (+ DiffableDataSource)
     private lazy var clothListCollectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
@@ -53,16 +69,16 @@ final class ClothListViewController : BaseViewController {
     }()
     
     private func setupDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<ListCollectionViewCell, ListModel> {
+        let cellRegistration = UICollectionView.CellRegistration<ListCollectionViewCell, ClothListModel> {
             (cell, indexPath, list) in
-            var clothList : ListModel?
-            clothList = self.clothLists[indexPath.row]
+            var clothList : ClothListModel?
+            clothList = self.clothListManager.clothList[indexPath.row]
            
             cell.cloth = clothList
             cell.accessories = [.multiselect()]
         }
         
-        self.dataSource = UICollectionViewDiffableDataSource<Section, ListModel>(collectionView: self.clothListCollectionView) {
+        self.dataSource = UICollectionViewDiffableDataSource<Section, ClothListModel>(collectionView: self.clothListCollectionView) {
             (collectionView, indexPath, list) -> UICollectionViewListCell? in
             return self.clothListCollectionView.dequeueConfiguredReusableCell(using: cellRegistration, 
                                                                               for: indexPath,
@@ -70,33 +86,36 @@ final class ClothListViewController : BaseViewController {
         }
     }
     
-    func performQuery() {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, ListModel>()
+    private func performQuery() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, ClothListModel>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(clothLists)
+        snapshot.appendItems(clothListManager.clothList)
         self.dataSource.apply(snapshot, animatingDifferences: true)
     }
     
-    @objc private func tapTopCheckButton() {
-        if selectToggle {
-            clothListCollectionView.isEditing = true
-            topView.selectButton.tintColor = .lightGray
-            selectToggle = false
-        }
-        
-        else {
-            if clothListCollectionView.indexPathsForSelectedItems?.count ?? 0 > 0 {
-                self.coordinator?.presentRegisterVC()
+    // MARK: - button click method
+    private func tabTopViewButtons(){
+        topView.selectButton.addAction(UIAction{ _ in
+            if self.selectToggle {
+                self.clothListCollectionView.isEditing = true
+                self.topView.selectButton.tintColor = .lightGray
+                self.selectToggle = false
             }
             
-            else{
-                clothListCollectionView.isEditing = false
-                topView.selectButton.tintColor = .black
-                selectToggle = true
+            else {
+                if self.clothListCollectionView.indexPathsForSelectedItems?.count ?? 0 > 0 {
+                    self.coordinator?.presentRegisterVC()
+                }
+                
+                else{
+                    self.clothListCollectionView.isEditing = false
+                    self.topView.selectButton.tintColor = .black
+                    self.selectToggle = true
+                }
             }
-        }
+        }, for: .touchUpInside)
     }
-    
+        
     override func setLayout() {
         super.setLayout()
         
