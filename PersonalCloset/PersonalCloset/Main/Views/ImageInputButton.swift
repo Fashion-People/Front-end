@@ -14,13 +14,7 @@ final class ImageInputButton : UIView {
         button.backgroundColor = .lightGray
         button.tintColor = .black
         button.layer.cornerRadius = 5
-        
-//        let imageConfig = UIImage.SymbolConfiguration(pointSize: 40, weight: .light)
-//        let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
-//        button.setImage(image, for: .normal)
-//        let titleConfig = UIFont(name: "추가", size: 15)
-//        button.setTitle(titleConfig, for: .normal)
-        
+                
         return button
     }()
     

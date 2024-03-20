@@ -18,6 +18,8 @@ final class ClothListViewController : BaseViewController {
     weak var coordinator : ListNavigation?
     
     private let clothListManager = ClothListManager.shared
+    
+    // 상단 이미지 선택 button 클릭 유무 확인하기 위한 toggle
     private var selectToggle = true
     
     var dataSource: UICollectionViewDiffableDataSource<Section, ClothListModel>!
@@ -28,7 +30,7 @@ final class ClothListViewController : BaseViewController {
         self.topView.backButton.isHidden = true
         self.setupDataSource()
         self.performQuery()
-        self.topView.selectButton.addTarget(self, action: #selector(tapTopCheckButton), for: .touchUpInside)
+        self.tabTopViewButtons()
         
         Task {
             do {
@@ -53,6 +55,7 @@ final class ClothListViewController : BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - UICollectionView config (+ DiffableDataSource)
     private lazy var clothListCollectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
@@ -83,33 +86,36 @@ final class ClothListViewController : BaseViewController {
         }
     }
     
-    func performQuery() {
+    private func performQuery() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, ClothListModel>()
         snapshot.appendSections([.main])
         snapshot.appendItems(clothListManager.clothList)
         self.dataSource.apply(snapshot, animatingDifferences: true)
     }
     
-    @objc private func tapTopCheckButton() {
-        if selectToggle {
-            clothListCollectionView.isEditing = true
-            topView.selectButton.tintColor = .lightGray
-            selectToggle = false
-        }
-        
-        else {
-            if clothListCollectionView.indexPathsForSelectedItems?.count ?? 0 > 0 {
-                self.coordinator?.presentRegisterVC()
+    // MARK: - button click method
+    private func tabTopViewButtons(){
+        topView.selectButton.addAction(UIAction{ _ in
+            if self.selectToggle {
+                self.clothListCollectionView.isEditing = true
+                self.topView.selectButton.tintColor = .lightGray
+                self.selectToggle = false
             }
             
-            else{
-                clothListCollectionView.isEditing = false
-                topView.selectButton.tintColor = .black
-                selectToggle = true
+            else {
+                if self.clothListCollectionView.indexPathsForSelectedItems?.count ?? 0 > 0 {
+                    self.coordinator?.presentRegisterVC()
+                }
+                
+                else{
+                    self.clothListCollectionView.isEditing = false
+                    self.topView.selectButton.tintColor = .black
+                    self.selectToggle = true
+                }
             }
-        }
+        }, for: .touchUpInside)
     }
-    
+        
     override func setLayout() {
         super.setLayout()
         

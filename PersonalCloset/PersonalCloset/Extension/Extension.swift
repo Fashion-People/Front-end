@@ -21,6 +21,7 @@ extension UICollectionViewCell {
     }
 }
 
+// MARK: - UICollectionViewListCell extension
 extension UICollectionViewListCell {
     static var id: String {
         return String(describing: self)

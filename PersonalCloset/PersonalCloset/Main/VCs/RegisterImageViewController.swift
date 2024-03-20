@@ -31,7 +31,6 @@ final class RegisterImageViewController : BaseViewController {
         topView.selectButton.isHidden = true
         tabTopViewButtons()
         buttonConfiguration()
-        tabResultButton()
     }
     
     private let imageInputStackView1 : UIStackView = {
@@ -61,7 +60,10 @@ final class RegisterImageViewController : BaseViewController {
     
     private lazy var registerButton = PersonalClosetButton("적합도를 알려주세요!",
                                                            titleColor: .darkBlue,
-                                                           backColor: .skyBlue)
+                                                           backColor: .skyBlue,
+                                                           action: UIAction { _ in
+        self.coordinator.presentResultVC()
+    })
     private func buttonConfiguration() {
         imageInput1.tag = 1
         imageInput2.tag = 2
@@ -140,30 +142,11 @@ final class RegisterImageViewController : BaseViewController {
 
     private func tabTopViewButtons(){
         topView.backButton.addAction(UIAction{ _ in
-            self.tabBackButton()
-        }, for: .touchUpInside)
-        
-        topView.iconButton.addAction(UIAction{ _ in
-            self.tabMainIcon()
+            self.coordinator.backToPreviousVC()
         }, for: .touchUpInside)
     }
     
-    private func tabResultButton() {
-        // 결과 버튼 눌렀을 때
-        registerButton.tabButtonAction = { [weak self] in
-//            self?.uploadImage()
-            self?.coordinator.presentResultVC()
-        }
-    }
-    
-    private func tabBackButton() {
-        // topview의 back button 눌렀을때 
-        coordinator.backToPreviousVC()
-    }
-    
-    private func tabMainIcon() {
-        coordinator.backToPreviousVC()
-    }
+    // MARK: - setupLayout
     
     override func setLayout() {
         super.setLayout()
@@ -203,6 +186,7 @@ final class RegisterImageViewController : BaseViewController {
     }
 }
 
+// MARK: - extension
 extension RegisterImageViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

@@ -36,7 +36,6 @@ final class LoginViewController : UIViewController {
         stackLayout()
         setLayout()
         backBarButtonConfig()
-        tapButtonEvent()
     }
     
     // MARK: - UI config
@@ -71,11 +70,17 @@ final class LoginViewController : UIViewController {
 
     private lazy var loginButton = PersonalClosetButton("로그인",
                                                     titleColor:.darkBlue,
-                                                    backColor: .skyBlue)
+                                                    backColor: .skyBlue,
+                                                    action: UIAction { _ in
+                                                                self.coordinator?.presentMainVC()
+                                                            })
     
     private lazy var joinButton = PersonalClosetButton("회원가입",
                                                     titleColor:.darkBlue,
-                                                    backColor: .systemGray5)
+                                                    backColor: .systemGray5,
+                                                    action: UIAction { _ in
+                                                                self.coordinator?.presentJoinVC()
+                                                            })
     
     
     private func backBarButtonConfig() {
@@ -87,19 +92,7 @@ final class LoginViewController : UIViewController {
         self.navigationItem.backBarButtonItem = backBarButtonItem
     }
     
-    // MARK: - method
-    private func tapButtonEvent() {
-        //join 버튼 눌렀을때
-        joinButton.tabButtonAction = { [weak self] in
-            self?.coordinator?.presentJoinVC()
-        }
-
-        // login 버튼 눌렀을때
-        loginButton.tabButtonAction = { [weak self] in
-            self?.coordinator?.presentMainVC()
-        }
-    }
-
+    // MARK: - UI layout config
     private func stackLayout() {
         [IDTextField,
          passwordTextField].forEach {
@@ -107,7 +100,6 @@ final class LoginViewController : UIViewController {
         }
     }
     
-    // MARK: - UI layout config
     private func setLayout() {
         [loginLabel,
          inputStackView,

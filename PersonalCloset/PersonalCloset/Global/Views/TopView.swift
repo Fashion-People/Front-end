@@ -10,6 +10,15 @@ import SnapKit
 
 
 final class TopView : UIView {
+    init() {
+        super.init(frame: .zero)
+        self.setLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+    
     private let topStackView : UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -29,7 +38,7 @@ final class TopView : UIView {
         return button
     }()
     
-    lazy var iconButton : UIButton = {
+    private lazy var iconButton : UIButton = {
         let button = UIButton()
         button.setTitle("Personal\nCloset", for: .normal)
         button.setTitleColor(.darkBlue, for: .normal)
@@ -44,6 +53,7 @@ final class TopView : UIView {
         return button
     }()
     
+    /// private 변경할 수 있는 방법이 없을까?
     lazy var selectButton : UIButton = {
         let button = UIButton()
         
@@ -67,15 +77,7 @@ final class TopView : UIView {
         return image
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
+    // MARK: - setup Layout
     private func setLayout() {
         [iconButton,
          selectButton,
@@ -83,14 +85,16 @@ final class TopView : UIView {
             topStackView.addArrangedSubview($0)
         }
             
-        [weatherImage,selectButton].forEach {
+        [weatherImage,
+         selectButton].forEach {
             $0.snp.makeConstraints {
                 $0.width.equalTo(40)
                 $0.height.equalTo(40)
             }
         }
         
-        [backButton,topStackView].forEach {
+        [backButton,
+         topStackView].forEach {
             addSubview($0)
         }
         

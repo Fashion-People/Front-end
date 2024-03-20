@@ -46,7 +46,6 @@ final class JoinInputView : UIView {
     private var inputTextField : UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
-//        textField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 20.0, height: 0.0))
 
         return textField
     }()
