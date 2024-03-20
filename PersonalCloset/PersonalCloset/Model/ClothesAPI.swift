@@ -21,7 +21,7 @@ enum ClothesAPI {
 }
 
 extension ClothesAPI {
-    static let baseURL = "http://15.164.219.41:8081/clothes"
+    static let baseURL = "http://54.180.107.32:8081/clothes"
     
     var path: String {
         switch self {
@@ -56,10 +56,12 @@ extension ClothesAPI {
     }
         
     var request: URLRequest {
+        let token = TokenManager.shared.token.accessToken
+        
         var request = URLRequest(url: url)
         request.httpMethod = method
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwicm9sZXMiOlsiVVNFUiJdLCJpYXQiOjE3MTAyNDcyNTYsImV4cCI6MTcxMDI1MDg1Nn0.m0GS3UQu3OeDPYmtz7lmrJcOJq2U52uEVJa-VuOBr78", forHTTPHeaderField: "Authentication")
+        request.addValue(token, forHTTPHeaderField: "Authentication")
         return request
     }
     
