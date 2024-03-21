@@ -58,8 +58,4 @@ final class TabBarCoordinator : Coordinator {
         listCoordinator.start()
         settingCoordinator.start()
     }
-
-    deinit {
-        print("홈탭코디네이터해제")
-    }
 }

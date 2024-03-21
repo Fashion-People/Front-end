@@ -14,7 +14,6 @@ final class AuthCoordinator : Coordinator {
     var navigationController: UINavigationController
 
     func start() {
-        print("auth 시작")
         pushLoginVC()
     }
     

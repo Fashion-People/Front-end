@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ServerStatus : Decodable{
-    let data: Int
+struct ServerStatus: Codable {
+    let data: String
     let msg: String
 }
