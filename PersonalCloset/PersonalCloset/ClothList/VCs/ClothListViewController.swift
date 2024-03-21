@@ -94,6 +94,7 @@ final class ClothListViewController : BaseViewController {
     }
     
     // MARK: - button click method
+    /// topView 내부 select 버튼 클릭에 따라 collectionView 의 선택버튼이 나타남
     private func tabTopViewButtons(){
         topView.selectButton.addAction(UIAction{ _ in
             if self.selectToggle {
