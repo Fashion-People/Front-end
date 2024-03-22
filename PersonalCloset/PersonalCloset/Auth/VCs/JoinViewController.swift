@@ -77,19 +77,11 @@ final class JoinViewController : UIViewController {
     private var thirdPickerView = JoinPickerView("3순위")
     private var fourthPickerView = JoinPickerView("4순위")
     
-    private lazy var joinButton = PersonalClosetButton("회원가입",titleColor: .darkBlue,backColor: .skyBlue,action: UIAction { _ in
-//            let joinSuccessAlert = UIAlertController(title: "알림",
-//                                                     message: "회원가입 성공.",
-//                                                     preferredStyle: UIAlertController.Style.alert)
-//            
-//            let success = UIAlertAction(title: "확인",
-//                                        style: .default) { action in
-//                self.coordinator?.backToLoginVC()
-//            }
-//            joinSuccessAlert.addAction(success)
-//            self.present(joinSuccessAlert, animated: true, completion: nil)
-            self.tapJoinButton()
-    })
+    private lazy var joinButton = PersonalClosetButton("회원가입",titleColor: .darkBlue,
+                                                       backColor: .skyBlue,
+                                                       action: UIAction { _ in
+                                                                    self.tapJoinButton()
+                                                                })
         
     // MARK: - method
     @objc private func tabBackbutton() {

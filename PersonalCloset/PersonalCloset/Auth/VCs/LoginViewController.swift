@@ -72,9 +72,7 @@ final class LoginViewController : UIViewController {
                                                     titleColor:.darkBlue,
                                                     backColor: .skyBlue,
                                                     action: UIAction { _ in
-        
                                                                 self.tapLoginButton()
-//                                                                self.coordinator?.presentMainVC()
                                                             })
     
     private lazy var joinButton = PersonalClosetButton("회원가입",
@@ -107,7 +105,7 @@ final class LoginViewController : UIViewController {
                 self.coordinator?.presentMainVC()
             }
             else {
-                 
+                
             }
         }
     }
