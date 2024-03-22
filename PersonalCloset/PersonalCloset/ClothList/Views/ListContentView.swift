@@ -30,15 +30,12 @@ final class ListContentView: UIView, UIContentView {
     private lazy var imageTitleLabel = UILabel()
     
     private lazy var menuItems: [UIAction] = {
-        return [UIAction(title: "hi",
-                         image: UIImage(systemName: "chevron.down"),
-                         handler: { _ in print("hellow")}),
-                UIAction(title: "name",
-                         image: UIImage(systemName: "chevron.down"),
-                         handler: { _ in print("hellow")}),
-                UIAction(title: "hellow",
-                         image: UIImage(systemName: "chevron.down"),
-                         handler: { _ in print("hellow")})
+        return [UIAction(title: "삭제",
+                         image: UIImage(systemName: "trash"),
+                         handler: { _ in print("삭제버튼")}),
+                UIAction(title: "수정",
+                         image: UIImage(systemName: "pencil"),
+                         handler: { _ in print("수정버튼")})
                 ]
     }()
     
@@ -47,6 +44,7 @@ final class ListContentView: UIView, UIContentView {
     private lazy var imageSettingButton: UIButton = {
         let button = UIButton()
         button.menu = menu
+        button.showsMenuAsPrimaryAction = true
         
         return button
     }()
