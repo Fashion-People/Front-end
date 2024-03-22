@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserRequestDTO {
+struct UserRequestDTO: Codable {
     var email: String
     var loginId: String
     var name: String

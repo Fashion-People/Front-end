@@ -43,7 +43,7 @@ final class JoinInputView : UIView {
         return label
     }()
     
-    private var inputTextField : UITextField = {
+    var inputTextField : UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
 

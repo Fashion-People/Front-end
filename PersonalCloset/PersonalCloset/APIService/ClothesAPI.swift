@@ -1,5 +1,5 @@
 //
-//  TokenAPI.swift
+//  ClothesAPI.swift
 //  PersonalCloset
 //
 //  Created by Bowon Han on 3/12/24.
@@ -7,41 +7,65 @@
 
 import Foundation
 
-enum TokenAPI {
-    static let authenticationURL = "http://54.180.107.32:8081/user"
+enum FetchError: Error {
+    case invalidStatus
+    case jsonDecodeError
+}
+
+enum ClothesAPI {
+    case fetchCloth(clothId: Int)
+    case fetchAllClothes(memberId: String)
+    case deleteCloth(clothId: Int)
+    case createCloth(_ param: ClothRequestDTO)
+    case modifyCloth(clothId: Int, _ param: ClothRequestDTO)
+}
+
+extension ClothesAPI {
+    static let baseURL = "http://54.180.107.32:8081/clothes"
     
-    case login (_ id: String,_ password: String)
-    case join (_ param: UserRequestDTO)
-    
-    var path: String{
+    var path: String {
         switch self {
-        case .login(let id, let password):
-            return "/login?loginId=\(id)&password=\(password)"
-        case .join:
-            return "/"
+        case .fetchCloth(let clothId),
+            .deleteCloth(let clothId):
+            return "/\(clothId)"
+        case .createCloth:
+            return "/save"
+        case .fetchAllClothes(let memberId):
+            return "/all/\(memberId)"
+        case .modifyCloth(let clothId,_):
+            return "/update/\(clothId)"
         }
     }
     
     var method: String {
         switch self {
-        case .login,
-             .join:
+        case .fetchCloth,
+            .fetchAllClothes:
+            return "GET"
+        case .createCloth:
             return "POST"
+        case .deleteCloth:
+            return "DELETE"
+        case .modifyCloth:
+            return "PUT"
         }
     }
     
     var url: URL {
-        return URL(string: TokenAPI.authenticationURL + path)!
+        return URL(string: ClothesAPI.baseURL + path)!
     }
-    
+        
     var request: URLRequest {
+        let token = TokenManager.shared.token.accessToken
+        
         var request = URLRequest(url: url)
         request.httpMethod = method
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(token, forHTTPHeaderField: "Authentication")
         return request
     }
     
-    func performRequest(with parameters: Encodable? = nil) async throws -> Bool{
+    func performRequest(with parameters: Encodable? = nil) async throws {
         //URLRequest 생성
         var request = self.request
 
@@ -53,7 +77,6 @@ enum TokenAPI {
 
         // 실제로 request를 보내서 network를 하는 부분
         let (data, response) = try await URLSession.shared.data(for: request)
-        print(data)
 
         guard let httpResponse = response as? HTTPURLResponse else {
             throw FetchError.invalidStatus
@@ -61,29 +84,23 @@ enum TokenAPI {
         
         //response가 200번대인지 확인하는 부분
         if (200..<300).contains(httpResponse.statusCode) {
-            // Handle success (200번대)
-            if case .login = self {
-                let loginToken = String(decoding: data, as: UTF8.self)
-                TokenManager.shared.token.accessToken = loginToken
-                return true
-            }
-            else if case .join = self {
-                let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
-                print("Response Data: \(dataContent.msg)")
-                return true
+            if case .fetchAllClothes = self {
+                let clothList = try JSONDecoder().decode([ClothListModel].self, from: data)
+                print(clothList)
+                
+                ClothListManager.shared.clothList = clothList
             }
             else {
                 let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
                 print("Response Data: \(dataContent.msg)")
-                return false
             }
         }
         else if (400..<600).contains(httpResponse.statusCode) {
+            // Handle client error (4xx)
             let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
             print("Response Data: \(dataContent.msg)")
             print("error: \(httpResponse.statusCode)")
-            return false
         }
-        return false
     }
+
 }

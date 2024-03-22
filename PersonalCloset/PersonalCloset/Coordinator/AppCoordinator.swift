@@ -58,8 +58,4 @@ final class AppCoordinator : Coordinator {
         tabBarCoordinator.parentCoordinator = self
         tabBarCoordinator.start()
     }
-        
-    deinit {
-        print("앱코디네이터해제")
-    }
 }
