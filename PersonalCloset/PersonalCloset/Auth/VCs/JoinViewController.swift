@@ -77,23 +77,60 @@ final class JoinViewController : UIViewController {
     private var thirdPickerView = JoinPickerView("3순위")
     private var fourthPickerView = JoinPickerView("4순위")
     
-    private lazy var joinButton = PersonalClosetButton("회원가입",titleColor: .darkBlue,backColor: .skyBlue,action: UIAction { _ in
-            let joinSuccessAlert = UIAlertController(title: "알림",
-                                                     message: "회원가입 성공.",
-                                                     preferredStyle: UIAlertController.Style.alert)
-            
-            let success = UIAlertAction(title: "확인",
-                                        style: .default) { action in
-                self.coordinator?.backToLoginVC()
-            }
-            joinSuccessAlert.addAction(success)
-            self.present(joinSuccessAlert, animated: true, completion: nil)
-    })
+    private lazy var joinButton = PersonalClosetButton("회원가입",titleColor: .darkBlue,
+                                                       backColor: .skyBlue,
+                                                       action: UIAction { _ in
+                                                                    self.tapJoinButton()
+                                                                })
         
     // MARK: - method
     @objc private func tabBackbutton() {
         // back 버튼 눌렀을때
         coordinator?.backToLoginVC()
+    }
+    
+    private func tapJoinButton() {
+        let id: String = joinIDInput.inputTextField.text ?? ""
+        let password: String = joinPasswordInput.inputTextField.text ?? ""
+        let passwordCheck: String = joinPasswordCheckInput.inputTextField.text ?? ""
+        let name: String = joinNameInput.inputTextField.text ?? ""
+        let email: String = joinEmailInput.inputTextField.text ?? ""
+        let style1: String = firstPickerView.first
+        let style2: String = secondPickerView.second
+        let style3: String = thirdPickerView.third
+        let style4: String = fourthPickerView.fourth
+        
+        var joinSuccess = false
+        
+        let requestBody = UserRequestDTO(
+            email: email,
+            loginId: id,
+            name: name,
+            password: password,
+            style1: style1,
+            style2: style2,
+            style3: style3,
+            style4: style4
+        )
+        
+        Task {
+            joinSuccess = try await TokenAPI.join(requestBody).performRequest(with: requestBody)
+            
+            if joinSuccess == true {
+                let joinSuccessAlert = UIAlertController(title: "알림",
+                                                         message: "회원가입 성공.",
+                                                         preferredStyle: UIAlertController.Style.alert)
+                
+                let success = UIAlertAction(title: "확인",
+                                            style: .default) { action in
+                    self.coordinator?.backToLoginVC()
+                }
+                joinSuccessAlert.addAction(success)
+                self.present(joinSuccessAlert, animated: true, completion: nil)
+            }
+            else {
+            }
+        }
     }
     
     private func navigationBarConfig() {

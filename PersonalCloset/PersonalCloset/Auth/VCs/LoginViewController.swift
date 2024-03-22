@@ -72,7 +72,7 @@ final class LoginViewController : UIViewController {
                                                     titleColor:.darkBlue,
                                                     backColor: .skyBlue,
                                                     action: UIAction { _ in
-                                                                self.coordinator?.presentMainVC()
+                                                                self.tapLoginButton()
                                                             })
     
     private lazy var joinButton = PersonalClosetButton("회원가입",
@@ -90,6 +90,24 @@ final class LoginViewController : UIViewController {
                                                 action: nil)
         backBarButtonItem.tintColor = .darkBlue
         self.navigationItem.backBarButtonItem = backBarButtonItem
+    }
+    
+    private func tapLoginButton() {
+        var loginSuccess = false
+        
+        let id: String = IDTextField.text ?? ""
+        let password: String = passwordTextField.text ?? ""
+        
+        Task {
+            loginSuccess = try await TokenAPI.login(id, password).performRequest()
+            
+            if loginSuccess == true {
+                self.coordinator?.presentMainVC()
+            }
+            else {
+                
+            }
+        }
     }
     
     // MARK: - UI layout config
