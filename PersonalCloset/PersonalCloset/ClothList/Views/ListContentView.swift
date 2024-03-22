@@ -28,8 +28,29 @@ final class ListContentView: UIView, UIContentView {
     
     private lazy var clothImageView = UIImageView()
     private lazy var imageTitleLabel = UILabel()
-    private lazy var imageSettingButton = UIButton()
     
+    private lazy var menuItems: [UIAction] = {
+        return [UIAction(title: "hi",
+                         image: UIImage(systemName: "chevron.down"),
+                         handler: { _ in print("hellow")}),
+                UIAction(title: "name",
+                         image: UIImage(systemName: "chevron.down"),
+                         handler: { _ in print("hellow")}),
+                UIAction(title: "hellow",
+                         image: UIImage(systemName: "chevron.down"),
+                         handler: { _ in print("hellow")})
+                ]
+    }()
+    
+    private lazy var menu: UIMenu = { return UIMenu(title: "", options: [], children: menuItems) }()
+                         
+    private lazy var imageSettingButton: UIButton = {
+        let button = UIButton()
+        button.menu = menu
+        
+        return button
+    }()
+        
     private func setupLayouts() {
         [clothImageView,
          imageTitleLabel,
