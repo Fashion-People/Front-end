@@ -49,6 +49,13 @@ final class ImageResultViewController : BaseViewController {
         return label
     }()
     
+    private lazy var addClothListButton = PersonalClosetButton("리스트에 추가", 
+                                                            titleColor: .darkBlue,
+                                                            backColor: .bwGray,
+                                                            action: UIAction { _ in
+                                                                self.coordinator?.backToPreviousVC()
+                                                                })
+    
     private lazy var backToRegisterButton = PersonalClosetButton("다시 검사하기",
                                                             titleColor: .darkBlue,
                                                              backColor: .skyBlue,
@@ -69,6 +76,7 @@ final class ImageResultViewController : BaseViewController {
         
         [resultImageView,
          resultLabel,
+         addClothListButton,
          backToRegisterButton].forEach {
             view.addSubview($0)
         }
@@ -86,11 +94,18 @@ final class ImageResultViewController : BaseViewController {
             $0.width.equalTo(300)
         }
         
+        addClothListButton.snp.makeConstraints {
+            $0.centerX.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(backToRegisterButton.snp.top).offset(-20)
+            $0.width.equalTo(300)
+            $0.height.equalTo(50)
+        }
+        
         backToRegisterButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-40)
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
-            $0.width.equalTo(230)
-            $0.height.equalTo(50)       
+            $0.width.equalTo(300)
+            $0.height.equalTo(50)
         }
     }
 }
