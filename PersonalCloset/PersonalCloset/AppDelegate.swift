@@ -6,27 +6,29 @@
 //
 
 import UIKit
+import AWSS3
+import AWSCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // AWS S3
-//        let credentialsProvider = AWSStaticCredentialsProvider(accessKey: S3Configuration.ACCESS_KEY.rawValue, secretKey: S3Configuration.SECRET_KEY.rawValue)
-//
-//        let configuration = AWSServiceConfiguration(region:.APNortheast2,
-//                                                    credentialsProvider:credentialsProvider)
-//        
-//        AWSServiceManager.default().defaultServiceConfiguration = configuration
-//        
-//        let tuConf = AWSS3TransferUtilityConfiguration()
-//        tuConf.isAccelerateModeEnabled = false
-//
-//        AWSS3TransferUtility.register(
-//            with: configuration!,
-//            transferUtilityConfiguration: tuConf,
-//            forKey: S3Configuration.FILE_KEY.rawValue
-//        )
-//        print("[ SUCCESS TO CONNECT AWS S3 ]")
+        let credentialsProvider = AWSStaticCredentialsProvider(accessKey: S3Configuration.ACCESS_KEY.rawValue, secretKey: S3Configuration.SECRET_KEY.rawValue)
+
+        let configuration = AWSServiceConfiguration(region:.APNortheast2,
+                                                    credentialsProvider:credentialsProvider)
+        
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
+        
+        let tuConf = AWSS3TransferUtilityConfiguration()
+        tuConf.isAccelerateModeEnabled = false
+
+        AWSS3TransferUtility.register(
+            with: configuration!,
+            transferUtilityConfiguration: tuConf,
+            forKey: S3Configuration.FILE_KEY.rawValue
+        )
+        print("[ SUCCESS TO CONNECT AWS S3 ]")
 
         return true
     }

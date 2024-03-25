@@ -52,6 +52,13 @@
 		29DA5F632B45600600F45CC6 /* JoinInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DA5F622B45600600F45CC6 /* JoinInputView.swift */; };
 		29DBBA602B90B86D00A36C27 /* ListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DBBA5F2B90B86D00A36C27 /* ListContentView.swift */; };
 		29DBBA622B90B88000A36C27 /* ListContentConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DBBA612B90B88000A36C27 /* ListContentConfiguration.swift */; };
+		29FF68372BB1143800509A00 /* AWSAPIGateway in Frameworks */ = {isa = PBXBuildFile; productRef = 29FF68362BB1143800509A00 /* AWSAPIGateway */; };
+		29FF68392BB1143800509A00 /* AWSAuthCore in Frameworks */ = {isa = PBXBuildFile; productRef = 29FF68382BB1143800509A00 /* AWSAuthCore */; };
+		29FF683B2BB1143800509A00 /* AWSCognitoIdentityProvider in Frameworks */ = {isa = PBXBuildFile; productRef = 29FF683A2BB1143800509A00 /* AWSCognitoIdentityProvider */; };
+		29FF683D2BB1143800509A00 /* AWSCognitoIdentityProviderASF in Frameworks */ = {isa = PBXBuildFile; productRef = 29FF683C2BB1143800509A00 /* AWSCognitoIdentityProviderASF */; };
+		29FF683F2BB1143800509A00 /* AWSCore in Frameworks */ = {isa = PBXBuildFile; productRef = 29FF683E2BB1143800509A00 /* AWSCore */; };
+		29FF68412BB1143800509A00 /* AWSS3 in Frameworks */ = {isa = PBXBuildFile; productRef = 29FF68402BB1143800509A00 /* AWSS3 */; };
+		29FF68432BB1143800509A00 /* AWSUserPoolsSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 29FF68422BB1143800509A00 /* AWSUserPoolsSignIn */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +115,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29FF68412BB1143800509A00 /* AWSS3 in Frameworks */,
+				29FF68432BB1143800509A00 /* AWSUserPoolsSignIn in Frameworks */,
+				29FF68372BB1143800509A00 /* AWSAPIGateway in Frameworks */,
+				29FF683B2BB1143800509A00 /* AWSCognitoIdentityProvider in Frameworks */,
+				29FF68392BB1143800509A00 /* AWSAuthCore in Frameworks */,
+				29FF683F2BB1143800509A00 /* AWSCore in Frameworks */,
+				29FF683D2BB1143800509A00 /* AWSCognitoIdentityProviderASF in Frameworks */,
 				29A9C0AD2B3FE73C00209641 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,6 +292,8 @@
 		298202352B43B2F300B7DEB3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				297F6CD72B5F9EE4009A1652 /* S3Upload.swift */,
+				297F6CD92B5F9F24009A1652 /* S3Configuration.swift */,
 				2926A8742B9744B600C4BCA4 /* ClothListModel.swift */,
 				2916A34F2BA0859000758747 /* ClothListManager.swift */,
 				2916A3532BA0926C00758747 /* TokenModel.swift */,
@@ -325,8 +341,6 @@
 				290DEEBF2BAB05ED002CB29C /* APIService */,
 				298202352B43B2F300B7DEB3 /* Model */,
 				29A9C0952B3FE62900209641 /* AppDelegate.swift */,
-				297F6CD72B5F9EE4009A1652 /* S3Upload.swift */,
-				297F6CD92B5F9F24009A1652 /* S3Configuration.swift */,
 				29A9C0972B3FE62900209641 /* SceneDelegate.swift */,
 				29A9C0A32B3FE62A00209641 /* Info.plist */,
 				29A9C09E2B3FE62A00209641 /* Assets.xcassets */,
@@ -353,6 +367,13 @@
 			name = PersonalCloset;
 			packageProductDependencies = (
 				29A9C0AC2B3FE73C00209641 /* SnapKit */,
+				29FF68362BB1143800509A00 /* AWSAPIGateway */,
+				29FF68382BB1143800509A00 /* AWSAuthCore */,
+				29FF683A2BB1143800509A00 /* AWSCognitoIdentityProvider */,
+				29FF683C2BB1143800509A00 /* AWSCognitoIdentityProviderASF */,
+				29FF683E2BB1143800509A00 /* AWSCore */,
+				29FF68402BB1143800509A00 /* AWSS3 */,
+				29FF68422BB1143800509A00 /* AWSUserPoolsSignIn */,
 			);
 			productName = PersonalCloset;
 			productReference = 29A9C0922B3FE62900209641 /* PersonalCloset.app */;
@@ -384,6 +405,7 @@
 			mainGroup = 29A9C0892B3FE62900209641;
 			packageReferences = (
 				29A9C0AB2B3FE73C00209641 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				29FF68352BB1143800509A00 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */,
 			);
 			productRefGroup = 29A9C0932B3FE62900209641 /* Products */;
 			projectDirPath = "";
@@ -675,6 +697,14 @@
 				minimumVersion = 5.6.0;
 			};
 		};
+		29FF68352BB1143800509A00 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aws-amplify/aws-sdk-ios-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.34.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -682,6 +712,41 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 29A9C0AB2B3FE73C00209641 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		29FF68362BB1143800509A00 /* AWSAPIGateway */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29FF68352BB1143800509A00 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
+			productName = AWSAPIGateway;
+		};
+		29FF68382BB1143800509A00 /* AWSAuthCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29FF68352BB1143800509A00 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
+			productName = AWSAuthCore;
+		};
+		29FF683A2BB1143800509A00 /* AWSCognitoIdentityProvider */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29FF68352BB1143800509A00 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
+			productName = AWSCognitoIdentityProvider;
+		};
+		29FF683C2BB1143800509A00 /* AWSCognitoIdentityProviderASF */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29FF68352BB1143800509A00 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
+			productName = AWSCognitoIdentityProviderASF;
+		};
+		29FF683E2BB1143800509A00 /* AWSCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29FF68352BB1143800509A00 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
+			productName = AWSCore;
+		};
+		29FF68402BB1143800509A00 /* AWSS3 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29FF68352BB1143800509A00 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
+			productName = AWSS3;
+		};
+		29FF68422BB1143800509A00 /* AWSUserPoolsSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29FF68352BB1143800509A00 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
+			productName = AWSUserPoolsSignIn;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -12,7 +12,7 @@ enum S3Configuration : String {
     case BUCKET_NAME = "fashionbucket"
     case CALLBACK_KEY = "Personality Message"
     case CONTENT_TYPE_IMAGE = "image/jpg"
-//    case ACCESS_KEY = ""
-//    case SECRET_KEY = ""
+    case ACCESS_KEY = ""
+    case SECRET_KEY = ""
     case FILE_KEY = "/profile/image"
 }
