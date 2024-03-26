@@ -23,24 +23,30 @@ final class MainCoordinator : Coordinator {
     }
 }
 
-extension MainCoordinator : MainNavigation, RegisterImageNavigation, ImageResultNavigation {
-    // navigation push 기능
+extension MainCoordinator : MainViewControllerDelegate,
+                          RegisterImageViewControllerDelegate,
+                          ImageResultViewControllerDelegate {
+    
+    /// navigation push 기능
     func presentMainVC() {
-        let mainVC = MainViewController(coordinator: self)
+        let mainVC = MainViewController()
+        mainVC.delegate = self
         navigationController.pushViewController(mainVC, animated: true)
     }
     
     func presentRegisterVC() {
-        let registerVC = RegisterImageViewController(coordinator: self)
+        let registerVC = RegisterImageViewController()
+        registerVC.delegate = self
         navigationController.pushViewController(registerVC, animated: true)
     }
     
     func presentResultVC() {
-        let resultVC = ImageResultViewController(coordinator: self)
+        let resultVC = ImageResultViewController()
+        resultVC.delegate = self
         navigationController.pushViewController(resultVC, animated: true)
     }
     
-    // navigation pop 기능
+    /// navigation pop 기능
     func backToPreviousVC() {
         navigationController.popToRootViewController(animated: true)
     }

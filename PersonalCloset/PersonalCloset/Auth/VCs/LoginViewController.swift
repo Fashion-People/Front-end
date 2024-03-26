@@ -8,23 +8,14 @@
 import UIKit
 import SnapKit
 
-protocol LoginNavigation : AnyObject {
+protocol LoginViewControllerDelegate : AnyObject {
     func presentJoinVC()
     func presentMainVC()
     func pushLoginVC()
 }
 
 final class LoginViewController : UIViewController {    
-    weak var coordinator : LoginNavigation?
-    
-    init(coordinator: LoginNavigation) {
-        self.coordinator = coordinator
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    weak var delegate : LoginViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +71,7 @@ final class LoginViewController : UIViewController {
                                                     titleColor:.darkBlue,
                                                     backColor: .systemGray5,
                                                     action: UIAction { _ in
-                                                                self.coordinator?.presentJoinVC()
+                                                                self.delegate?.presentJoinVC()
                                                             })
     
     
@@ -108,7 +99,7 @@ final class LoginViewController : UIViewController {
             loginSuccess = try await TokenAPI.login(id, password).performRequest()
             
             if loginSuccess == true {
-                self.coordinator?.presentMainVC()
+                self.delegate?.presentMainVC()
             }
             else {
                 

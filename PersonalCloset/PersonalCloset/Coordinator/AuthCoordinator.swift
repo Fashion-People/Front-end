@@ -23,7 +23,8 @@ final class AuthCoordinator : Coordinator {
     }
 }
 
-extension AuthCoordinator : LoginNavigation, JoinNavigation {
+extension AuthCoordinator : LoginViewControllerDelegate,
+                          JoinViewControllerDelegate {
     func presentMainVC() {
         let appCoordinator = parentCoordinator as! AppCoordinator
         appCoordinator.startMainTabbarCoordinator()
@@ -31,17 +32,18 @@ extension AuthCoordinator : LoginNavigation, JoinNavigation {
     }
     
     func pushLoginVC() {
-        let loginVC = LoginViewController(coordinator: self)
+        let loginVC = LoginViewController()
+        loginVC.delegate = self
         navigationController.pushViewController(loginVC, animated: true)
     }
     
     func presentJoinVC() {
-        let joinVC = JoinViewController(coordinator: self)
+        let joinVC = JoinViewController()
+        joinVC.delegate = self
         navigationController.pushViewController(joinVC, animated: true)
     }
     
     func backToLoginVC() {
         navigationController.popViewController(animated: true)
     }
-    
 }

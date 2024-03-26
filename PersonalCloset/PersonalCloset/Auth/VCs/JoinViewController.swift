@@ -8,21 +8,12 @@
 import UIKit
 import SnapKit
 
-protocol JoinNavigation : AnyObject {
+protocol JoinViewControllerDelegate : AnyObject {
     func backToLoginVC()
 }
 
 final class JoinViewController : UIViewController {
-    weak var coordinator : JoinNavigation?
-    
-    init(coordinator: JoinNavigation) {
-        self.coordinator = coordinator
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    weak var delegate : JoinViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,7 +78,7 @@ final class JoinViewController : UIViewController {
     // MARK: - method
     @objc private func tabBackbutton() {
         // back 버튼 눌렀을때
-        coordinator?.backToLoginVC()
+        delegate?.backToLoginVC()
     }
     
     private func tapJoinButton() {
@@ -124,12 +115,14 @@ final class JoinViewController : UIViewController {
                 
                 let success = UIAlertAction(title: "확인",
                                             style: .default) { action in
-                    self.coordinator?.backToLoginVC()
+                    self.delegate?.backToLoginVC()
                 }
+                
                 joinSuccessAlert.addAction(success)
                 self.present(joinSuccessAlert, animated: true, completion: nil)
             }
             else {
+                ///
             }
         }
     }
