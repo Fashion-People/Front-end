@@ -59,6 +59,7 @@ final class ListContentView: UIView, UIContentView {
         DispatchQueue.global().async { [weak self] in
             if let data = try? Data(contentsOf: url) {
                 if let image = UIImage(data: data) {
+                    
                     DispatchQueue.main.async {
                         self?.clothImageView.image = image
                     }
@@ -68,10 +69,11 @@ final class ListContentView: UIView, UIContentView {
     }
        
     /// set configuration
-    private func apply(_ configuration: ContentConfiguration) {
+    private func apply(_ configuration: ListContentConfiguration) {
         imageTitleLabel.font = .systemFont(ofSize: 18, weight: .semibold)
         
         clothImageView.tintColor = .lightGray
+        clothImageView.image = UIImage(named: "exampleImage")
         
         imageSettingButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         imageSettingButton.tintColor = .lightGray
@@ -83,6 +85,7 @@ final class ListContentView: UIView, UIContentView {
         imageTitleLabel.text = configuration.clothDescription
     }
     
+    // MARK: - Set layouts
     private func setupLayouts() {
         [clothImageView,
          imageTitleLabel,
@@ -108,17 +111,5 @@ final class ListContentView: UIView, UIContentView {
             $0.height.equalTo(30)
             $0.width.equalTo(30)
         }
-    }
-    
-    private func apply(_ configuration: ListContentConfiguration) {
-        imageTitleLabel.font = .systemFont(ofSize: 18, weight: .semibold)
-        
-        clothImageView.tintColor = .lightGray
-        clothImageView.image = UIImage(named: "exampleImage")
-        
-        imageSettingButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
-        imageSettingButton.tintColor = .lightGray
-        
-        imageTitleLabel.text = configuration.clothDescription
     }
 }

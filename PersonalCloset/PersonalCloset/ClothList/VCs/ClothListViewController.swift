@@ -84,10 +84,27 @@ final class ClothListViewController : BaseViewController {
         self.dataSource.apply(snapshot, animatingDifferences: true)
     }
     
+    func deleteList(indexPath: IndexPath) {
+        let cloth = ClothListManager.shared.clothList[indexPath.row]
+        ClothListManager.shared.clothList.remove(at: indexPath.row)
+        performQuery()
+
+        Task {
+            do {
+
+                try await ClothesAPI.deleteCloth(clothId: cloth.clothesNumber).performRequest()
+
+            } catch {
+                print("error: \(error)")
+            }
+        }
+    }
+
+    
     // MARK: - button click method
     /// topView 내부 select 버튼 클릭에 따라 collectionView 의 선택버튼이 나타남
     private func tabTopViewButtons(){
-        topView.selectButton.addAction(UIAction{ _ in
+        topView.selectButton.addAction(UIAction { _ in
             
             /// Selecting a list of clothes to inspect
             if self.selectToggle {
@@ -98,7 +115,6 @@ final class ClothListViewController : BaseViewController {
             
             else {
                 if self.clothListCollectionView.indexPathsForSelectedItems?.count ?? 0 > 0 {
-
                     self.delegate?.presentRegisterVC()
                 }
                 
