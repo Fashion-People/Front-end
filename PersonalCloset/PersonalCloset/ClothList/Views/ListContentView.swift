@@ -11,7 +11,7 @@ import SnapKit
 final class ListContentView: UIView, UIContentView {
     var configuration: UIContentConfiguration {
        didSet {
-           apply(configuration as! ContentConfiguration)
+           apply(configuration as! ListContentConfiguration)
        }
     }
     
@@ -19,7 +19,7 @@ final class ListContentView: UIView, UIContentView {
         self.configuration = configuration
         super.init(frame: .zero)
         self.setupLayouts()
-        apply(configuration as! ContentConfiguration)
+        apply(configuration as! ListContentConfiguration)
     }
     
     required init?(coder: NSCoder) {
@@ -76,7 +76,7 @@ final class ListContentView: UIView, UIContentView {
         }
     }
     
-    private func apply(_ configuration: ContentConfiguration) {
+    private func apply(_ configuration: ListContentConfiguration) {
         imageTitleLabel.font = .systemFont(ofSize: 18, weight: .semibold)
         
         clothImageView.tintColor = .lightGray

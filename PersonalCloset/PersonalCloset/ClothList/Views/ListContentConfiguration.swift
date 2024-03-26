@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct ContentConfiguration: UIContentConfiguration, Hashable {
+struct ListContentConfiguration: UIContentConfiguration, Hashable {
     var clothDescription: String?
     
     func makeContentView() -> UIView & UIContentView {

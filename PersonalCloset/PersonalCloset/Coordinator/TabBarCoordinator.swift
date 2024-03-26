@@ -47,7 +47,7 @@ final class TabBarCoordinator: Coordinator {
         // TabBar 스타일 지정
         self.tabBarController.view.backgroundColor = .systemBackground
         self.tabBarController.tabBar.backgroundColor = .systemBackground
-        self.tabBarController.tabBar.tintColor = UIColor.skyBlue
+        self.tabBarController.tabBar.tintColor = UIColor.darkBlue
     }
     
     private func addTabBarController(){
