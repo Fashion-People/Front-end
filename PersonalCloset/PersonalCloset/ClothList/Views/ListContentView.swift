@@ -32,11 +32,15 @@ final class ListContentView: UIView, UIContentView {
     private lazy var menuItems: [UIAction] = {
         return [UIAction(title: "삭제",
                          image: UIImage(systemName: "trash"),
-                         handler: { _ in print("삭제버튼")}),
+                         handler: { _ in
+            print("삭제버튼")
+        }),
                 UIAction(title: "수정",
                          image: UIImage(systemName: "pencil"),
-                         handler: { _ in print("수정버튼")})
-                ]
+                         handler: { _ in
+            print("수정버튼")
+        })
+        ]
     }()
     
     private lazy var menu: UIMenu = { return UIMenu(title: "", options: [], children: menuItems) }()
@@ -62,7 +66,23 @@ final class ListContentView: UIView, UIContentView {
             }
         }
     }
+       
+    /// set configuration
+    private func apply(_ configuration: ContentConfiguration) {
+        imageTitleLabel.font = .systemFont(ofSize: 18, weight: .semibold)
         
+        clothImageView.tintColor = .lightGray
+        
+        imageSettingButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        imageSettingButton.tintColor = .lightGray
+        
+        Task {
+            try await requestImageURL(data: configuration.imageUrl ?? "")
+        }
+        
+        imageTitleLabel.text = configuration.clothDescription
+    }
+    
     private func setupLayouts() {
         [clothImageView,
          imageTitleLabel,
@@ -88,20 +108,5 @@ final class ListContentView: UIView, UIContentView {
             $0.height.equalTo(30)
             $0.width.equalTo(30)
         }
-    }
-    
-    private func apply(_ configuration: ContentConfiguration) {
-        imageTitleLabel.font = .systemFont(ofSize: 18, weight: .semibold)
-        
-        clothImageView.tintColor = .lightGray
-        
-        imageSettingButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
-        imageSettingButton.tintColor = .lightGray
-        
-        Task {
-            try await requestImageURL(data: configuration.imageUrl ?? "")
-
-        }
-        imageTitleLabel.text = configuration.clothDescription
     }
 }

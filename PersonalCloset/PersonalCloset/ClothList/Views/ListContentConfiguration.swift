@@ -18,4 +18,19 @@ struct ContentConfiguration: UIContentConfiguration, Hashable {
     func updated(for state: UIConfigurationState) -> Self {
         return self
     }
+    
+//    func deleteList(indexPath: IndexPath) {
+//        let cloth = ClothListManager.shared.clothList[indexPath.row]
+//        ClothListManager.shared.clothList.remove(at: indexPath.row)
+//        
+//        Task {
+//            do {
+//                
+//                try await ClothesAPI.deleteCloth(clothId: cloth.clothesNumber).performRequest()
+//        
+//            } catch {
+//                print("error: \(error)")
+//            }
+//        }
+//    }
 }
