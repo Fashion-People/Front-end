@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol SettingNavigation : AnyObject {
+protocol SettingViewControllerDelegate : AnyObject {
     func presentSetting()
 }
 
@@ -15,17 +15,19 @@ final class SettingViewController : UIViewController {
     var setting : [String] = ["회원 정보 수정","로그아웃","앱 버전","개인정보 처리방침"]
     var account : [String] = ["회원 탈퇴"]
     
+    weak var delegate: SettingViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .skyBlue
+        view.backgroundColor = .systemBackground
         setLayout()
         configure()
     }
     
     private lazy var settingTableView : UITableView = {
         let tableView = UITableView(frame: CGRect.zero, style: .insetGrouped)
-        tableView.backgroundColor = .skyBlue
+        tableView.backgroundColor = .systemBackground
         
         return tableView
     }()
@@ -35,8 +37,7 @@ final class SettingViewController : UIViewController {
         
         settingTableView.snp.makeConstraints {
             $0.top.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(10)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
         }
     }
     

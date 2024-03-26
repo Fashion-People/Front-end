@@ -23,9 +23,10 @@ final class SettingCoordinator : Coordinator {
     }
 }
 
-extension SettingCoordinator : SettingNavigation {
+extension SettingCoordinator : SettingViewControllerDelegate {
     func presentSetting() {
         let settingVC = SettingViewController()
+        settingVC.delegate = self
         navigationController.pushViewController(settingVC, animated: true)
     }
 }

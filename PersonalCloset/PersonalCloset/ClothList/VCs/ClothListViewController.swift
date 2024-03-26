@@ -8,14 +8,14 @@
 import UIKit
 import SnapKit
 
-protocol ListNavigation : AnyObject {
+protocol ClothListViewControllerDelegate : AnyObject {
     func presentListVC()
     func backToPreviousVC()
     func presentRegisterVC()
 }
 
 final class ClothListViewController : BaseViewController {
-    weak var coordinator : ListNavigation?
+    weak var delegate : ClothListViewControllerDelegate?
     
     private let clothListManager = ClothListManager.shared
     
@@ -43,15 +43,6 @@ final class ClothListViewController : BaseViewController {
                 
             } catch { print("error: \(error)") }
         }
-    }
-    
-    init(coordinator: ListNavigation) {
-        self.coordinator = coordinator
-        super.init()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - UICollectionView config (+ DiffableDataSource)
@@ -107,8 +98,8 @@ final class ClothListViewController : BaseViewController {
             
             else {
                 if self.clothListCollectionView.indexPathsForSelectedItems?.count ?? 0 > 0 {
-                    
-                    self.coordinator?.presentRegisterVC()
+
+                    self.delegate?.presentRegisterVC()
                 }
                 
                 /// If nothing is selected, nothing happens

@@ -8,28 +8,19 @@
 import UIKit
 import SnapKit
 
-protocol ImageResultNavigation : AnyObject {
+protocol ImageResultViewControllerDelegate : AnyObject {
     func backToRegisterVC()
     func backToPreviousVC()
 }
 
 final class ImageResultViewController : BaseViewController {
-    weak var coordinator : ImageResultNavigation?
+    weak var delegate : ImageResultViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         topViewConfig()
         topView.selectButton.isHidden = true
-    }
-    
-    init(coordinator: ImageResultNavigation) {
-        self.coordinator = coordinator
-        super.init()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     private var resultImageView : UIImageView = {
@@ -53,20 +44,20 @@ final class ImageResultViewController : BaseViewController {
                                                             titleColor: .darkBlue,
                                                             backColor: .bwGray,
                                                             action: UIAction { _ in
-                                                                self.coordinator?.backToPreviousVC()
+                                                                self.delegate?.backToPreviousVC()
                                                                 })
     
     private lazy var backToRegisterButton = PersonalClosetButton("다시 검사하기",
                                                             titleColor: .darkBlue,
                                                              backColor: .skyBlue,
                                                              action: UIAction { _ in
-                                                                        self.coordinator?.backToRegisterVC()
+                                                                        self.delegate?.backToRegisterVC()
                                                                     })
     
     // MARK: - button click method
     private func topViewConfig() {
         topView.backButton.addAction(UIAction{ _ in
-            self.coordinator?.backToRegisterVC()
+            self.delegate?.backToRegisterVC()
         }, for: .touchUpInside)
     }
     

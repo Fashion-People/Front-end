@@ -8,22 +8,13 @@
 import UIKit
 import SnapKit
 
-protocol RegisterImageNavigation : AnyObject {
+protocol RegisterImageViewControllerDelegate : AnyObject {
     func presentResultVC()
     func backToPreviousVC()
 }
 
 final class RegisterImageViewController : BaseViewController {
-    weak var coordinator : RegisterImageNavigation!
-    
-    init(coordinator: RegisterImageNavigation) {
-        self.coordinator = coordinator
-        super.init()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    weak var delegate : RegisterImageViewControllerDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,13 +50,14 @@ final class RegisterImageViewController : BaseViewController {
     private var imageInput4 = ImageInputButton()
     
     private lazy var registerButton = PersonalClosetButton("적합도를 알려주세요!",
-                                                       titleColor: .darkBlue,
-                                                       backColor: .skyBlue,
-                                                       action: UIAction { _ in
-                                                                self.uploadImage()
-                                                                self.coordinator.presentResultVC()
-                                                            })
                                                                 
+
+                                                           titleColor: .darkBlue,
+                                                           backColor: .skyBlue,
+                                                           action: UIAction { _ in
+        self.uploadImage()
+        self.delegate.presentResultVC()
+    })
     private func buttonConfiguration() {
         imageInput1.tag = 1
         imageInput2.tag = 2
@@ -144,7 +136,7 @@ final class RegisterImageViewController : BaseViewController {
 
     private func tabTopViewButtons(){
         topView.backButton.addAction(UIAction{ _ in
-            self.coordinator.backToPreviousVC()
+            self.delegate.backToPreviousVC()
         }, for: .touchUpInside)
     }
     
