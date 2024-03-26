@@ -63,7 +63,7 @@ final class TopView : UIView {
 
         let buttonImage = UIImage(systemName: "checkmark", withConfiguration: imageConfig)
         button.setImage(buttonImage, for: .normal)
-        button.tintColor = .black
+        button.tintColor = .lightGray  
         
         return button
     }()

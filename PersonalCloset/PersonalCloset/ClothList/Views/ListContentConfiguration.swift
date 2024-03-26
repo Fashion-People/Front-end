@@ -9,6 +9,7 @@ import UIKit
 
 struct ContentConfiguration: UIContentConfiguration, Hashable {
     var clothDescription: String?
+    var imageUrl: String?
     
     func makeContentView() -> UIView & UIContentView {
         return ListContentView(configuration: self)

@@ -19,7 +19,7 @@ final class ClothListViewController : BaseViewController {
     
     private let clothListManager = ClothListManager.shared
     
-    // 상단 이미지 선택 button 클릭 유무 확인하기 위한 toggle
+    /// 상단 이미지 선택 button 클릭 유무 확인하기 위한 toggle
     private var selectToggle = true
     
     var dataSource: UICollectionViewDiffableDataSource<Section, ClothListModel>!
@@ -34,15 +34,14 @@ final class ClothListViewController : BaseViewController {
         
         Task {
             do {
+                /// Fetch a list of all clothes from the server
                 try await ClothesAPI.fetchAllClothes(memberId: "fashionPP").performRequest()
                 
                 DispatchQueue.main.async {
                     self.performQuery()
                 }
                 
-            } catch {
-                print("error: \(error)")
-            }
+            } catch { print("error: \(error)") }
         }
     }
     
@@ -63,13 +62,14 @@ final class ClothListViewController : BaseViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.allowsMultipleSelectionDuringEditing = true
         collectionView.delegate = self
-
     
         return collectionView
     }()
     
     private func setupDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<ListCollectionViewCell, ClothListModel> {
+        let cellRegistration = UICollectionView.CellRegistration<
+                                                ListCollectionViewCell,
+                                                ClothListModel> {
             (cell, indexPath, list) in
             var clothList : ClothListModel?
             clothList = self.clothListManager.clothList[indexPath.row]
@@ -97,20 +97,24 @@ final class ClothListViewController : BaseViewController {
     /// topView 내부 select 버튼 클릭에 따라 collectionView 의 선택버튼이 나타남
     private func tabTopViewButtons(){
         topView.selectButton.addAction(UIAction{ _ in
+            
+            /// Selecting a list of clothes to inspect
             if self.selectToggle {
                 self.clothListCollectionView.isEditing = true
-                self.topView.selectButton.tintColor = .lightGray
+                self.topView.selectButton.tintColor = .black
                 self.selectToggle = false
             }
             
             else {
                 if self.clothListCollectionView.indexPathsForSelectedItems?.count ?? 0 > 0 {
+                    
                     self.coordinator?.presentRegisterVC()
                 }
                 
+                /// If nothing is selected, nothing happens
                 else{
                     self.clothListCollectionView.isEditing = false
-                    self.topView.selectButton.tintColor = .black
+                    self.topView.selectButton.tintColor = .lightGray
                     self.selectToggle = true
                 }
             }

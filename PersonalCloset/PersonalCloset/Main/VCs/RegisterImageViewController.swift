@@ -59,12 +59,13 @@ final class RegisterImageViewController : BaseViewController {
     private var imageInput4 = ImageInputButton()
     
     private lazy var registerButton = PersonalClosetButton("적합도를 알려주세요!",
-                                                           titleColor: .darkBlue,
-                                                           backColor: .skyBlue,
-                                                           action: UIAction { _ in
-        self.uploadImage()
-        self.coordinator.presentResultVC()
-    })
+                                                       titleColor: .darkBlue,
+                                                       backColor: .skyBlue,
+                                                       action: UIAction { _ in
+                                                                self.uploadImage()
+                                                                self.coordinator.presentResultVC()
+                                                            })
+                                                                
     private func buttonConfiguration() {
         imageInput1.tag = 1
         imageInput2.tag = 2

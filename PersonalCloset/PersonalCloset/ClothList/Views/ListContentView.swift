@@ -48,6 +48,20 @@ final class ListContentView: UIView, UIContentView {
         
         return button
     }()
+    
+    func requestImageURL(data: String) async throws {
+        guard let url = URL(string: data) else { return }
+        
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.clothImageView.image = image
+                    }
+                }
+            }
+        }
+    }
         
     private func setupLayouts() {
         [clothImageView,
@@ -80,11 +94,14 @@ final class ListContentView: UIView, UIContentView {
         imageTitleLabel.font = .systemFont(ofSize: 18, weight: .semibold)
         
         clothImageView.tintColor = .lightGray
-        clothImageView.image = UIImage(named: "exampleImage")
         
         imageSettingButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         imageSettingButton.tintColor = .lightGray
         
+        Task {
+            try await requestImageURL(data: configuration.imageUrl ?? "")
+
+        }
         imageTitleLabel.text = configuration.clothDescription
     }
 }

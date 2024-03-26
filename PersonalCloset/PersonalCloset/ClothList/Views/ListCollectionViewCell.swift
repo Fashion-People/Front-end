@@ -14,6 +14,7 @@ final class ListCollectionViewCell: UICollectionViewListCell {
     override func updateConfiguration(using state: UICellConfigurationState) {
         var config = ContentConfiguration().updated(for: state)
         config.clothDescription = cloth.description
+        config.imageUrl = cloth.imageUrl
         
         contentConfiguration = config
     }

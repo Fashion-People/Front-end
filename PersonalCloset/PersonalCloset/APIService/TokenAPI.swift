@@ -42,7 +42,7 @@ enum TokenAPI {
     }
     
     func performRequest(with parameters: Encodable? = nil) async throws -> Bool{
-        //URLRequest 생성
+        /// URLRequest 생성
         var request = self.request
 
         if let parameters = parameters {
@@ -51,7 +51,7 @@ enum TokenAPI {
         
         print(request)
 
-        // 실제로 request를 보내서 network를 하는 부분
+        /// 실제로 request를 보내서 network를 하는 부분
         let (data, response) = try await URLSession.shared.data(for: request)
         print(data)
 
@@ -59,25 +59,28 @@ enum TokenAPI {
             throw FetchError.invalidStatus
         }
         
-        //response가 200번대인지 확인하는 부분
+        /// response가 200번대인지 확인하는 부분
         if (200..<300).contains(httpResponse.statusCode) {
-            // Handle success (200번대)
+            /// Handle success (200번대)
             if case .login = self {
                 let loginToken = String(decoding: data, as: UTF8.self)
                 TokenManager.shared.token.accessToken = loginToken
                 return true
             }
+            
             else if case .join = self {
                 let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
                 print("Response Data: \(dataContent.msg)")
                 return true
             }
+            
             else {
                 let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
                 print("Response Data: \(dataContent.msg)")
                 return false
             }
         }
+        
         else if (400..<600).contains(httpResponse.statusCode) {
             let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
             print("Response Data: \(dataContent.msg)")
