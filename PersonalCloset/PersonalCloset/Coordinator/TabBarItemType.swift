@@ -33,8 +33,8 @@ enum TabBarItemType: String, CaseIterable {
     func toKrName() -> String {
         switch self {
         case .main: return "홈"
-        case .list: return "커뮤니티"
-        case .setting: return "추천"
+        case .list: return "옷"
+        case .setting: return "설정"
         }
     }
     
@@ -42,8 +42,8 @@ enum TabBarItemType: String, CaseIterable {
     func toIconName() -> String {
         switch self {
         case .main: return "house"
-        case .list: return "magnifyingglass"
-        case .setting: return "heart"
+        case .list: return "hanger"
+        case .setting: return "person"
         }
     }
 }
