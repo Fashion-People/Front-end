@@ -31,6 +31,7 @@ final class JoinViewController : UIViewController {
         self.hideKeyboardWhenTappedAround()
         setLayout()
         navigationBarConfig()
+        setupStyles()
     }
     
     // MARK: - UI config
@@ -131,6 +132,14 @@ final class JoinViewController : UIViewController {
             else {
             }
         }
+    }
+    
+    private func setupStyles() {
+        joinPasswordInput.inputTextField.isSecureTextEntry = true
+        joinPasswordInput.inputTextField.textContentType = .oneTimeCode
+        
+        joinPasswordCheckInput.inputTextField.isSecureTextEntry = true
+        joinPasswordCheckInput.inputTextField.textContentType = .oneTimeCode
     }
     
     private func navigationBarConfig() {

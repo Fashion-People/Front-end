@@ -36,6 +36,7 @@ final class LoginViewController : UIViewController {
         stackLayout()
         setLayout()
         backBarButtonConfig()
+        setupStyles()
     }
     
     // MARK: - UI config
@@ -90,6 +91,11 @@ final class LoginViewController : UIViewController {
                                                 action: nil)
         backBarButtonItem.tintColor = .darkBlue
         self.navigationItem.backBarButtonItem = backBarButtonItem
+    }
+    
+    private func setupStyles() {
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.textContentType = .oneTimeCode
     }
     
     private func tapLoginButton() {
