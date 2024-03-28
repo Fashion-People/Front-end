@@ -9,14 +9,19 @@ import UIKit
 import SnapKit
 
 final class ListContentView: UIView, UIContentView {
+    var deleteAction: (()->())
+    var modifyAction: (()->())
+    
     var configuration: UIContentConfiguration {
        didSet {
            apply(configuration as! ListContentConfiguration)
        }
     }
     
-    init(configuration: UIContentConfiguration) {
+    init(configuration: UIContentConfiguration, deleteAction: @escaping (()->()), modifyAction: @escaping (()->())) {
         self.configuration = configuration
+        self.deleteAction = deleteAction
+        self.modifyAction = modifyAction
         super.init(frame: .zero)
         self.setupLayouts()
         apply(configuration as! ListContentConfiguration)
@@ -33,12 +38,12 @@ final class ListContentView: UIView, UIContentView {
         return [UIAction(title: "삭제",
                          image: UIImage(systemName: "trash"),
                          handler: { _ in
-            print("삭제버튼")
+            self.deleteAction()
         }),
                 UIAction(title: "수정",
                          image: UIImage(systemName: "pencil"),
                          handler: { _ in
-            print("수정버튼")
+            self.modifyAction()
         })
         ]
     }()
@@ -53,7 +58,7 @@ final class ListContentView: UIView, UIContentView {
         return button
     }()
     
-    func requestImageURL(data: String) async throws {
+    private func requestImageURL(data: String) {
         guard let url = URL(string: data) else { return }
         
         DispatchQueue.global().async { [weak self] in
@@ -73,18 +78,14 @@ final class ListContentView: UIView, UIContentView {
         imageTitleLabel.font = .systemFont(ofSize: 18, weight: .semibold)
         
         clothImageView.tintColor = .lightGray
-        clothImageView.image = UIImage(named: "exampleImage")
         
         imageSettingButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         imageSettingButton.tintColor = .lightGray
         
-        Task {
-            try await requestImageURL(data: configuration.imageUrl ?? "")
-        }
-        
+        requestImageURL(data: configuration.imageUrl ?? "")
         imageTitleLabel.text = configuration.clothDescription
     }
-    
+        
     // MARK: - Set layouts
     private func setupLayouts() {
         [clothImageView,

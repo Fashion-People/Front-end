@@ -13,11 +13,11 @@ enum FetchError: Error {
 }
 
 enum ClothesAPI {
-    case fetchCloth(clothId: Int)
-    case fetchAllClothes(memberId: String)
+    case fetchCloth(clothesNumber: Int)
+    case fetchAllClothes
     case deleteCloth(clothId: Int)
     case createCloth(_ param: ClothRequestDTO)
-    case modifyCloth(clothId: Int, _ param: ClothRequestDTO)
+    case modifyCloth(clothId: Int, _ param: ModifyRequestDTO)
 }
 
 extension ClothesAPI {
@@ -30,8 +30,8 @@ extension ClothesAPI {
             return "/\(clothId)"
         case .createCloth:
             return "/save"
-        case .fetchAllClothes(let memberId):
-            return "/all/\(memberId)"
+        case .fetchAllClothes:
+            return "/all/fashionPP"
         case .modifyCloth(let clothId,_):
             return "/update/\(clothId)"
         }
@@ -94,17 +94,17 @@ extension ClothesAPI {
             }
             
             else {
-                let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
-                print("Response Data: \(dataContent.msg)")
+//                let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
+//                print("Response Data: \(dataContent.msg)")
             }
         }
         
         /// respones가 오류임을 나타낼때
         else if (400..<600).contains(httpResponse.statusCode) {
-            let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
-            
-            print("Response Data: \(dataContent.msg)")
-            print("error: \(httpResponse.statusCode)")
+//            let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
+//            
+//            print("Response Data: \(dataContent.msg)")
+//            print("error: \(httpResponse.statusCode)")
         }
     }
 
