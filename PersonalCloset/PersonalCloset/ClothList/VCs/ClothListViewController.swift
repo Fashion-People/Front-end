@@ -114,10 +114,11 @@ final class ClothListViewController : BaseViewController {
         let success = UIAlertAction(title: "확인", style: .default) { action in
             var param = ModifyRequestDTO(description: "")
             param.description = modifyAlert.textFields?[0].text ?? ""
+            print(param.description)
             
             Task {
                 do {
-                    try await ClothesAPI.modifyCloth(clothId: listNumber, param).performRequest()
+                    try await ClothesAPI.modifyCloth(clothId: listNumber).performRequest(with: param)
                     try await ClothesAPI.fetchAllClothes.performRequest()
                     
                     DispatchQueue.main.async {

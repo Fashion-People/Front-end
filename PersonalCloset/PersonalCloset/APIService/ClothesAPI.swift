@@ -17,7 +17,7 @@ enum ClothesAPI {
     case fetchAllClothes
     case deleteCloth(clothId: Int)
     case createCloth(_ param: ClothRequestDTO)
-    case modifyCloth(clothId: Int, _ param: ModifyRequestDTO)
+    case modifyCloth(clothId: Int)
 }
 
 extension ClothesAPI {
@@ -32,7 +32,7 @@ extension ClothesAPI {
             return "/save"
         case .fetchAllClothes:
             return "/all/fashionPP"
-        case .modifyCloth(let clothId,_):
+        case .modifyCloth(let clothId):
             return "/update/\(clothId)"
         }
     }
