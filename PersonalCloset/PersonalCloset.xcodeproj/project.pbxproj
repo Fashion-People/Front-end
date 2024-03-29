@@ -17,6 +17,7 @@
 		2916A35A2BA092D100758747 /* UserRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916A3592BA092D100758747 /* UserRequestDTO.swift */; };
 		2926A8752B9744B600C4BCA4 /* ClothListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2926A8742B9744B600C4BCA4 /* ClothListModel.swift */; };
 		292BE6B42B4D26BA00BF3EE9 /* JoinPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */; };
+		29308B7B2BB6C0A600342955 /* S3Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29308B7A2BB6C0A600342955 /* S3Configuration.swift */; };
 		29589FCA2B457839003578A3 /* ImageResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29589FC92B457839003578A3 /* ImageResultViewController.swift */; };
 		295FAD382B5796A3003BC20B /* ClothListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295FAD372B5796A3003BC20B /* ClothListViewController.swift */; };
 		295FAD3A2B57985B003BC20B /* ListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295FAD392B57985B003BC20B /* ListCoordinator.swift */; };
@@ -29,7 +30,6 @@
 		296353E42B8DECDE00AB8A2B /* PersonalClosetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296353E32B8DECDE00AB8A2B /* PersonalClosetButton.swift */; };
 		296492062BB5198D00FD990C /* ModifyRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296492052BB5198D00FD990C /* ModifyRequestDTO.swift */; };
 		297F6CD82B5F9EE4009A1652 /* S3Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297F6CD72B5F9EE4009A1652 /* S3Upload.swift */; };
-		297F6CDA2B5F9F24009A1652 /* S3Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297F6CD92B5F9F24009A1652 /* S3Configuration.swift */; };
 		2982023A2B43C2F100B7DEB3 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298202392B43C2F100B7DEB3 /* TopView.swift */; };
 		2982023C2B43C72600B7DEB3 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2982023B2B43C72600B7DEB3 /* BaseViewController.swift */; };
 		298202632B43F1AB00B7DEB3 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298202622B43F1AB00B7DEB3 /* SettingTableViewCell.swift */; };
@@ -72,6 +72,7 @@
 		2916A3592BA092D100758747 /* UserRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestDTO.swift; sourceTree = "<group>"; };
 		2926A8742B9744B600C4BCA4 /* ClothListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothListModel.swift; sourceTree = "<group>"; };
 		292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPickerView.swift; sourceTree = "<group>"; };
+		29308B7A2BB6C0A600342955 /* S3Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = S3Configuration.swift; sourceTree = "<group>"; };
 		29589FC92B457839003578A3 /* ImageResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResultViewController.swift; sourceTree = "<group>"; };
 		295FAD372B5796A3003BC20B /* ClothListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothListViewController.swift; sourceTree = "<group>"; };
 		295FAD392B57985B003BC20B /* ListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCoordinator.swift; sourceTree = "<group>"; };
@@ -84,7 +85,6 @@
 		296353E32B8DECDE00AB8A2B /* PersonalClosetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalClosetButton.swift; sourceTree = "<group>"; };
 		296492052BB5198D00FD990C /* ModifyRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyRequestDTO.swift; sourceTree = "<group>"; };
 		297F6CD72B5F9EE4009A1652 /* S3Upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = S3Upload.swift; sourceTree = "<group>"; };
-		297F6CD92B5F9F24009A1652 /* S3Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = S3Configuration.swift; sourceTree = "<group>"; };
 		298202392B43C2F100B7DEB3 /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		2982023B2B43C72600B7DEB3 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		298202622B43F1AB00B7DEB3 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
@@ -293,11 +293,11 @@
 			isa = PBXGroup;
 			children = (
 				297F6CD72B5F9EE4009A1652 /* S3Upload.swift */,
-				297F6CD92B5F9F24009A1652 /* S3Configuration.swift */,
 				2926A8742B9744B600C4BCA4 /* ClothListModel.swift */,
 				2916A34F2BA0859000758747 /* ClothListManager.swift */,
 				2916A3532BA0926C00758747 /* TokenModel.swift */,
 				2916A3552BA0928400758747 /* TokenManager.swift */,
+				29308B7A2BB6C0A600342955 /* S3Configuration.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -457,7 +457,7 @@
 				2916A3522BA085EA00758747 /* ServerStatus.swift in Sources */,
 				2982023C2B43C72600B7DEB3 /* BaseViewController.swift in Sources */,
 				29589FCA2B457839003578A3 /* ImageResultViewController.swift in Sources */,
-				297F6CDA2B5F9F24009A1652 /* S3Configuration.swift in Sources */,
+				29308B7B2BB6C0A600342955 /* S3Configuration.swift in Sources */,
 				29DA5F632B45600600F45CC6 /* JoinInputView.swift in Sources */,
 				2916A3542BA0926C00758747 /* TokenModel.swift in Sources */,
 				298202632B43F1AB00B7DEB3 /* SettingTableViewCell.swift in Sources */,
