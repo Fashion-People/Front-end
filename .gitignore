@@ -67,4 +67,4 @@ xcuserdata/
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 
-PersonalCloset/PersonalCloset/Model/S3Configuration.swift
+/PersonalCloset/PersonalCloset/Model/S3Configuration.swift
