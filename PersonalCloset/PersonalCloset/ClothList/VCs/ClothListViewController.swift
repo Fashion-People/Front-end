@@ -19,7 +19,7 @@ final class ClothListViewController : BaseViewController {
     
     private let clothListManager = ClothListManager.shared
     
-    // 상단 이미지 선택 button 클릭 유무 확인하기 위한 toggle
+    /// 상단 이미지 선택 button 클릭 유무 확인하기 위한 toggle
     private var selectToggle = true
     
     var dataSource: UICollectionViewDiffableDataSource<Section, ClothListModel>!
@@ -29,20 +29,18 @@ final class ClothListViewController : BaseViewController {
         
         self.topView.backButton.isHidden = true
         self.setupDataSource()
-        self.performQuery()
         self.tabTopViewButtons()
         
         Task {
             do {
-                try await ClothesAPI.fetchAllClothes(memberId: "fashionPP").performRequest()
+                /// Fetch a list of all clothes from the server
+                try await ClothesAPI.fetchAllClothes.performRequest()
                 
                 DispatchQueue.main.async {
                     self.performQuery()
                 }
                 
-            } catch {
-                print("error: \(error)")
-            }
+            } catch { print("error: \(error)") }
         }
     }
     
@@ -54,26 +52,32 @@ final class ClothListViewController : BaseViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.allowsMultipleSelectionDuringEditing = true
         collectionView.delegate = self
-
     
         return collectionView
     }()
     
     private func setupDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<ListCollectionViewCell, ClothListModel> {
-            (cell, indexPath, list) in
-            var clothList : ClothListModel?
-            clothList = self.clothListManager.clothList[indexPath.row]
-           
-            cell.cloth = clothList
-            cell.accessories = [.multiselect()]
-        }
+        let cellRegistration = UICollectionView.CellRegistration<
+                                                ListCollectionViewCell,
+                                                ClothListModel> {
+                                                    (cell, indexPath, list) in
+                                                    cell.cloth = list
+                                                    cell.accessories = [ .multiselect() ]
+                                                    
+                                                    cell.deleteAction = { [unowned self] in
+                                                        self.deleteList(listNumber: list.clothesNumber)
+                                                    }
+                                                    
+                                                    cell.modifyAction = { [unowned self] in
+                                                        self.modifyList(listNumber: list.clothesNumber)
+                                                    }
+                                                }
         
         self.dataSource = UICollectionViewDiffableDataSource<Section, ClothListModel>(collectionView: self.clothListCollectionView) {
             (collectionView, indexPath, list) -> UICollectionViewListCell? in
             return self.clothListCollectionView.dequeueConfiguredReusableCell(using: cellRegistration, 
-                                                                              for: indexPath,
-                                                                              item: list)
+                                                                        for: indexPath,
+                                                                        item: list)
         }
     }
     
@@ -84,13 +88,67 @@ final class ClothListViewController : BaseViewController {
         self.dataSource.apply(snapshot, animatingDifferences: true)
     }
     
+    /// deleteList method
+    // 삭제하려는 cell이 삭제되지 않는 버그
+    func deleteList(listNumber: Int) {
+        Task {
+            do {
+                try await ClothesAPI.deleteCloth(clothId: listNumber).performRequest()
+                try await ClothesAPI.fetchAllClothes.performRequest()
+                
+                DispatchQueue.main.async {
+                    self.performQuery()
+                }
+            } catch {
+                print("error: \(error)")
+            }
+        }
+    }
+    
+    /// modifyList method
+    func modifyList(listNumber: Int) {
+        let modifyAlert = UIAlertController(title: "변경", message: "변경 내용을 작성해주세요", preferredStyle: UIAlertController.Style.alert)
+        modifyAlert.addTextField()
+        
+        let success = UIAlertAction(title: "확인", style: .default) { action in
+            var param = ModifyRequestDTO(description: "")
+            param.description = modifyAlert.textFields?[0].text ?? ""
+            print(param.description)
+            
+            Task {
+                do {
+                    try await ClothesAPI.modifyCloth(clothId: listNumber).performRequest(with: param)
+                    try await ClothesAPI.fetchAllClothes.performRequest()
+                    
+                    DispatchQueue.main.async {
+                        self.performQuery()
+                    }
+                } catch {
+                    print("error: \(error)")
+                }
+            }
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel) { action in
+            
+        }
+        
+        modifyAlert.addAction(success)
+        modifyAlert.addAction(cancel)
+        
+        self.present(modifyAlert, animated: true, completion: nil)
+    }
+
+
     // MARK: - button click method
     /// topView 내부 select 버튼 클릭에 따라 collectionView 의 선택버튼이 나타남
     private func tabTopViewButtons(){
-        topView.selectButton.addAction(UIAction{ _ in
+        topView.selectButton.addAction(UIAction { _ in
+            
+            /// Selecting a list of clothes to inspect
             if self.selectToggle {
                 self.clothListCollectionView.isEditing = true
-                self.topView.selectButton.tintColor = .lightGray
+                self.topView.selectButton.tintColor = .black
                 self.selectToggle = false
             }
             
@@ -99,9 +157,10 @@ final class ClothListViewController : BaseViewController {
                     self.delegate?.presentRegisterVC()
                 }
                 
-                else{
+                /// If nothing is selected, nothing happens
+                else {
                     self.clothListCollectionView.isEditing = false
-                    self.topView.selectButton.tintColor = .black
+                    self.topView.selectButton.tintColor = .lightGray
                     self.selectToggle = true
                 }
             }

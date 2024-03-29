@@ -14,5 +14,6 @@ enum Section : CaseIterable {
 struct ClothListModel: Codable, Hashable {
     let clothesNumber: Int
     var description : String
-    var imageUrl : String
+    var imageUrl: String
+    let userNumber: Int
 }

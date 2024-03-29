@@ -54,7 +54,14 @@ final class LoginViewController : UIViewController {
     
     private var IDTextField = InputView("아이디를 입력해주세요.")
     private var passwordTextField = InputView("비밀번호를 입력해주세요.")
-    private let lineView = UIView()
+    
+    private var loginDescription: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 10, weight: .light)
+        label.textColor = .red
+        
+        return label
+    }()
     
     private func UIconfig() {
         lineView.backgroundColor = .bwGray
@@ -67,13 +74,14 @@ final class LoginViewController : UIViewController {
                                                                 self.tapLoginButton()
                                                             })
     
+    private let lineView = UIView()
+    
     private lazy var joinButton = PersonalClosetButton("회원가입",
                                                     titleColor:.darkBlue,
                                                     backColor: .systemGray5,
                                                     action: UIAction { _ in
                                                                 self.delegate?.presentJoinVC()
                                                             })
-    
     
     private func backBarButtonConfig() {
         let backBarButtonItem = UIBarButtonItem(title: "로그인",
@@ -95,14 +103,21 @@ final class LoginViewController : UIViewController {
         let id: String = IDTextField.text ?? ""
         let password: String = passwordTextField.text ?? ""
         
-        Task {
-            loginSuccess = try await TokenAPI.login(id, password).performRequest()
-            
-            if loginSuccess == true {
-                self.delegate?.presentMainVC()
-            }
-            else {
+        if (IDTextField.text == "" ||
+            passwordTextField.text == "") {
+            loginDescription.text = "이메일과 비밀번호를 입력해주세요"
+        }
+        
+        else {
+            Task {
+                loginSuccess = try await TokenAPI.login(id, password).performRequest()
                 
+                if loginSuccess == true {
+                    self.delegate?.presentMainVC()
+                }
+                else {
+                    loginDescription.text = "아이디와 비밀번호를 다시 입력해주세요."
+                }
             }
         }
     }
@@ -118,6 +133,7 @@ final class LoginViewController : UIViewController {
     private func setLayout() {
         [loginLabel,
          inputStackView,
+         loginDescription,
          loginButton,
          lineView,
          joinButton].forEach {
@@ -134,8 +150,13 @@ final class LoginViewController : UIViewController {
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
         }
         
+        loginDescription.snp.makeConstraints {
+            $0.top.equalTo(inputStackView.snp.bottom).offset(5)
+            $0.leading.equalTo(inputStackView.snp.leading)
+        }
+        
         loginButton.snp.makeConstraints {
-            $0.top.equalTo(inputStackView.snp.bottom).offset(30)
+            $0.top.equalTo(loginDescription.snp.bottom).offset(30)
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(40)
             $0.width.equalTo(295)

@@ -13,11 +13,11 @@ enum FetchError: Error {
 }
 
 enum ClothesAPI {
-    case fetchCloth(clothId: Int)
-    case fetchAllClothes(memberId: String)
+    case fetchCloth(clothesNumber: Int)
+    case fetchAllClothes
     case deleteCloth(clothId: Int)
     case createCloth(_ param: ClothRequestDTO)
-    case modifyCloth(clothId: Int, _ param: ClothRequestDTO)
+    case modifyCloth(clothId: Int)
 }
 
 extension ClothesAPI {
@@ -30,9 +30,9 @@ extension ClothesAPI {
             return "/\(clothId)"
         case .createCloth:
             return "/save"
-        case .fetchAllClothes(let memberId):
-            return "/all/\(memberId)"
-        case .modifyCloth(let clothId,_):
+        case .fetchAllClothes:
+            return "/all/fashionPP"
+        case .modifyCloth(let clothId):
             return "/update/\(clothId)"
         }
     }
@@ -65,24 +65,26 @@ extension ClothesAPI {
         return request
     }
     
+    // MARK: - network 호출함수
     func performRequest(with parameters: Encodable? = nil) async throws {
-        //URLRequest 생성
+        /// URLRequest 생성
         var request = self.request
 
         if let parameters = parameters {
             request.httpBody = try JSONEncoder().encode(parameters)
         }
         
+        /// request URL
         print(request)
 
-        // 실제로 request를 보내서 network를 하는 부분
+        /// 실제로 request를 보내서 network를 하는 부분
         let (data, response) = try await URLSession.shared.data(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse else {
             throw FetchError.invalidStatus
         }
         
-        //response가 200번대인지 확인하는 부분
+        /// response status가 200번대인지 확인하는 부분
         if (200..<300).contains(httpResponse.statusCode) {
             if case .fetchAllClothes = self {
                 let clothList = try JSONDecoder().decode([ClothListModel].self, from: data)
@@ -90,16 +92,19 @@ extension ClothesAPI {
                 
                 ClothListManager.shared.clothList = clothList
             }
+            
             else {
-                let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
-                print("Response Data: \(dataContent.msg)")
+//                let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
+//                print("Response Data: \(dataContent.msg)")
             }
         }
+        
+        /// respones가 오류임을 나타낼때
         else if (400..<600).contains(httpResponse.statusCode) {
-            // Handle client error (4xx)
-            let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
-            print("Response Data: \(dataContent.msg)")
-            print("error: \(httpResponse.statusCode)")
+//            let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
+//            
+//            print("Response Data: \(dataContent.msg)")
+//            print("error: \(httpResponse.statusCode)")
         }
     }
 

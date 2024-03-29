@@ -27,6 +27,7 @@
 		295FF8632B53DD88006DDD50 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295FF8622B53DD88006DDD50 /* MainCoordinator.swift */; };
 		295FF8652B53DDA2006DDD50 /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295FF8642B53DDA2006DDD50 /* SettingCoordinator.swift */; };
 		296353E42B8DECDE00AB8A2B /* PersonalClosetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296353E32B8DECDE00AB8A2B /* PersonalClosetButton.swift */; };
+		296492062BB5198D00FD990C /* ModifyRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296492052BB5198D00FD990C /* ModifyRequestDTO.swift */; };
 		297F6CD82B5F9EE4009A1652 /* S3Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297F6CD72B5F9EE4009A1652 /* S3Upload.swift */; };
 		297F6CDA2B5F9F24009A1652 /* S3Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297F6CD92B5F9F24009A1652 /* S3Configuration.swift */; };
 		2982023A2B43C2F100B7DEB3 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298202392B43C2F100B7DEB3 /* TopView.swift */; };
@@ -81,6 +82,7 @@
 		295FF8622B53DD88006DDD50 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		295FF8642B53DDA2006DDD50 /* SettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinator.swift; sourceTree = "<group>"; };
 		296353E32B8DECDE00AB8A2B /* PersonalClosetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalClosetButton.swift; sourceTree = "<group>"; };
+		296492052BB5198D00FD990C /* ModifyRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyRequestDTO.swift; sourceTree = "<group>"; };
 		297F6CD72B5F9EE4009A1652 /* S3Upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = S3Upload.swift; sourceTree = "<group>"; };
 		297F6CD92B5F9F24009A1652 /* S3Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = S3Configuration.swift; sourceTree = "<group>"; };
 		298202392B43C2F100B7DEB3 /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				2916A3572BA092A400758747 /* TokenAPI.swift */,
 				2916A3592BA092D100758747 /* UserRequestDTO.swift */,
 				2916A3512BA085EA00758747 /* ServerStatus.swift */,
+				296492052BB5198D00FD990C /* ModifyRequestDTO.swift */,
 			);
 			path = APIService;
 			sourceTree = "<group>";
@@ -471,6 +474,7 @@
 				29A9C0982B3FE62900209641 /* SceneDelegate.swift in Sources */,
 				2916A35A2BA092D100758747 /* UserRequestDTO.swift in Sources */,
 				296353E42B8DECDE00AB8A2B /* PersonalClosetButton.swift in Sources */,
+				296492062BB5198D00FD990C /* ModifyRequestDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

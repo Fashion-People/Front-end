@@ -75,7 +75,7 @@ final class MainViewController : BaseViewController {
             $0.top.equalTo(cameraButton.snp.bottom).offset(30)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(30)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-30)
-            $0.height.equalTo(320)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
         }
     }
 }

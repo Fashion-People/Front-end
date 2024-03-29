@@ -9,14 +9,19 @@ import UIKit
 import SnapKit
 
 final class ListContentView: UIView, UIContentView {
+    var deleteAction: (()->())
+    var modifyAction: (()->())
+    
     var configuration: UIContentConfiguration {
        didSet {
            apply(configuration as! ListContentConfiguration)
        }
     }
     
-    init(configuration: UIContentConfiguration) {
+    init(configuration: UIContentConfiguration, deleteAction: @escaping (()->()), modifyAction: @escaping (()->())) {
         self.configuration = configuration
+        self.deleteAction = deleteAction
+        self.modifyAction = modifyAction
         super.init(frame: .zero)
         self.setupLayouts()
         apply(configuration as! ListContentConfiguration)
@@ -32,11 +37,15 @@ final class ListContentView: UIView, UIContentView {
     private lazy var menuItems: [UIAction] = {
         return [UIAction(title: "삭제",
                          image: UIImage(systemName: "trash"),
-                         handler: { _ in print("삭제버튼")}),
+                         handler: { _ in
+            self.deleteAction()
+        }),
                 UIAction(title: "수정",
                          image: UIImage(systemName: "pencil"),
-                         handler: { _ in print("수정버튼")})
-                ]
+                         handler: { _ in
+            self.modifyAction()
+        })
+        ]
     }()
     
     private lazy var menu: UIMenu = { return UIMenu(title: "", options: [], children: menuItems) }()
@@ -48,7 +57,36 @@ final class ListContentView: UIView, UIContentView {
         
         return button
     }()
+    
+    private func requestImageURL(data: String) {
+        guard let url = URL(string: data) else { return }
         
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    
+                    DispatchQueue.main.async {
+                        self?.clothImageView.image = image
+                    }
+                }
+            }
+        }
+    }
+       
+    /// set configuration
+    private func apply(_ configuration: ListContentConfiguration) {
+        imageTitleLabel.font = .systemFont(ofSize: 18, weight: .semibold)
+        
+        clothImageView.tintColor = .lightGray
+        
+        imageSettingButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+        imageSettingButton.tintColor = .lightGray
+        
+        requestImageURL(data: configuration.imageUrl ?? "")
+        imageTitleLabel.text = configuration.clothDescription
+    }
+        
+    // MARK: - Set layouts
     private func setupLayouts() {
         [clothImageView,
          imageTitleLabel,
@@ -74,17 +112,5 @@ final class ListContentView: UIView, UIContentView {
             $0.height.equalTo(30)
             $0.width.equalTo(30)
         }
-    }
-    
-    private func apply(_ configuration: ListContentConfiguration) {
-        imageTitleLabel.font = .systemFont(ofSize: 18, weight: .semibold)
-        
-        clothImageView.tintColor = .lightGray
-        clothImageView.image = UIImage(named: "exampleImage")
-        
-        imageSettingButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
-        imageSettingButton.tintColor = .lightGray
-        
-        imageTitleLabel.text = configuration.clothDescription
     }
 }
