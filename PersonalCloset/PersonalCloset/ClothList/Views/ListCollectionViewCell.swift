@@ -12,7 +12,7 @@ final class ListCollectionViewCell: UICollectionViewListCell {
     var cloth: ClothListModel!
     
     override func updateConfiguration(using state: UICellConfigurationState) {
-        var config = ContentConfiguration().updated(for: state)
+        var config = ListContentConfiguration().updated(for: state)
         config.clothDescription = cloth.description
         
         contentConfiguration = config
