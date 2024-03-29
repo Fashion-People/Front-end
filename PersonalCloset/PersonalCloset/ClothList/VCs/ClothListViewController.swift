@@ -106,7 +106,6 @@ final class ClothListViewController : BaseViewController {
     }
     
     /// modifyList method
-    // 수정이 안되는 버그
     func modifyList(listNumber: Int) {
         let modifyAlert = UIAlertController(title: "변경", message: "변경 내용을 작성해주세요", preferredStyle: UIAlertController.Style.alert)
         modifyAlert.addTextField()
