@@ -114,6 +114,7 @@ final class LoginViewController : UIViewController {
                 
                 if loginSuccess == true {
                     self.delegate?.presentMainVC()
+                    print("로그인 성공")
                 }
                 else {
                     loginDescription.text = "아이디와 비밀번호를 다시 입력해주세요."
@@ -153,6 +154,7 @@ final class LoginViewController : UIViewController {
         loginDescription.snp.makeConstraints {
             $0.top.equalTo(inputStackView.snp.bottom).offset(5)
             $0.leading.equalTo(inputStackView.snp.leading)
+            $0.height.equalTo(20)
         }
         
         loginButton.snp.makeConstraints {
