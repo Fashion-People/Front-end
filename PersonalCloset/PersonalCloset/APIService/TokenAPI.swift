@@ -70,20 +70,21 @@ enum TokenAPI {
             
             else if case .join = self {
                 let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
-                print("Response Data: \(dataContent.msg)")
+                print("Response Data: \(dataContent.message)")
                 return true
             }
             
             else {
                 let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
-                print("Response Data: \(dataContent.msg)")
+                print("Response Data: \(dataContent.message)")
                 return false
             }
         }
         
+        /// response가 400~600번대인지 확인하는 부분
         else if (400..<600).contains(httpResponse.statusCode) {
             let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
-            print("Response Data: \(dataContent.msg)")
+            print("Response Data: \(dataContent.message)")
             print("error: \(httpResponse.statusCode)")
             return false
         }

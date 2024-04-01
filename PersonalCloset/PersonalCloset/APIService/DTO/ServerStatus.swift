@@ -8,6 +8,5 @@
 import Foundation
 
 struct ServerStatus: Codable {
-    let data: String
-    let msg: String
+    let message: String
 }

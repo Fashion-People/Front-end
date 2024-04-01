@@ -59,6 +59,14 @@ final class JoinViewController : UIViewController {
                                                   guide: "비밀번호")
     private var joinPasswordCheckInput = JoinInputView(placeholder: "비밀번호를 한번더 입력해주세요",
                                                        guide: "비밀번호 확인")
+    private var passwordDescription: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 10, weight: .light)
+        label.textColor = .red
+
+        return label
+    }()
+    
     private var joinNameInput = JoinInputView(placeholder: "이름을 입력해주세요",
                                               guide: "이름")
     private var joinEmailInput = JoinInputView(placeholder: "이메일을 입력해주세요",
@@ -94,36 +102,43 @@ final class JoinViewController : UIViewController {
         
         var joinSuccess = false
         
-        let requestBody = UserRequestDTO(
-            email: email,
-            loginId: id,
-            name: name,
-            password: password,
-            style1: style1,
-            style2: style2,
-            style3: style3,
-            style4: style4
-        )
-        
-        Task {
-            joinSuccess = try await TokenAPI.join(requestBody).performRequest(with: requestBody)
+        if password == passwordCheck {
+            let requestBody = UserRequestDTO(
+                email: email,
+                loginId: id,
+                name: name,
+                password: password,
+                style1: style1,
+                style2: style2,
+                style3: style3,
+                style4: style4
+            )
             
-            if joinSuccess == true {
-                let joinSuccessAlert = UIAlertController(title: "알림",
-                                                         message: "회원가입 성공.",
-                                                         preferredStyle: UIAlertController.Style.alert)
+            Task {
+                joinSuccess = try await TokenAPI.join(requestBody).performRequest(with: requestBody)
                 
-                let success = UIAlertAction(title: "확인",
-                                            style: .default) { action in
-                    self.delegate?.backToLoginVC()
+                if joinSuccess == true {
+                    let joinSuccessAlert = UIAlertController(title: "알림",
+                                                             message: "회원가입 성공.",
+                                                             preferredStyle: UIAlertController.Style.alert)
+                    
+                    let success = UIAlertAction(title: "확인",
+                                                style: .default) { action in
+                        self.delegate?.backToLoginVC()
+                    }
+                    
+                    joinSuccessAlert.addAction(success)
+                    self.present(joinSuccessAlert, animated: true, completion: nil)
                 }
-                
-                joinSuccessAlert.addAction(success)
-                self.present(joinSuccessAlert, animated: true, completion: nil)
+                else {
+                    // 회원가입 실패시
+                }
             }
-            else {
-                ///
-            }
+        }
+        
+        else {
+            // 비밀번호 확인란이 다를때
+            passwordDescription.text = "비밀번호를 확인해주세요."
         }
     }
     
