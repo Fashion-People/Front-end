@@ -18,8 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let navigationController = UINavigationController()
             self.window?.rootViewController = navigationController
             
-            let coordinator = AuthCoordinator(navigationController: navigationController)
-            coordinator.presentJoinVC()
+            let coordinator = AppCoordinator(navigationController: navigationController)
+            coordinator.start()
             
             self.window?.makeKeyAndVisible()
         }

@@ -53,6 +53,16 @@ final class JoinViewController : UIViewController {
         return stackView
     }()
     
+    private let joinStackView2 : UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.alignment = .leading
+        stackView.spacing = 24
+        
+        return stackView
+    }()
+    
     private var joinIDInput = JoinInputView(placeholder: "아이디를 입력해주세요",
                                                 guide: "아이디")
     private var joinPasswordInput = JoinInputView(placeholder: "비밀번호를 입력해주세요",
@@ -117,7 +127,8 @@ final class JoinViewController : UIViewController {
             Task {
                 joinSuccess = try await TokenAPI.join(requestBody).performRequest(with: requestBody)
                 
-                if joinSuccess == true {
+                switch joinSuccess {
+                case true:
                     let joinSuccessAlert = UIAlertController(title: "알림",
                                                              message: "회원가입 성공.",
                                                              preferredStyle: UIAlertController.Style.alert)
@@ -129,15 +140,27 @@ final class JoinViewController : UIViewController {
                     
                     joinSuccessAlert.addAction(success)
                     self.present(joinSuccessAlert, animated: true, completion: nil)
-                }
-                else {
-                    // 회원가입 실패시
+                    
+                case false:
+                    let joinFailureAlert = UIAlertController(title: "알림",
+                                                             message: "회원가입 실패.",
+                                                             preferredStyle: UIAlertController.Style.alert)
+                    
+                    let failure = UIAlertAction(title: "확인",
+                                                style: .destructive) { action in
+                        self.dismiss(animated: true)
+                    }
+                    
+                    joinFailureAlert.addAction(failure)
+                    self.present(joinFailureAlert, animated: true, completion: nil)
+                    
+                default: break
                 }
             }
         }
         
         else {
-            // 비밀번호 확인란이 다를때
+            /// 비밀번호 !=  비밀번호 확인란
             passwordDescription.text = "비밀번호를 확인해주세요."
         }
     }
@@ -165,14 +188,17 @@ final class JoinViewController : UIViewController {
     private func setLayout() {
         [joinIDInput,
          joinPasswordInput,
-         joinPasswordCheckInput,
-         joinNameInput,
+         joinPasswordCheckInput].forEach{
+            joinStackView.addArrangedSubview($0)
+        }
+        
+        [joinNameInput,
          joinEmailInput,
          firstPickerView,
          secondPickerView,
          thirdPickerView,
-         fourthPickerView].forEach{
-            joinStackView.addArrangedSubview($0)
+         fourthPickerView].forEach {
+            joinStackView2.addArrangedSubview($0)
         }
         
         [joinLabel,
@@ -183,7 +209,9 @@ final class JoinViewController : UIViewController {
         
         scrollView.addSubview(contentView)
         
-        [joinStackView].forEach {
+        [joinStackView,
+         passwordDescription,
+         joinStackView2].forEach {
             contentView.addSubview($0)
         }
         
@@ -207,6 +235,16 @@ final class JoinViewController : UIViewController {
         joinStackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(5)
             $0.leading.equalToSuperview().offset(25)
+        }
+        
+        passwordDescription.snp.makeConstraints {
+            $0.top.equalTo(joinStackView.snp.bottom).offset(5)
+            $0.leading.equalTo(joinStackView.snp.leading)
+        }
+        
+        joinStackView2.snp.makeConstraints {
+            $0.top.equalTo(passwordDescription.snp.bottom).offset(25)
+            $0.leading.equalTo(passwordDescription.snp.leading)
             $0.trailing.equalToSuperview().offset(-25)
         }
                 
