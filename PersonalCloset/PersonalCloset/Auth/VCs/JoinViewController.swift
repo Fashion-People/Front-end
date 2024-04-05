@@ -53,12 +53,30 @@ final class JoinViewController : UIViewController {
         return stackView
     }()
     
+    private let joinStackView2 : UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.alignment = .leading
+        stackView.spacing = 24
+        
+        return stackView
+    }()
+    
     private var joinIDInput = JoinInputView(placeholder: "아이디를 입력해주세요",
                                                 guide: "아이디")
     private var joinPasswordInput = JoinInputView(placeholder: "비밀번호를 입력해주세요",
                                                   guide: "비밀번호")
     private var joinPasswordCheckInput = JoinInputView(placeholder: "비밀번호를 한번더 입력해주세요",
                                                        guide: "비밀번호 확인")
+    private var passwordDescription: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 10, weight: .light)
+        label.textColor = .red
+
+        return label
+    }()
+    
     private var joinNameInput = JoinInputView(placeholder: "이름을 입력해주세요",
                                               guide: "이름")
     private var joinEmailInput = JoinInputView(placeholder: "이메일을 입력해주세요",
@@ -94,36 +112,56 @@ final class JoinViewController : UIViewController {
         
         var joinSuccess = false
         
-        let requestBody = UserRequestDTO(
-            email: email,
-            loginId: id,
-            name: name,
-            password: password,
-            style1: style1,
-            style2: style2,
-            style3: style3,
-            style4: style4
-        )
-        
-        Task {
-            joinSuccess = try await TokenAPI.join(requestBody).performRequest(with: requestBody)
+        if password == passwordCheck {
+            let requestBody = UserRequestDTO(
+                email: email,
+                loginId: id,
+                name: name,
+                password: password,
+                style1: style1,
+                style2: style2,
+                style3: style3,
+                style4: style4
+            )
             
-            if joinSuccess == true {
-                let joinSuccessAlert = UIAlertController(title: "알림",
-                                                         message: "회원가입 성공.",
-                                                         preferredStyle: UIAlertController.Style.alert)
+            Task {
+                joinSuccess = try await TokenAPI.join(requestBody).performRequest(with: requestBody)
                 
-                let success = UIAlertAction(title: "확인",
-                                            style: .default) { action in
-                    self.delegate?.backToLoginVC()
+                switch joinSuccess {
+                case true:
+                    let joinSuccessAlert = UIAlertController(title: "알림",
+                                                             message: "회원가입 성공.",
+                                                             preferredStyle: UIAlertController.Style.alert)
+                    
+                    let success = UIAlertAction(title: "확인",
+                                                style: .default) { action in
+                        self.delegate?.backToLoginVC()
+                    }
+                    
+                    joinSuccessAlert.addAction(success)
+                    self.present(joinSuccessAlert, animated: true, completion: nil)
+                    
+                case false:
+                    let joinFailureAlert = UIAlertController(title: "알림",
+                                                             message: "회원가입 실패.",
+                                                             preferredStyle: UIAlertController.Style.alert)
+                    
+                    let failure = UIAlertAction(title: "확인",
+                                                style: .destructive) { action in
+                        self.dismiss(animated: true)
+                    }
+                    
+                    joinFailureAlert.addAction(failure)
+                    self.present(joinFailureAlert, animated: true, completion: nil)
+                    
+                default: break
                 }
-                
-                joinSuccessAlert.addAction(success)
-                self.present(joinSuccessAlert, animated: true, completion: nil)
             }
-            else {
-                ///
-            }
+        }
+        
+        else {
+            /// 비밀번호 !=  비밀번호 확인란
+            passwordDescription.text = "비밀번호를 확인해주세요."
         }
     }
     
@@ -150,14 +188,17 @@ final class JoinViewController : UIViewController {
     private func setLayout() {
         [joinIDInput,
          joinPasswordInput,
-         joinPasswordCheckInput,
-         joinNameInput,
+         joinPasswordCheckInput].forEach{
+            joinStackView.addArrangedSubview($0)
+        }
+        
+        [joinNameInput,
          joinEmailInput,
          firstPickerView,
          secondPickerView,
          thirdPickerView,
-         fourthPickerView].forEach{
-            joinStackView.addArrangedSubview($0)
+         fourthPickerView].forEach {
+            joinStackView2.addArrangedSubview($0)
         }
         
         [joinLabel,
@@ -168,7 +209,9 @@ final class JoinViewController : UIViewController {
         
         scrollView.addSubview(contentView)
         
-        [joinStackView].forEach {
+        [joinStackView,
+         passwordDescription,
+         joinStackView2].forEach {
             contentView.addSubview($0)
         }
         
@@ -192,6 +235,16 @@ final class JoinViewController : UIViewController {
         joinStackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(5)
             $0.leading.equalToSuperview().offset(25)
+        }
+        
+        passwordDescription.snp.makeConstraints {
+            $0.top.equalTo(joinStackView.snp.bottom).offset(5)
+            $0.leading.equalTo(joinStackView.snp.leading)
+        }
+        
+        joinStackView2.snp.makeConstraints {
+            $0.top.equalTo(passwordDescription.snp.bottom).offset(25)
+            $0.leading.equalTo(passwordDescription.snp.leading)
             $0.trailing.equalToSuperview().offset(-25)
         }
                 

@@ -50,8 +50,6 @@ final class RegisterImageViewController : BaseViewController {
     private var imageInput4 = ImageInputButton()
     
     private lazy var registerButton = PersonalClosetButton("적합도를 알려주세요!",
-                                                                
-
                                                            titleColor: .darkBlue,
                                                            backColor: .skyBlue,
                                                            action: UIAction { _ in

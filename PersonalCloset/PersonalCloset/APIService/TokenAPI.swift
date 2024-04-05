@@ -8,7 +8,7 @@
 import Foundation
 
 enum TokenAPI {
-    static let authenticationURL = "http://54.180.107.32:8081/user/"
+    static let authenticationURL = "http://43.201.27.151:8081/user"
     
     case login (_ id: String,_ password: String)
     case join (_ param: UserRequestDTO)
@@ -16,9 +16,9 @@ enum TokenAPI {
     var path: String{
         switch self {
         case .login(let id, let password):
-            return "login?loginId=\(id)&password=\(password)"
+            return "/login?loginId=\(id)&password=\(password)"
         case .join:
-            return "join"
+            return "/join"
         }
     }
     
@@ -70,20 +70,21 @@ enum TokenAPI {
             
             else if case .join = self {
                 let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
-                print("Response Data: \(dataContent.msg)")
+                print("Response Data: \(dataContent.message)")
                 return true
             }
             
             else {
                 let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
-                print("Response Data: \(dataContent.msg)")
+                print("Response Data: \(dataContent.message)")
                 return false
             }
         }
         
+        /// response가 400~600번대인지 확인하는 부분
         else if (400..<600).contains(httpResponse.statusCode) {
             let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
-            print("Response Data: \(dataContent.msg)")
+            print("Response Data: \(dataContent.message)")
             print("error: \(httpResponse.statusCode)")
             return false
         }

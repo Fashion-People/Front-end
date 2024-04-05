@@ -146,12 +146,9 @@
 		290DEEBF2BAB05ED002CB29C /* APIService */ = {
 			isa = PBXGroup;
 			children = (
+				2996B61A2BBA736800591E64 /* DTO */,
 				2916A34B2BA06C4300758747 /* ClothesAPI.swift */,
-				2916A34D2BA06DB700758747 /* ClothRequestDTO.swift */,
 				2916A3572BA092A400758747 /* TokenAPI.swift */,
-				2916A3592BA092D100758747 /* UserRequestDTO.swift */,
-				2916A3512BA085EA00758747 /* ServerStatus.swift */,
-				296492052BB5198D00FD990C /* ModifyRequestDTO.swift */,
 			);
 			path = APIService;
 			sourceTree = "<group>";
@@ -310,6 +307,17 @@
 				299CCE5A2B4679EA0054505E /* KeyboardHide+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		2996B61A2BBA736800591E64 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				2916A3512BA085EA00758747 /* ServerStatus.swift */,
+				2916A34D2BA06DB700758747 /* ClothRequestDTO.swift */,
+				2916A3592BA092D100758747 /* UserRequestDTO.swift */,
+				296492052BB5198D00FD990C /* ModifyRequestDTO.swift */,
+			);
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		29A9C0892B3FE62900209641 = {

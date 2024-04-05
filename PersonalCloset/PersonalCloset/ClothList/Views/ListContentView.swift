@@ -108,7 +108,7 @@ final class ListContentView: UIView, UIContentView {
 
         imageSettingButton.snp.makeConstraints {
             $0.centerY.equalTo(clothImageView.snp.centerY)
-            $0.trailing.equalToSuperview().offset(-30)
+            $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(30)
             $0.width.equalTo(30)
         }

@@ -21,7 +21,7 @@ enum ClothesAPI {
 }
 
 extension ClothesAPI {
-    static let baseURL = "http://54.180.107.32:8081/clothes"
+    static let baseURL = "http://43.201.27.151:8081/clothes"
     
     var path: String {
         switch self {
@@ -31,7 +31,7 @@ extension ClothesAPI {
         case .createCloth:
             return "/save"
         case .fetchAllClothes:
-            return "/all/fashionPP"
+            return "/all"
         case .modifyCloth(let clothId):
             return "/update/\(clothId)"
         }
