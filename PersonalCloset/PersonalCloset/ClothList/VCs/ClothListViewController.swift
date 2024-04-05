@@ -46,16 +46,31 @@ final class ClothListViewController : BaseViewController {
     
     // MARK: - UICollectionView config (+ DiffableDataSource)
     private lazy var clothListCollectionView : UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 0
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.allowsMultipleSelectionDuringEditing = true
         collectionView.delegate = self
     
         return collectionView
     }()
     
+    private func createLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .absolute(100))
+        
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .absolute(100))
+        
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        
+        return layout
+    }
+
     private func setupDataSource() {
         let cellRegistration = UICollectionView.CellRegistration<
                                                 ListCollectionViewCell,
@@ -90,7 +105,7 @@ final class ClothListViewController : BaseViewController {
     
     /// deleteList method
     // 삭제하려는 cell이 삭제되지 않는 버그
-    func deleteList(listNumber: Int) {
+    private func deleteList(listNumber: Int) {
         Task {
             do {
                 try await ClothesAPI.deleteCloth(clothId: listNumber).performRequest()
@@ -106,7 +121,7 @@ final class ClothListViewController : BaseViewController {
     }
     
     /// modifyList method
-    func modifyList(listNumber: Int) {
+    private func modifyList(listNumber: Int) {
         let modifyAlert = UIAlertController(title: "변경", message: "변경 내용을 작성해주세요", preferredStyle: UIAlertController.Style.alert)
         modifyAlert.addTextField()
         
