@@ -15,6 +15,8 @@
 		2916A3562BA0928400758747 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916A3552BA0928400758747 /* TokenManager.swift */; };
 		2916A3582BA092A400758747 /* TokenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916A3572BA092A400758747 /* TokenAPI.swift */; };
 		2916A35A2BA092D100758747 /* UserRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916A3592BA092D100758747 /* UserRequestDTO.swift */; };
+		291E6DB62BBFBF6D002BAAAC /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291E6DB52BBFBF6D002BAAAC /* LocationModel.swift */; };
+		291E6DB82BBFC022002BAAAC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291E6DB72BBFC022002BAAAC /* LocationManager.swift */; };
 		2926A8752B9744B600C4BCA4 /* ClothListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2926A8742B9744B600C4BCA4 /* ClothListModel.swift */; };
 		292BE6B42B4D26BA00BF3EE9 /* JoinPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */; };
 		29308B7B2BB6C0A600342955 /* S3Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29308B7A2BB6C0A600342955 /* S3Configuration.swift */; };
@@ -70,6 +72,8 @@
 		2916A3552BA0928400758747 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		2916A3572BA092A400758747 /* TokenAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenAPI.swift; sourceTree = "<group>"; };
 		2916A3592BA092D100758747 /* UserRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestDTO.swift; sourceTree = "<group>"; };
+		291E6DB52BBFBF6D002BAAAC /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
+		291E6DB72BBFC022002BAAAC /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		2926A8742B9744B600C4BCA4 /* ClothListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothListModel.swift; sourceTree = "<group>"; };
 		292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPickerView.swift; sourceTree = "<group>"; };
 		29308B7A2BB6C0A600342955 /* S3Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = S3Configuration.swift; sourceTree = "<group>"; };
@@ -295,6 +299,8 @@
 				2916A3532BA0926C00758747 /* TokenModel.swift */,
 				2916A3552BA0928400758747 /* TokenManager.swift */,
 				29308B7A2BB6C0A600342955 /* S3Configuration.swift */,
+				291E6DB52BBFBF6D002BAAAC /* LocationModel.swift */,
+				291E6DB72BBFC022002BAAAC /* LocationManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -474,8 +480,10 @@
 				295FAD3A2B57985B003BC20B /* ListCoordinator.swift in Sources */,
 				29A9C0B32B3FE93C00209641 /* SettingViewController.swift in Sources */,
 				295FAD3C2B5798FA003BC20B /* ListCollectionViewCell.swift in Sources */,
+				291E6DB62BBFBF6D002BAAAC /* LocationModel.swift in Sources */,
 				2926A8752B9744B600C4BCA4 /* ClothListModel.swift in Sources */,
 				2982023A2B43C2F100B7DEB3 /* TopView.swift in Sources */,
+				291E6DB82BBFC022002BAAAC /* LocationManager.swift in Sources */,
 				299CCE5B2B4679EA0054505E /* KeyboardHide+.swift in Sources */,
 				29DA5F612B4542A500F45CC6 /* InputView.swift in Sources */,
 				298202692B4452D800B7DEB3 /* LoginViewController.swift in Sources */,
