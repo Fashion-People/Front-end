@@ -153,8 +153,6 @@ final class JoinViewController : UIViewController {
                     
                     joinFailureAlert.addAction(failure)
                     self.present(joinFailureAlert, animated: true, completion: nil)
-                    
-                default: break
                 }
             }
         }
