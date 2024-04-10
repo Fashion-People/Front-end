@@ -1,60 +1,37 @@
 //
-//  ClothesAPI.swift
+//  FitnessTestAPI.swift
 //  PersonalCloset
 //
-//  Created by Bowon Han on 3/12/24.
+//  Created by Bowon Han on 4/10/24.
 //
 
 import Foundation
 
-enum FetchError: Error {
-    case invalidStatus
-    case jsonDecodeError
+enum FitnessTestAPI {
+    static let baseURL = "http://43.201.27.151:8081"
+    
+    case fitnessTest
 }
 
-enum ClothesAPI {
-    static let baseURL = "http://43.201.27.151:8081/clothes"
-
-    case fetchCloth(clothesNumber: Int)
-    case fetchAllClothes
-    case deleteCloth(clothId: Int)
-    case createCloth(_ param: ClothRequestDTO)
-    case modifyCloth(clothId: Int)
-}
-
-extension ClothesAPI {
+extension FitnessTestAPI {
     var path: String {
         switch self {
-        case .fetchCloth(let clothId),
-            .deleteCloth(let clothId):
-            return "/\(clothId)"
-        case .createCloth:
-            return "/save"
-        case .fetchAllClothes:
-            return "/all"
-        case .modifyCloth(let clothId):
-            return "/update/\(clothId)"
+        case .fitnessTest:
+            "/analysis"
         }
     }
     
     var method: String {
         switch self {
-        case .fetchCloth,
-            .fetchAllClothes:
-            return "GET"
-        case .createCloth:
-            return "POST"
-        case .deleteCloth:
-            return "DELETE"
-        case .modifyCloth:
-            return "PUT"
+        case .fitnessTest:
+            "POST"
         }
     }
     
     var url: URL {
-        return URL(string: ClothesAPI.baseURL + path)!
+        return URL(string: FitnessTestAPI.baseURL + path)!
     }
-        
+    
     var request: URLRequest {
         let token = TokenManager.shared.token.accessToken
         
@@ -86,16 +63,11 @@ extension ClothesAPI {
         
         /// response status가 200번대인지 확인하는 부분
         if (200..<300).contains(httpResponse.statusCode) {
-            if case .fetchAllClothes = self {
+            if case .fitnessTest = self {
                 let clothList = try JSONDecoder().decode([ClothListModel].self, from: data)
                 print(clothList)
                 
                 ClothListManager.shared.clothList = clothList
-            }
-            
-            else {
-                let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
-                print("Response Data: \(dataContent.message)")
             }
         }
         
@@ -106,5 +78,4 @@ extension ClothesAPI {
             print("error: \(httpResponse.statusCode)")
         }
     }
-
 }
