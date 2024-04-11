@@ -1,40 +1,35 @@
 //
-//  TokenAPI.swift
+//  WeatherAPI.swift
 //  PersonalCloset
 //
-//  Created by Bowon Han on 3/12/24.
+//  Created by Bowon Han on 4/10/24.
 //
 
 import Foundation
 
-enum TokenAPI {
-    static let authenticationURL = "http://43.201.27.151:8081/user"
+enum WeatherAPI {
+    static let baseURL = "http://43.201.27.151:8081/weather"
     
-    case login (_ id: String,_ password: String)
-    case join (_ param: UserRequestDTO)
-    
+    case fetchWeatherStatus(latitudeValue: String, longtitudeValue: String)
 }
 
-extension TokenAPI {
-    var path: String{
+extension WeatherAPI {
+    var path: String {
         switch self {
-        case .login(let id, let password):
-            return "/login?loginId=\(id)&password=\(password)"
-        case .join:
-            return "/join"
+        case .fetchWeatherStatus(let latitudeValue, let longtitudeValue):
+            "/get/condition?latitude=\(latitudeValue)&longitude=\(longtitudeValue)"
         }
     }
     
     var method: String {
         switch self {
-        case .login,
-             .join:
-            return "POST"
+        case .fetchWeatherStatus:
+            "GET"
         }
     }
     
     var url: URL {
-        return URL(string: TokenAPI.authenticationURL + path)!
+        return URL(string: WeatherAPI.baseURL + path)!
     }
     
     var request: URLRequest {
@@ -44,7 +39,7 @@ extension TokenAPI {
         return request
     }
     
-    func performRequest(with parameters: Encodable? = nil) async throws -> Bool{
+    func performRequest(with parameters: Encodable? = nil) async throws {
         /// URLRequest 생성
         var request = self.request
 
@@ -65,22 +60,14 @@ extension TokenAPI {
         /// response가 200번대인지 확인하는 부분
         if (200..<300).contains(httpResponse.statusCode) {
             /// Handle success (200번대)
-            if case .login = self {
-                let loginToken = String(decoding: data, as: UTF8.self)
-                TokenManager.shared.token.accessToken = loginToken
-                return true
-            }
-            
-            else if case .join = self {
-                let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
-                print("Response Data: \(dataContent.message)")
-                return true
+            if case .fetchWeatherStatus = self {
+                let weatherStatus = String(decoding: data, as: UTF8.self)
+                WeatherManager.shared.weather.weatherStatus = weatherStatus
             }
             
             else {
                 let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
                 print("Response Data: \(dataContent.message)")
-                return false
             }
         }
         
@@ -89,8 +76,6 @@ extension TokenAPI {
             let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
             print("Response Data: \(dataContent.message)")
             print("error: \(httpResponse.statusCode)")
-            return false
         }
-        return false
     }
 }

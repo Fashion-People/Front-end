@@ -50,6 +50,11 @@
 		29A9C0B12B3FE92D00209641 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9C0B02B3FE92D00209641 /* MainViewController.swift */; };
 		29A9C0B32B3FE93C00209641 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9C0B22B3FE93C00209641 /* SettingViewController.swift */; };
 		29A9C0B52B3FE96600209641 /* RegisterImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A9C0B42B3FE96600209641 /* RegisterImageViewController.swift */; };
+		29C70C0D2BC6597D00286BE6 /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C70C0C2BC6597D00286BE6 /* WeatherAPI.swift */; };
+		29C70C0F2BC65E7400286BE6 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C70C0E2BC65E7400286BE6 /* WeatherModel.swift */; };
+		29C70C112BC65EB700286BE6 /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C70C102BC65EB700286BE6 /* WeatherManager.swift */; };
+		29C70C132BC6615E00286BE6 /* FitnessTestRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C70C122BC6615E00286BE6 /* FitnessTestRequestDTO.swift */; };
+		29C70C152BC661AF00286BE6 /* FitnessTestAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C70C142BC661AF00286BE6 /* FitnessTestAPI.swift */; };
 		29DA5F612B4542A500F45CC6 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DA5F602B4542A500F45CC6 /* InputView.swift */; };
 		29DA5F632B45600600F45CC6 /* JoinInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DA5F622B45600600F45CC6 /* JoinInputView.swift */; };
 		29DBBA602B90B86D00A36C27 /* ListContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DBBA5F2B90B86D00A36C27 /* ListContentView.swift */; };
@@ -108,6 +113,11 @@
 		29A9C0B02B3FE92D00209641 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		29A9C0B22B3FE93C00209641 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		29A9C0B42B3FE96600209641 /* RegisterImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterImageViewController.swift; sourceTree = "<group>"; };
+		29C70C0C2BC6597D00286BE6 /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
+		29C70C0E2BC65E7400286BE6 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		29C70C102BC65EB700286BE6 /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
+		29C70C122BC6615E00286BE6 /* FitnessTestRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTestRequestDTO.swift; sourceTree = "<group>"; };
+		29C70C142BC661AF00286BE6 /* FitnessTestAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTestAPI.swift; sourceTree = "<group>"; };
 		29DA5F602B4542A500F45CC6 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		29DA5F622B45600600F45CC6 /* JoinInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinInputView.swift; sourceTree = "<group>"; };
 		29DBBA5F2B90B86D00A36C27 /* ListContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListContentView.swift; sourceTree = "<group>"; };
@@ -152,6 +162,8 @@
 			children = (
 				2996B61A2BBA736800591E64 /* DTO */,
 				2916A34B2BA06C4300758747 /* ClothesAPI.swift */,
+				29C70C142BC661AF00286BE6 /* FitnessTestAPI.swift */,
+				29C70C0C2BC6597D00286BE6 /* WeatherAPI.swift */,
 				2916A3572BA092A400758747 /* TokenAPI.swift */,
 			);
 			path = APIService;
@@ -294,13 +306,15 @@
 			isa = PBXGroup;
 			children = (
 				297F6CD72B5F9EE4009A1652 /* S3Upload.swift */,
+				29308B7A2BB6C0A600342955 /* S3Configuration.swift */,
 				2926A8742B9744B600C4BCA4 /* ClothListModel.swift */,
 				2916A34F2BA0859000758747 /* ClothListManager.swift */,
 				2916A3532BA0926C00758747 /* TokenModel.swift */,
 				2916A3552BA0928400758747 /* TokenManager.swift */,
-				29308B7A2BB6C0A600342955 /* S3Configuration.swift */,
 				291E6DB52BBFBF6D002BAAAC /* LocationModel.swift */,
 				291E6DB72BBFC022002BAAAC /* LocationManager.swift */,
+				29C70C0E2BC65E7400286BE6 /* WeatherModel.swift */,
+				29C70C102BC65EB700286BE6 /* WeatherManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -322,6 +336,7 @@
 				2916A34D2BA06DB700758747 /* ClothRequestDTO.swift */,
 				2916A3592BA092D100758747 /* UserRequestDTO.swift */,
 				296492052BB5198D00FD990C /* ModifyRequestDTO.swift */,
+				29C70C122BC6615E00286BE6 /* FitnessTestRequestDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -451,6 +466,7 @@
 				295FF8632B53DD88006DDD50 /* MainCoordinator.swift in Sources */,
 				29A9C0AF2B3FE7A700209641 /* UIColor+.swift in Sources */,
 				29DBBA602B90B86D00A36C27 /* ListContentView.swift in Sources */,
+				29C70C112BC65EB700286BE6 /* WeatherManager.swift in Sources */,
 				29A9C0B52B3FE96600209641 /* RegisterImageViewController.swift in Sources */,
 				299FA59C2BB2F0BE00F73259 /* TabBarItemType.swift in Sources */,
 				2916A34C2BA06C4300758747 /* ClothesAPI.swift in Sources */,
@@ -463,6 +479,7 @@
 				2982026B2B4452DF00B7DEB3 /* JoinViewController.swift in Sources */,
 				2916A3502BA0859000758747 /* ClothListManager.swift in Sources */,
 				297F6CD82B5F9EE4009A1652 /* S3Upload.swift in Sources */,
+				29C70C152BC661AF00286BE6 /* FitnessTestAPI.swift in Sources */,
 				29DBBA622B90B88000A36C27 /* ListContentConfiguration.swift in Sources */,
 				2916A3562BA0928400758747 /* TokenManager.swift in Sources */,
 				2916A3582BA092A400758747 /* TokenAPI.swift in Sources */,
@@ -474,11 +491,13 @@
 				29308B7B2BB6C0A600342955 /* S3Configuration.swift in Sources */,
 				29DA5F632B45600600F45CC6 /* JoinInputView.swift in Sources */,
 				2916A3542BA0926C00758747 /* TokenModel.swift in Sources */,
+				29C70C0D2BC6597D00286BE6 /* WeatherAPI.swift in Sources */,
 				298202632B43F1AB00B7DEB3 /* SettingTableViewCell.swift in Sources */,
 				292BE6B42B4D26BA00BF3EE9 /* JoinPickerView.swift in Sources */,
 				2916A34E2BA06DB700758747 /* ClothRequestDTO.swift in Sources */,
 				295FAD3A2B57985B003BC20B /* ListCoordinator.swift in Sources */,
 				29A9C0B32B3FE93C00209641 /* SettingViewController.swift in Sources */,
+				29C70C132BC6615E00286BE6 /* FitnessTestRequestDTO.swift in Sources */,
 				295FAD3C2B5798FA003BC20B /* ListCollectionViewCell.swift in Sources */,
 				291E6DB62BBFBF6D002BAAAC /* LocationModel.swift in Sources */,
 				2926A8752B9744B600C4BCA4 /* ClothListModel.swift in Sources */,
@@ -488,6 +507,7 @@
 				29DA5F612B4542A500F45CC6 /* InputView.swift in Sources */,
 				298202692B4452D800B7DEB3 /* LoginViewController.swift in Sources */,
 				29A9C0982B3FE62900209641 /* SceneDelegate.swift in Sources */,
+				29C70C0F2BC65E7400286BE6 /* WeatherModel.swift in Sources */,
 				2916A35A2BA092D100758747 /* UserRequestDTO.swift in Sources */,
 				296353E42B8DECDE00AB8A2B /* PersonalClosetButton.swift in Sources */,
 				296492062BB5198D00FD990C /* ModifyRequestDTO.swift in Sources */,
