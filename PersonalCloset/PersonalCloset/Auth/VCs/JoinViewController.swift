@@ -248,9 +248,9 @@ final class JoinViewController : UIViewController {
                 
         joinButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
-            $0.centerX.equalToSuperview()
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-20)
             $0.height.equalTo(40)
-            $0.width.equalTo(300)
         }
     }
 }

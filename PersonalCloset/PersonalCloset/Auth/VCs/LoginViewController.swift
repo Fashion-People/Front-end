@@ -46,7 +46,7 @@ final class LoginViewController : UIViewController {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
-        stackView.alignment = .center
+        stackView.alignment = .leading
         stackView.spacing = 7
         
         return stackView
@@ -146,9 +146,17 @@ final class LoginViewController : UIViewController {
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
         }
         
+        [IDTextField, passwordTextField].forEach {
+            $0.snp.makeConstraints {
+                $0.leading.equalTo(inputStackView.snp.leading)
+                $0.trailing.equalTo(inputStackView.snp.trailing)
+            }
+        }
+        
         inputStackView.snp.makeConstraints {
             $0.top.equalTo(loginLabel.snp.bottom).offset(30)
-            $0.centerX.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(50)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-50)
         }
         
         loginDescription.snp.makeConstraints {
@@ -159,23 +167,23 @@ final class LoginViewController : UIViewController {
         
         loginButton.snp.makeConstraints {
             $0.top.equalTo(loginDescription.snp.bottom).offset(30)
-            $0.centerX.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.equalTo(inputStackView.snp.leading)
+            $0.trailing.equalTo(inputStackView.snp.trailing)
             $0.height.equalTo(40)
-            $0.width.equalTo(295)
         }
         
         lineView.snp.makeConstraints {
             $0.top.equalTo(loginButton.snp.bottom).offset(20)
-            $0.centerX.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.equalTo(loginButton.snp.leading)
+            $0.trailing.equalTo(loginButton.snp.trailing)
             $0.height.equalTo(1)
-            $0.width.equalTo(295)
         }
         
         joinButton.snp.makeConstraints {
             $0.top.equalTo(lineView.snp.bottom).offset(30)
-            $0.centerX.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.equalTo(lineView.snp.leading)
+            $0.trailing.equalTo(lineView.snp.trailing)
             $0.height.equalTo(40)
-            $0.width.equalTo(295)
         }
     }
 }
