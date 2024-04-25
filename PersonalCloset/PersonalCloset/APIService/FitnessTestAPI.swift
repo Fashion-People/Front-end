@@ -8,7 +8,7 @@
 import Foundation
 
 enum FitnessTestAPI {
-    static let baseURL = "http://43.201.27.151:8081"
+    static let baseURL = "http://13.124.188.170:8081"
     
     case fitnessTest
 }
@@ -65,7 +65,6 @@ extension FitnessTestAPI {
         if (200..<300).contains(httpResponse.statusCode) {
             if case .fitnessTest = self {
                 let clothList = try JSONDecoder().decode([ClothListModel].self, from: data)
-                print(clothList)
                 
                 ClothListManager.shared.clothList = clothList
             }
