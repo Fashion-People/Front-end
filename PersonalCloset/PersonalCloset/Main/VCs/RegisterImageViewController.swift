@@ -16,6 +16,19 @@ protocol RegisterImageViewControllerDelegate : AnyObject {
 final class RegisterImageViewController : BaseViewController {
     weak var delegate : RegisterImageViewControllerDelegate!
     
+    private enum Metric {
+        enum InputImageView {
+            static let top: CGFloat = 15
+            static let sideInset: CGFloat = 30
+        }
+        
+        enum RegisterButton {
+            static let heigth: CGFloat = 50
+            static let width: CGFloat = 230
+            static let top: CGFloat = 40
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -157,22 +170,22 @@ final class RegisterImageViewController : BaseViewController {
         }
         
         imageInputStackView1.snp.makeConstraints {
-            $0.top.equalTo(topView.snp.bottom).offset(20)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(30)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-30)
+            $0.top.equalTo(topView.snp.bottom).offset(Metric.InputImageView.top)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).inset(Metric.InputImageView.sideInset)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(Metric.InputImageView.sideInset)
         }
         
         imageInputStackView2.snp.makeConstraints {
-            $0.top.equalTo(imageInputStackView1.snp.bottom).offset(15)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(30)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-30)
+            $0.top.equalTo(imageInputStackView1.snp.bottom).offset(Metric.InputImageView.top)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).inset(Metric.InputImageView.sideInset)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(Metric.InputImageView.sideInset)
         }
         
         registerButton.snp.makeConstraints {
-            $0.top.equalTo(imageInputStackView2.snp.bottom).offset(40)
+            $0.top.equalTo(imageInputStackView2.snp.bottom).offset(Metric.RegisterButton.top)
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
-            $0.width.equalTo(230)
-            $0.height.equalTo(50)
+            $0.width.equalTo(Metric.RegisterButton.width)
+            $0.height.equalTo(Metric.RegisterButton.heigth)
         }
     }
 }
