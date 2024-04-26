@@ -50,9 +50,8 @@ final class LoginViewController : UIViewController {
         view.backgroundColor = .systemBackground
         self.hideKeyboardWhenTappedAround()
         
-        UIconfig()
-        stackLayout()
-        setLayout()
+        setupStackLayout()
+        setupLayout()
         backBarButtonConfig()
         setupStyles()
     }
@@ -90,10 +89,6 @@ final class LoginViewController : UIViewController {
         return label
     }()
     
-    private func UIconfig() {
-        lineView.backgroundColor = .bwGray
-    }
-
     private lazy var loginButton = PersonalClosetButton("로그인",
                                                     titleColor:.darkBlue,
                                                     backColor: .skyBlue,
@@ -101,7 +96,12 @@ final class LoginViewController : UIViewController {
                                                                 self.tapLoginButton()
                                                             })
     
-    private let lineView = UIView()
+    private let lineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .bwGray
+        
+        return view
+    }()
     
     private lazy var joinButton = PersonalClosetButton("회원가입",
                                                     titleColor:.darkBlue,
@@ -151,14 +151,14 @@ final class LoginViewController : UIViewController {
     }
     
     // MARK: - UI layout config
-    private func stackLayout() {
+    private func setupStackLayout() {
         [IDTextField,
          passwordTextField].forEach {
             inputStackView.addArrangedSubview($0)
         }
     }
     
-    private func setLayout() {
+    private func setupLayout() {
         [loginLabel,
          inputStackView,
          loginDescription,
