@@ -17,6 +17,33 @@ protocol LoginViewControllerDelegate : AnyObject {
 final class LoginViewController : UIViewController {    
     weak var delegate : LoginViewControllerDelegate?
     
+    private enum Metric {
+        enum LoginLabel {
+            static let top: CGFloat = 90
+        }
+         
+        enum InputView {
+            static let spacing: CGFloat = 7
+            static let top: CGFloat = 30
+            static let sideInset: CGFloat = 50
+        }
+        
+        enum LoginDescription {
+            static let top: CGFloat = 5
+            static let height: CGFloat = 20
+        }
+        
+        enum Buttons {
+            static let top: CGFloat = 30
+            static let height: CGFloat = 40
+        }
+        
+        enum LineView {
+            static let top: CGFloat = 20
+            static let height: CGFloat = 1
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -142,7 +169,7 @@ final class LoginViewController : UIViewController {
         }
         
         loginLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(90)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(Metric.LoginLabel.top)
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
         }
         
@@ -154,36 +181,36 @@ final class LoginViewController : UIViewController {
         }
         
         inputStackView.snp.makeConstraints {
-            $0.top.equalTo(loginLabel.snp.bottom).offset(30)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(50)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-50)
+            $0.top.equalTo(loginLabel.snp.bottom).offset(Metric.InputView.top)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).inset(Metric.InputView.sideInset)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(Metric.InputView.sideInset)
         }
         
         loginDescription.snp.makeConstraints {
-            $0.top.equalTo(inputStackView.snp.bottom).offset(5)
+            $0.top.equalTo(inputStackView.snp.bottom).offset(Metric.LoginDescription.top)
             $0.leading.equalTo(inputStackView.snp.leading)
-            $0.height.equalTo(20)
+            $0.height.equalTo(Metric.LoginDescription.height)
         }
         
         loginButton.snp.makeConstraints {
-            $0.top.equalTo(loginDescription.snp.bottom).offset(30)
+            $0.top.equalTo(loginDescription.snp.bottom).offset(Metric.Buttons.top)
             $0.leading.equalTo(inputStackView.snp.leading)
             $0.trailing.equalTo(inputStackView.snp.trailing)
-            $0.height.equalTo(40)
+            $0.height.equalTo(Metric.Buttons.height)
         }
         
         lineView.snp.makeConstraints {
-            $0.top.equalTo(loginButton.snp.bottom).offset(20)
+            $0.top.equalTo(loginButton.snp.bottom).offset(Metric.LineView.top)
             $0.leading.equalTo(loginButton.snp.leading)
             $0.trailing.equalTo(loginButton.snp.trailing)
-            $0.height.equalTo(1)
+            $0.height.equalTo(Metric.LineView.height)
         }
         
         joinButton.snp.makeConstraints {
-            $0.top.equalTo(lineView.snp.bottom).offset(30)
+            $0.top.equalTo(lineView.snp.bottom).offset(Metric.Buttons.top)
             $0.leading.equalTo(lineView.snp.leading)
             $0.trailing.equalTo(lineView.snp.trailing)
-            $0.height.equalTo(40)
+            $0.height.equalTo(Metric.Buttons.height)
         }
     }
 }
