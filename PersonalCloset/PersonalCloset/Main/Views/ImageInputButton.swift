@@ -8,8 +8,12 @@
 import UIKit
 import SnapKit
 
-final class ImageInputButton : UIView {
-    lazy var inputImageButton : UIButton = {
+final class ImageInputButton: UIView {
+    private enum Metric {
+        static let height: CGFloat = 170
+    }
+    
+    lazy var inputImageButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .lightGray
         button.tintColor = .black
@@ -32,7 +36,7 @@ final class ImageInputButton : UIView {
         
         inputImageButton.snp.makeConstraints {
             $0.top.leading.bottom.trailing.equalToSuperview()
-            $0.height.equalTo(170)
+            $0.height.equalTo(Metric.height)
         }
     }
     
