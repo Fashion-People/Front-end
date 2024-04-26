@@ -8,36 +8,30 @@
 import UIKit
 import SnapKit
 
-final class ImageInputButton: UIView {
+final class ImageInputButton: UIButton {
     private enum Metric {
         static let height: CGFloat = 170
     }
-    
-    lazy var inputImageButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .lightGray
-        button.tintColor = .black
-        button.layer.cornerRadius = 5
-                
-        return button
-    }()
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setLayout()
+        self.setupConstraints()
+        self.setupStyles()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
-    private func setLayout() {
-        addSubview(inputImageButton)
-        
-        inputImageButton.snp.makeConstraints {
-            $0.top.leading.bottom.trailing.equalToSuperview()
+    private func setupConstraints() {
+        self.snp.makeConstraints {
             $0.height.equalTo(Metric.height)
         }
     }
     
+    private func setupStyles() {
+        self.backgroundColor = .lightGray
+        self.tintColor = .black
+        self.layer.cornerRadius = 5
+    }
 }

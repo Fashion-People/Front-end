@@ -20,13 +20,14 @@ final class MainViewController : BaseViewController {
     
     private enum Metric {
         enum cameraButton {
-            static let top: CGFloat = 20.0
-            static let height: CGFloat = 200.0
-            static let sideInset: CGFloat = 30.0
+            static let top: CGFloat = 20
+            static let height: CGFloat = 200
+            static let sideInset: CGFloat = 30
         }
         
         enum emptyView {
-            static let inset: CGFloat = 30.0
+            static let top: CGFloat = 30
+            static let inset: CGFloat = 30
         }
     }
     
@@ -104,10 +105,10 @@ final class MainViewController : BaseViewController {
         }
         
         emptyView.snp.makeConstraints {
-            $0.top.equalTo(cameraButton.snp.bottom).offset(Metric.emptyView.inset)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(Metric.emptyView.inset)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(Metric.emptyView.inset)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(Metric.emptyView.inset)
+            $0.top.equalTo(cameraButton.snp.bottom).offset(Metric.emptyView.top)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).inset(Metric.emptyView.inset)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(Metric.emptyView.inset)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(Metric.emptyView.inset)
         }
     }
 }
@@ -125,7 +126,7 @@ extension MainViewController: CLLocationManagerDelegate {
         }
     }
         
-    // 위치 가져오기 실패
+    /// 위치 가져오기 실패
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("error")
     }
