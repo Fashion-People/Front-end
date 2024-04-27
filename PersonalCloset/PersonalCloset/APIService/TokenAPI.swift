@@ -43,16 +43,16 @@ extension TokenAPI {
         return request
     }
     
-    func performRequest(with parameters: Encodable? = nil) async throws -> Bool{
+    func performRequest(with parameters: Encodable? = nil) async throws -> Bool {
+        var successCheck: Bool = false
         /// URLRequest 생성
         var request = self.request
-
+        print(request)
+        
         if let parameters = parameters {
             request.httpBody = try JSONEncoder().encode(parameters)
         }
         
-        print(request)
-
         /// 실제로 request를 보내서 network를 하는 부분
         let (data, response) = try await URLSession.shared.data(for: request)
         print(data)
@@ -64,22 +64,19 @@ extension TokenAPI {
         /// response가 200번대인지 확인하는 부분
         if (200..<300).contains(httpResponse.statusCode) {
             /// Handle success (200번대)
+            
+            /// Login 로직
             if case .login = self {
                 let loginToken = String(decoding: data, as: UTF8.self)
                 TokenManager.shared.token.accessToken = loginToken
-                return true
+                successCheck = true
             }
             
+            /// Join 로직
             else if case .join = self {
                 let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
                 print("Response Data: \(dataContent.message)")
-                return true
-            }
-            
-            else {
-                let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
-                print("Response Data: \(dataContent.message)")
-                return false
+                successCheck = true
             }
         }
         
@@ -88,8 +85,9 @@ extension TokenAPI {
             let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
             print("Response Data: \(dataContent.message)")
             print("error: \(httpResponse.statusCode)")
-            return false
+            successCheck = false
         }
-        return false
+        
+        return successCheck
     }
 }

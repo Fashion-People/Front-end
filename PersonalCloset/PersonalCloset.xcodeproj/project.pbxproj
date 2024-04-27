@@ -20,6 +20,7 @@
 		2926A8752B9744B600C4BCA4 /* ClothListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2926A8742B9744B600C4BCA4 /* ClothListModel.swift */; };
 		292BE6B42B4D26BA00BF3EE9 /* JoinPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */; };
 		29308B7B2BB6C0A600342955 /* S3Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29308B7A2BB6C0A600342955 /* S3Configuration.swift */; };
+		2950A1D92BDD01B00046EF0E /* WeatherItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950A1D82BDD01B00046EF0E /* WeatherItemType.swift */; };
 		29578EF52BDBC1F400A321FD /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29578EF42BDBC1F400A321FD /* UIScrollView.swift */; };
 		29589FCA2B457839003578A3 /* ImageResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29589FC92B457839003578A3 /* ImageResultViewController.swift */; };
 		295FAD382B5796A3003BC20B /* ClothListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295FAD372B5796A3003BC20B /* ClothListViewController.swift */; };
@@ -83,6 +84,7 @@
 		2926A8742B9744B600C4BCA4 /* ClothListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothListModel.swift; sourceTree = "<group>"; };
 		292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPickerView.swift; sourceTree = "<group>"; };
 		29308B7A2BB6C0A600342955 /* S3Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = S3Configuration.swift; sourceTree = "<group>"; };
+		2950A1D82BDD01B00046EF0E /* WeatherItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherItemType.swift; sourceTree = "<group>"; };
 		29578EF42BDBC1F400A321FD /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		29589FC92B457839003578A3 /* ImageResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResultViewController.swift; sourceTree = "<group>"; };
 		295FAD372B5796A3003BC20B /* ClothListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothListViewController.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 			children = (
 				298202392B43C2F100B7DEB3 /* TopView.swift */,
 				296353E32B8DECDE00AB8A2B /* PersonalClosetButton.swift */,
+				2950A1D82BDD01B00046EF0E /* WeatherItemType.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				298202672B44269300B7DEB3 /* ImageInputButton.swift in Sources */,
+				2950A1D92BDD01B00046EF0E /* WeatherItemType.swift in Sources */,
 				295FF8632B53DD88006DDD50 /* MainCoordinator.swift in Sources */,
 				29A9C0AF2B3FE7A700209641 /* UIColor+.swift in Sources */,
 				29DBBA602B90B86D00A36C27 /* ListContentView.swift in Sources */,

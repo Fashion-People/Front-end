@@ -69,9 +69,9 @@ final class TopView: UIView {
         return button
     }()
     
-    private var weatherImage: UIImageView = {
+    lazy var weatherImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(systemName: "sun.rain")
+//        image.image = UIImage(systemName: "sun.rain")
         image.tintColor = .black
         image.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         

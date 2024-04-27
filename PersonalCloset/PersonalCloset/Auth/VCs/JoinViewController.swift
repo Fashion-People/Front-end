@@ -145,7 +145,7 @@ final class JoinViewController: UIViewController {
         let style3: String = thirdPickerView.third
         let style4: String = fourthPickerView.fourth
         
-        var joinSuccess = false
+        var joinSuccess: Bool = false
         
         if password == passwordCheck {
             let requestBody = UserRequestDTO(
@@ -162,32 +162,36 @@ final class JoinViewController: UIViewController {
             Task {
                 joinSuccess = try await TokenAPI.join(requestBody).performRequest(with: requestBody)
                 
-                switch joinSuccess {
-                case true:
-                    let joinSuccessAlert = UIAlertController(title: "알림",
-                                                             message: "회원가입 성공.",
-                                                             preferredStyle: UIAlertController.Style.alert)
-                    
-                    let success = UIAlertAction(title: "확인",
-                                                style: .default) { action in
-                        self.delegate?.backToLoginVC()
+                DispatchQueue.main.async {
+                    print(joinSuccess)
+
+                    switch joinSuccess {
+                    case true:
+                        let joinSuccessAlert = UIAlertController(title: "알림",
+                                                                 message: "회원가입 성공.",
+                                                                 preferredStyle: UIAlertController.Style.alert)
+                        
+                        let success = UIAlertAction(title: "확인",
+                                                    style: .default) { action in
+                            self.delegate?.backToLoginVC()
+                        }
+                        
+                        joinSuccessAlert.addAction(success)
+                        self.present(joinSuccessAlert, animated: true, completion: nil)
+                        
+                    case false:
+                        let joinFailureAlert = UIAlertController(title: "알림",
+                                                                 message: "회원가입 실패.",
+                                                                 preferredStyle: UIAlertController.Style.alert)
+                        
+                        let failure = UIAlertAction(title: "확인",
+                                                    style: .destructive) { action in
+                            self.dismiss(animated: true)
+                        }
+                        
+                        joinFailureAlert.addAction(failure)
+                        self.present(joinFailureAlert, animated: true, completion: nil)
                     }
-                    
-                    joinSuccessAlert.addAction(success)
-                    self.present(joinSuccessAlert, animated: true, completion: nil)
-                    
-                case false:
-                    let joinFailureAlert = UIAlertController(title: "알림",
-                                                             message: "회원가입 실패.",
-                                                             preferredStyle: UIAlertController.Style.alert)
-                    
-                    let failure = UIAlertAction(title: "확인",
-                                                style: .destructive) { action in
-                        self.dismiss(animated: true)
-                    }
-                    
-                    joinFailureAlert.addAction(failure)
-                    self.present(joinFailureAlert, animated: true, completion: nil)
                 }
             }
         }
