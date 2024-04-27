@@ -8,14 +8,14 @@
 import UIKit
 import SnapKit
 
-protocol ClothListViewControllerDelegate : AnyObject {
+protocol ClothListViewControllerDelegate: AnyObject {
     func presentListVC()
     func backToPreviousVC()
     func presentRegisterVC()
 }
 
-final class ClothListViewController : BaseViewController {
-    weak var delegate : ClothListViewControllerDelegate?
+final class ClothListViewController: BaseViewController {
+    weak var delegate: ClothListViewControllerDelegate?
     
     private enum Metric {
         static let top: CGFloat = 10
@@ -49,7 +49,7 @@ final class ClothListViewController : BaseViewController {
     }
     
     // MARK: - UICollectionView config (+ DiffableDataSource)
-    private lazy var clothListCollectionView : UICollectionView = {
+    private lazy var clothListCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.allowsMultipleSelectionDuringEditing = true
         collectionView.delegate = self
@@ -161,7 +161,7 @@ final class ClothListViewController : BaseViewController {
 
     // MARK: - button click method
     /// topView 내부 select 버튼 클릭에 따라 collectionView 의 선택버튼이 나타남
-    private func tabTopViewButtons(){
+    private func tabTopViewButtons() {
         topView.selectButton.addAction(UIAction { _ in
             
             /// Selecting a list of clothes to inspect
@@ -200,12 +200,12 @@ final class ClothListViewController : BaseViewController {
     }
 }
 
-extension ClothListViewController : UICollectionViewDelegateFlowLayout {
+extension ClothListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width : CGFloat = collectionView.bounds.width
+        let width: CGFloat = collectionView.bounds.width
         return CGSize(width: width, height: width/4)
     }
 }
