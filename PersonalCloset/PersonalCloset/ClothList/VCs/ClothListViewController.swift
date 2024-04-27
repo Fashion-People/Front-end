@@ -17,6 +17,10 @@ protocol ClothListViewControllerDelegate : AnyObject {
 final class ClothListViewController : BaseViewController {
     weak var delegate : ClothListViewControllerDelegate?
     
+    private enum Metric {
+        static let top: CGFloat = 10
+    }
+    
     private let clothListManager = ClothListManager.shared
     
     /// 상단 이미지 선택 button 클릭 유무 확인하기 위한 toggle
@@ -190,7 +194,7 @@ final class ClothListViewController : BaseViewController {
         }
         
         clothListCollectionView.snp.makeConstraints {
-            $0.top.equalTo(topView.snp.bottom).offset(10)
+            $0.top.equalTo(topView.snp.bottom).offset(Metric.top)
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
