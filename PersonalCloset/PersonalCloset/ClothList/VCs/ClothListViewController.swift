@@ -186,12 +186,14 @@ final class ClothListViewController: BaseViewController {
         }, for: .touchUpInside)
     }
         
-    override func setLayout() {
-        super.setLayout()
+    override func setupLayouts() {
+        super.setupLayouts()
         
-        [clothListCollectionView].forEach {
-            view.addSubview($0)
-        }
+        view.addSubview(clothListCollectionView)
+    }
+    
+    override func setupConstraints() {
+        super.setupConstraints()
         
         clothListCollectionView.snp.makeConstraints {
             $0.top.equalTo(topView.snp.bottom).offset(Metric.top)

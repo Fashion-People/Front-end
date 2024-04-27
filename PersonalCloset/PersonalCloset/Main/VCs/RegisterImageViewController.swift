@@ -153,8 +153,8 @@ final class RegisterImageViewController : BaseViewController {
     }
     
     // MARK: - setupLayout
-    override func setLayout() {
-        super.setLayout()
+    override func setupLayouts() {
+        super.setupLayouts()
         
         [imageInput1,imageInput2].forEach {
             imageInputStackView1.addArrangedSubview($0)
@@ -169,7 +169,11 @@ final class RegisterImageViewController : BaseViewController {
          registerButton].forEach {
             view.addSubview($0)
         }
-                
+    }
+    
+    override func setupConstraints() {
+        super.setupConstraints()
+        
         imageInputStackView1.snp.makeConstraints {
             $0.top.equalTo(topView.snp.bottom).offset(Metric.InputImageView.inputImageSpacing)
             $0.leading.equalTo(view.safeAreaLayoutGuide).inset(Metric.InputImageView.sideInset)

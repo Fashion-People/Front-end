@@ -52,9 +52,10 @@ final class JoinViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         self.hideKeyboardWhenTappedAround()
-        setLayout()
-        navigationBarConfig()
-        setupStyles()
+        self.setupLayouts()
+        self.setupConstraints()
+        self.setupStyles()
+        self.navigationBarConfig()
     }
     
     // MARK: - UI config
@@ -216,7 +217,7 @@ final class JoinViewController: UIViewController {
     }
     
     // MARK: - UI layout config
-    private func setLayout() {
+    private func setupLayouts() {
         [joinIDInput,
          joinPasswordInput,
          joinPasswordCheckInput].forEach{
@@ -245,7 +246,9 @@ final class JoinViewController: UIViewController {
          joinStackView2].forEach {
             contentView.addSubview($0)
         }
-        
+    }
+    
+    private func setupConstraints() {
         joinLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(Metric.JoinTitle.top)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(Metric.JoinTitle.leading)

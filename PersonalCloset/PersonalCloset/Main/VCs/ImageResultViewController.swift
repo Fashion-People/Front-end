@@ -80,8 +80,8 @@ final class ImageResultViewController : BaseViewController {
     }
     
     // MARK: - setup Layout
-    override func setLayout() {
-        super.setLayout()
+    override func setupLayouts() {
+        super.setupLayouts()
         
         [resultImageView,
          resultLabel,
@@ -89,6 +89,10 @@ final class ImageResultViewController : BaseViewController {
          backToRegisterButton].forEach {
             view.addSubview($0)
         }
+    }
+    
+    override func setupConstraints() {
+        super.setupConstraints()
         
         resultImageView.snp.makeConstraints {
             $0.top.equalTo(topView.snp.bottom).offset(Metric.ResultImage.top)

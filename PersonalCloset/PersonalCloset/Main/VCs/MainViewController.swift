@@ -89,13 +89,17 @@ final class MainViewController : BaseViewController {
     }
     
     // MARK: - UI layout config
-    override func setLayout() {
-        super.setLayout()
+    override func setupLayouts() {
+        super.setupLayouts()
         
         [cameraButton, 
          emptyView].forEach {
             view.addSubview($0)
         }
+    }
+    
+    override func setupConstraints() {
+        super.setupConstraints()
         
         cameraButton.snp.makeConstraints {
             $0.top.equalTo(topView.snp.bottom).offset(Metric.cameraButton.top)
