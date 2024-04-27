@@ -146,15 +146,15 @@ final class RegisterImageViewController : BaseViewController {
         self.present(imagePicker, animated: true)
     }
 
-    private func tabTopViewButtons(){
+    private func tabTopViewButtons() {
         topView.backButton.addAction(UIAction{ _ in
             self.delegate.backToPreviousVC()
         }, for: .touchUpInside)
     }
     
     // MARK: - setupLayout
-    override func setLayout() {
-        super.setLayout()
+    override func setupLayouts() {
+        super.setupLayouts()
         
         [imageInput1,imageInput2].forEach {
             imageInputStackView1.addArrangedSubview($0)
@@ -169,7 +169,12 @@ final class RegisterImageViewController : BaseViewController {
          registerButton].forEach {
             view.addSubview($0)
         }
-                
+    }
+    
+    // MARK: - UI Constraints config
+    override func setupConstraints() {
+        super.setupConstraints()
+        
         imageInputStackView1.snp.makeConstraints {
             $0.top.equalTo(topView.snp.bottom).offset(Metric.InputImageView.inputImageSpacing)
             $0.leading.equalTo(view.safeAreaLayoutGuide).inset(Metric.InputImageView.sideInset)
@@ -192,7 +197,7 @@ final class RegisterImageViewController : BaseViewController {
 }
 
 // MARK: - extension
-extension RegisterImageViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension RegisterImageViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: false) { () in

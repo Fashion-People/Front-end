@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MainCoordinator : Coordinator {
+final class MainCoordinator: Coordinator {
     var parentCoordinator: Coordinator?
     var childCoordinator: [Coordinator] = []
     
@@ -23,7 +23,7 @@ final class MainCoordinator : Coordinator {
     }
 }
 
-extension MainCoordinator : MainViewControllerDelegate,
+extension MainCoordinator: MainViewControllerDelegate,
                           RegisterImageViewControllerDelegate,
                           ImageResultViewControllerDelegate {
     

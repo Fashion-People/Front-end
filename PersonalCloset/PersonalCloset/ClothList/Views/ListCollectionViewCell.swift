@@ -10,8 +10,8 @@ import SnapKit
 
 final class ListCollectionViewCell: UICollectionViewListCell {
     var cloth: ClothListModel!
-    var deleteAction : (() -> ()) = {}
-    var modifyAction : (() -> ()) = {}
+    var deleteAction: (() -> ()) = {}
+    var modifyAction: (() -> ()) = {}
 
     /// UICellConfigurationState - cell의 상태를 캡슐화한 객체
     override func updateConfiguration(using state: UICellConfigurationState) {

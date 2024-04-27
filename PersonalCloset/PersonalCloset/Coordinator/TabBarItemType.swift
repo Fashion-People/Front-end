@@ -10,7 +10,7 @@ import Foundation
 enum TabBarItemType: String, CaseIterable {
     case main, list, setting
     
-    // Int형에 맞춰 초기화
+    /// Int형에 맞춰 초기화
     init?(index: Int) {
         switch index {
         case 0: self = .main

@@ -8,14 +8,18 @@
 import UIKit
 import SnapKit
 
-protocol ClothListViewControllerDelegate : AnyObject {
+protocol ClothListViewControllerDelegate: AnyObject {
     func presentListVC()
     func backToPreviousVC()
     func presentRegisterVC()
 }
 
-final class ClothListViewController : BaseViewController {
-    weak var delegate : ClothListViewControllerDelegate?
+final class ClothListViewController: BaseViewController {
+    weak var delegate: ClothListViewControllerDelegate?
+    
+    private enum Metric {
+        static let top: CGFloat = 10
+    }
     
     private let clothListManager = ClothListManager.shared
     
@@ -45,7 +49,7 @@ final class ClothListViewController : BaseViewController {
     }
     
     // MARK: - UICollectionView config (+ DiffableDataSource)
-    private lazy var clothListCollectionView : UICollectionView = {
+    private lazy var clothListCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.allowsMultipleSelectionDuringEditing = true
         collectionView.delegate = self
@@ -157,7 +161,7 @@ final class ClothListViewController : BaseViewController {
 
     // MARK: - button click method
     /// topView 내부 select 버튼 클릭에 따라 collectionView 의 선택버튼이 나타남
-    private func tabTopViewButtons(){
+    private func tabTopViewButtons() {
         topView.selectButton.addAction(UIAction { _ in
             
             /// Selecting a list of clothes to inspect
@@ -182,26 +186,30 @@ final class ClothListViewController : BaseViewController {
         }, for: .touchUpInside)
     }
         
-    override func setLayout() {
-        super.setLayout()
+    // MARK: - UI Layouts config
+    override func setupLayouts() {
+        super.setupLayouts()
         
-        [clothListCollectionView].forEach {
-            view.addSubview($0)
-        }
+        view.addSubview(clothListCollectionView)
+    }
+    
+    // MARK: - UI Constraints config
+    override func setupConstraints() {
+        super.setupConstraints()
         
         clothListCollectionView.snp.makeConstraints {
-            $0.top.equalTo(topView.snp.bottom).offset(10)
+            $0.top.equalTo(topView.snp.bottom).offset(Metric.top)
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
 }
 
-extension ClothListViewController : UICollectionViewDelegateFlowLayout {
+extension ClothListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width : CGFloat = collectionView.bounds.width
+        let width: CGFloat = collectionView.bounds.width
         return CGSize(width: width, height: width/4)
     }
 }

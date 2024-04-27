@@ -24,6 +24,7 @@ final class ListContentView: UIView, UIContentView {
         self.modifyAction = modifyAction
         super.init(frame: .zero)
         self.setupLayouts()
+        self.setupConstraints()
         apply(configuration as! ListContentConfiguration)
     }
     
@@ -86,14 +87,17 @@ final class ListContentView: UIView, UIContentView {
         imageTitleLabel.text = configuration.clothDescription
     }
         
-    // MARK: - Set layouts
+    // MARK: - UI Layouts config
     private func setupLayouts() {
         [clothImageView,
          imageTitleLabel,
          imageSettingButton].forEach {
             addSubview($0)
         }
-
+    }
+    
+    // MARK: - UI Constraints config
+    private func setupConstraints() {
         clothImageView.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(20)
             $0.centerY.equalToSuperview()

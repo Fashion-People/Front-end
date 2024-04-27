@@ -13,29 +13,63 @@ protocol JoinViewControllerDelegate: AnyObject {
 }
 
 final class JoinViewController: UIViewController {
-    weak var delegate : JoinViewControllerDelegate?
+    weak var delegate: JoinViewControllerDelegate?
+    
+    private enum Metric {
+        enum JoinTitle {
+            static let top: CGFloat = 20
+            static let leading: CGFloat = 25
+        }
+        
+        enum ScrollView {
+            static let top: CGFloat = 10
+            static let bottom: CGFloat = -10
+            static let contentViewHeight: CGFloat = 1100
+        }
+        
+        enum StackView {
+            static let top: CGFloat = 5
+            static let leading: CGFloat = 25
+        }
+        
+        enum PasswordDescription {
+            static let top: CGFloat = 5
+        }
+        
+        enum StackView2 {
+            static let top: CGFloat = 25
+        }
+        
+        enum JoinButton {
+            static let sideInset: CGFloat = 20
+            static let bottom: CGFloat = -10
+            static let height: CGFloat = 50
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
         self.hideKeyboardWhenTappedAround()
-        setLayout()
-        navigationBarConfig()
-        setupStyles()
+        self.setupLayouts()
+        self.setupConstraints()
+        self.setupStyles()
+        self.navigationBarConfig()
     }
     
     // MARK: - UI config
     private let contentView = UIView()
-    private let scrollView : UIScrollView = {
+    private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
 //        scrollView.updateContentSize()
 
         return scrollView
     }()
     
-    private var joinLabel : UILabel = {
+    private var joinLabel: UILabel = {
         let label = UILabel()
         label.text = "회원가입"
         label.font = UIFont.systemFont(ofSize: 33, weight: .heavy)
@@ -44,7 +78,7 @@ final class JoinViewController: UIViewController {
         return label
     }()
     
-    private let joinStackView : UIStackView = {
+    private let joinStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
@@ -54,7 +88,7 @@ final class JoinViewController: UIViewController {
         return stackView
     }()
     
-    private let joinStackView2 : UIStackView = {
+    private let joinStackView2: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
@@ -111,7 +145,7 @@ final class JoinViewController: UIViewController {
         let style3: String = thirdPickerView.third
         let style4: String = fourthPickerView.fourth
         
-        var joinSuccess = false
+        var joinSuccess: Bool = false
         
         if password == passwordCheck {
             let requestBody = UserRequestDTO(
@@ -128,32 +162,36 @@ final class JoinViewController: UIViewController {
             Task {
                 joinSuccess = try await TokenAPI.join(requestBody).performRequest(with: requestBody)
                 
-                switch joinSuccess {
-                case true:
-                    let joinSuccessAlert = UIAlertController(title: "알림",
-                                                             message: "회원가입 성공.",
-                                                             preferredStyle: UIAlertController.Style.alert)
-                    
-                    let success = UIAlertAction(title: "확인",
-                                                style: .default) { action in
-                        self.delegate?.backToLoginVC()
+                DispatchQueue.main.async {
+                    print(joinSuccess)
+
+                    switch joinSuccess {
+                    case true:
+                        let joinSuccessAlert = UIAlertController(title: "알림",
+                                                                 message: "회원가입 성공.",
+                                                                 preferredStyle: UIAlertController.Style.alert)
+                        
+                        let success = UIAlertAction(title: "확인",
+                                                    style: .default) { action in
+                            self.delegate?.backToLoginVC()
+                        }
+                        
+                        joinSuccessAlert.addAction(success)
+                        self.present(joinSuccessAlert, animated: true, completion: nil)
+                        
+                    case false:
+                        let joinFailureAlert = UIAlertController(title: "알림",
+                                                                 message: "회원가입 실패.",
+                                                                 preferredStyle: UIAlertController.Style.alert)
+                        
+                        let failure = UIAlertAction(title: "확인",
+                                                    style: .destructive) { action in
+                            self.dismiss(animated: true)
+                        }
+                        
+                        joinFailureAlert.addAction(failure)
+                        self.present(joinFailureAlert, animated: true, completion: nil)
                     }
-                    
-                    joinSuccessAlert.addAction(success)
-                    self.present(joinSuccessAlert, animated: true, completion: nil)
-                    
-                case false:
-                    let joinFailureAlert = UIAlertController(title: "알림",
-                                                             message: "회원가입 실패.",
-                                                             preferredStyle: UIAlertController.Style.alert)
-                    
-                    let failure = UIAlertAction(title: "확인",
-                                                style: .destructive) { action in
-                        self.dismiss(animated: true)
-                    }
-                    
-                    joinFailureAlert.addAction(failure)
-                    self.present(joinFailureAlert, animated: true, completion: nil)
                 }
             }
         }
@@ -184,7 +222,7 @@ final class JoinViewController: UIViewController {
     }
     
     // MARK: - UI layout config
-    private func setLayout() {
+    private func setupLayouts() {
         [joinIDInput,
          joinPasswordInput,
          joinPasswordCheckInput].forEach{
@@ -213,45 +251,47 @@ final class JoinViewController: UIViewController {
          joinStackView2].forEach {
             contentView.addSubview($0)
         }
-        
+    }
+    
+    // MARK: - UI Constraints config
+    private func setupConstraints() {
         joinLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(25)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(Metric.JoinTitle.top)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(Metric.JoinTitle.leading)
         }
         
         scrollView.snp.makeConstraints {
-            $0.top.equalTo(joinLabel.snp.bottom).offset(10)
+            $0.top.equalTo(joinLabel.snp.bottom).offset(Metric.ScrollView.top)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(joinButton.snp.top).offset(-10)
+            $0.bottom.equalTo(joinButton.snp.top).offset(Metric.ScrollView.bottom)
         }
         
         contentView.snp.makeConstraints {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.width.equalTo(scrollView.frameLayoutGuide)
-            $0.height.equalTo(1100)
+            $0.height.equalTo(Metric.ScrollView.contentViewHeight)
         }
         
         joinStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(5)
-            $0.leading.equalToSuperview().offset(25)
+            $0.top.equalToSuperview().offset(Metric.StackView.top)
+            $0.leading.equalToSuperview().offset(Metric.StackView.leading)
         }
         
         passwordDescription.snp.makeConstraints {
-            $0.top.equalTo(joinStackView.snp.bottom).offset(5)
+            $0.top.equalTo(joinStackView.snp.bottom).offset(Metric.PasswordDescription.top)
             $0.leading.equalTo(joinStackView.snp.leading)
         }
         
         joinStackView2.snp.makeConstraints {
-            $0.top.equalTo(passwordDescription.snp.bottom).offset(25)
+            $0.top.equalTo(passwordDescription.snp.bottom).offset(Metric.StackView2.top)
             $0.leading.equalTo(passwordDescription.snp.leading)
-            $0.trailing.equalToSuperview().offset(-25)
         }
                 
         joinButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-20)
-            $0.height.equalTo(40)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(Metric.JoinButton.bottom)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).inset(Metric.JoinButton.sideInset)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(Metric.JoinButton.sideInset)
+            $0.height.equalTo(Metric.JoinButton.height)
         }
     }
 }

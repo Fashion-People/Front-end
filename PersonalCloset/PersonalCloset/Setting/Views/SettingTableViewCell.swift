@@ -9,8 +9,8 @@
 import UIKit
 import SnapKit
 
-final class SettingTableViewCell : UITableViewCell {
-    var settingTitleLabel : UILabel = {
+final class SettingTableViewCell: UITableViewCell {
+    var settingTitleLabel: UILabel = {
         let label = UILabel()
         
         return label
@@ -18,16 +18,20 @@ final class SettingTableViewCell : UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setLayout()
+        self.setupLayouts()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError()
     }
     
-    private func setLayout(){
+    // MARK: - UI Layouts config
+    private func setupLayouts() {
         contentView.addSubview(settingTitleLabel)
-        
+    }
+    
+    // MARK: - UI Constraints config
+    private func setupConstraints() {
         settingTitleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(15)
             $0.leading.equalToSuperview().offset(15)

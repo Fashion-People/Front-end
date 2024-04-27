@@ -7,10 +7,10 @@
 
 import UIKit
 
-final class PersonalClosetButton : UIButton {
-    private let buttonSetTitle : String
-    private let buttonTitleColor : UIColor
-    private let buttonBackgroundColor : UIColor
+final class PersonalClosetButton: UIButton {
+    private let buttonSetTitle: String
+    private let buttonTitleColor: UIColor
+    private let buttonBackgroundColor: UIColor
     var tabButtonAction: UIAction
 
     init(_ buttonTitle: String, titleColor: UIColor, backColor: UIColor, action: UIAction) {

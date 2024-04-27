@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AuthCoordinator : Coordinator {
+final class AuthCoordinator: Coordinator {
     var parentCoordinator: Coordinator?
     var childCoordinator: [Coordinator] = []
     
@@ -23,7 +23,7 @@ final class AuthCoordinator : Coordinator {
     }
 }
 
-extension AuthCoordinator : LoginViewControllerDelegate,
+extension AuthCoordinator: LoginViewControllerDelegate,
                           JoinViewControllerDelegate {
     func presentMainVC() {
         let appCoordinator = parentCoordinator as! AppCoordinator

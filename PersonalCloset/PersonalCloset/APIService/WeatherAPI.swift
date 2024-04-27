@@ -10,7 +10,7 @@ import Foundation
 enum WeatherAPI {
     static let baseURL = "http://13.124.188.170:8081/weather"
     
-    case fetchWeatherStatus(latitudeValue: String, longtitudeValue: String)
+    case fetchWeatherStatus(_ latitudeValue: String, _ longtitudeValue: String)
 }
 
 extension WeatherAPI {
@@ -60,15 +60,9 @@ extension WeatherAPI {
         /// response가 200번대인지 확인하는 부분
         if (200..<300).contains(httpResponse.statusCode) {
             /// Handle success (200번대)
-            if case .fetchWeatherStatus = self {
-                let weatherStatus = String(decoding: data, as: UTF8.self)
-                WeatherManager.shared.weather.weatherStatus = weatherStatus
-            }
-            
-            else {
-                let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
-                print("Response Data: \(dataContent.message)")
-            }
+            let weatherStatus = String(decoding: data, as: UTF8.self)
+            WeatherManager.shared.weather.weatherStatus = weatherStatus
+            print(weatherStatus)    
         }
         
         /// response가 400~600번대인지 확인하는 부분

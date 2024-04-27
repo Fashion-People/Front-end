@@ -11,6 +11,10 @@ import SnapKit
 final class InputView : UITextField {
     private let customPlaceholder: String
     
+    private enum Metric {
+        static let height: CGFloat = 40
+    }
+    
     init(_ placeholder: String) {
         self.customPlaceholder = placeholder
         super.init(frame: .zero)
@@ -29,7 +33,7 @@ final class InputView : UITextField {
     
     private func setupConstraints() {
         self.snp.makeConstraints {
-            $0.height.equalTo(40)
+            $0.height.equalTo(Metric.height)
         }
     }
 }

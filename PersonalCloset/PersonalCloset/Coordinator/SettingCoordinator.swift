@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SettingCoordinator : Coordinator {
+final class SettingCoordinator: Coordinator {
     var parentCoordinator: Coordinator?
     var childCoordinator: [Coordinator] = []
     
@@ -23,7 +23,7 @@ final class SettingCoordinator : Coordinator {
     }
 }
 
-extension SettingCoordinator : SettingViewControllerDelegate {
+extension SettingCoordinator: SettingViewControllerDelegate {
     func presentSetting() {
         let settingVC = SettingViewController()
         settingVC.delegate = self

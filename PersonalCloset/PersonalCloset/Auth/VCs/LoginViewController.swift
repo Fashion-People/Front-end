@@ -8,14 +8,14 @@
 import UIKit
 import SnapKit
 
-protocol LoginViewControllerDelegate : AnyObject {
+protocol LoginViewControllerDelegate: AnyObject {
     func presentJoinVC()
     func presentMainVC()
     func pushLoginVC()
 }
 
-final class LoginViewController : UIViewController {    
-    weak var delegate : LoginViewControllerDelegate?
+final class LoginViewController: UIViewController {    
+    weak var delegate: LoginViewControllerDelegate?
     
     private enum Metric {
         enum LoginLabel {
@@ -50,14 +50,15 @@ final class LoginViewController : UIViewController {
         view.backgroundColor = .systemBackground
         self.hideKeyboardWhenTappedAround()
         
-        setupStackLayout()
-        setupLayout()
-        backBarButtonConfig()
-        setupStyles()
+        self.setupStackLayout()
+        self.setupLayouts()
+        self.setupConstraints()
+        self.setupStyles()
+        self.backBarButtonConfig()
     }
     
     // MARK: - UI config
-    private var loginLabel : UILabel = {
+    private var loginLabel: UILabel = {
         let label = UILabel()
         label.text = "Personal\ncloset"
         label.numberOfLines = 2
@@ -68,7 +69,7 @@ final class LoginViewController : UIViewController {
         return label
     }()
     
-    private let inputStackView : UIStackView = {
+    private let inputStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
@@ -158,7 +159,7 @@ final class LoginViewController : UIViewController {
         }
     }
     
-    private func setupLayout() {
+    private func setupLayouts() {
         [loginLabel,
          inputStackView,
          loginDescription,
@@ -167,7 +168,10 @@ final class LoginViewController : UIViewController {
          joinButton].forEach {
             view.addSubview($0)
         }
-        
+    }
+    
+    // MARK: - UI Constraints config
+    private func setupConstraints() {
         loginLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(Metric.LoginLabel.top)
             $0.centerX.equalTo(view.safeAreaLayoutGuide)

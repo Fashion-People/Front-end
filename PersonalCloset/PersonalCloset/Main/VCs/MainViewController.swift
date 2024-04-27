@@ -17,6 +17,8 @@ protocol MainViewControllerDelegate : AnyObject {
 final class MainViewController : BaseViewController {
     weak var delegate : MainViewControllerDelegate?
     var locationManager = CLLocationManager()
+    private let location = LocationManager.shared.location
+    private let status: [WeatherItemType] = WeatherItemType.allCases
     
     private enum Metric {
         enum cameraButton {
@@ -37,10 +39,11 @@ final class MainViewController : BaseViewController {
         topView.selectButton.isHidden = true
         
         self.setLocationManager()
+//        self.fetchWeatherStatus()
     }
     
     // MARK: - UI config
-    private lazy var cameraButton : UIButton = {
+    private lazy var cameraButton: UIButton = {
         let button = UIButton()
         button.imageView?.tintColor = .darkBlue
         button.layer.cornerRadius = 10
@@ -58,7 +61,7 @@ final class MainViewController : BaseViewController {
         return button
     }()
     
-    private let emptyView : UIView = {
+    private let emptyView: UIView = {
         let view = UIView()
         view.backgroundColor = .skyBlue
         view.layer.cornerRadius = 10
@@ -88,14 +91,33 @@ final class MainViewController : BaseViewController {
         }
     }
     
+//    private func fetchWeatherStatus() {
+//        Task {
+//            do {
+//                /// Fetch weather status from the server
+//                try await WeatherAPI.fetchWeatherStatus(location.latitude,location.longtitude).performRequest()
+//                
+//                DispatchQueue.main.async {
+////                    self.topView.weatherImage.image = UIImage(systemName: status.)
+//                }
+//                
+//            } catch { print("error: \(error)") }
+//        }
+//    }
+    
     // MARK: - UI layout config
-    override func setLayout() {
-        super.setLayout()
+    override func setupLayouts() {
+        super.setupLayouts()
         
         [cameraButton, 
          emptyView].forEach {
             view.addSubview($0)
         }
+    }
+    
+    // MARK: - UI Constraints config
+    override func setupConstraints() {
+        super.setupConstraints()
         
         cameraButton.snp.makeConstraints {
             $0.top.equalTo(topView.snp.bottom).offset(Metric.cameraButton.top)
@@ -121,6 +143,19 @@ extension MainViewController: CLLocationManagerDelegate {
             
             setLocation.latitude = String(location.coordinate.latitude)
             setLocation.longtitude = String(location.coordinate.longitude)
+            
+            Task {
+                do {
+                    /// Fetch weather status from the server
+                    try await WeatherAPI.fetchWeatherStatus(setLocation.latitude, setLocation.longtitude).performRequest()
+                    
+                    DispatchQueue.main.async {
+                        self.topView.weatherImage.image = UIImage(systemName: "sun.max")
+                    }
+                    
+                } catch { print("error: \(error)") }
+            }
+            
             
             print(setLocation)
         }

@@ -12,6 +12,12 @@ class BaseViewController : UIViewController {
 //    // MARK: - Property
     private(set) var didSetupConstraints = false
     
+    private enum Metric {
+        static let top: CGFloat = 10
+        static let trailing: CGFloat = -10
+        static let height: CGFloat = 80
+    }
+    
 //    // MARK: - Initializing
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -30,7 +36,8 @@ class BaseViewController : UIViewController {
     
     override func updateViewConstraints() {
         if !self.didSetupConstraints {
-            self.setLayout()
+            self.setupLayouts()
+            self.setupConstraints()
             self.didSetupConstraints = true
         }
         super.updateViewConstraints()
@@ -39,14 +46,17 @@ class BaseViewController : UIViewController {
     // MARK: - Top View
     lazy var topView = TopView()
     
-    func setLayout() {
+    func setupLayouts() {
         view.addSubview(topView)
-        
+    }
+    
+    // MARK: - UI Constraints config
+    func setupConstraints() {
         topView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(Metric.top)
             $0.leading.equalTo(view.safeAreaLayoutGuide)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-10)
-            $0.height.equalTo(80)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(Metric.trailing)
+            $0.height.equalTo(Metric.height)
         }
     }
 }

@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol SettingViewControllerDelegate : AnyObject {
+protocol SettingViewControllerDelegate: AnyObject {
     func presentSetting()
 }
 
-final class SettingViewController : UIViewController {
-    var setting : [String] = ["회원 정보 수정","로그아웃","앱 버전","개인정보 처리방침"]
-    var account : [String] = ["회원 탈퇴"]
+final class SettingViewController: UIViewController {
+    var setting: [String] = ["회원 정보 수정","로그아웃","앱 버전","개인정보 처리방침"]
+    var account: [String] = ["회원 탈퇴"]
     
     weak var delegate: SettingViewControllerDelegate?
     
@@ -21,30 +21,31 @@ final class SettingViewController : UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        setLayout()
-        configure()
+        self.setupLayouts()
+        self.setupConstraints()
     }
     
-    private lazy var settingTableView : UITableView = {
+    private lazy var settingTableView: UITableView = {
         let tableView = UITableView(frame: CGRect.zero, style: .insetGrouped)
         tableView.backgroundColor = .systemBackground
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
         
         return tableView
     }()
     
-    private func setLayout() {
+    // MARK: - UI Layouts config
+    private func setupLayouts() {
         view.addSubview(settingTableView)
-        
+    }
+    
+    // MARK: - UI Constraints config
+    private func setupConstraints() {
         settingTableView.snp.makeConstraints {
             $0.top.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
         }
-    }
-    
-    private func configure() {
-        settingTableView.delegate = self
-        settingTableView.dataSource = self
-        settingTableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
     }
 }
 
