@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ListCoordinator : Coordinator {
+final class ListCoordinator: Coordinator {
     var parentCoordinator: Coordinator?
     var childCoordinator: [Coordinator] = []
     
@@ -23,7 +23,7 @@ final class ListCoordinator : Coordinator {
     }
 }
 
-extension ListCoordinator : ClothListViewControllerDelegate,
+extension ListCoordinator: ClothListViewControllerDelegate,
                           RegisterImageViewControllerDelegate {
     func backToPreviousVC() {
         navigationController.popToRootViewController(animated: true)

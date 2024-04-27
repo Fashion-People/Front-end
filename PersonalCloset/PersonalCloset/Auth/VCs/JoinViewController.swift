@@ -63,12 +63,13 @@ final class JoinViewController: UIViewController {
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
 //        scrollView.updateContentSize()
 
         return scrollView
     }()
     
-    private var joinLabel : UILabel = {
+    private var joinLabel: UILabel = {
         let label = UILabel()
         label.text = "회원가입"
         label.font = UIFont.systemFont(ofSize: 33, weight: .heavy)
@@ -77,7 +78,7 @@ final class JoinViewController: UIViewController {
         return label
     }()
     
-    private let joinStackView : UIStackView = {
+    private let joinStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
@@ -87,7 +88,7 @@ final class JoinViewController: UIViewController {
         return stackView
     }()
     
-    private let joinStackView2 : UIStackView = {
+    private let joinStackView2: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
@@ -248,6 +249,7 @@ final class JoinViewController: UIViewController {
         }
     }
     
+    // MARK: - UI Constraints config
     private func setupConstraints() {
         joinLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(Metric.JoinTitle.top)

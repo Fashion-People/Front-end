@@ -23,6 +23,7 @@ final class ImageInputButton: UIButton {
         super.init(coder: coder)
     }
     
+    // MARK: - UI Constraints config
     private func setupConstraints() {
         self.snp.makeConstraints {
             $0.height.equalTo(Metric.height)

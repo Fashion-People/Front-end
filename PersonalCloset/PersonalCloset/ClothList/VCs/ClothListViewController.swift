@@ -186,12 +186,14 @@ final class ClothListViewController: BaseViewController {
         }, for: .touchUpInside)
     }
         
+    // MARK: - UI Layouts config
     override func setupLayouts() {
         super.setupLayouts()
         
         view.addSubview(clothListCollectionView)
     }
     
+    // MARK: - UI Constraints config
     override func setupConstraints() {
         super.setupConstraints()
         

@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol Coordinator : AnyObject {
+protocol Coordinator: AnyObject {
     var parentCoordinator: Coordinator? { get set }
     var childCoordinator: [Coordinator] { get set }
     var navigationController : UINavigationController { get set }
@@ -17,7 +17,7 @@ protocol Coordinator : AnyObject {
 extension Coordinator {
     /// Removing a coordinator inside a children. This call is important to prevent memory leak.
     /// - Parameter coordinator: Coordinator that finished.
-    func childDidFinish(_ coordinator : Coordinator){
+    func childDidFinish(_ coordinator: Coordinator){
         // Call this if a coordinator is done.
         for (index, child) in childCoordinator.enumerated() {
             if child === coordinator {
@@ -29,7 +29,7 @@ extension Coordinator {
 }
 
 
-final class AppCoordinator : Coordinator {
+final class AppCoordinator: Coordinator {
     var parentCoordinator: Coordinator?
     var childCoordinator: [Coordinator] = []
     

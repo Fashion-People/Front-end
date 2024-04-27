@@ -91,6 +91,7 @@ final class ImageResultViewController : BaseViewController {
         }
     }
     
+    // MARK: - UI Constraints config
     override func setupConstraints() {
         super.setupConstraints()
         

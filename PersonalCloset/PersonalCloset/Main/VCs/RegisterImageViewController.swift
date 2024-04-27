@@ -146,7 +146,7 @@ final class RegisterImageViewController : BaseViewController {
         self.present(imagePicker, animated: true)
     }
 
-    private func tabTopViewButtons(){
+    private func tabTopViewButtons() {
         topView.backButton.addAction(UIAction{ _ in
             self.delegate.backToPreviousVC()
         }, for: .touchUpInside)
@@ -171,6 +171,7 @@ final class RegisterImageViewController : BaseViewController {
         }
     }
     
+    // MARK: - UI Constraints config
     override func setupConstraints() {
         super.setupConstraints()
         
@@ -196,7 +197,7 @@ final class RegisterImageViewController : BaseViewController {
 }
 
 // MARK: - extension
-extension RegisterImageViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension RegisterImageViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: false) { () in

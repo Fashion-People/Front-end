@@ -23,31 +23,29 @@ final class SettingViewController: UIViewController {
         view.backgroundColor = .systemBackground
         self.setupLayouts()
         self.setupConstraints()
-        self.tableViewConfigure()
     }
     
     private lazy var settingTableView: UITableView = {
         let tableView = UITableView(frame: CGRect.zero, style: .insetGrouped)
         tableView.backgroundColor = .systemBackground
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
         
         return tableView
     }()
     
+    // MARK: - UI Layouts config
     private func setupLayouts() {
         view.addSubview(settingTableView)
     }
     
+    // MARK: - UI Constraints config
     private func setupConstraints() {
         settingTableView.snp.makeConstraints {
             $0.top.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
         }
-    }
-    
-    private func tableViewConfigure() {
-        settingTableView.delegate = self
-        settingTableView.dataSource = self
-        settingTableView.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
     }
 }
 

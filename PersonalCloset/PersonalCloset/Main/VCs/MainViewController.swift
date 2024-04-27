@@ -58,7 +58,7 @@ final class MainViewController : BaseViewController {
         return button
     }()
     
-    private let emptyView : UIView = {
+    private let emptyView: UIView = {
         let view = UIView()
         view.backgroundColor = .skyBlue
         view.layer.cornerRadius = 10
@@ -98,6 +98,7 @@ final class MainViewController : BaseViewController {
         }
     }
     
+    // MARK: - UI Constraints config
     override func setupConstraints() {
         super.setupConstraints()
         

@@ -170,6 +170,7 @@ final class LoginViewController: UIViewController {
         }
     }
     
+    // MARK: - UI Constraints config
     private func setupConstraints() {
         loginLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(Metric.LoginLabel.top)

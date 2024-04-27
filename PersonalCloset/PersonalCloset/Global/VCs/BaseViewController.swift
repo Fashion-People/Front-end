@@ -50,6 +50,7 @@ class BaseViewController : UIViewController {
         view.addSubview(topView)
     }
     
+    // MARK: - UI Constraints config
     func setupConstraints() {
         topView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(Metric.top)
