@@ -18,6 +18,19 @@ final class MainViewController : BaseViewController {
     weak var delegate : MainViewControllerDelegate?
     var locationManager = CLLocationManager()
     
+    private enum Metric {
+        enum cameraButton {
+            static let top: CGFloat = 20
+            static let height: CGFloat = 200
+            static let sideInset: CGFloat = 30
+        }
+        
+        enum emptyView {
+            static let top: CGFloat = 30
+            static let inset: CGFloat = 30
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         topView.backButton.isHidden = true
@@ -85,17 +98,17 @@ final class MainViewController : BaseViewController {
         }
         
         cameraButton.snp.makeConstraints {
-            $0.top.equalTo(topView.snp.bottom).offset(20)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(30)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-30)
-            $0.height.equalTo(200)
+            $0.top.equalTo(topView.snp.bottom).offset(Metric.cameraButton.top)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).inset(Metric.cameraButton.sideInset)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(Metric.cameraButton.sideInset)
+            $0.height.equalTo(Metric.cameraButton.height)
         }
         
         emptyView.snp.makeConstraints {
-            $0.top.equalTo(cameraButton.snp.bottom).offset(30)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(30)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-30)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
+            $0.top.equalTo(cameraButton.snp.bottom).offset(Metric.emptyView.top)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).inset(Metric.emptyView.inset)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(Metric.emptyView.inset)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(Metric.emptyView.inset)
         }
     }
 }
@@ -113,7 +126,7 @@ extension MainViewController: CLLocationManagerDelegate {
         }
     }
         
-    // 위치 가져오기 실패
+    /// 위치 가져오기 실패
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("error")
     }

@@ -10,3 +10,4 @@ import Foundation
 struct WeatherModel: Codable {
     var weatherStatus: String
 }
+

@@ -8,11 +8,11 @@
 import UIKit
 import SnapKit
 
-protocol JoinViewControllerDelegate : AnyObject {
+protocol JoinViewControllerDelegate: AnyObject {
     func backToLoginVC()
 }
 
-final class JoinViewController : UIViewController {
+final class JoinViewController: UIViewController {
     weak var delegate : JoinViewControllerDelegate?
     
     override func viewDidLoad() {
@@ -30,6 +30,7 @@ final class JoinViewController : UIViewController {
     private let scrollView : UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = false
+//        scrollView.updateContentSize()
 
         return scrollView
     }()
@@ -227,7 +228,7 @@ final class JoinViewController : UIViewController {
         contentView.snp.makeConstraints {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.width.equalTo(scrollView.frameLayoutGuide)
-            $0.height.equalTo(1150)
+            $0.height.equalTo(1100)
         }
         
         joinStackView.snp.makeConstraints {

@@ -13,7 +13,7 @@ enum FetchError: Error {
 }
 
 enum ClothesAPI {
-    static let baseURL = "http://43.201.27.151:8081/clothes"
+    static let baseURL = "http://13.124.188.170:8081/clothes"
 
     case fetchCloth(clothesNumber: Int)
     case fetchAllClothes
@@ -88,14 +88,8 @@ extension ClothesAPI {
         if (200..<300).contains(httpResponse.statusCode) {
             if case .fetchAllClothes = self {
                 let clothList = try JSONDecoder().decode([ClothListModel].self, from: data)
-                print(clothList)
                 
                 ClothListManager.shared.clothList = clothList
-            }
-            
-            else {
-                let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
-                print("Response Data: \(dataContent.message)")
             }
         }
         
