@@ -8,7 +8,18 @@
 import UIKit
 
 final class JoinPickerView : UIView {
-    var style : [String] = ["모던", "캐주얼", "스포티","페미닌"]
+    private enum Metric {
+        enum InputLabel {
+            static let height: CGFloat = 50
+        }
+        
+        enum PickerView {
+            static let width: CGFloat = 380
+            static let height: CGFloat = 70
+        }
+    }
+    
+    var style: [String] = ["모던", "캐주얼", "스포티", "페미닌"]
     var first = ""
     var second = ""
     var third = ""
@@ -44,7 +55,8 @@ final class JoinPickerView : UIView {
     init(_ pickerTitle: String) {
         self.pickerTitle = pickerTitle
         super.init(frame: .zero)
-        self.setLayout()
+        
+        self.setupLayout()
         self.setupStyles()
         pickerView.delegate = self
         pickerView.dataSource = self
@@ -57,21 +69,20 @@ final class JoinPickerView : UIView {
     private func setupStyles() {
         inputLabel.text = pickerTitle
     }
-
     
-    private func setLayout() {
+    private func setupLayout() {
         [inputLabel,
          pickerView].forEach {
             inputStackView.addArrangedSubview($0)
         }
         
         inputLabel.snp.makeConstraints {
-            $0.height.equalTo(50)
+            $0.height.equalTo(Metric.InputLabel.height)
         }
         
         pickerView.snp.makeConstraints {
-            $0.width.equalTo(380)
-            $0.height.equalTo(70)
+            $0.width.equalTo(Metric.PickerView.width)
+            $0.height.equalTo(Metric.PickerView.height)
         }
         
         addSubview(inputStackView)
@@ -97,7 +108,7 @@ extension JoinPickerView : UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 4
+        return style.count
     }
     
     func pickerView(_ pickerView: UIPickerView, 

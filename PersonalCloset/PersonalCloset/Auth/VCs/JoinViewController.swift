@@ -13,7 +13,39 @@ protocol JoinViewControllerDelegate: AnyObject {
 }
 
 final class JoinViewController: UIViewController {
-    weak var delegate : JoinViewControllerDelegate?
+    weak var delegate: JoinViewControllerDelegate?
+    
+    private enum Metric {
+        enum JoinTitle {
+            static let top: CGFloat = 20
+            static let leading: CGFloat = 25
+        }
+        
+        enum ScrollView {
+            static let top: CGFloat = 10
+            static let bottom: CGFloat = -10
+            static let contentViewHeight: CGFloat = 1100
+        }
+        
+        enum StackView {
+            static let top: CGFloat = 5
+            static let leading: CGFloat = 25
+        }
+        
+        enum PasswordDescription {
+            static let top: CGFloat = 5
+        }
+        
+        enum StackView2 {
+            static let top: CGFloat = 25
+        }
+        
+        enum JoinButton {
+            static let sideInset: CGFloat = 20
+            static let bottom: CGFloat = -10
+            static let height: CGFloat = 50
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +59,7 @@ final class JoinViewController: UIViewController {
     
     // MARK: - UI config
     private let contentView = UIView()
-    private let scrollView : UIScrollView = {
+    private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = false
 //        scrollView.updateContentSize()
@@ -215,43 +247,42 @@ final class JoinViewController: UIViewController {
         }
         
         joinLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(25)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(Metric.JoinTitle.top)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(Metric.JoinTitle.leading)
         }
         
         scrollView.snp.makeConstraints {
-            $0.top.equalTo(joinLabel.snp.bottom).offset(10)
+            $0.top.equalTo(joinLabel.snp.bottom).offset(Metric.ScrollView.top)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(joinButton.snp.top).offset(-10)
+            $0.bottom.equalTo(joinButton.snp.top).offset(Metric.ScrollView.bottom)
         }
         
         contentView.snp.makeConstraints {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.width.equalTo(scrollView.frameLayoutGuide)
-            $0.height.equalTo(1100)
+            $0.height.equalTo(Metric.ScrollView.contentViewHeight)
         }
         
         joinStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(5)
-            $0.leading.equalToSuperview().offset(25)
+            $0.top.equalToSuperview().offset(Metric.StackView.top)
+            $0.leading.equalToSuperview().offset(Metric.StackView.leading)
         }
         
         passwordDescription.snp.makeConstraints {
-            $0.top.equalTo(joinStackView.snp.bottom).offset(5)
+            $0.top.equalTo(joinStackView.snp.bottom).offset(Metric.PasswordDescription.top)
             $0.leading.equalTo(joinStackView.snp.leading)
         }
         
         joinStackView2.snp.makeConstraints {
-            $0.top.equalTo(passwordDescription.snp.bottom).offset(25)
+            $0.top.equalTo(passwordDescription.snp.bottom).offset(Metric.StackView2.top)
             $0.leading.equalTo(passwordDescription.snp.leading)
-            $0.trailing.equalToSuperview().offset(-25)
         }
                 
         joinButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-20)
-            $0.height.equalTo(40)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(Metric.JoinButton.bottom)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).inset(Metric.JoinButton.sideInset)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(Metric.JoinButton.sideInset)
+            $0.height.equalTo(Metric.JoinButton.height)
         }
     }
 }

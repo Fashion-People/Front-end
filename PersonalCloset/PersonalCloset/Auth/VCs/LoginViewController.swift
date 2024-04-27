@@ -8,14 +8,14 @@
 import UIKit
 import SnapKit
 
-protocol LoginViewControllerDelegate : AnyObject {
+protocol LoginViewControllerDelegate: AnyObject {
     func presentJoinVC()
     func presentMainVC()
     func pushLoginVC()
 }
 
-final class LoginViewController : UIViewController {    
-    weak var delegate : LoginViewControllerDelegate?
+final class LoginViewController: UIViewController {    
+    weak var delegate: LoginViewControllerDelegate?
     
     private enum Metric {
         enum LoginLabel {
