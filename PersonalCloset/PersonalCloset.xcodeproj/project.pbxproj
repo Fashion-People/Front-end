@@ -20,6 +20,7 @@
 		2926A8752B9744B600C4BCA4 /* ClothListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2926A8742B9744B600C4BCA4 /* ClothListModel.swift */; };
 		292BE6B42B4D26BA00BF3EE9 /* JoinPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */; };
 		29308B7B2BB6C0A600342955 /* S3Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29308B7A2BB6C0A600342955 /* S3Configuration.swift */; };
+		293B64182BDF3D1900DE873B /* FitnessTestResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293B64172BDF3D1900DE873B /* FitnessTestResponseDTO.swift */; };
 		2950A1D92BDD01B00046EF0E /* WeatherItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2950A1D82BDD01B00046EF0E /* WeatherItemType.swift */; };
 		29578EF52BDBC1F400A321FD /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29578EF42BDBC1F400A321FD /* UIScrollView.swift */; };
 		29589FCA2B457839003578A3 /* ImageResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29589FC92B457839003578A3 /* ImageResultViewController.swift */; };
@@ -84,6 +85,7 @@
 		2926A8742B9744B600C4BCA4 /* ClothListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothListModel.swift; sourceTree = "<group>"; };
 		292BE6B32B4D26BA00BF3EE9 /* JoinPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinPickerView.swift; sourceTree = "<group>"; };
 		29308B7A2BB6C0A600342955 /* S3Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = S3Configuration.swift; sourceTree = "<group>"; };
+		293B64172BDF3D1900DE873B /* FitnessTestResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessTestResponseDTO.swift; sourceTree = "<group>"; };
 		2950A1D82BDD01B00046EF0E /* WeatherItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherItemType.swift; sourceTree = "<group>"; };
 		29578EF42BDBC1F400A321FD /* UIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		29589FC92B457839003578A3 /* ImageResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResultViewController.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				2916A3592BA092D100758747 /* UserRequestDTO.swift */,
 				296492052BB5198D00FD990C /* ModifyRequestDTO.swift */,
 				29C70C122BC6615E00286BE6 /* FitnessTestRequestDTO.swift */,
+				293B64172BDF3D1900DE873B /* FitnessTestResponseDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -511,6 +514,7 @@
 				2926A8752B9744B600C4BCA4 /* ClothListModel.swift in Sources */,
 				2982023A2B43C2F100B7DEB3 /* TopView.swift in Sources */,
 				291E6DB82BBFC022002BAAAC /* LocationManager.swift in Sources */,
+				293B64182BDF3D1900DE873B /* FitnessTestResponseDTO.swift in Sources */,
 				299CCE5B2B4679EA0054505E /* KeyboardHide+.swift in Sources */,
 				29DA5F612B4542A500F45CC6 /* InputView.swift in Sources */,
 				298202692B4452D800B7DEB3 /* LoginViewController.swift in Sources */,

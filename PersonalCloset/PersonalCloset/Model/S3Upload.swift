@@ -17,8 +17,6 @@ class S3Upload {
             return
         }
         
-//        let data : Data = image
-
         // 파일 이름을 위한 날짜 포맷 설정
         let currentDate = Date()
         let dateFormatter = DateFormatter()

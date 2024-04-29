@@ -11,4 +11,5 @@ struct FitnessTestRequestDTO: Codable {
     var imageUrl: [String]
     var latitude: String
     var longtitude: String
+    var situation: String
 }

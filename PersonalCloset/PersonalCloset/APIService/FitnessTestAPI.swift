@@ -43,8 +43,9 @@ extension FitnessTestAPI {
     }
     
     // MARK: - network 호출함수
-    func performRequest(with parameters: Encodable? = nil) async throws {
+    func performRequest(with parameters: Encodable? = nil) async throws -> FitnessTestResponseDTO {
         /// URLRequest 생성
+        var result: FitnessTestResponseDTO?
         var request = self.request
 
         if let parameters = parameters {
@@ -64,9 +65,9 @@ extension FitnessTestAPI {
         /// response status가 200번대인지 확인하는 부분
         if (200..<300).contains(httpResponse.statusCode) {
             if case .fitnessTest = self {
-                let clothList = try JSONDecoder().decode([ClothListModel].self, from: data)
-                
-                ClothListManager.shared.clothList = clothList
+                let clothList = try JSONDecoder().decode(FitnessTestResponseDTO?.self, from: data)
+//                guard let result = clothList else { }
+                result = clothList
             }
         }
         
@@ -76,5 +77,7 @@ extension FitnessTestAPI {
             print("Response Data: \(dataContent.message)")
             print("error: \(httpResponse.statusCode)")
         }
+        
+//        return result
     }
 }
