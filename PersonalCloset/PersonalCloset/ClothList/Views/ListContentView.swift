@@ -59,17 +59,16 @@ final class ListContentView: UIView, UIContentView {
         return button
     }()
     
-    private func requestImageURL(data: String) {
-        guard let url = URL(string: data) else { return }
+    private func loadImage(data: String) {
+        guard let url = URL(string: data)  else { return }
         
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    
-                    DispatchQueue.main.async {
-                        self?.clothImageView.image = image
-                    }
-                }
+        let backgroundQueue = DispatchQueue(label: "background_queue",qos: .background)
+        
+        backgroundQueue.async {
+            guard let data = try? Data(contentsOf: url) else { return }
+            
+            DispatchQueue.main.async {
+                self.clothImageView.image = UIImage(data: data)
             }
         }
     }
@@ -83,7 +82,7 @@ final class ListContentView: UIView, UIContentView {
         imageSettingButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         imageSettingButton.tintColor = .lightGray
         
-        requestImageURL(data: configuration.imageUrl ?? "")
+        loadImage(data: configuration.imageUrl ?? "")
         imageTitleLabel.text = configuration.clothDescription
     }
         
@@ -95,7 +94,7 @@ final class ListContentView: UIView, UIContentView {
             addSubview($0)
         }
     }
-    
+        
     // MARK: - UI Constraints config
     private func setupConstraints() {
         clothImageView.snp.makeConstraints {

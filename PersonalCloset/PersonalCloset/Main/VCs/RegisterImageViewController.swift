@@ -8,13 +8,13 @@
 import UIKit
 import SnapKit
 
-protocol RegisterImageViewControllerDelegate : AnyObject {
+protocol RegisterImageViewControllerDelegate: AnyObject {
     func presentResultVC()
     func backToPreviousVC()
 }
 
-final class RegisterImageViewController : BaseViewController {
-    weak var delegate : RegisterImageViewControllerDelegate!
+final class RegisterImageViewController: BaseViewController {
+    weak var delegate: RegisterImageViewControllerDelegate!
     
     private enum Metric {
         enum InputImageView {
@@ -67,6 +67,11 @@ final class RegisterImageViewController : BaseViewController {
                                                            backColor: .skyBlue,
                                                            action: UIAction { _ in
         self.uploadImage()
+//        Task {
+//            do {
+//                
+//            } catch {}
+//        }
         self.delegate.presentResultVC()
     })
     

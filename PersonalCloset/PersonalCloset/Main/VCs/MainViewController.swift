@@ -83,11 +83,13 @@ final class MainViewController : BaseViewController {
         // 위치 사용 허용 알림
         locationManager.requestWhenInUseAuthorization()
         // 위치 사용을 허용하면 현재 위치 정보를 가져옴
-        if CLLocationManager.locationServicesEnabled() {
-           locationManager.startUpdatingLocation()
-        }
-        else {
-            print("위치 서비스 허용 off")
+        DispatchQueue.global().async {
+            if CLLocationManager.locationServicesEnabled() {
+                self.locationManager.startUpdatingLocation()
+            }
+            else {
+                print("위치 서비스 허용 off")
+            }
         }
     }
     
