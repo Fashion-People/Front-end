@@ -203,6 +203,7 @@ final class RegisterImageViewController: BaseViewController {
             imageNilAlert.addAction(success)
             self.present(imageNilAlert, animated: true, completion: nil)
         }
+        
     }
     
     private func tabImageButton(tag: Int) {
