@@ -8,33 +8,51 @@
 import UIKit
 import SnapKit
 
-protocol RegisterImageViewControllerDelegate : AnyObject {
+protocol RegisterImageViewControllerDelegate: AnyObject {
     func presentResultVC()
     func backToPreviousVC()
 }
 
-final class RegisterImageViewController : BaseViewController {
-    weak var delegate : RegisterImageViewControllerDelegate!
+final class RegisterImageViewController: BaseViewController {
+    weak var delegate: RegisterImageViewControllerDelegate!
+    private let situations: [String] = ["회사", "데이트", "결혼식", "운동", "학교", "도서관", "나들이"]
+    private var situationTitle: String = "회사"
     
+    // MARK: - Metric
     private enum Metric {
         enum InputImageView {
-            static let inputImageSpacing: CGFloat = 15
+            static let inputImageSpacing: CGFloat = 10
             static let sideInset: CGFloat = 30
         }
         
         enum RegisterButton {
-            static let heigth: CGFloat = 50
-            static let width: CGFloat = 230
+            static let height: CGFloat = 50
+            static let width: CGFloat = 300
             static let top: CGFloat = 40
+            static let bottom: CGFloat = -20
+        }
+        
+        enum SituationDescription {
+            static let top: CGFloat = 20
+        }
+        
+        enum SituationPickerView {
+            static let top: CGFloat = 20
+            static let sideInset: CGFloat = 60
+            static let height: CGFloat = 100
+            static let bottom: CGFloat = -50
         }
     }
     
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        topView.selectButton.isHidden = true
-        tabTopViewButtons()
-        buttonConfiguration()
+        self.view.bringSubviewToFront(self.indicatorView)
+
+        self.topView.selectButton.isHidden = true
+        self.tabTopViewButtons()
+        self.buttonConfiguration()
     }
     
     private let imageInputStackView1: UIStackView = {
@@ -62,12 +80,65 @@ final class RegisterImageViewController : BaseViewController {
     private lazy var imageInput3 = ImageInputButton()
     private lazy var imageInput4 = ImageInputButton()
     
+    private lazy var situationDescription: UILabel = {
+        let label = UILabel()
+        label.text = "외출 상황을 선택해주세요!"
+        label.font = .systemFont(ofSize: 18, weight: .medium)
+        
+        return label
+    }()
+    
+    private lazy var situationPickerView: UIPickerView = {
+        let pickerView = UIPickerView()
+        pickerView.dataSource = self
+        pickerView.delegate = self
+        
+        return pickerView
+    }()
+    
+    private lazy var indicatorView: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        activityIndicator.center = self.view.center
+        
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .large
+        
+//        activityIndicator.stopAnimating()
+        
+        return activityIndicator
+        
+    }()
+
     private lazy var registerButton = PersonalClosetButton("적합도를 알려주세요!",
                                                            titleColor: .darkBlue,
                                                            backColor: .skyBlue,
                                                            action: UIAction { _ in
-        self.uploadImage()
-        self.delegate.presentResultVC()
+        
+        Task {
+            do {
+                try await self.uploadImage()
+                
+                Thread.sleep(forTimeInterval: 8)
+
+                let params = FitnessTestRequestDTO (
+                    imageUrl: ImageTempManager.shared.imageURLs,
+                    situation: self.situationTitle
+                )
+                
+                print(ImageTempManager.shared.imageURLs)
+                
+                try await FitnessTestAPI.fitnessTest.performRequest(with: params)
+                
+                if !ImageTempManager.shared.imageURLs.isEmpty {
+                    /// 이미지 업로드가 성공적으로 완료되면 FitnessTestAPI 호출
+                    self.delegate.presentResultVC()
+                }
+            } catch {
+                print("Error: \(error)")
+            }
+        }
     })
     
     private func buttonConfiguration() {
@@ -92,8 +163,8 @@ final class RegisterImageViewController : BaseViewController {
             self.tabImageButton(tag: 4)
         }, for: .touchUpInside)
     }
-    
-    private func uploadImage() {
+
+    private func uploadImage() async throws {
         let S3 = S3Upload()
         var count = 0
         
@@ -145,6 +216,10 @@ final class RegisterImageViewController : BaseViewController {
 
         self.present(imagePicker, animated: true)
     }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        situationTitle = situations[row]
+    }
 
     private func tabTopViewButtons() {
         topView.backButton.addAction(UIAction{ _ in
@@ -152,7 +227,7 @@ final class RegisterImageViewController : BaseViewController {
         }, for: .touchUpInside)
     }
     
-    // MARK: - setupLayout
+    // MARK: - UI Hierarchy config
     override func setupLayouts() {
         super.setupLayouts()
         
@@ -166,7 +241,10 @@ final class RegisterImageViewController : BaseViewController {
         
         [imageInputStackView1,
          imageInputStackView2,
-         registerButton].forEach {
+         situationDescription,
+         situationPickerView,
+         registerButton,
+         indicatorView].forEach {
             view.addSubview($0)
         }
     }
@@ -174,24 +252,37 @@ final class RegisterImageViewController : BaseViewController {
     // MARK: - UI Constraints config
     override func setupConstraints() {
         super.setupConstraints()
-        
+            
         imageInputStackView1.snp.makeConstraints {
             $0.top.equalTo(topView.snp.bottom).offset(Metric.InputImageView.inputImageSpacing)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).inset(Metric.InputImageView.sideInset)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(Metric.InputImageView.sideInset)
+            $0.centerX.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(170)
+            
         }
         
         imageInputStackView2.snp.makeConstraints {
             $0.top.equalTo(imageInputStackView1.snp.bottom).offset(Metric.InputImageView.inputImageSpacing)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).inset(Metric.InputImageView.sideInset)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(Metric.InputImageView.sideInset)
+            $0.centerX.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(170)
+        }
+        
+        situationDescription.snp.makeConstraints {
+            $0.top.equalTo(imageInputStackView2.snp.bottom).offset(Metric.SituationDescription.top)
+            $0.centerX.equalTo(imageInputStackView2.snp.centerX)
+        }
+        
+        situationPickerView.snp.makeConstraints {
+            $0.top.equalTo(situationDescription.snp.bottom)
+            $0.centerX.equalTo(situationDescription.snp.centerX)
+            $0.bottom.equalTo(registerButton.snp.top).offset(Metric.SituationPickerView.bottom)
+            $0.height.equalTo(Metric.SituationPickerView.height)
         }
         
         registerButton.snp.makeConstraints {
-            $0.top.equalTo(imageInputStackView2.snp.bottom).offset(Metric.RegisterButton.top)
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
-            $0.width.equalTo(Metric.RegisterButton.width)
-            $0.height.equalTo(Metric.RegisterButton.heigth)
+            $0.width.equalTo(imageInputStackView2.snp.width)
+            $0.height.equalTo(Metric.RegisterButton.height)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(Metric.RegisterButton.bottom)
         }
     }
 }
@@ -222,3 +313,30 @@ extension RegisterImageViewController: UIImagePickerControllerDelegate, UINaviga
 }
 
 
+extension RegisterImageViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return situations.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView,
+                    attributedTitleForRow row: Int,
+                    forComponent component: Int) -> NSAttributedString? {
+        let attributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key(rawValue: NSAttributedString.Key.font.rawValue): UIFont.systemFont(ofSize: 10, weight: .bold)
+        ]
+        
+        return NSAttributedString(string: situations[row], attributes: attributes)
+    }
+}
+
+extension RegisterImageViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView,
+                    titleForRow row: Int,
+                    forComponent component: Int) -> String? {
+        return situations[row]
+    }
+}

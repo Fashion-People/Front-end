@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class JoinInputView : UIView {
+final class JoinInputView: UIView {
     private let customPlaceholder: String
     private let customGuide: String
     
@@ -25,7 +25,7 @@ final class JoinInputView : UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private let inputStackView : UIStackView = {
+    private let inputStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
@@ -35,7 +35,7 @@ final class JoinInputView : UIView {
         return stackView
     }()
     
-    private var inputLabel : UILabel = {
+    private var inputLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
@@ -43,7 +43,7 @@ final class JoinInputView : UIView {
         return label
     }()
     
-    var inputTextField : UITextField = {
+    var inputTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
 

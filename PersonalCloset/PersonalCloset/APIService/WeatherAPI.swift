@@ -8,7 +8,7 @@
 import Foundation
 
 enum WeatherAPI {
-    static let baseURL = "http://13.124.188.170:8081/weather"
+    static let baseURL = "http://43.201.61.246:8081/weather"
     
     case fetchWeatherStatus(_ latitudeValue: String, _ longtitudeValue: String)
 }
@@ -33,9 +33,13 @@ extension WeatherAPI {
     }
     
     var request: URLRequest {
+        let token = TokenManager.shared.token.accessToken
+
         var request = URLRequest(url: url)
         request.httpMethod = method
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(token, forHTTPHeaderField: "Authentication")
+
         return request
     }
     
@@ -57,19 +61,22 @@ extension WeatherAPI {
             throw FetchError.invalidStatus
         }
         
-        /// response가 200번대인지 확인하는 부분
-        if (200..<300).contains(httpResponse.statusCode) {
-            /// Handle success (200번대)
+        switch httpResponse.statusCode {
+        case 200..<300:
+            /// 성공적인 응답 처리
             let weatherStatus = String(decoding: data, as: UTF8.self)
             WeatherManager.shared.weather.weatherStatus = weatherStatus
-            print(weatherStatus)    
-        }
+            print(weatherStatus)
         
-        /// response가 400~600번대인지 확인하는 부분
-        else if (400..<600).contains(httpResponse.statusCode) {
+        case 400..<600:
+            /// 오류 응답 처리
             let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
             print("Response Data: \(dataContent.message)")
             print("error: \(httpResponse.statusCode)")
+        
+        default:
+            /// 그 외의 상태코드 처리
+            throw FetchError.invalidStatus
         }
     }
 }

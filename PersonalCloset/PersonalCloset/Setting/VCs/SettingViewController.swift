@@ -17,6 +17,7 @@ final class SettingViewController: UIViewController {
     
     weak var delegate: SettingViewControllerDelegate?
     
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,7 +60,7 @@ extension SettingViewController : UITableViewDelegate,UITableViewDataSource {
             return UITableViewCell()
         }
         
-        var name : String = ""
+        var name: String = ""
         
         switch indexPath.section {
         case 0:
@@ -69,6 +70,7 @@ extension SettingViewController : UITableViewDelegate,UITableViewDataSource {
         default:
             return UITableViewCell()
         }
+        
         cell.settingTitleLabel.text = name
         
         return cell

@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum Section : CaseIterable {
+enum Section: CaseIterable {
     case main
 }
 
 struct ClothListModel: Codable, Hashable {
     let clothesNumber: Int
-    var description : String
+    var description: String
     var imageUrl: String
     let userNumber: Int
 }

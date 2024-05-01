@@ -8,7 +8,7 @@
 import Foundation
 
 enum TokenAPI {
-    static let authenticationURL = "http://13.124.188.170:8081/user"
+    static let authenticationURL = "http://43.201.61.246:8081/user"
     
     case login (_ id: String,_ password: String)
     case join (_ param: UserRequestDTO)
@@ -61,10 +61,10 @@ extension TokenAPI {
             throw FetchError.invalidStatus
         }
         
-        /// response가 200번대인지 확인하는 부분
-        if (200..<300).contains(httpResponse.statusCode) {
-            /// Handle success (200번대)
-            
+        switch httpResponse.statusCode {
+        case 200..<300:
+            /// 성공적인 응답 처리
+        
             /// Login 로직
             if case .login = self {
                 let loginToken = String(decoding: data, as: UTF8.self)
@@ -78,14 +78,17 @@ extension TokenAPI {
                 print("Response Data: \(dataContent.message)")
                 successCheck = true
             }
-        }
         
-        /// response가 400~600번대인지 확인하는 부분
-        else if (400..<600).contains(httpResponse.statusCode) {
+        case 400..<600:
+            /// 오류 응답 처리
             let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
             print("Response Data: \(dataContent.message)")
             print("error: \(httpResponse.statusCode)")
             successCheck = false
+        
+        default:
+            /// 그 외의 상태코드 처리
+            throw FetchError.invalidStatus
         }
         
         return successCheck

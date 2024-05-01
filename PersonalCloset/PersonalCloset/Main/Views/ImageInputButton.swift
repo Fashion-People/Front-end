@@ -11,6 +11,7 @@ import SnapKit
 final class ImageInputButton: UIButton {
     private enum Metric {
         static let height: CGFloat = 170
+        static let width: CGFloat = 170
     }
         
     override init(frame: CGRect) {
@@ -27,6 +28,7 @@ final class ImageInputButton: UIButton {
     private func setupConstraints() {
         self.snp.makeConstraints {
             $0.height.equalTo(Metric.height)
+            $0.width.equalTo(Metric.width)
         }
     }
     

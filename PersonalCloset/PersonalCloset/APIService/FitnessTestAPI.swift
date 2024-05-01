@@ -8,7 +8,7 @@
 import Foundation
 
 enum FitnessTestAPI {
-    static let baseURL = "http://13.124.188.170:8081"
+    static let baseURL = "http://43.201.61.246:8081"
     
     case fitnessTest
 }
@@ -44,37 +44,49 @@ extension FitnessTestAPI {
     
     // MARK: - network 호출함수
     func performRequest(with parameters: Encodable? = nil) async throws {
+        print("request 함수 호출 시점")
         /// URLRequest 생성
         var request = self.request
-
+        
+        /// 요청에 파라미터 추가
         if let parameters = parameters {
             request.httpBody = try JSONEncoder().encode(parameters)
+            print(parameters)
         }
         
         /// request URL
         print(request)
-
-        /// 실제로 request를 보내서 network를 하는 부분
+        
+        /// 네트워크 요청 및 데이터 수신
         let (data, response) = try await URLSession.shared.data(for: request)
-
+        
         guard let httpResponse = response as? HTTPURLResponse else {
             throw FetchError.invalidStatus
         }
+        print(httpResponse.statusCode)
         
-        /// response status가 200번대인지 확인하는 부분
-        if (200..<300).contains(httpResponse.statusCode) {
+        /// response status 확인
+        switch httpResponse.statusCode {
+        case 200..<300:
+            /// 성공적인 응답 처리
             if case .fitnessTest = self {
-                let clothList = try JSONDecoder().decode([ClothListModel].self, from: data)
-                
-                ClothListManager.shared.clothList = clothList
+                let result = try JSONDecoder().decode(FitnessTestModel.self, from: data)
+                FitnessTestManager.shared.result = result
+                print(result)
+            } else {
+                throw FetchError.invalidStatus
             }
-        }
-        
-        /// respones가 오류임을 나타낼때
-        else if (400..<600).contains(httpResponse.statusCode) {
+            
+        case 400..<600:
+            /// 오류 응답 처리
             let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
             print("Response Data: \(dataContent.message)")
-            print("error: \(httpResponse.statusCode)")
+            print("Error: \(httpResponse.statusCode)")
+            throw FetchError.invalidStatus
+            
+        default:
+            /// 그 외의 상태코드 처리
+            throw FetchError.invalidStatus
         }
     }
 }

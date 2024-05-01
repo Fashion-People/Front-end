@@ -30,6 +30,7 @@ final class JoinViewController: UIViewController {
         enum StackView {
             static let top: CGFloat = 5
             static let leading: CGFloat = 25
+            static let trailing: CGFloat = -25
         }
         
         enum PasswordDescription {
@@ -47,6 +48,7 @@ final class JoinViewController: UIViewController {
         }
     }
     
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -275,6 +277,7 @@ final class JoinViewController: UIViewController {
         joinStackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(Metric.StackView.top)
             $0.leading.equalToSuperview().offset(Metric.StackView.leading)
+            $0.trailing.equalToSuperview().offset(Metric.StackView.trailing)
         }
         
         passwordDescription.snp.makeConstraints {
@@ -285,6 +288,7 @@ final class JoinViewController: UIViewController {
         joinStackView2.snp.makeConstraints {
             $0.top.equalTo(passwordDescription.snp.bottom).offset(Metric.StackView2.top)
             $0.leading.equalTo(passwordDescription.snp.leading)
+            $0.trailing.equalTo(joinStackView.snp.trailing)
         }
                 
         joinButton.snp.makeConstraints {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class JoinPickerView : UIView {
+final class JoinPickerView: UIView {
     private enum Metric {
         enum InputLabel {
             static let height: CGFloat = 50
@@ -27,7 +27,7 @@ final class JoinPickerView : UIView {
     
     private let pickerTitle: String
     
-    private let inputStackView : UIStackView = {
+    private let inputStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
@@ -36,7 +36,7 @@ final class JoinPickerView : UIView {
         return stackView
     }()
     
-    private var inputLabel : UILabel = {
+    private var inputLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
@@ -44,7 +44,7 @@ final class JoinPickerView : UIView {
         return label
     }()
     
-    private var pickerView : UIPickerView = {
+    private var pickerView: UIPickerView = {
         let pickerView = UIPickerView()
         pickerView.layer.cornerRadius = 5
         pickerView.layer.backgroundColor = UIColor.skyBlue.cgColor
@@ -94,7 +94,7 @@ final class JoinPickerView : UIView {
 }
 
 // MARK: - pickerView extension
-extension JoinPickerView : UIPickerViewDelegate {
+extension JoinPickerView: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, 
                     titleForRow row: Int,
                     forComponent component: Int) -> String? {
@@ -102,7 +102,7 @@ extension JoinPickerView : UIPickerViewDelegate {
     }
 }
 
-extension JoinPickerView : UIPickerViewDataSource {
+extension JoinPickerView: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
