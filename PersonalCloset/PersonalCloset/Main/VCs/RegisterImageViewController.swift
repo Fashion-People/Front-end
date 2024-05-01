@@ -171,26 +171,24 @@ final class RegisterImageViewController: BaseViewController {
         if (self.imageInput1.imageView?.image != nil) {
             S3.uploadImageFile(imgData:self.imageInput1.currentImage)
         } else {
-            print("이미지 없음")
             count += 1
         }
         
         if (self.imageInput2.imageView?.image != nil) {
             S3.uploadImageFile(imgData:self.imageInput2.currentImage)
         } else {
-            print("이미지2 없음")
             count += 1
         }
         
         if (self.imageInput3.imageView?.image != nil) {
             S3.uploadImageFile(imgData:self.imageInput3.currentImage)
-        } else { print("이미지3 없음")
+        } else {
             count += 1
         }
         
         if (self.imageInput4.imageView?.image != nil) {
             S3.uploadImageFile(imgData:self.imageInput4.currentImage)
-        } else { print("이미지4 없음")
+        } else { 
             count += 1
         }
         

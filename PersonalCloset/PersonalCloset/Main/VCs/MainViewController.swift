@@ -147,7 +147,7 @@ extension MainViewController: CLLocationManagerDelegate {
             LocationManager.shared.location.latitude = String(location.coordinate.latitude)
             LocationManager.shared.location.longtitude = String(location.coordinate.longitude)
             
-            var setLocation = LocationManager.shared.location
+            let setLocation = LocationManager.shared.location
             
             Task {
                 do {
