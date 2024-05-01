@@ -8,7 +8,7 @@
 import Foundation
 
 enum FitnessTestAPI {
-    static let baseURL = "http://43.202.51.16:8081"
+    static let baseURL = "http://43.201.61.246:8081"
     
     case fitnessTest
 }
@@ -44,6 +44,7 @@ extension FitnessTestAPI {
     
     // MARK: - network 호출함수
     func performRequest(with parameters: Encodable? = nil) async throws {
+        print("request 함수 호출 시점")
         /// URLRequest 생성
         var request = self.request
         
@@ -78,6 +79,8 @@ extension FitnessTestAPI {
             
         case 400..<600:
             /// 오류 응답 처리
+            let dataContent = try JSONDecoder().decode(ServerStatus.self, from: data)
+            print("Response Data: \(dataContent.message)")
             print("Error: \(httpResponse.statusCode)")
             throw FetchError.invalidStatus
             

@@ -17,6 +17,7 @@ final class SettingViewController: UIViewController {
     
     weak var delegate: SettingViewControllerDelegate?
     
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         

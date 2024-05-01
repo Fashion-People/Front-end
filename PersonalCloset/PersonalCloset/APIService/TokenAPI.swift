@@ -8,7 +8,7 @@
 import Foundation
 
 enum TokenAPI {
-    static let authenticationURL = "http://43.202.51.16:8081/user"
+    static let authenticationURL = "http://43.201.61.246:8081/user"
     
     case login (_ id: String,_ password: String)
     case join (_ param: UserRequestDTO)

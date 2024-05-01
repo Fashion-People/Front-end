@@ -33,6 +33,7 @@ final class MainViewController: BaseViewController {
         }
     }
     
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -142,7 +143,6 @@ extension MainViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             print("위치 업데이트!")
-//            var setLocation = LocationManager.shared.location
             
             LocationManager.shared.location.latitude = String(location.coordinate.latitude)
             LocationManager.shared.location.longtitude = String(location.coordinate.longitude)

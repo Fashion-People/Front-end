@@ -12,7 +12,7 @@ import AWSCore
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        /// AWS S3
+        /// AWS S3 앱이 시작하자마자 연결됨
         let credentialsProvider = AWSStaticCredentialsProvider(accessKey: S3Configuration.ACCESS_KEY.rawValue, secretKey: S3Configuration.SECRET_KEY.rawValue)
 
         let configuration = AWSServiceConfiguration(region:.APNortheast2,

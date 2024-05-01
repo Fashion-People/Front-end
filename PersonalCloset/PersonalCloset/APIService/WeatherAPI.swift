@@ -8,7 +8,7 @@
 import Foundation
 
 enum WeatherAPI {
-    static let baseURL = "http://43.202.51.16:8081/weather"
+    static let baseURL = "http://43.201.61.246:8081/weather"
     
     case fetchWeatherStatus(_ latitudeValue: String, _ longtitudeValue: String)
 }
@@ -33,9 +33,13 @@ extension WeatherAPI {
     }
     
     var request: URLRequest {
+        let token = TokenManager.shared.token.accessToken
+
         var request = URLRequest(url: url)
         request.httpMethod = method
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(token, forHTTPHeaderField: "Authentication")
+
         return request
     }
     

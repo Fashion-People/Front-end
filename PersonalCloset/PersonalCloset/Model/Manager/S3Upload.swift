@@ -11,6 +11,7 @@ import AWSS3
 
 class S3Upload {
     func uploadImageFile(imgData: UIImage?) {
+        print("이미지 업로드 함수 호출 시점")
         /// 이미지를 Data 타입으로 변환
         guard let image = imgData?.jpegData(compressionQuality: 0.9) else {
             print("[ DONT HAVE IMAGE DATA ]")
@@ -30,7 +31,7 @@ class S3Upload {
         expression.progressBlock = {(task, progress) in
             DispatchQueue.global().async(execute: {
                 /// Do something e.g. Update a progress bar.
-                print("[ Upload progress ]: ", progress.fractionCompleted)
+//                print("[ Upload progress ]: ", progress.fractionCompleted)
             })
         }
 
@@ -49,8 +50,8 @@ class S3Upload {
                 /// 배열의 첫 번째 값이 실제 사용하는 URL
                 let url = responseURL.absoluteString.components(separatedBy: "?")[0]
                 ImageTempManager.shared.imageURLs.append(url)
-                print(url)
-                print("[ COMPLETE UPLOAD DATA TO AWS S3 ]")
+//                print(url)
+//                print("[ COMPLETE UPLOAD DATA TO AWS S3 ]")
             })
         }
 

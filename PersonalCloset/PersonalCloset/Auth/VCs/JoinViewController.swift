@@ -48,6 +48,7 @@ final class JoinViewController: UIViewController {
         }
     }
     
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
