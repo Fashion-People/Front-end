@@ -9,13 +9,13 @@ import UIKit
 import SnapKit
 import CoreLocation
 
-protocol MainViewControllerDelegate : AnyObject {
+protocol MainViewControllerDelegate: AnyObject {
     func presentMainVC()
     func presentRegisterVC()
 }
 
-final class MainViewController : BaseViewController {
-    weak var delegate : MainViewControllerDelegate?
+final class MainViewController: BaseViewController {
+    weak var delegate: MainViewControllerDelegate?
     var locationManager = CLLocationManager()
     private let location = LocationManager.shared.location
     private let status: [WeatherItemType] = WeatherItemType.allCases
@@ -35,8 +35,9 @@ final class MainViewController : BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        topView.backButton.isHidden = true
-        topView.selectButton.isHidden = true
+        
+        self.topView.backButton.isHidden = true
+        self.topView.selectButton.isHidden = true
         
         self.setLocationManager()
 //        self.fetchWeatherStatus()
@@ -71,18 +72,18 @@ final class MainViewController : BaseViewController {
     
     // MARK: - method
     private func tabCameraButton() {
-        // 카메라 버튼 눌렀을때
+        /// 카메라 버튼 눌렀을때
         delegate?.presentRegisterVC()
     }
     
     fileprivate func setLocationManager() {
-        // 델리게이트를 설정하고,
+        /// 델리게이트를 설정하고,
         locationManager.delegate = self
-        // 거리 정확도
+        /// 거리 정확도
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        // 위치 사용 허용 알림
+        /// 위치 사용 허용 알림
         locationManager.requestWhenInUseAuthorization()
-        // 위치 사용을 허용하면 현재 위치 정보를 가져옴
+        /// 위치 사용을 허용하면 현재 위치 정보를 가져옴
         DispatchQueue.global().async {
             if CLLocationManager.locationServicesEnabled() {
                 self.locationManager.startUpdatingLocation()
@@ -141,10 +142,12 @@ extension MainViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             print("위치 업데이트!")
-            var setLocation = LocationManager.shared.location
+//            var setLocation = LocationManager.shared.location
             
-            setLocation.latitude = String(location.coordinate.latitude)
-            setLocation.longtitude = String(location.coordinate.longitude)
+            LocationManager.shared.location.latitude = String(location.coordinate.latitude)
+            LocationManager.shared.location.longtitude = String(location.coordinate.longitude)
+            
+            var setLocation = LocationManager.shared.location
             
             Task {
                 do {
@@ -153,11 +156,11 @@ extension MainViewController: CLLocationManagerDelegate {
                     
                     DispatchQueue.main.async {
                         self.topView.weatherImage.image = UIImage(systemName: "sun.max")
+                        print("성공")
                     }
                     
                 } catch { print("error: \(error)") }
             }
-            
             
             print(setLocation)
         }

@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct Token : Codable {
-    var accessToken : String
+struct Token: Codable {
+    var accessToken: String
 }

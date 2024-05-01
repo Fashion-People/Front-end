@@ -32,9 +32,9 @@ final class RegisterImageViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        topView.selectButton.isHidden = true
-        tabTopViewButtons()
-        buttonConfiguration()
+        self.topView.selectButton.isHidden = true
+        self.tabTopViewButtons()
+        self.buttonConfiguration()
     }
     
     private let imageInputStackView1: UIStackView = {
@@ -66,12 +66,30 @@ final class RegisterImageViewController: BaseViewController {
                                                            titleColor: .darkBlue,
                                                            backColor: .skyBlue,
                                                            action: UIAction { _ in
-        self.uploadImage()
-//        Task {
-//            do {
-//                
-//            } catch {}
-//        }
+        
+        Task {
+            do {
+                
+                try await self.uploadImage()
+                
+                Thread.sleep(forTimeInterval: 3)
+
+                let params = FitnessTestRequestDTO (
+                    imageUrl: ImageTempManager.shared.imageURLs,
+                    latitude: LocationManager.shared.location.latitude,
+                    longtitude: LocationManager.shared.location.longtitude,
+                    situation: "회사"
+                )
+                
+                print(ImageTempManager.shared.imageURLs)
+                
+                /// 이미지 업로드가 성공적으로 완료되면 FitnessTestAPI 호출
+                try await FitnessTestAPI.fitnessTest.performRequest(with: params)
+            } catch {
+                print("Error: \(error)")
+            }
+        }
+        
         self.delegate.presentResultVC()
     })
     
@@ -97,8 +115,8 @@ final class RegisterImageViewController: BaseViewController {
             self.tabImageButton(tag: 4)
         }, for: .touchUpInside)
     }
-    
-    private func uploadImage() {
+
+    private func uploadImage() async throws {
         let S3 = S3Upload()
         var count = 0
         

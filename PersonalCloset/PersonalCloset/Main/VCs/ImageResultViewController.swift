@@ -8,19 +8,21 @@
 import UIKit
 import SnapKit
 
-protocol ImageResultViewControllerDelegate : AnyObject {
+protocol ImageResultViewControllerDelegate: AnyObject {
     func backToRegisterVC()
     func backToPreviousVC()
 }
 
-final class ImageResultViewController : BaseViewController {
-    weak var delegate : ImageResultViewControllerDelegate?
+final class ImageResultViewController: BaseViewController {
+    
+    weak var delegate: ImageResultViewControllerDelegate?
+    private let fitnessTestResult = FitnessTestManager.shared.result
     
     private enum Metric {
         static let width: CGFloat = 300
 
         enum Buttons {
-            static let bottom: CGFloat = -30
+            static let bottom: CGFloat = -20
             static let height: CGFloat = 50
         }
         
@@ -37,18 +39,19 @@ final class ImageResultViewController : BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        topViewConfig()
-        topView.selectButton.isHidden = true
+        self.resultLabel.text = String(self.fitnessTestResult.message)
+        self.topViewConfig()
+        self.topView.selectButton.isHidden = true
     }
     
-    private var resultImageView : UIImageView = {
+    private lazy var resultImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .darkBlue
         
         return imageView
     }()
     
-    private var resultLabel : UILabel = {
+    private lazy var resultLabel: UILabel = {
         let label = UILabel()
         label.text = "적합도는 79% 입니다."
         label.font = UIFont.systemFont(ofSize: 23, weight: .bold)
