@@ -14,6 +14,10 @@ protocol JoinViewControllerDelegate: AnyObject {
 
 final class JoinViewController: UIViewController {
     weak var delegate: JoinViewControllerDelegate?
+    private var firstPriority: String = "모던"
+    private var secondPriority: String = "캐주얼"
+    private var thirdPriority: String = "스포티"
+    private var fourthPriority: String = "페미닌"
     
     private enum Metric {
         enum JoinTitle {
@@ -142,10 +146,10 @@ final class JoinViewController: UIViewController {
         let passwordCheck: String = joinPasswordCheckInput.inputTextField.text ?? ""
         let name: String = joinNameInput.inputTextField.text ?? ""
         let email: String = joinEmailInput.inputTextField.text ?? ""
-        let style1: String = firstPickerView.first
-        let style2: String = secondPickerView.second
-        let style3: String = thirdPickerView.third
-        let style4: String = fourthPickerView.fourth
+        let style1: String = firstPickerView.style
+        let style2: String = secondPickerView.style
+        let style3: String = thirdPickerView.style
+        let style4: String = fourthPickerView.style
         
         var joinSuccess: Bool = false
         

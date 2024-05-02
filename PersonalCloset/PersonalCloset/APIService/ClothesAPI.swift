@@ -13,7 +13,7 @@ enum FetchError: Error {
 }
 
 enum ClothesAPI {
-    static let baseURL = "http://43.201.61.246:8081/clothes"
+    static let baseURL = "http://3.36.76.157:8081/clothes"
 
     case fetchCloth(clothesNumber: Int)
     case fetchAllClothes
@@ -72,6 +72,7 @@ extension ClothesAPI {
 
         if let parameters = parameters {
             request.httpBody = try JSONEncoder().encode(parameters)
+            print(parameters)
         }
         
         /// request URL
@@ -83,6 +84,7 @@ extension ClothesAPI {
         guard let httpResponse = response as? HTTPURLResponse else {
             throw FetchError.invalidStatus
         }
+        print(httpResponse.statusCode)
         
         /// response status가 200번대인지 확인하는 부분
         if (200..<300).contains(httpResponse.statusCode) {
@@ -90,6 +92,11 @@ extension ClothesAPI {
                 let clothList = try JSONDecoder().decode([ClothListModel].self, from: data)
                 
                 ClothListManager.shared.clothList = clothList
+            }
+            
+            else if case .createCloth = self {
+                let listNumber = try JSONDecoder().decode(Int.self, from: data)
+                print(listNumber)
             }
         }
         

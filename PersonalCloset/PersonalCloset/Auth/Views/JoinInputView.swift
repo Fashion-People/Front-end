@@ -56,12 +56,13 @@ final class JoinInputView: UIView {
     }
     
     private func setLayout() {
-        [inputLabel,inputTextField].forEach {
+        [inputLabel,
+         inputTextField].forEach {
             inputStackView.addArrangedSubview($0)
         }
         
         inputTextField.snp.makeConstraints {
-            $0.width.equalTo(380)
+            $0.width.equalTo(340)
             $0.height.equalTo(50)
         }
         

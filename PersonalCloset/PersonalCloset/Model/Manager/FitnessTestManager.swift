@@ -10,7 +10,7 @@ import Foundation
 class FitnessTestManager {
     static let shared = FitnessTestManager()
     
-    var result = FitnessTestModel(clothesNumber: 0, figure: 0, message: "",tempNumber: 0)
+    var result = FitnessTestModel(clothesNumber: 0, imageUrl: "", figure: 0,message: "")
     
     private init() {}
 }
