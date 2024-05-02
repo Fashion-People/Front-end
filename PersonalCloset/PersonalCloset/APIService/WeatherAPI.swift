@@ -8,7 +8,7 @@
 import Foundation
 
 enum WeatherAPI {
-    static let baseURL = "http://43.201.61.246:8081/weather"
+    static let baseURL = "http://3.36.76.157:8081/weather"
     
     case fetchWeatherStatus(_ latitudeValue: String, _ longtitudeValue: String)
 }

@@ -9,7 +9,7 @@ import Foundation
 
 struct FitnessTestModel: Codable {
     var clothesNumber: Int
+    var imageUrl: String
     var figure: Int
     var message: String
-    var tempNumber: Int
 }

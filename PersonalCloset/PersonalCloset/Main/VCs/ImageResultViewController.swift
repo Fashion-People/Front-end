@@ -43,9 +43,10 @@ final class ImageResultViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        resultImageUrl = ImageTempManager.shared.imageURLs[self.fitnessTestResult.clothesNumber-1]
+        resultImageUrl = fitnessTestResult.imageUrl
         loadImage(data: resultImageUrl)
-        self.resultLabel.text = "해당 옷의 적합도 수치가 \(String(self.fitnessTestResult.figure))%로 가장 높습니다."
+//        self.resultLabel.text = "해당 옷의 적합도 수치가 \(String(self.fitnessTestResult.figure))%로 가장 높습니다! "
+        self.resultLabel.text = self.fitnessTestResult.message
         self.topViewConfig()
         self.topView.selectButton.isHidden = true
     }
@@ -57,15 +58,14 @@ final class ImageResultViewController: BaseViewController {
     
     private lazy var resultImageView: UIImageView = {
         let imageView = UIImageView()
-//        imageView.backgroundColor = .darkBlue
         
         return imageView
     }()
     
     private lazy var resultLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 23, weight: .bold)
-        label.numberOfLines = 2
+        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+//        label.numberOfLines = 2
         label.textAlignment = .center
         
         return label
@@ -79,27 +79,37 @@ final class ImageResultViewController: BaseViewController {
         descriptionAlert.addTextField()
         
         let success = UIAlertAction(title: "확인", style: .default) { action in
-            var params = ClothRequestDTO(description: descriptionAlert.textFields?[0].text ?? "", imageURL: self.resultImageUrl)
+            var params = ClothRequestDTO(description: descriptionAlert.textFields?[0].text ?? "", imageUrl: self.resultImageUrl)
             print(params)
             
             Task {
                 do {
                     try await ClothesAPI.createCloth.performRequest(with: params)
+                    
+                    DispatchQueue.main.async {
+                        let successAlert = UIAlertController(title: "옷 저장에 성공하였습니다!", message: "다시 검사하시겠습니까?", preferredStyle: UIAlertController.Style.alert)
+                        let reTest = UIAlertAction(title: "네", style: .default) { action in
+                            self.delegate?.backToRegisterVC()
+                        }
+                        let backToMain = UIAlertAction(title: "아니오", style: .default) { action in
+                            self.delegate?.backToPreviousVC()
+                        }
+                        successAlert.addAction(reTest)
+                        successAlert.addAction(backToMain)
+                        self.present(successAlert, animated: true, completion: nil)
+                    }
                 } catch {
                     print("error: \(error)")
                 }
             }
         }
         
-        let cancel = UIAlertAction(title: "취소", style: .cancel) { action in
-            
-        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
         
         descriptionAlert.addAction(success)
         descriptionAlert.addAction(cancel)
         
         self.present(descriptionAlert, animated: true, completion: nil)
-        self.delegate?.backToPreviousVC()
     })
     
     private lazy var backToRegisterButton = PersonalClosetButton("다시 검사하기",

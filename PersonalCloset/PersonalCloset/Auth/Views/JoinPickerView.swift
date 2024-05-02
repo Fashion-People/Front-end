@@ -14,16 +14,13 @@ final class JoinPickerView: UIView {
         }
         
         enum PickerView {
-            static let width: CGFloat = 380
+            static let width: CGFloat = 340
             static let height: CGFloat = 70
         }
     }
     
-    var style: [String] = ["모던", "캐주얼", "스포티", "페미닌"]
-    var first = ""
-    var second = ""
-    var third = ""
-    var fourth = ""
+    var style: String = "모던"
+    private var styles: [String] = ["모던", "캐주얼", "스포티", "페미닌"]
     
     private let pickerTitle: String
     
@@ -70,6 +67,11 @@ final class JoinPickerView: UIView {
         inputLabel.text = pickerTitle
     }
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        style = styles[row]
+    }
+
+    
     private func setupLayout() {
         [inputLabel,
          pickerView].forEach {
@@ -98,7 +100,7 @@ extension JoinPickerView: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, 
                     titleForRow row: Int,
                     forComponent component: Int) -> String? {
-        return style[row]
+        return styles[row]
     }
 }
 
@@ -108,7 +110,7 @@ extension JoinPickerView: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return style.count
+        return styles.count
     }
     
     func pickerView(_ pickerView: UIPickerView, 
@@ -118,6 +120,6 @@ extension JoinPickerView: UIPickerViewDataSource {
             NSAttributedString.Key(rawValue: NSAttributedString.Key.font.rawValue): UIFont.systemFont(ofSize: 10, weight: .bold)
         ]
         
-        return NSAttributedString(string: style[row], attributes: attributes)
+        return NSAttributedString(string: styles[row], attributes: attributes)
     }
 }

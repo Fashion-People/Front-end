@@ -120,7 +120,7 @@ final class RegisterImageViewController: BaseViewController {
             do {
                 try await self.uploadImage()
                 
-                Thread.sleep(forTimeInterval: 8)
+                Thread.sleep(forTimeInterval: 7)
 
                 let params = FitnessTestRequestDTO (
                     imageUrl: ImageTempManager.shared.imageURLs,
@@ -129,10 +129,10 @@ final class RegisterImageViewController: BaseViewController {
                 
                 print(ImageTempManager.shared.imageURLs)
                 
+                /// 이미지 업로드가 성공적으로 완료되면 FitnessTestAPI 호출
                 try await FitnessTestAPI.fitnessTest.performRequest(with: params)
                 
                 if !ImageTempManager.shared.imageURLs.isEmpty {
-                    /// 이미지 업로드가 성공적으로 완료되면 FitnessTestAPI 호출
                     self.delegate.presentResultVC()
                 }
             } catch {
@@ -171,26 +171,24 @@ final class RegisterImageViewController: BaseViewController {
         if (self.imageInput1.imageView?.image != nil) {
             S3.uploadImageFile(imgData:self.imageInput1.currentImage)
         } else {
-            print("이미지 없음")
             count += 1
         }
         
         if (self.imageInput2.imageView?.image != nil) {
             S3.uploadImageFile(imgData:self.imageInput2.currentImage)
         } else {
-            print("이미지2 없음")
             count += 1
         }
         
         if (self.imageInput3.imageView?.image != nil) {
             S3.uploadImageFile(imgData:self.imageInput3.currentImage)
-        } else { print("이미지3 없음")
+        } else {
             count += 1
         }
         
         if (self.imageInput4.imageView?.image != nil) {
             S3.uploadImageFile(imgData:self.imageInput4.currentImage)
-        } else { print("이미지4 없음")
+        } else { 
             count += 1
         }
         
@@ -203,6 +201,7 @@ final class RegisterImageViewController: BaseViewController {
             imageNilAlert.addAction(success)
             self.present(imageNilAlert, animated: true, completion: nil)
         }
+        
     }
     
     private func tabImageButton(tag: Int) {
