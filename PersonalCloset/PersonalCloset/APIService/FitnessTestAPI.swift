@@ -8,7 +8,7 @@
 import Foundation
 
 enum FitnessTestAPI {
-    static let baseURL = "http://43.201.61.246:8081"
+    static let baseURL = "http://3.36.76.157:8081"
     
     case fitnessTest
 }
@@ -63,7 +63,6 @@ extension FitnessTestAPI {
         guard let httpResponse = response as? HTTPURLResponse else {
             throw FetchError.invalidStatus
         }
-        print(httpResponse.statusCode)
         
         /// response status 확인
         switch httpResponse.statusCode {

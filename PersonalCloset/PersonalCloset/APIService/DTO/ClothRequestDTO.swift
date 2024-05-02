@@ -9,5 +9,5 @@ import Foundation
 
 struct ClothRequestDTO: Codable {
     let description: String
-    let imageURL: String
+    let imageUrl: String
 }

@@ -120,7 +120,7 @@ final class RegisterImageViewController: BaseViewController {
             do {
                 try await self.uploadImage()
                 
-                Thread.sleep(forTimeInterval: 8)
+                Thread.sleep(forTimeInterval: 7)
 
                 let params = FitnessTestRequestDTO (
                     imageUrl: ImageTempManager.shared.imageURLs,
@@ -129,10 +129,10 @@ final class RegisterImageViewController: BaseViewController {
                 
                 print(ImageTempManager.shared.imageURLs)
                 
+                /// 이미지 업로드가 성공적으로 완료되면 FitnessTestAPI 호출
                 try await FitnessTestAPI.fitnessTest.performRequest(with: params)
                 
                 if !ImageTempManager.shared.imageURLs.isEmpty {
-                    /// 이미지 업로드가 성공적으로 완료되면 FitnessTestAPI 호출
                     self.delegate.presentResultVC()
                 }
             } catch {
