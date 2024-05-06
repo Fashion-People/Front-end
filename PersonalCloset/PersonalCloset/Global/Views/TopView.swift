@@ -71,7 +71,6 @@ final class TopView: UIView {
     
     lazy var weatherImage: UIImageView = {
         let image = UIImageView()
-//        image.image = UIImage(systemName: "sun.rain")
         image.tintColor = .black
         image.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
@@ -89,8 +88,8 @@ final class TopView: UIView {
         [weatherImage,
          selectButton].forEach {
             $0.snp.makeConstraints {
-                $0.width.equalTo(40)
-                $0.height.equalTo(40)
+                $0.width.equalTo(35)
+                $0.height.equalTo(30)
             }
         }
         
