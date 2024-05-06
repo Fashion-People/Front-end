@@ -8,9 +8,9 @@
 import Foundation
 
 class WeatherManager {
-    static let shared = WeatherManager()
-    
     var weather = WeatherModel(weatherStatus: "")
+    
+    static let shared = WeatherManager()
     
     private init() {}
 }

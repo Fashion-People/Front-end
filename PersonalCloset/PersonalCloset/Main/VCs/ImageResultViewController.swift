@@ -45,8 +45,8 @@ final class ImageResultViewController: BaseViewController {
         
         resultImageUrl = fitnessTestResult.imageUrl
         loadImage(data: resultImageUrl)
-//        self.resultLabel.text = "해당 옷의 적합도 수치가 \(String(self.fitnessTestResult.figure))%로 가장 높습니다! "
-        self.resultLabel.text = self.fitnessTestResult.message
+
+        self.resultLabel.text = self.fitnessTestResult.message + "!"
         self.topViewConfig()
         self.topView.selectButton.isHidden = true
     }
