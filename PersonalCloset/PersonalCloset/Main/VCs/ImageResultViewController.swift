@@ -42,10 +42,10 @@ final class ImageResultViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.resultImageUrl = fitnessTestResult.imageUrl
-        self.loadImage(data: resultImageUrl)
-        
-        self.resultLabel.text = self.fitnessTestResult.message
+        resultImageUrl = fitnessTestResult.imageUrl
+        loadImage(data: resultImageUrl)
+
+        self.resultLabel.text = self.fitnessTestResult.message + "!"
         self.topViewConfig()
         self.topView.selectButton.isHidden = true
     }

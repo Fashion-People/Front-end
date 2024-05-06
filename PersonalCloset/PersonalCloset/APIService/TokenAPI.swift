@@ -13,7 +13,7 @@ enum TokenAPI {
     case login (_ id: String,_ password: String)
     case join (_ param: UserRequestDTO)
 }
-
+    
 extension TokenAPI {
     var path: String{
         switch self {

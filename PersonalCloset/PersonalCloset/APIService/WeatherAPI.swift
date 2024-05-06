@@ -66,7 +66,7 @@ extension WeatherAPI {
             /// 성공적인 응답 처리
             let weatherStatus = String(decoding: data, as: UTF8.self)
             WeatherManager.shared.weather.weatherStatus = weatherStatus
-            print(weatherStatus)
+            print("network 결과:",WeatherManager.shared.weather.weatherStatus)
         
         case 400..<600:
             /// 오류 응답 처리
