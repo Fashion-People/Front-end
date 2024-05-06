@@ -179,6 +179,31 @@
 			path = APIService;
 			sourceTree = "<group>";
 		};
+		2944D0DE2BE8FC540014F0F1 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				298202352B43B2F300B7DEB3 /* Model */,
+				290DEEBF2BAB05ED002CB29C /* APIService */,
+				298202372B43B31500B7DEB3 /* Extension */,
+				296353D22B8DE89500AB8A2B /* Auth */,
+				296353D32B8DE89B00AB8A2B /* Main */,
+				296353D42B8DE8BA00AB8A2B /* Setting */,
+				296353D52B8DE8C000AB8A2B /* ClothList */,
+				296353DC2B8DE95E00AB8A2B /* Global */,
+				290BAADB2B4AE15200C800A1 /* Coordinator */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		2944D0DF2BE8FC7C0014F0F1 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				29A9C0952B3FE62900209641 /* AppDelegate.swift */,
+				29A9C0972B3FE62900209641 /* SceneDelegate.swift */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		296353D22B8DE89500AB8A2B /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,20 +394,11 @@
 		29A9C0942B3FE62900209641 /* PersonalCloset */ = {
 			isa = PBXGroup;
 			children = (
-				290BAADB2B4AE15200C800A1 /* Coordinator */,
-				296353DC2B8DE95E00AB8A2B /* Global */,
-				296353D52B8DE8C000AB8A2B /* ClothList */,
-				296353D42B8DE8BA00AB8A2B /* Setting */,
-				296353D32B8DE89B00AB8A2B /* Main */,
-				296353D22B8DE89500AB8A2B /* Auth */,
-				298202372B43B31500B7DEB3 /* Extension */,
-				290DEEBF2BAB05ED002CB29C /* APIService */,
-				298202352B43B2F300B7DEB3 /* Model */,
-				29A9C0952B3FE62900209641 /* AppDelegate.swift */,
-				29A9C0972B3FE62900209641 /* SceneDelegate.swift */,
+				29A9C0A02B3FE62A00209641 /* LaunchScreen.storyboard */,
 				29A9C0A32B3FE62A00209641 /* Info.plist */,
 				29A9C09E2B3FE62A00209641 /* Assets.xcassets */,
-				29A9C0A02B3FE62A00209641 /* LaunchScreen.storyboard */,
+				2944D0DF2BE8FC7C0014F0F1 /* Resource */,
+				2944D0DE2BE8FC540014F0F1 /* Source */,
 			);
 			path = PersonalCloset;
 			sourceTree = "<group>";
