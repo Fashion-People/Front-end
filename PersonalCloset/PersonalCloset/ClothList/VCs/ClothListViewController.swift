@@ -49,6 +49,22 @@ final class ClothListViewController: BaseViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        Task {
+            do {
+                /// Fetch a list of all clothes from the server
+                try await ClothesAPI.fetchAllClothes.performRequest()
+                
+                DispatchQueue.main.async {
+                    self.performQuery()
+                }
+                
+            } catch { print("error: \(error)") }
+        }
+    }
+    
     // MARK: - UICollectionView config (+ DiffableDataSource)
     private lazy var clothListCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
@@ -172,10 +188,9 @@ final class ClothListViewController: BaseViewController {
             }
             
             else {
-            
-                
                 if self.clothListCollectionView.indexPathsForSelectedItems?.count ?? 0 > 0 {
                     self.delegate?.presentRegisterVC()
+                    print(self.imageTempManager.imageURLs)
                 }
                 
                 /// If nothing is selected, nothing happens
@@ -212,15 +227,15 @@ extension ClothListViewController: UICollectionViewDelegate {
             if imageTempManager.imageURLs.count <= 4 {
                 let clothList = clothListManager.clothList[indexPath.row].imageUrl
                 imageTempManager.imageURLs.append(clothList)
-                print(imageTempManager.imageURLs)
             }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if collectionView.isEditing {
-            imageTempManager.imageURLs.removeLast()
-            print(imageTempManager.imageURLs)
+            if imageTempManager.imageURLs.count > 0 {
+                imageTempManager.imageURLs.removeLast()
+            }
         }
     }
 }

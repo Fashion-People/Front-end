@@ -56,10 +56,9 @@ final class RegisterImageViewController: BaseViewController {
         self.buttonConfiguration()
         
         if !imageURLs.isEmpty {
-//            for url in imageURLs{
-            print("비어있지 않음")
-            loadImage(data: imageURLs.first ?? "")
-//            }
+            for i in 0..<min(imageURLs.count, imageInputArray.count) {
+                self.loadImage(data: imageURLs[i], imageInput: imageInputArray[i])
+            }
         }
     }
     
@@ -87,6 +86,10 @@ final class RegisterImageViewController: BaseViewController {
     private lazy var imageInput2 = ImageInputButton()
     private lazy var imageInput3 = ImageInputButton()
     private lazy var imageInput4 = ImageInputButton()
+    
+    private lazy var imageInputArray: [ImageInputButton] = {
+        return [imageInput1, imageInput2, imageInput3, imageInput4]
+    }()
     
     private lazy var situationDescription: UILabel = {
         let label = UILabel()
@@ -149,7 +152,8 @@ final class RegisterImageViewController: BaseViewController {
         }
     })
     
-    private func loadImage(data: String) {
+    // MARK: - imageLoad method
+    private func loadImage(data: String, imageInput: ImageInputButton) {
         guard let url = URL(string: data)  else { return }
         
         let backgroundQueue = DispatchQueue(label: "background_queue",qos: .background)
@@ -158,12 +162,12 @@ final class RegisterImageViewController: BaseViewController {
             guard let data = try? Data(contentsOf: url) else { return }
             
             DispatchQueue.main.async {
-                print(self.imageURLs)
-                self.imageInput1.imageView?.image = UIImage(data: data)
+                imageInput.setImage(UIImage(data: data), for: .normal)
             }
         }
     }
     
+    // MARK: - config ImageAction, tag
     private func buttonConfiguration() {
         imageInput1.tag = 1
         imageInput2.tag = 2
@@ -187,6 +191,7 @@ final class RegisterImageViewController: BaseViewController {
         }, for: .touchUpInside)
     }
 
+    // MARK: - Upload Image To S3 Bucket
     private func uploadImage() async throws {
         let S3 = S3Upload()
         var count = 0
@@ -224,9 +229,9 @@ final class RegisterImageViewController: BaseViewController {
             imageNilAlert.addAction(success)
             self.present(imageNilAlert, animated: true, completion: nil)
         }
-        
     }
     
+    // MARK: - Set ImagePicker
     private func tabImageButton(tag: Int) {
         let imagePicker = UIImagePickerController()
 
@@ -242,6 +247,8 @@ final class RegisterImageViewController: BaseViewController {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         situationTitle = situations[row]
     }
+
+    // MARK: - Set TopView Button Action
 
     private func tabTopViewButtons() {
         topView.backButton.addAction(UIAction{ _ in
@@ -333,7 +340,6 @@ extension RegisterImageViewController: UIImagePickerControllerDelegate, UINaviga
         }
     }
 }
-
 
 extension RegisterImageViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
