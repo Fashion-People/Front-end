@@ -15,6 +15,7 @@ protocol ImageResultViewControllerDelegate: AnyObject {
 
 final class ImageResultViewController: BaseViewController {
     weak var delegate: ImageResultViewControllerDelegate?
+    
     private let fitnessTestResult = FitnessTestManager.shared.result
     private var resultImageUrl: String = ""
     

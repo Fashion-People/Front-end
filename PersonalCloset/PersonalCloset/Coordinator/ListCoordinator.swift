@@ -24,13 +24,20 @@ final class ListCoordinator: Coordinator {
 }
 
 extension ListCoordinator: ClothListViewControllerDelegate,
-                          RegisterImageViewControllerDelegate {
-    func backToPreviousVC() {
-        navigationController.popToRootViewController(animated: true)
+                           RegisterImageViewControllerDelegate,
+                           ImageResultViewControllerDelegate {
+    func backToRegisterVC() {
+        navigationController.popViewController(animated: true)
     }
     
     func presentResultVC() {
-        
+        let registerVC = ImageResultViewController()
+        registerVC.delegate = self
+        navigationController.pushViewController(registerVC, animated: true)
+    }
+    
+    func backToPreviousVC() {
+        navigationController.popToRootViewController(animated: true)
     }
     
     func presentListVC() {
