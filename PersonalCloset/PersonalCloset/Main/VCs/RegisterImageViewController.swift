@@ -15,9 +15,11 @@ protocol RegisterImageViewControllerDelegate: AnyObject {
 
 final class RegisterImageViewController: BaseViewController {
     weak var delegate: RegisterImageViewControllerDelegate!
+    
     private let situations: [String] = ["회사", "데이트", "결혼식", "운동", "학교", "도서관", "나들이"]
     private var situationTitle: String = "회사"
-    private let imageURLs = ImageTempManager.shared.imageURLs
+    
+    private var imageURLs = ImageTempManager.shared.imageURLs
     
     // MARK: - Metric
     private enum Metric {
@@ -62,6 +64,12 @@ final class RegisterImageViewController: BaseViewController {
         }
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        ImageTempManager.shared.imageURLs.removeAll()
+    }
+
     private let imageInputStackView1: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -121,33 +129,57 @@ final class RegisterImageViewController: BaseViewController {
         return activityIndicator
         
     }()
-
+    
+    // MARK: - 이미지 적합도 검사 버튼
     private lazy var registerButton = PersonalClosetButton("적합도를 알려주세요!",
                                                            titleColor: .darkBlue,
                                                            backColor: .skyBlue,
                                                            action: UIAction { _ in
         
-        Task {
-            do {
-                try await self.uploadImage()
-                
-                Thread.sleep(forTimeInterval: 7)
+        if self.imageURLs.isEmpty {
+            Task {
+                do {
+                    try await self.uploadImage()
+                    
+                    Thread.sleep(forTimeInterval: 7)
 
-                let params = FitnessTestRequestDTO (
-                    imageUrl: ImageTempManager.shared.imageURLs,
-                    situation: self.situationTitle
-                )
-                
-                print(ImageTempManager.shared.imageURLs)
-                
-                /// 이미지 업로드가 성공적으로 완료되면 FitnessTestAPI 호출
-                try await FitnessTestAPI.fitnessTest.performRequest(with: params)
-                
-                if !ImageTempManager.shared.imageURLs.isEmpty {
-                    self.delegate.presentResultVC()
+                    let params = FitnessTestRequestDTO (
+                        imageUrl: ImageTempManager.shared.imageURLs,
+                        situation: self.situationTitle
+                    )
+                    
+                    print(ImageTempManager.shared.imageURLs)
+                    
+                    /// 이미지 업로드가 성공적으로 완료되면 FitnessTestAPI 호출
+                    try await FitnessTestAPI.fitnessTest.performRequest(with: params)
+                    
+                    if !ImageTempManager.shared.imageURLs.isEmpty {
+                        self.delegate.presentResultVC()
+                    }
+                } catch {
+                    print("Error: \(error)")
                 }
-            } catch {
-                print("Error: \(error)")
+            }
+        }
+        
+        else {
+            Task {
+                do {
+                    let params = FitnessTestRequestDTO (
+                        imageUrl: self.imageURLs,
+                        situation: self.situationTitle
+                    )
+                    
+                    /// 이미지 업로드가 성공적으로 완료되면 FitnessTestAPI 호출
+                    try await FitnessTestAPI.fitnessTest.performRequest(with: params)
+                          
+                    if !FitnessTestManager.shared.result.imageUrl.isEmpty {
+                        self.delegate.presentResultVC()
+                        print("외않되 이거?")
+                    }
+                } catch {
+                    print("Error: \(error)")
+                }
             }
         }
     })

@@ -14,7 +14,6 @@ protocol ImageResultViewControllerDelegate: AnyObject {
 }
 
 final class ImageResultViewController: BaseViewController {
-    
     weak var delegate: ImageResultViewControllerDelegate?
     private let fitnessTestResult = FitnessTestManager.shared.result
     private var resultImageUrl: String = ""
@@ -43,9 +42,9 @@ final class ImageResultViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        resultImageUrl = fitnessTestResult.imageUrl
-        loadImage(data: resultImageUrl)
-//        self.resultLabel.text = "해당 옷의 적합도 수치가 \(String(self.fitnessTestResult.figure))%로 가장 높습니다! "
+        self.resultImageUrl = fitnessTestResult.imageUrl
+        self.loadImage(data: resultImageUrl)
+        
         self.resultLabel.text = self.fitnessTestResult.message
         self.topViewConfig()
         self.topView.selectButton.isHidden = true
@@ -65,7 +64,6 @@ final class ImageResultViewController: BaseViewController {
     private lazy var resultLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-//        label.numberOfLines = 2
         label.textAlignment = .center
         
         return label
@@ -91,9 +89,11 @@ final class ImageResultViewController: BaseViewController {
                         let reTest = UIAlertAction(title: "네", style: .default) { action in
                             self.delegate?.backToRegisterVC()
                         }
+                        
                         let backToMain = UIAlertAction(title: "아니오", style: .default) { action in
                             self.delegate?.backToPreviousVC()
                         }
+                        
                         successAlert.addAction(reTest)
                         successAlert.addAction(backToMain)
                         self.present(successAlert, animated: true, completion: nil)
