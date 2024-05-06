@@ -15,8 +15,11 @@ protocol RegisterImageViewControllerDelegate: AnyObject {
 
 final class RegisterImageViewController: BaseViewController {
     weak var delegate: RegisterImageViewControllerDelegate!
+    
     private let situations: [String] = ["회사", "데이트", "결혼식", "운동", "학교", "도서관", "나들이"]
     private var situationTitle: String = "회사"
+    
+    private var imageURLs = ImageTempManager.shared.imageURLs
     
     // MARK: - Metric
     private enum Metric {
@@ -48,13 +51,25 @@ final class RegisterImageViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.bringSubviewToFront(self.indicatorView)
+//        self.view.bringSubviewToFront(self.indicatorView)
 
         self.topView.selectButton.isHidden = true
         self.tabTopViewButtons()
         self.buttonConfiguration()
+        
+        if !imageURLs.isEmpty {
+            for i in 0..<min(imageURLs.count, imageInputArray.count) {
+                self.loadImage(data: imageURLs[i], imageInput: imageInputArray[i])
+            }
+        }
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        ImageTempManager.shared.imageURLs.removeAll()
+    }
+
     private let imageInputStackView1: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -79,6 +94,10 @@ final class RegisterImageViewController: BaseViewController {
     private lazy var imageInput2 = ImageInputButton()
     private lazy var imageInput3 = ImageInputButton()
     private lazy var imageInput4 = ImageInputButton()
+    
+    private lazy var imageInputArray: [ImageInputButton] = {
+        return [imageInput1, imageInput2, imageInput3, imageInput4]
+    }()
     
     private lazy var situationDescription: UILabel = {
         let label = UILabel()
@@ -110,37 +129,77 @@ final class RegisterImageViewController: BaseViewController {
         return activityIndicator
         
     }()
-
+    
+    // MARK: - 이미지 적합도 검사 버튼
     private lazy var registerButton = PersonalClosetButton("적합도를 알려주세요!",
                                                            titleColor: .darkBlue,
                                                            backColor: .skyBlue,
                                                            action: UIAction { _ in
         
-        Task {
-            do {
-                try await self.uploadImage()
-                
-                Thread.sleep(forTimeInterval: 7)
+        if self.imageURLs.isEmpty {
+            Task {
+                do {
+                    try await self.uploadImage()
+                    
+                    Thread.sleep(forTimeInterval: 7)
 
-                let params = FitnessTestRequestDTO (
-                    imageUrl: ImageTempManager.shared.imageURLs,
-                    situation: self.situationTitle
-                )
-                
-                print(ImageTempManager.shared.imageURLs)
-                
-                /// 이미지 업로드가 성공적으로 완료되면 FitnessTestAPI 호출
-                try await FitnessTestAPI.fitnessTest.performRequest(with: params)
-                
-                if !ImageTempManager.shared.imageURLs.isEmpty {
-                    self.delegate.presentResultVC()
+                    let params = FitnessTestRequestDTO (
+                        imageUrl: ImageTempManager.shared.imageURLs,
+                        situation: self.situationTitle
+                    )
+                    
+                    print(ImageTempManager.shared.imageURLs)
+                    
+                    /// 이미지 업로드가 성공적으로 완료되면 FitnessTestAPI 호출
+                    try await FitnessTestAPI.fitnessTest.performRequest(with: params)
+                    
+                    if !ImageTempManager.shared.imageURLs.isEmpty {
+                        self.delegate.presentResultVC()
+                    }
+                } catch {
+                    print("Error: \(error)")
                 }
-            } catch {
-                print("Error: \(error)")
+            }
+        }
+        
+        else {
+            Task {
+                do {
+                    let params = FitnessTestRequestDTO (
+                        imageUrl: self.imageURLs,
+                        situation: self.situationTitle
+                    )
+                    
+                    /// 이미지 업로드가 성공적으로 완료되면 FitnessTestAPI 호출
+                    try await FitnessTestAPI.fitnessTest.performRequest(with: params)
+                          
+                    if !FitnessTestManager.shared.result.imageUrl.isEmpty {
+                        self.delegate.presentResultVC()
+                        print("외않되 이거?")
+                    }
+                } catch {
+                    print("Error: \(error)")
+                }
             }
         }
     })
     
+    // MARK: - imageLoad method
+    private func loadImage(data: String, imageInput: ImageInputButton) {
+        guard let url = URL(string: data)  else { return }
+        
+        let backgroundQueue = DispatchQueue(label: "background_queue",qos: .background)
+        
+        backgroundQueue.async {
+            guard let data = try? Data(contentsOf: url) else { return }
+            
+            DispatchQueue.main.async {
+                imageInput.setImage(UIImage(data: data), for: .normal)
+            }
+        }
+    }
+    
+    // MARK: - config ImageAction, tag
     private func buttonConfiguration() {
         imageInput1.tag = 1
         imageInput2.tag = 2
@@ -164,6 +223,7 @@ final class RegisterImageViewController: BaseViewController {
         }, for: .touchUpInside)
     }
 
+    // MARK: - Upload Image To S3 Bucket
     private func uploadImage() async throws {
         let S3 = S3Upload()
         var count = 0
@@ -201,9 +261,9 @@ final class RegisterImageViewController: BaseViewController {
             imageNilAlert.addAction(success)
             self.present(imageNilAlert, animated: true, completion: nil)
         }
-        
     }
     
+    // MARK: - Set ImagePicker
     private func tabImageButton(tag: Int) {
         let imagePicker = UIImagePickerController()
 
@@ -219,6 +279,8 @@ final class RegisterImageViewController: BaseViewController {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         situationTitle = situations[row]
     }
+
+    // MARK: - Set TopView Button Action
 
     private func tabTopViewButtons() {
         topView.backButton.addAction(UIAction{ _ in
@@ -310,7 +372,6 @@ extension RegisterImageViewController: UIImagePickerControllerDelegate, UINaviga
         }
     }
 }
-
 
 extension RegisterImageViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
