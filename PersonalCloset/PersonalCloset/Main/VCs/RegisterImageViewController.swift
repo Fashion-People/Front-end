@@ -17,6 +17,7 @@ final class RegisterImageViewController: BaseViewController {
     weak var delegate: RegisterImageViewControllerDelegate!
     private let situations: [String] = ["회사", "데이트", "결혼식", "운동", "학교", "도서관", "나들이"]
     private var situationTitle: String = "회사"
+    private let imageURLs = ImageTempManager.shared.imageURLs
     
     // MARK: - Metric
     private enum Metric {
@@ -48,11 +49,18 @@ final class RegisterImageViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.bringSubviewToFront(self.indicatorView)
+//        self.view.bringSubviewToFront(self.indicatorView)
 
         self.topView.selectButton.isHidden = true
         self.tabTopViewButtons()
         self.buttonConfiguration()
+        
+        if !imageURLs.isEmpty {
+//            for url in imageURLs{
+            print("비어있지 않음")
+            loadImage(data: imageURLs.first ?? "")
+//            }
+        }
     }
     
     private let imageInputStackView1: UIStackView = {
@@ -140,6 +148,21 @@ final class RegisterImageViewController: BaseViewController {
             }
         }
     })
+    
+    private func loadImage(data: String) {
+        guard let url = URL(string: data)  else { return }
+        
+        let backgroundQueue = DispatchQueue(label: "background_queue",qos: .background)
+        
+        backgroundQueue.async {
+            guard let data = try? Data(contentsOf: url) else { return }
+            
+            DispatchQueue.main.async {
+                print(self.imageURLs)
+                self.imageInput1.imageView?.image = UIImage(data: data)
+            }
+        }
+    }
     
     private func buttonConfiguration() {
         imageInput1.tag = 1

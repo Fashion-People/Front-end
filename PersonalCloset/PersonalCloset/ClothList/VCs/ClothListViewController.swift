@@ -16,17 +16,17 @@ protocol ClothListViewControllerDelegate: AnyObject {
 
 final class ClothListViewController: BaseViewController {
     weak var delegate: ClothListViewControllerDelegate?
-    
-    private enum Metric {
-        static let top: CGFloat = 10
-    }
-    
     private let clothListManager = ClothListManager.shared
+    private let imageTempManager = ImageTempManager.shared
     
     /// 상단 이미지 선택 button 클릭 유무 확인하기 위한 toggle
     private var selectToggle = true
-    
     var dataSource: UICollectionViewDiffableDataSource<Section, ClothListModel>!
+
+    // MARK: - Metric
+    private enum Metric {
+        static let top: CGFloat = 10
+    }
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -58,6 +58,7 @@ final class ClothListViewController: BaseViewController {
         return collectionView
     }()
     
+    // MARK: - CompositionalLayout
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                               heightDimension: .absolute(100))
@@ -76,22 +77,22 @@ final class ClothListViewController: BaseViewController {
         return layout
     }
 
+    // MARK: - setupDataSource
     private func setupDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<
-                                                ListCollectionViewCell,
-                                                ClothListModel> {
-                                                    (cell, indexPath, list) in
-                                                    cell.cloth = list
-                                                    cell.accessories = [ .multiselect() ]
-                                                    
-                                                    cell.deleteAction = { [unowned self] in
-                                                        self.deleteList(listNumber: list.clothesNumber)
-                                                    }
-                                                    
-                                                    cell.modifyAction = { [unowned self] in
-                                                        self.modifyList(listNumber: list.clothesNumber)
-                                                    }
-                                                }
+        let cellRegistration = UICollectionView.CellRegistration<ListCollectionViewCell, ClothListModel> {
+            (cell, indexPath, list) in
+            
+            cell.cloth = list
+            cell.accessories = [ .multiselect() ]
+                
+            cell.deleteAction = { [unowned self] in
+                self.deleteList(listNumber: list.clothesNumber)
+            }
+            
+            cell.modifyAction = { [unowned self] in
+                self.modifyList(listNumber: list.clothesNumber)
+            }
+        }
         
         self.dataSource = UICollectionViewDiffableDataSource<Section, ClothListModel>(collectionView: self.clothListCollectionView) {
             (collectionView, indexPath, list) -> UICollectionViewListCell? in
@@ -101,6 +102,7 @@ final class ClothListViewController: BaseViewController {
         }
     }
     
+    // MARK: - performQuery
     private func performQuery() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, ClothListModel>()
         snapshot.appendSections([.main])
@@ -149,16 +151,13 @@ final class ClothListViewController: BaseViewController {
             }
         }
         
-        let cancel = UIAlertAction(title: "취소", style: .cancel) { action in
-            
-        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
         
         modifyAlert.addAction(success)
         modifyAlert.addAction(cancel)
         
         self.present(modifyAlert, animated: true, completion: nil)
     }
-
 
     // MARK: - button click method
     /// topView 내부 select 버튼 클릭에 따라 collectionView 의 선택버튼이 나타남
@@ -173,6 +172,8 @@ final class ClothListViewController: BaseViewController {
             }
             
             else {
+            
+                
                 if self.clothListCollectionView.indexPathsForSelectedItems?.count ?? 0 > 0 {
                     self.delegate?.presentRegisterVC()
                 }
@@ -205,12 +206,21 @@ final class ClothListViewController: BaseViewController {
     }
 }
 
-extension ClothListViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let width: CGFloat = collectionView.bounds.width
-        return CGSize(width: width, height: width/4)
+extension ClothListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView.isEditing {
+            if imageTempManager.imageURLs.count <= 4 {
+                let clothList = clothListManager.clothList[indexPath.row].imageUrl
+                imageTempManager.imageURLs.append(clothList)
+                print(imageTempManager.imageURLs)
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if collectionView.isEditing {
+            imageTempManager.imageURLs.removeLast()
+            print(imageTempManager.imageURLs)
+        }
     }
 }
