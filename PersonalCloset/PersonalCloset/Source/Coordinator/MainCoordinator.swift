@@ -25,8 +25,8 @@ final class MainCoordinator: Coordinator {
 
 extension MainCoordinator: MainViewControllerDelegate,
                           RegisterImageViewControllerDelegate,
-                          ImageResultViewControllerDelegate {
-    
+                          ImageResultViewControllerDelegate,
+                           AddImageViewControllerDelegate {
     /// navigation push 기능
     func presentMainVC() {
         let mainVC = MainViewController()
@@ -44,6 +44,12 @@ extension MainCoordinator: MainViewControllerDelegate,
         let resultVC = ImageResultViewController()
         resultVC.delegate = self
         navigationController.pushViewController(resultVC, animated: true)
+    }
+    
+    func presentAddImageVC() {
+        let addImageVC = AddImageViewController()
+        addImageVC.delegate = self
+        navigationController.pushViewController(addImageVC, animated: true)
     }
     
     /// navigation pop 기능

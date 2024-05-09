@@ -12,6 +12,7 @@ import CoreLocation
 protocol MainViewControllerDelegate: AnyObject {
     func presentMainVC()
     func presentRegisterVC()
+    func presentAddImageVC()
 }
 
 final class MainViewController: BaseViewController {
@@ -21,10 +22,16 @@ final class MainViewController: BaseViewController {
         enum cameraButton {
             static let top: CGFloat = 20
             static let height: CGFloat = 200
-            static let sideInset: CGFloat = 30
+            static let inset: CGFloat = 30
         }
         
-        enum emptyView {
+        enum WeatherView {
+            static let top: CGFloat = 30
+            static let inset: CGFloat = 30
+            static let height: CGFloat = 200
+        }
+        
+        enum AddImageButton {
             static let top: CGFloat = 30
             static let inset: CGFloat = 30
         }
@@ -57,12 +64,30 @@ final class MainViewController: BaseViewController {
         return button
     }()
     
-    private let emptyView: UIView = {
+    private lazy var weatherView: UIView = {
         let view = UIView()
         view.backgroundColor = .skyBlue
         view.layer.cornerRadius = 10
         
         return view
+    }()
+    
+    private lazy var addImageButton: UIButton = {
+        let button = UIButton()
+        button.imageView?.tintColor = .darkBlue
+        button.layer.cornerRadius = 10
+        button.backgroundColor = .skyBlue
+        
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 40, weight: .light)
+        let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
+        button.setImage(image, for: .normal)
+        
+        button.addAction(UIAction { _ in
+            
+            }, for: .touchUpInside
+        )
+
+        return button
     }()
     
     // MARK: - method
@@ -76,7 +101,8 @@ final class MainViewController: BaseViewController {
         super.setupLayouts()
         
         [cameraButton, 
-         emptyView].forEach {
+         weatherView,
+         addImageButton].forEach {
             view.addSubview($0)
         }
     }
@@ -87,16 +113,23 @@ final class MainViewController: BaseViewController {
         
         cameraButton.snp.makeConstraints {
             $0.top.equalTo(topView.snp.bottom).offset(Metric.cameraButton.top)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).inset(Metric.cameraButton.sideInset)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(Metric.cameraButton.sideInset)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).inset(Metric.cameraButton.inset)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(Metric.cameraButton.inset)
             $0.height.equalTo(Metric.cameraButton.height)
         }
         
-        emptyView.snp.makeConstraints {
-            $0.top.equalTo(cameraButton.snp.bottom).offset(Metric.emptyView.top)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).inset(Metric.emptyView.inset)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(Metric.emptyView.inset)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(Metric.emptyView.inset)
+        weatherView.snp.makeConstraints {
+            $0.top.equalTo(cameraButton.snp.bottom).offset(Metric.WeatherView.top)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).inset(Metric.WeatherView.inset)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(Metric.WeatherView.inset)
+            $0.height.equalTo(Metric.WeatherView.height)
+        }
+        
+        addImageButton.snp.makeConstraints {
+            $0.top.equalTo(weatherView.snp.bottom).offset(Metric.AddImageButton.top)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).inset(Metric.AddImageButton.inset)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(Metric.AddImageButton.inset)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(Metric.AddImageButton.inset)
         }
     }
 }

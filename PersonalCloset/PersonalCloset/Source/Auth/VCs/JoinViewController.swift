@@ -130,8 +130,8 @@ final class JoinViewController: UIViewController {
     
     private lazy var joinButton = PersonalClosetButton("회원가입",titleColor: .darkBlue,
                                                        backColor: .skyBlue,
-                                                       action: UIAction { _ in
-                                                                    self.tapJoinButton()
+                                                       action: UIAction { [weak self] _ in
+        self?.tapJoinButton()
                                                                 })
         
     // MARK: - method

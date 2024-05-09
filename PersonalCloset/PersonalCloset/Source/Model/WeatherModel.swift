@@ -38,17 +38,17 @@ enum WeatherItemType: String, CaseIterable {
         case .mist: return "cloud.fog"
         }
     }
+    
+    
+    func toStringKo() -> String {
+        switch self {
+        case .clear: return "맑음"
+        case .clouds: return "흐림"
+        case .rain: return "비"
+        case .snow: return "눈"
+        case .thunderstrom: return "번개"
+        case .mist: return "안개"
+        }
+    }
 }
 
-
-/// TabBarPage 형을 매칭되는 string 형으로 변환
-//    func toStringName() -> String {
-//        switch self {
-//        case .clear: return "Clear"
-//        case .clouds: return "Clouds"
-//        case .rain: return "Rain"
-//        case .snow: return "Snow"
-//        case .thunderstrom: return "Thunderstorm"
-//        case .mist: return "Mist"
-//        }
-//    }

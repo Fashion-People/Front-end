@@ -18,11 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let navigationController = UINavigationController()
             self.window?.rootViewController = navigationController
 
-            let coordinator = AppCoordinator(navigationController: navigationController)
-            coordinator.start()
+//            let coordinator = AppCoordinator(navigationController: navigationController)
+//            coordinator.start()
             
-//            let coordinator = MainCoordinator(navigationController: navigationController)
-//            coordinator.presentRegisterVC()
+            let coordinator = MainCoordinator(navigationController: navigationController)
+            coordinator.presentAddImageVC()
 
             self.window?.makeKeyAndVisible()
         }
