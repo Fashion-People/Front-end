@@ -8,7 +8,7 @@
 import Foundation
 
 class WeatherManager {
-    var weather = WeatherModel(weatherStatus: "")
+    var weatherInfo = WeatherModel(weather: "", windChillfactor: 0, temperature: 0, humidity: 0)
     
     static let shared = WeatherManager()
     

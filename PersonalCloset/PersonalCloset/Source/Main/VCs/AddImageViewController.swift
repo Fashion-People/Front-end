@@ -40,6 +40,7 @@ final class AddImageViewController: BaseViewController {
         super.viewDidLoad()
         
         self.topView.selectButton.isHidden = true
+        self.tabTopViewButtons()
     }
     
     private lazy var addImageButton: UIButton = {
@@ -70,7 +71,34 @@ final class AddImageViewController: BaseViewController {
     
     private lazy var addListButton = PersonalClosetButton("이미지 추가", titleColor: .darkBlue, backColor: .skyBlue, action: UIAction { [weak self] _ in
         
+        guard let description = self?.descriptionTextView.text else { return }
+        
+        var params = ClothRequestDTO(description: description, imageUrl: "https://fashionbucket.s3.ap-northeast-2.amazonaws.com/profile/image/옷.jpeg")
+        
+        Task {
+            do {
+                try await ClothesAPI.createCloth.performRequest(with: params)
+                
+                DispatchQueue.main.async {
+                    let successAlert = UIAlertController(title: "알림", message: "옷 저장에 성공하였습니다!", preferredStyle: UIAlertController.Style.alert)
+                    let check = UIAlertAction(title: "네", style: .default) { action in
+                        self?.delegate?.backToPreviousVC()
+                    }
+                    
+                    successAlert.addAction(check)
+                    self?.present(successAlert, animated: true, completion: nil)
+                }
+            } catch {
+                print("error: \(error)")
+            }
+        }
     })
+    
+    private func tabTopViewButtons() {
+        topView.backButton.addAction(UIAction{ [weak self] _ in
+            self?.delegate?.backToPreviousVC()
+        }, for: .touchUpInside)
+    }
     
     private func tabImageButton(tag: Int) {
         let imagePicker = UIImagePickerController()

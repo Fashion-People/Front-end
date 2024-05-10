@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class InputView : UITextField {
+final class InputView: UITextField {
     private let customPlaceholder: String
     
     private enum Metric {

@@ -17,7 +17,7 @@ protocol MainViewControllerDelegate: AnyObject {
 
 final class MainViewController: BaseViewController {
     weak var delegate: MainViewControllerDelegate?
-    
+        
     private enum Metric {
         enum cameraButton {
             static let top: CGFloat = 20
@@ -46,61 +46,23 @@ final class MainViewController: BaseViewController {
     }
     
     // MARK: - UI config
-    private lazy var cameraButton: UIButton = {
-        let button = UIButton()
-        button.imageView?.tintColor = .darkBlue
-        button.layer.cornerRadius = 10
-        button.backgroundColor = .skyBlue
-        
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 40, weight: .light)
-        let image = UIImage(systemName: "camera.fill", withConfiguration: imageConfig)
-        button.setImage(image, for: .normal)
-        
-        button.addAction(UIAction { _ in
-            self.tabCameraButton()
-            }, for: .touchUpInside
-        )
+    private lazy var cameraButton = MainViewButton(imageName: "camera.fill", action: UIAction { _ in
+        self.delegate?.presentRegisterVC()
+    })
+    
+    private let weatherInfo = WeatherManager.shared.weatherInfo
+    
+    private lazy var weatherView = WeatherView(imageName: "sun.max", temperature: weatherInfo.temperature, windChill: weatherInfo.windChillfactor, humidity: weatherInfo.humidity)
+    
+    private lazy var addImageButton = MainViewButton(imageName: "plus", action: UIAction { _ in
+        self.delegate?.presentAddImageVC()
+    })
 
-        return button
-    }()
-    
-    private lazy var weatherView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .skyBlue
-        view.layer.cornerRadius = 10
-        
-        return view
-    }()
-    
-    private lazy var addImageButton: UIButton = {
-        let button = UIButton()
-        button.imageView?.tintColor = .darkBlue
-        button.layer.cornerRadius = 10
-        button.backgroundColor = .skyBlue
-        
-        let imageConfig = UIImage.SymbolConfiguration(pointSize: 40, weight: .light)
-        let image = UIImage(systemName: "plus", withConfiguration: imageConfig)
-        button.setImage(image, for: .normal)
-        
-        button.addAction(UIAction { _ in
-            
-            }, for: .touchUpInside
-        )
-
-        return button
-    }()
-    
-    // MARK: - method
-    private func tabCameraButton() {
-        /// 카메라 버튼 눌렀을때
-        delegate?.presentRegisterVC()
-    }
-    
     // MARK: - UI layout config
     override func setupLayouts() {
         super.setupLayouts()
         
-        [cameraButton, 
+        [cameraButton,
          weatherView,
          addImageButton].forEach {
             view.addSubview($0)
@@ -117,7 +79,7 @@ final class MainViewController: BaseViewController {
             $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(Metric.cameraButton.inset)
             $0.height.equalTo(Metric.cameraButton.height)
         }
-        
+                
         weatherView.snp.makeConstraints {
             $0.top.equalTo(cameraButton.snp.bottom).offset(Metric.WeatherView.top)
             $0.leading.equalTo(view.safeAreaLayoutGuide).inset(Metric.WeatherView.inset)

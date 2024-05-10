@@ -8,7 +8,7 @@
 import Foundation
 
 enum FitnessTestAPI {
-    static let baseURL = "http://3.35.233.65:8081"
+    static let baseURL = "http://43.201.109.28:8081"
     
     case fitnessTest
 }

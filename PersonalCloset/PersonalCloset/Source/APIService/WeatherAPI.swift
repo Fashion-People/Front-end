@@ -8,7 +8,7 @@
 import Foundation
 
 enum WeatherAPI {
-    static let baseURL = "http://3.35.233.65:8081/weather"
+    static let baseURL = "http://43.201.109.28:8081/weather"
     
     case fetchWeatherStatus(_ latitudeValue: String, _ longtitudeValue: String)
 }
@@ -64,9 +64,9 @@ extension WeatherAPI {
         switch httpResponse.statusCode {
         case 200..<300:
             /// 성공적인 응답 처리
-            let weatherStatus = String(decoding: data, as: UTF8.self)
-            WeatherManager.shared.weather.weatherStatus = weatherStatus
-            print("network 결과:",WeatherManager.shared.weather.weatherStatus)
+            let weatherInfo = try JSONDecoder().decode(WeatherModel.self, from: data)
+            WeatherManager.shared.weatherInfo = weatherInfo
+            print("network 결과:",WeatherManager.shared.weatherInfo)
         
         case 400..<600:
             /// 오류 응답 처리

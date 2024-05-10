@@ -13,7 +13,7 @@ enum FetchError: Error {
 }
 
 enum ClothesAPI {
-    static let baseURL = "http://3.35.233.65:8081/clothes"
+    static let baseURL = "http://43.201.109.28:8081/clothes"
 
     case fetchCloth(clothesNumber: Int)
     case fetchAllClothes

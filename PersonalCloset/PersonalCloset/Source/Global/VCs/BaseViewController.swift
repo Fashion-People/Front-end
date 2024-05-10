@@ -98,11 +98,9 @@ extension BaseViewController: CLLocationManagerDelegate {
                 do {
                     /// Fetch weather status from the server
                     try await WeatherAPI.fetchWeatherStatus(setLocation.latitude, setLocation.longtitude).performRequest()
-                    
-                    print(WeatherManager.shared.weather.weatherStatus)
-                    
-                    guard let weatherItemType = WeatherItemType(index: WeatherManager.shared.weather.weatherStatus) else {
-                        print("Unknown weather status: \(WeatherManager.shared.weather.weatherStatus)")
+                                        
+                    guard let weatherItemType = WeatherItemType(index: WeatherManager.shared.weatherInfo.weather) else {
+                        print("Unknown weather status: \(WeatherManager.shared.weatherInfo.weather)")
                         return
                     }
                     
