@@ -43,6 +43,23 @@ final class MainViewController: BaseViewController {
         
         self.topView.backButton.isHidden = true
         self.topView.selectButton.isHidden = true
+        
+//        Task {
+//            do {
+//                /// Fetch weather status from the server
+//                try await WeatherAPI.fetchWeatherStatus(LocationManager.shared.location.latitude, LocationManager.shared.location.longtitude).performRequest()
+//
+//                guard let weatherItemType = WeatherItemType(index: WeatherManager.shared.weatherInfo.weather) else {
+//                    print("Unknown weather status: \(WeatherManager.shared.weatherInfo.weather)")
+//                    return
+//                }
+//
+//                DispatchQueue.main.async {
+//                    self.topView.weatherImage.image = UIImage(systemName: weatherItemType.toIconName())
+//                }
+//
+//            } catch { print("error: \(error)") }
+//        }
     }
     
     // MARK: - UI config
@@ -50,9 +67,9 @@ final class MainViewController: BaseViewController {
         self.delegate?.presentRegisterVC()
     })
     
-    private let weatherInfo = WeatherManager.shared.weatherInfo
+//    private let weatherInfo = WeatherManager.shared.weatherInfo
     
-    private lazy var weatherView = WeatherView(imageName: "sun.max", temperature: weatherInfo.temperature, windChill: weatherInfo.windChillfactor, humidity: weatherInfo.humidity)
+    private lazy var weatherView = WeatherView(imageName: "sun.max")
     
     private lazy var addImageButton = MainViewButton(imageName: "plus", action: UIAction { _ in
         self.delegate?.presentAddImageVC()

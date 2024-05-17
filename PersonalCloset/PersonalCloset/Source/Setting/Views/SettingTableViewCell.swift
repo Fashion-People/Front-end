@@ -12,6 +12,7 @@ import SnapKit
 final class SettingTableViewCell: UITableViewCell {
     var settingTitleLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .black
         
         return label
     }()
@@ -19,6 +20,7 @@ final class SettingTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupLayouts()
+        self.setupConstraints()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -36,7 +38,7 @@ final class SettingTableViewCell: UITableViewCell {
             $0.top.equalToSuperview().offset(15)
             $0.leading.equalToSuperview().offset(15)
             $0.bottom.equalToSuperview().offset(-15)
-            $0.trailing.equalToSuperview().offset(15)
+//            $0.trailing.equalToSuperview().offset(-15)
         }
     }
 }

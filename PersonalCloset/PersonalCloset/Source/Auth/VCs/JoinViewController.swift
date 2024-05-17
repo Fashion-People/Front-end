@@ -146,10 +146,14 @@ final class JoinViewController: UIViewController {
         let passwordCheck: String = joinPasswordCheckInput.inputTextField.text ?? ""
         let name: String = joinNameInput.inputTextField.text ?? ""
         let email: String = joinEmailInput.inputTextField.text ?? ""
-        let style1: String = firstPickerView.style
-        let style2: String = secondPickerView.style
-        let style3: String = thirdPickerView.style
-        let style4: String = fourthPickerView.style
+//        let style1: String = firstPickerView.style
+//        let style2: String = secondPickerView.style
+//        let style3: String = thirdPickerView.style
+//        let style4: String = fourthPickerView.style
+        let style1: String = "스포티"
+        let style2: String = "캐주얼"
+        let style3: String = "패미닌"
+        let style4: String = "모던"
         
         var joinSuccess: Bool = false
         

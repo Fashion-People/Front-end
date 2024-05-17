@@ -10,15 +10,15 @@ import SnapKit
 
 final class WeatherView: UIView {
     private let imageName: String
-    private let temperatureInfo: String
-    private let windChillInfo: String
-    private let humidityInfo: String
+//    private let temperatureInfo: String
+//    private let windChillInfo: String
+//    private let humidityInfo: String
     
-    init(imageName: String, temperature: Float, windChill: Float, humidity: Float) {
+    init(imageName: String) {
         self.imageName = imageName
-        self.temperatureInfo = String(temperature)
-        self.windChillInfo = String(windChill)
-        self.humidityInfo = String(humidity)
+//        self.temperatureInfo = String(temperature)
+//        self.windChillInfo = String(windChill)
+//        self.humidityInfo = String(humidity)
         super.init(frame: .zero)
         self.backgroundColor = .skyBlue
         self.setupLayouts()
@@ -52,6 +52,7 @@ final class WeatherView: UIView {
     private lazy var temperature: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 40, weight: .bold)
+        label.text = "16.2°"
         
         return label
     }()
@@ -68,6 +69,7 @@ final class WeatherView: UIView {
     private lazy var windChill: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15, weight: .semibold)
+        label.text = "16.2°"
         
         return label
     }()
@@ -84,15 +86,16 @@ final class WeatherView: UIView {
     private lazy var humidity: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15, weight: .semibold)
+        label.text = "49%"
 
         return label
     }()
     
     private func setupStyles() {
         weatherIcon.image = UIImage(systemName: imageName)
-        temperature.text = temperatureInfo
-        windChill.text = windChillInfo
-        humidity.text = humidityInfo
+//        temperature.text = temperatureInfo
+//        windChill.text = windChillInfo
+//        humidity.text = humidityInfo
     }
     
     private func setupLayouts() {

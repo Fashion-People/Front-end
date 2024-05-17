@@ -72,8 +72,7 @@ final class AddImageViewController: BaseViewController {
     private lazy var addListButton = PersonalClosetButton("이미지 추가", titleColor: .darkBlue, backColor: .skyBlue, action: UIAction { [weak self] _ in
         
         guard let description = self?.descriptionTextView.text else { return }
-        
-        var params = ClothRequestDTO(description: description, imageUrl: "https://fashionbucket.s3.ap-northeast-2.amazonaws.com/profile/image/옷.jpeg")
+        var params = ClothRequestDTO(description: description, imageUrl: "https://fashionbucket.s3.ap-northeast-2.amazonaws.com/profile/image/20240516115224612.jpg")
         
         Task {
             do {
