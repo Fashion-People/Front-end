@@ -51,7 +51,7 @@ final class RegisterImageViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.view.bringSubviewToFront(self.indicatorView)
+        self.view.bringSubviewToFront(self.indicatorView)
 
         self.topView.selectButton.isHidden = true
         self.tabTopViewButtons()
@@ -124,7 +124,7 @@ final class RegisterImageViewController: BaseViewController {
         activityIndicator.hidesWhenStopped = true
         activityIndicator.style = .large
         
-//        activityIndicator.stopAnimating()
+        activityIndicator.stopAnimating()
         
         return activityIndicator
         
@@ -135,13 +135,14 @@ final class RegisterImageViewController: BaseViewController {
                                                            titleColor: .darkBlue,
                                                            backColor: .skyBlue,
                                                            action: UIAction { _ in
+        self.indicatorView.startAnimating()
         
         if self.imageURLs.isEmpty {
             Task {
                 do {
                     try await self.uploadImage()
                     
-                    Thread.sleep(forTimeInterval: 7)
+                    Thread.sleep(forTimeInterval: 5)
 
                     let params = FitnessTestRequestDTO (
                         imageUrl: ImageTempManager.shared.imageURLs,
@@ -155,6 +156,7 @@ final class RegisterImageViewController: BaseViewController {
                     
                     if !ImageTempManager.shared.imageURLs.isEmpty {
                         self.delegate.presentResultVC()
+                        self.indicatorView.stopAnimating()
                     }
                 } catch {
                     print("Error: \(error)")
@@ -344,6 +346,11 @@ final class RegisterImageViewController: BaseViewController {
             $0.width.equalTo(imageInputStackView2.snp.width)
             $0.height.equalTo(Metric.RegisterButton.height)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(Metric.RegisterButton.bottom)
+        }
+        
+        indicatorView.snp.makeConstraints {
+            $0.centerX.equalTo(view.safeAreaLayoutGuide)
+            $0.centerY.equalTo(view.safeAreaLayoutGuide)
         }
     }
 }
