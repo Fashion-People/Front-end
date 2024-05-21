@@ -43,6 +43,12 @@ final class AddImageViewController: BaseViewController {
         self.tabTopViewButtons()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        ImageTempManager.shared.imageURLs.removeAll()
+    }
+    
     private lazy var addImageButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .bwGray
